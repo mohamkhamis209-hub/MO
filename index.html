@@ -91,43 +91,36 @@ footer{text-align:center;color:var(--muted);padding:30px}
 <div id="modal" class="modal hidden"></div>
 
 <script>
-const STORAGE='thaneya_github_pages_v1';
-const ADMIN_HASH='3e48c3964fb22e6e0cde35b831a3b93243053704c5f042af7c5bd725d4156ee9'; // placeholder replaced below
-const defaultExams=[
-{id:'arabic-1',title:'اختبار اللغة العربية - نموذج 1',subject:'اللغة العربية',duration:20,questions:[
-{text:'ما نوع كلمة "العلم" في جملة: العلم نور؟',options:['فعل','اسم','حرف','ضمير'],correct:1,explanation:'العلم اسم لأنه يدل على معنى غير مرتبط بزمن.'},
-{text:'أي الجمل الآتية جملة اسمية؟',options:['ذهب الطالب','الطالب مجتهد','اكتب الدرس','لن أتأخر'],correct:1,explanation:'تبدأ الجملة الاسمية باسم.'},
-{text:'جمع كلمة "كتاب" هو:',options:['كاتب','كتب','مكتبة','مكتوب'],correct:1,explanation:'جمع كتاب هو كتب.'}]},
-{id:'physics-1',title:'اختبار الفيزياء - نموذج 1',subject:'الفيزياء',duration:15,questions:[
-{text:'إذا قطع جسم 100 متر في 20 ثانية، فما سرعته؟',options:['2 م/ث','5 م/ث','20 م/ث','50 م/ث'],correct:1,explanation:'السرعة = المسافة ÷ الزمن = 100 ÷ 20 = 5 م/ث.'},
-{text:'وحدة قياس القوة في النظام الدولي هي:',options:['جول','واط','نيوتن','فولت'],correct:2,explanation:'القوة تقاس بالنيوتن.'}]},
-{id:'english-1',title:'English Test - Model 1',subject:'اللغة الإنجليزية',duration:15,questions:[
-{text:'Choose the correct form: She ___ to school every day.',options:['go','goes','going','gone'],correct:1,explanation:'مع She في المضارع البسيط نستخدم goes.'}]},
-{id:'history-1',title:'اختبار التاريخ - نموذج 1',subject:'التاريخ',duration:10,questions:[
-{text:'ما عاصمة مصر؟',options:['الإسكندرية','القاهرة','الأقصر','أسوان'],correct:1,explanation:'القاهرة هي عاصمة مصر.'}]}
-];
+const API_URL='https://script.google.com/macros/s/AKfycbz03Ahf0GVWqiypZERwUuRiqGO9pKJhFHGh20ibM4u5H-rbr8cU8YD5mnmOe07RugQP-g/exec';
+let state={exams:[],results:[],books:[]};
+let ADMIN_SESSION='';
+let timer=null;
 
-let state=loadState(), timer=null;
-
-function loadState(){
-  try{
-    const x=JSON.parse(localStorage.getItem(STORAGE));
-    if(x&&Array.isArray(x.exams)&&Array.isArray(x.results)){ if(!Array.isArray(x.books)) x.books=[]; return x; }
-  }catch(e){}
-  return {exams:structuredClone(defaultExams),results:[],books:[]};
-}
-function save(){localStorage.setItem(STORAGE,JSON.stringify(state))}
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+async function api(action,payload={},admin=false){
+  const body={action,...payload};
+  if(admin){if(!ADMIN_SESSION)throw new Error('جلسة الإدارة منتهية، سجل الدخول مرة أخرى');body.adminSession=ADMIN_SESSION}
+  const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)});
+  const d=await r.json();
+  if(!d.ok)throw new Error(d.error||'فشل الاتصال بقاعدة البيانات');
+  return d;
+}
+async function refreshCloud(){
+  try{
+    const [e,b]=await Promise.all([api('listExams'),api('listBooks')]);
+    state.exams=e.exams||[];state.books=b.books||[];
+    renderHome();renderExams();renderBooks();
+  }catch(err){console.error(err);alert('تعذر الاتصال بقاعدة البيانات. تأكد من نشر Google Apps Script كـ Web App.');}
+}
 function show(id){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='home')renderHome();if(id==='exams')renderExams();if(id==='books')renderBooks();if(id==='results')document.getElementById('studentResults').innerHTML='';scrollTo(0,0)}
 function renderBooks(){
  const html=state.books.length?state.books.slice().reverse().map(b=>`<div class="item"><div class="item-main"><b>📚 ${esc(b.title)}</b><span class="muted">${esc(b.subject)}</span></div><div class="actions"><a class="btn" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">فتح الكتاب</a></div></div>`).join(''):'<div class="panel">لا توجد كتب مضافة حتى الآن.</div>';
  document.getElementById('bookList').innerHTML=html;
  if(document.getElementById('homeBooks')) document.getElementById('homeBooks').innerHTML=state.books.slice().reverse().slice(0,4).map(b=>`<div class="item"><div class="item-main"><b>📚 ${esc(b.title)}</b><span class="muted">${esc(b.subject)}</span></div><a class="btn light" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">فتح</a></div>`).join('')||'<div class="panel">لا توجد كتب مضافة حتى الآن.</div>';
 }
-
 function subjects(){return [...new Set(state.exams.map(x=>x.subject))]}
 function renderHome(){
- document.getElementById('subjects').innerHTML=subjects().map(s=>`<button class="card subject" onclick="filterSubject('${esc(s)}')"><span class="icon">📚</span><b>${esc(s)}</b><span class="muted">${state.exams.filter(x=>x.subject===s).length} امتحان</span></button>`).join('');
+ document.getElementById('subjects').innerHTML=subjects().map(s=>`<button class="card subject" onclick="filterSubject('${esc(s)}')"><span class="icon">📚</span><b>${esc(s)}</b><span class="muted">${state.exams.filter(x=>x.subject===s).length} امتحان</span></button>`).join('')||'<div class="panel">لا توجد مواد أو امتحانات حاليًا.</div>';
  document.getElementById('latest').innerHTML=state.exams.slice(-5).reverse().map(examCard).join('')||'<div class="panel">لا توجد امتحانات.</div>';
  renderBooks();
 }
@@ -137,91 +130,63 @@ function filterSubject(s){show('exams');renderExams(state.exams.filter(x=>x.subj
 function startExam(id){
  const x=state.exams.find(e=>e.id===id);if(!x)return;
  const name=prompt('اكتب اسمك الثلاثي:');if(!name||!name.trim())return;
- const start=Date.now();let seconds=(x.duration||0)*60;
- document.getElementById('take').innerHTML=`<div class="row" style="justify-content:space-between"><div><h2>${esc(x.title)}</h2><p class="muted">الطالب: ${esc(name.trim())} · ${esc(x.subject)}</p></div><span class="timer" id="clock">${seconds?formatTime(seconds):'بدون مؤقت'}</span></div>
- <form id="examForm"><div style="margin-top:15px">${x.questions.map((q,i)=>`<div class="question"><h3>${i+1}. ${esc(q.text)}</h3>${q.options.map((o,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}"> ${esc(o)}</label>`).join('')}</div>`).join('')}</div><button class="btn green" type="submit">تسليم الامتحان</button></form>`;
+ let seconds=(x.duration||0)*60;
+ document.getElementById('take').innerHTML=`<div class="row" style="justify-content:space-between"><div><h2>${esc(x.title)}</h2><p class="muted">الطالب: ${esc(name.trim())} · ${esc(x.subject)}</p></div><span class="timer" id="clock">${seconds?formatTime(seconds):'بدون مؤقت'}</span></div><form id="examForm"><div style="margin-top:15px">${x.questions.map((q,i)=>`<div class="question"><h3>${i+1}. ${esc(q.text)}</h3>${q.options.map((o,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}"> ${esc(o)}</label>`).join('')}</div>`).join('')}</div><button class="btn green" type="submit">تسليم الامتحان</button></form>`;
  show('take');
- if(seconds){
-   clearInterval(timer);
-   timer=setInterval(()=>{seconds--;document.getElementById('clock').textContent=formatTime(Math.max(0,seconds));if(seconds<=0){clearInterval(timer);submitExam(x,name,start,true)}},1000);
- }
- document.getElementById('examForm').onsubmit=e=>{e.preventDefault();if(confirm('هل تريد تسليم الامتحان الآن؟'))submitExam(x,name,start,false)}
+ if(seconds){clearInterval(timer);timer=setInterval(()=>{seconds--;const c=document.getElementById('clock');if(c)c.textContent=formatTime(Math.max(0,seconds));if(seconds<=0){clearInterval(timer);submitExam(x,name,true)}},1000)}
+ document.getElementById('examForm').onsubmit=e=>{e.preventDefault();if(confirm('هل تريد تسليم الامتحان الآن؟'))submitExam(x,name,false)};
 }
 function formatTime(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
-function submitExam(x,name,start,auto){
+async function submitExam(x,name,auto){
  clearInterval(timer);
- let score=0,answers=x.questions.map((q,i)=>{const el=document.querySelector(`input[name="q${i}"]:checked`);const a=el?Number(el.value):null;if(a===q.correct)score++;return a});
- const result={id:Date.now().toString(36),examId:x.id,examTitle:x.title,subject:x.subject,name:name.trim(),score,total:x.questions.length,answers,at:new Date().toISOString(),auto};
- state.results.push(result);save();
- document.getElementById('take').innerHTML=`<div class="panel"><h2>تم تسليم الامتحان ✅</h2><div class="notice success">الطالب: ${esc(name)}<br>الدرجة: <b>${score} / ${x.questions.length}</b></div><button class="btn" onclick="review('${result.id}')">مراجعة الإجابات</button> <button class="btn light" onclick="show('home')">الرئيسية</button></div>`;
+ const answers=x.questions.map((q,i)=>{const el=document.querySelector(`input[name="q${i}"]:checked`);return el?Number(el.value):null});
+ try{
+   const d=await api('submitAttempt',{examId:x.id,name:name.trim(),answers});
+   state.results.push({id:d.attemptId,examId:x.id,examTitle:x.title,subject:x.subject,name:name.trim(),score:d.score,total:d.total,at:new Date().toISOString()});
+   document.getElementById('take').innerHTML=`<div class="panel"><h2>تم تسليم الامتحان ✅</h2><div class="notice success">الطالب: ${esc(name)}<br>الدرجة: <b>${d.score} / ${d.total}</b></div><button class="btn" onclick="show('results')">نتائجي</button> <button class="btn light" onclick="show('home')">الرئيسية</button></div>`;
+ }catch(err){alert(err.message)}
 }
-function review(id){
- const r=state.results.find(x=>x.id===id),x=state.exams.find(e=>e.id===r.examId);if(!r||!x)return;
- document.getElementById('take').innerHTML=`<div class="panel"><h2>${esc(r.examTitle)}</h2><div class="notice">الدرجة: ${r.score}/${r.total} · ${esc(r.name)}</div>${x.questions.map((q,i)=>{const a=r.answers[i];return `<div class="question"><h3>${i+1}. ${esc(q.text)}</h3><div class="${a===q.correct?'notice success':'notice danger'}">إجابتك: ${a==null?'لم تجب':esc(q.options[a])}<br>الإجابة الصحيحة: ${esc(q.options[q.correct])}</div>${q.explanation?`<p class="muted">الشرح: ${esc(q.explanation)}</p>`:''}</div>`}).join('')}<button class="btn" onclick="show('results')">نتائجي</button></div>`;
-}
-function renderStudentResults(){
- const n=document.getElementById('resultName').value.trim().toLocaleLowerCase();
- const rows=state.results.filter(r=>r.name.trim().toLocaleLowerCase()===n);
- document.getElementById('studentResults').innerHTML=rows.length?rows.slice().reverse().map(r=>`<div class="item"><div class="item-main"><b>${esc(r.examTitle)}</b><span class="muted">${esc(r.subject)} · ${r.score}/${r.total} · ${new Date(r.at).toLocaleString('ar-EG')}</span></div><button class="btn light" onclick="review('${r.id}')">مراجعة</button></div>`).join(''):'<div class="panel">لم يتم العثور على نتائج بهذا الاسم على هذا الجهاز.</div>';
+async function renderStudentResults(){
+ const n=document.getElementById('resultName').value.trim();if(!n){document.getElementById('studentResults').innerHTML='<div class="panel">اكتب اسم الطالب أولًا.</div>';return}
+ try{
+  const d=await api('getStudentResults',{name:n});
+  document.getElementById('studentResults').innerHTML=(d.results||[]).length?d.results.slice().reverse().map(r=>`<div class="item"><div class="item-main"><b>${esc(r.examTitle)}</b><span class="muted">${esc(r.subject)} · ${r.score}/${r.total} · ${new Date(r.at).toLocaleString('ar-EG')}</span></div></div>`).join(''):'<div class="panel">لم يتم العثور على نتائج بهذا الاسم.</div>';
+ }catch(err){alert(err.message)}
 }
 async function openAdmin(){
  const p=prompt('كلمة مرور الإدارة:');if(p===null)return;
- const ok=await verifyAdmin(p);
- if(!ok){alert('كلمة المرور غير صحيحة');return}
- show('admin');renderAdmin();
+ try{const d=await api('adminLogin',{password:p});ADMIN_SESSION=d.session;show('admin');await renderAdmin();}
+ catch(err){alert(err.message)}
 }
-async function verifyAdmin(p){
- const data=new TextEncoder().encode(p);const hash=await crypto.subtle.digest('SHA-256',data);const h=[...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');
- return h===ADMIN_HASH;
+async function renderAdmin(){
+ try{
+  const d=await api('getAdminData',{},true);state.exams=d.exams||[];state.books=d.books||[];state.results=d.results||[];
+  document.getElementById('stats').innerHTML=[['الامتحانات',state.exams.length],['الأسئلة',state.exams.reduce((a,x)=>a+x.questions.length,0)],['النتائج',state.results.length],['الطلاب',new Set(state.results.map(x=>x.name.toLowerCase())).size],['الكتب',state.books.length]].map(x=>`<div class="card stat"><span class="muted">${x[0]}</span><strong>${x[1]}</strong></div>`).join('');
+  adminTab('manage',document.querySelector('#admin .tabs button'));
+ }catch(err){alert(err.message)}
 }
-function renderAdmin(){
- document.getElementById('stats').innerHTML=[
-  ['الامتحانات',state.exams.length],['الأسئلة',state.exams.reduce((a,x)=>a+x.questions.length,0)],['النتائج',state.results.length],['الطلاب',new Set(state.results.map(x=>x.name.toLowerCase())).size]
- ].map(x=>`<div class="card stat"><span class="muted">${x[0]}</span><strong>${x[1]}</strong></div>`).join('');
- adminTab('manage',document.querySelector('.tabs button'));
+function adminTab(tab,btn){document.querySelectorAll('#admin .tabs button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');['manage','add','books','results','backup'].forEach(x=>document.getElementById('admin-'+x).classList.toggle('hidden',x!==tab));if(tab==='manage')renderManage();if(tab==='add')renderAdd();if(tab==='books')renderAdminBooks();if(tab==='results')renderAdminResults();if(tab==='backup')renderBackup()}
+function renderManage(){document.getElementById('admin-manage').innerHTML=`<h3>إدارة الامتحانات</h3><div class="list">${state.exams.map(x=>`<div class="item"><div class="item-main"><b>${esc(x.title)}</b><span class="muted">${esc(x.subject)} · ${x.questions.length} سؤال · ${x.attempts?.length||0} نتيجة</span></div><div class="actions"><button class="btn red small" onclick="deleteExam('${esc(x.id)}')">حذف</button></div></div>`).join('')||'<p class="muted">لا توجد امتحانات.</p>'}</div>`}
+function renderAdd(){document.getElementById('admin-add').innerHTML=`<h3>إضافة امتحان جديد</h3><form id="addForm"><div class="formgrid"><div class="field"><label>اسم الامتحان</label><input id="ntitle" required></div><div class="field"><label>المادة</label><input id="nsubject" required placeholder="مثال: الرياضيات"></div><div class="field"><label>المدة بالدقائق</label><input id="nduration" type="number" min="0" value="15"></div><div class="field"><label>عدد الأسئلة</label><input id="ncount" type="number" min="1" value="5"></div></div><button class="btn">إنشاء الامتحان</button></form>`;document.getElementById('addForm').onsubmit=e=>{e.preventDefault();createExam()}}
+async function createExam(){
+ const title=document.getElementById('ntitle').value.trim(),subject=document.getElementById('nsubject').value.trim(),duration=Number(document.getElementById('nduration').value)||0,count=Math.max(1,Number(document.getElementById('ncount').value)||1);const qs=[];
+ for(let i=0;i<count;i++){const q=prompt(`السؤال ${i+1}`);if(!q||!q.trim())return;const options=[];for(let j=0;j<4;j++){const o=prompt(`السؤال ${i+1} - الاختيار ${j+1}`);if(!o||!o.trim())return;options.push(o.trim())}let c=Number(prompt('رقم الإجابة الصحيحة (1-4)','1'))-1;if(c<0||c>3)c=0;qs.push({text:q.trim(),options,correct:c})}
+ try{await api('createExam',{exam:{id:'custom-'+Date.now().toString(36),title,subject,duration,attemptLimit:0,showScore:true,questions:qs}},true);await renderAdmin();alert('تم حفظ الامتحان في Google Sheet')}catch(err){alert(err.message)}
 }
-function adminTab(tab,btn){
- document.querySelectorAll('#admin .tabs button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');
- ['manage','add','books','results','backup'].forEach(x=>document.getElementById('admin-'+x).classList.toggle('hidden',x!==tab));
- if(tab==='manage')renderManage();if(tab==='add')renderAdd();if(tab==='books')renderAdminBooks();if(tab==='results')renderAdminResults();if(tab==='backup')renderBackup();
-}
-function renderManage(){
- document.getElementById('admin-manage').innerHTML=`<h3>إدارة الامتحانات</h3><div class="list">${state.exams.map(x=>`<div class="item"><div class="item-main"><b>${esc(x.title)}</b><span class="muted">${esc(x.subject)} · ${x.questions.length} سؤال</span></div><div class="actions"><button class="btn red small" onclick="deleteExam('${x.id}')">حذف</button></div></div>`).join('')}</div>`;
-}
-function renderAdd(){
- document.getElementById('admin-add').innerHTML=`<h3>إضافة امتحان جديد</h3><form id="addForm"><div class="formgrid"><div class="field"><label>اسم الامتحان</label><input id="ntitle" required></div><div class="field"><label>المادة</label><input id="nsubject" required placeholder="مثال: الرياضيات"></div><div class="field"><label>المدة بالدقائق</label><input id="nduration" type="number" min="0" value="15"></div><div class="field"><label>عدد الأسئلة</label><input id="ncount" type="number" min="1" value="5"></div><div class="full"><div class="notice">بعد إنشاء الامتحان ستظهر لك شاشة إضافة الأسئلة.</div></div></div><button class="btn">إنشاء الامتحان</button></form>`;
- document.getElementById('addForm').onsubmit=e=>{e.preventDefault();createExam()}
-}
-function createExam(){
- const title=document.getElementById('ntitle').value.trim(),subject=document.getElementById('nsubject').value.trim(),duration=Number(document.getElementById('nduration').value)||0,count=Math.max(1,Number(document.getElementById('ncount').value)||1);
- const qs=[];for(let i=0;i<count;i++){const q=prompt(`السؤال ${i+1}`);if(!q||!q.trim())return;const options=[];for(let j=0;j<4;j++){const o=prompt(`السؤال ${i+1} - الاختيار ${j+1}`);if(!o||!o.trim())return;options.push(o.trim())}let c=Number(prompt('رقم الإجابة الصحيحة (1-4)','1'))-1;if(c<0||c>3)c=0;qs.push({text:q.trim(),options,correct:c,explanation:''})}
- state.exams.push({id:'custom-'+Date.now().toString(36),title,subject,duration,questions:qs});save();renderAdmin();alert('تم إنشاء الامتحان')
-}
-function deleteExam(id){if(!confirm('حذف الامتحان وكل بياناته؟'))return;state.exams=state.exams.filter(x=>x.id!==id);state.results=state.results.filter(x=>x.examId!==id);save();renderAdmin()}
+async function deleteExam(id){if(!confirm('حذف الامتحان وكل نتائجه من قاعدة البيانات؟'))return;try{await api('deleteExam',{examId:id},true);await renderAdmin();await refreshCloud();alert('تم حذف الامتحان')}catch(err){alert(err.message)}}
 function renderAdminBooks(){
- document.getElementById('admin-books').innerHTML=`<h3>إدارة الكتب</h3><p class="muted">أضف المادة واسم الكتاب ورابط Google Drive، وسيظهر الكتاب للطلاب مباشرة.</p><form id="bookForm"><div class="formgrid"><div class="field"><label>المادة</label><input id="bsubject" required placeholder="مثال: الفيزياء"></div><div class="field"><label>اسم الكتاب</label><input id="btitle" required placeholder="مثال: كتاب الفيزياء"></div><div class="field full"><label>رابط Google Drive</label><input id="burl" type="url" required placeholder="https://drive.google.com/..."></div></div><button class="btn green">إضافة الكتاب</button></form><hr style="border:0;border-top:1px solid var(--line);margin:22px 0"><div class="list">${state.books.slice().reverse().map(b=>`<div class="item"><div class="item-main"><b>📚 ${esc(b.title)}</b><span class="muted">${esc(b.subject)} · <a href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">فتح الرابط</a></span></div><button class="btn red small" onclick="deleteBook('${b.id}')">حذف</button></div>`).join('')||'<p class="muted">لم تتم إضافة كتب بعد.</p>'}</div>`;
+ document.getElementById('admin-books').innerHTML=`<h3>إدارة الكتب</h3><p class="muted">أضف المادة واسم الكتاب ورابط Google Drive. البيانات تُحفظ في Google Sheet وتظهر لكل الطلاب.</p><form id="bookForm"><div class="formgrid"><div class="field"><label>المادة</label><input id="bsubject" required placeholder="مثال: الفيزياء"></div><div class="field"><label>اسم الكتاب</label><input id="btitle" required placeholder="مثال: كتاب الفيزياء"></div><div class="field full"><label>رابط Google Drive</label><input id="burl" type="url" required placeholder="https://drive.google.com/..."></div></div><button class="btn green">إضافة الكتاب</button></form><hr style="border:0;border-top:1px solid var(--line);margin:22px 0"><div class="list">${state.books.slice().reverse().map(b=>`<div class="item"><div class="item-main"><b>📚 ${esc(b.title)}</b><span class="muted">${esc(b.subject)} · <a href="${esc(b.url)}" target="_blank" rel="noopener">فتح الرابط</a></span></div><button class="btn red small" onclick="deleteBook('${esc(b.id)}')">حذف</button></div>`).join('')||'<p class="muted">لم تتم إضافة كتب بعد.</p>'}</div>`;
  document.getElementById('bookForm').onsubmit=e=>{e.preventDefault();addBook()};
 }
-function addBook(){
- const subject=document.getElementById('bsubject').value.trim(),title=document.getElementById('btitle').value.trim(),url=document.getElementById('burl').value.trim();
- if(!subject||!title||!url)return;
- try{new URL(url)}catch(_){alert('يرجى إدخال رابط صحيح');return}
- state.books.push({id:'book-'+Date.now().toString(36),subject,title,url});save();renderAdminBooks();renderHome();alert('تمت إضافة الكتاب بنجاح');
-}
-function deleteBook(id){if(!confirm('حذف هذا الكتاب؟'))return;state.books=state.books.filter(b=>b.id!==id);save();renderAdminBooks();renderHome();renderBooks()}
-
-function renderAdminResults(){
- document.getElementById('admin-results').innerHTML=`<div class="row" style="justify-content:space-between"><h3>كل النتائج</h3><button class="btn light" onclick="exportResults()">تصدير CSV</button></div><div class="list">${state.results.slice().reverse().map(r=>`<div class="item"><div class="item-main"><b>${esc(r.name)} — ${esc(r.examTitle)}</b><span class="muted">${r.score}/${r.total} · ${new Date(r.at).toLocaleString('ar-EG')}</span></div><button class="btn light small" onclick="review('${r.id}')">مراجعة</button></div>`).join('')||'<p class="muted">لا توجد نتائج.</p>'}</div>`;
-}
-function renderBackup(){
- document.getElementById('admin-backup').innerHTML=`<h3>النسخ الاحتياطي</h3><p class="muted">احفظ نسخة من الامتحانات والنتائج على جهازك، ويمكن استعادتها لاحقًا.</p><div class="row"><button class="btn" onclick="backup()">تصدير نسخة JSON</button><label class="btn light">استيراد نسخة JSON<input type="file" accept=".json" hidden onchange="restore(event)"></label><button class="btn red" onclick="resetData()">إرجاع بيانات البداية</button></div><div class="notice danger" style="margin-top:15px">هذه نسخة GitHub Pages: البيانات محفوظة في متصفح الجهاز. مسح بيانات المتصفح أو تغيير الجهاز قد يحذفها، لذلك استخدم النسخ الاحتياطي.</div>`;
-}
+async function addBook(){const subject=document.getElementById('bsubject').value.trim(),title=document.getElementById('btitle').value.trim(),url=document.getElementById('burl').value.trim();if(!subject||!title||!url)return;try{new URL(url)}catch(_){alert('يرجى إدخال رابط صحيح');return}try{await api('createBook',{book:{subject,title,url}},true);await renderAdmin();await refreshCloud();alert('تمت إضافة الكتاب وحفظه في Google Sheet')}catch(err){alert(err.message)}}
+async function deleteBook(id){if(!confirm('حذف هذا الكتاب من قاعدة البيانات؟'))return;try{await api('deleteBook',{bookId:id},true);await renderAdmin();await refreshCloud();alert('تم حذف الكتاب')}catch(err){alert(err.message)}}
+function renderAdminResults(){document.getElementById('admin-results').innerHTML=`<div class="row" style="justify-content:space-between"><h3>كل النتائج</h3><button class="btn light" onclick="exportResults()">تصدير CSV</button></div><div class="list">${state.results.slice().reverse().map(r=>`<div class="item"><div class="item-main"><b>${esc(r.name)} — ${esc(r.examTitle)}</b><span class="muted">${r.score}/${r.total} · ${new Date(r.at).toLocaleString('ar-EG')}</span></div></div>`).join('')||'<p class="muted">لا توجد نتائج.</p>'}</div>`}
+function renderBackup(){document.getElementById('admin-backup').innerHTML=`<h3>نسخة احتياطية</h3><p class="muted">تنزيل نسخة من البيانات الموجودة حاليًا في Google Sheet.</p><button class="btn" onclick="backup()">تصدير JSON</button>`}
 function download(content,name,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-function backup(){download(JSON.stringify(state,null,2),'thaneya-backup.json','application/json')}
-function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!Array.isArray(x.exams)||!Array.isArray(x.results))throw 0;if(!Array.isArray(x.books))x.books=[];state=x;save();renderAdmin();alert('تم استرجاع النسخة')}catch(_){alert('ملف غير صالح')}};r.readAsText(f)}
-function resetData(){if(!confirm('سيتم حذف كل الامتحانات والنتائج والكتب وإرجاع النسخة الافتراضية. متأكد؟'))return;state={exams:structuredClone(defaultExams),results:[],books:[]};save();renderAdmin()}
-function exportResults(){let rows=[['الطالب','الامتحان','المادة','الدرجة','من','التاريخ'],...state.results.map(r=>[r.name,r.examTitle,r.subject,r.score,r.total,new Date(r.at).toLocaleString('ar-EG')])];download('\\ufeff'+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\\r\\n'),'results.csv','text/csv;charset=utf-8')}
-document.getElementById('year').textContent=new Date().getFullYear();renderHome();renderExams();
+function backup(){download(JSON.stringify({exams:state.exams,results:state.results,books:state.books},null,2),'thaneya-cloud-backup.json','application/json')}
+function exportResults(){let rows=[['الطالب','الامتحان','المادة','الدرجة','من','التاريخ'],...state.results.map(r=>[r.name,r.examTitle,r.subject,r.score,r.total,new Date(r.at).toLocaleString('ar-EG')])];download('\ufeff'+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\r\n'),'results.csv','text/csv;charset=utf-8')}
+document.getElementById('year').textContent=new Date().getFullYear();
+refreshCloud();
 </script>
 </body>
 </html>
