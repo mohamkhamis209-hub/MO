@@ -32,6 +32,7 @@ footer{text-align:center;color:var(--muted);padding:30px}
   <div class="brand">🎓 منصة تانية بكالوريا</div>
   <button onclick="show('home')">الرئيسية</button>
   <button onclick="show('exams')">الامتحانات</button>
+  <button onclick="show('books')">الكتب</button>
   <button onclick="show('results')">نتائجي</button>
   <button onclick="openAdmin()">الإدارة</button>
 </div></header>
@@ -41,6 +42,12 @@ footer{text-align:center;color:var(--muted);padding:30px}
   <div class="hero"><h1>كل اللي تحتاجه في مكان واحد.</h1><p>منصة تعليمية عربية للامتحانات والمراجعة ومتابعة النتائج، تعمل مباشرة من GitHub Pages.</p><button class="btn" onclick="show('exams')">ابدأ الامتحانات</button></div>
   <div class="section"><h2>المواد</h2><div id="subjects" class="grid"></div></div>
   <div class="section"><h2>آخر الامتحانات</h2><div id="latest" class="list"></div></div>
+  <div class="section"><div class="row" style="justify-content:space-between"><h2>الكتب</h2><button class="btn light" onclick="show('books')">عرض كل الكتب</button></div><div id="homeBooks" class="list"></div></div>
+</section>
+
+<section id="books" class="page hidden">
+  <div class="row" style="justify-content:space-between"><div><h2>الكتب</h2><p class="muted">كتب المواد وروابط Google Drive المضافة من لوحة الإدارة.</p></div><button class="btn light" onclick="show('home')">رجوع</button></div>
+  <div id="bookList" class="list"></div>
 </section>
 
 <section id="exams" class="page hidden">
@@ -62,11 +69,13 @@ footer{text-align:center;color:var(--muted);padding:30px}
   <div class="tabs">
     <button class="active" onclick="adminTab('manage',this)">الامتحانات</button>
     <button onclick="adminTab('add',this)">إضافة امتحان</button>
+    <button onclick="adminTab('books',this)">الكتب</button>
     <button onclick="adminTab('results',this)">النتائج</button>
     <button onclick="adminTab('backup',this)">نسخة احتياطية</button>
   </div>
   <div id="admin-manage" class="panel"></div>
   <div id="admin-add" class="panel hidden"></div>
+  <div id="admin-books" class="panel hidden"></div>
   <div id="admin-results" class="panel hidden"></div>
   <div id="admin-backup" class="panel hidden"></div>
 </section>
@@ -103,17 +112,24 @@ let state=loadState(), timer=null;
 function loadState(){
   try{
     const x=JSON.parse(localStorage.getItem(STORAGE));
-    if(x&&Array.isArray(x.exams)&&Array.isArray(x.results)) return x;
+    if(x&&Array.isArray(x.exams)&&Array.isArray(x.results)){ if(!Array.isArray(x.books)) x.books=[]; return x; }
   }catch(e){}
-  return {exams:structuredClone(defaultExams),results:[]};
+  return {exams:structuredClone(defaultExams),results:[],books:[]};
 }
 function save(){localStorage.setItem(STORAGE,JSON.stringify(state))}
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function show(id){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='home')renderHome();if(id==='exams')renderExams();if(id==='results')document.getElementById('studentResults').innerHTML='';scrollTo(0,0)}
+function show(id){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='home')renderHome();if(id==='exams')renderExams();if(id==='books')renderBooks();if(id==='results')document.getElementById('studentResults').innerHTML='';scrollTo(0,0)}
+function renderBooks(){
+ const html=state.books.length?state.books.slice().reverse().map(b=>`<div class="item"><div class="item-main"><b>📚 ${esc(b.title)}</b><span class="muted">${esc(b.subject)}</span></div><div class="actions"><a class="btn" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">فتح الكتاب</a></div></div>`).join(''):'<div class="panel">لا توجد كتب مضافة حتى الآن.</div>';
+ document.getElementById('bookList').innerHTML=html;
+ if(document.getElementById('homeBooks')) document.getElementById('homeBooks').innerHTML=state.books.slice().reverse().slice(0,4).map(b=>`<div class="item"><div class="item-main"><b>📚 ${esc(b.title)}</b><span class="muted">${esc(b.subject)}</span></div><a class="btn light" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">فتح</a></div>`).join('')||'<div class="panel">لا توجد كتب مضافة حتى الآن.</div>';
+}
+
 function subjects(){return [...new Set(state.exams.map(x=>x.subject))]}
 function renderHome(){
  document.getElementById('subjects').innerHTML=subjects().map(s=>`<button class="card subject" onclick="filterSubject('${esc(s)}')"><span class="icon">📚</span><b>${esc(s)}</b><span class="muted">${state.exams.filter(x=>x.subject===s).length} امتحان</span></button>`).join('');
  document.getElementById('latest').innerHTML=state.exams.slice(-5).reverse().map(examCard).join('')||'<div class="panel">لا توجد امتحانات.</div>';
+ renderBooks();
 }
 function examCard(x){return `<div class="item"><div class="item-main"><b>${esc(x.title)}</b><span class="muted">${esc(x.subject)} · ${x.questions.length} سؤال · ${x.duration?x.duration+' دقيقة':'بدون مؤقت'}</span></div><div class="actions"><button class="btn" onclick="startExam('${esc(x.id)}')">ابدأ</button></div></div>`}
 function renderExams(list=state.exams){document.getElementById('examList').innerHTML=list.map(examCard).join('')||'<div class="panel">لا توجد امتحانات بهذه المادة.</div>'}
@@ -166,8 +182,8 @@ function renderAdmin(){
 }
 function adminTab(tab,btn){
  document.querySelectorAll('#admin .tabs button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');
- ['manage','add','results','backup'].forEach(x=>document.getElementById('admin-'+x).classList.toggle('hidden',x!==tab));
- if(tab==='manage')renderManage();if(tab==='add')renderAdd();if(tab==='results')renderAdminResults();if(tab==='backup')renderBackup();
+ ['manage','add','books','results','backup'].forEach(x=>document.getElementById('admin-'+x).classList.toggle('hidden',x!==tab));
+ if(tab==='manage')renderManage();if(tab==='add')renderAdd();if(tab==='books')renderAdminBooks();if(tab==='results')renderAdminResults();if(tab==='backup')renderBackup();
 }
 function renderManage(){
  document.getElementById('admin-manage').innerHTML=`<h3>إدارة الامتحانات</h3><div class="list">${state.exams.map(x=>`<div class="item"><div class="item-main"><b>${esc(x.title)}</b><span class="muted">${esc(x.subject)} · ${x.questions.length} سؤال</span></div><div class="actions"><button class="btn red small" onclick="deleteExam('${x.id}')">حذف</button></div></div>`).join('')}</div>`;
@@ -182,6 +198,18 @@ function createExam(){
  state.exams.push({id:'custom-'+Date.now().toString(36),title,subject,duration,questions:qs});save();renderAdmin();alert('تم إنشاء الامتحان')
 }
 function deleteExam(id){if(!confirm('حذف الامتحان وكل بياناته؟'))return;state.exams=state.exams.filter(x=>x.id!==id);state.results=state.results.filter(x=>x.examId!==id);save();renderAdmin()}
+function renderAdminBooks(){
+ document.getElementById('admin-books').innerHTML=`<h3>إدارة الكتب</h3><p class="muted">أضف المادة واسم الكتاب ورابط Google Drive، وسيظهر الكتاب للطلاب مباشرة.</p><form id="bookForm"><div class="formgrid"><div class="field"><label>المادة</label><input id="bsubject" required placeholder="مثال: الفيزياء"></div><div class="field"><label>اسم الكتاب</label><input id="btitle" required placeholder="مثال: كتاب الفيزياء"></div><div class="field full"><label>رابط Google Drive</label><input id="burl" type="url" required placeholder="https://drive.google.com/..."></div></div><button class="btn green">إضافة الكتاب</button></form><hr style="border:0;border-top:1px solid var(--line);margin:22px 0"><div class="list">${state.books.slice().reverse().map(b=>`<div class="item"><div class="item-main"><b>📚 ${esc(b.title)}</b><span class="muted">${esc(b.subject)} · <a href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">فتح الرابط</a></span></div><button class="btn red small" onclick="deleteBook('${b.id}')">حذف</button></div>`).join('')||'<p class="muted">لم تتم إضافة كتب بعد.</p>'}</div>`;
+ document.getElementById('bookForm').onsubmit=e=>{e.preventDefault();addBook()};
+}
+function addBook(){
+ const subject=document.getElementById('bsubject').value.trim(),title=document.getElementById('btitle').value.trim(),url=document.getElementById('burl').value.trim();
+ if(!subject||!title||!url)return;
+ try{new URL(url)}catch(_){alert('يرجى إدخال رابط صحيح');return}
+ state.books.push({id:'book-'+Date.now().toString(36),subject,title,url});save();renderAdminBooks();renderHome();alert('تمت إضافة الكتاب بنجاح');
+}
+function deleteBook(id){if(!confirm('حذف هذا الكتاب؟'))return;state.books=state.books.filter(b=>b.id!==id);save();renderAdminBooks();renderHome();renderBooks()}
+
 function renderAdminResults(){
  document.getElementById('admin-results').innerHTML=`<div class="row" style="justify-content:space-between"><h3>كل النتائج</h3><button class="btn light" onclick="exportResults()">تصدير CSV</button></div><div class="list">${state.results.slice().reverse().map(r=>`<div class="item"><div class="item-main"><b>${esc(r.name)} — ${esc(r.examTitle)}</b><span class="muted">${r.score}/${r.total} · ${new Date(r.at).toLocaleString('ar-EG')}</span></div><button class="btn light small" onclick="review('${r.id}')">مراجعة</button></div>`).join('')||'<p class="muted">لا توجد نتائج.</p>'}</div>`;
 }
@@ -190,8 +218,8 @@ function renderBackup(){
 }
 function download(content,name,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function backup(){download(JSON.stringify(state,null,2),'thaneya-backup.json','application/json')}
-function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!Array.isArray(x.exams)||!Array.isArray(x.results))throw 0;state=x;save();renderAdmin();alert('تم استرجاع النسخة')}catch(_){alert('ملف غير صالح')}};r.readAsText(f)}
-function resetData(){if(!confirm('سيتم حذف كل الامتحانات والنتائج وإرجاع النسخة الافتراضية. متأكد؟'))return;state={exams:structuredClone(defaultExams),results:[]};save();renderAdmin()}
+function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!Array.isArray(x.exams)||!Array.isArray(x.results))throw 0;if(!Array.isArray(x.books))x.books=[];state=x;save();renderAdmin();alert('تم استرجاع النسخة')}catch(_){alert('ملف غير صالح')}};r.readAsText(f)}
+function resetData(){if(!confirm('سيتم حذف كل الامتحانات والنتائج والكتب وإرجاع النسخة الافتراضية. متأكد؟'))return;state={exams:structuredClone(defaultExams),results:[],books:[]};save();renderAdmin()}
 function exportResults(){let rows=[['الطالب','الامتحان','المادة','الدرجة','من','التاريخ'],...state.results.map(r=>[r.name,r.examTitle,r.subject,r.score,r.total,new Date(r.at).toLocaleString('ar-EG')])];download('\\ufeff'+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\\r\\n'),'results.csv','text/csv;charset=utf-8')}
 document.getElementById('year').textContent=new Date().getFullYear();renderHome();renderExams();
 </script>
