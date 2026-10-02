@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1f3a">
 <title>منصة تانية بكالوريا</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <style>
 :root{--navy:#0b1f3a;--blue:#1769e0;--bg:#f5f7fb;--card:#fff;--line:#e4e8ef;--text:#172033;--muted:#6c7484;--green:#159957;--red:#d64545;--shadow:0 10px 30px #10204012}
 *{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}button{cursor:pointer}
@@ -21,7 +22,7 @@ input,select,textarea{width:100%;border:1px solid #ccd3df;border-radius:9px;padd
 .question{padding:17px;border:1px solid var(--line);border-radius:14px;margin-bottom:13px;background:#fff}.question h3{font-size:17px;margin:0 0 13px}.option{display:block;padding:10px;border:1px solid var(--line);border-radius:9px;margin:7px 0;cursor:pointer}.option:hover{background:#f6f9ff}.option input{width:auto;margin-left:8px}
 .timer{position:sticky;top:70px;background:#fff;border:2px solid #e8b13b;padding:10px 14px;border-radius:10px;font-weight:800;display:inline-block;z-index:5}
 .notice{padding:12px;border-radius:10px;background:#f0f5ff;color:#214a87;margin:10px 0}.success{background:#ecfbf2;color:#126b3c}.danger{background:#fff0f0;color:#8b2424}
-.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:15px;z-index:50}.modalbox{background:#fff;border-radius:18px;width:min(520px,100%);padding:22px;max-height:90vh;overflow:auto}
+.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:15px;z-index:50}.modalbox{background:#fff;border-radius:18px;width:min(520px,100%);padding:22px;max-height:90vh;overflow:auto}.builder-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.builder-head h3{margin:0}.builder-step{font-size:12px;color:var(--muted);background:#f2f5fa;padding:7px 10px;border-radius:999px}.question-builder{border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;background:#fbfcfe}.question-builder-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.question-builder-head strong{font-size:16px}.question-builder-head span{font-size:12px;color:var(--muted)}.option-editor{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:center;margin:9px 0}.option-editor input[type=radio]{width:18px;height:18px;accent-color:var(--blue);margin:auto}.option-editor input[type=text]{margin:0}.question-number{width:34px;height:34px;border-radius:10px;background:#eaf1ff;color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:800}.builder-summary{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}.summary-pill{background:#f3f6fa;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:13px}.sticky-actions{position:sticky;bottom:-1px;background:#fff;border-top:1px solid var(--line);padding-top:14px;margin-top:18px;display:flex;justify-content:flex-start;gap:8px}.help-text{font-size:12px;color:var(--muted);margin-top:6px}
 footer{text-align:center;color:var(--muted);padding:30px}
 @media(max-width:800px){.grid,.statgrid{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr}.hero h1{font-size:27px}.nav{overflow:auto}.nav button{white-space:nowrap}}
 @media(max-width:520px){.grid,.statgrid{grid-template-columns:1fr}.item{align-items:flex-start;flex-direction:column}.item .actions{width:100%}.item .actions .btn{flex:1}}
@@ -39,7 +40,7 @@ footer{text-align:center;color:var(--muted);padding:30px}
 
 <main class="container">
 <section id="home" class="page">
-  <div class="hero"><h1>كل اللي تحتاجه في مكان واحد.</h1><p>منصة تعليمية عربية للامتحانات والمراجعة ومتابعة النتائج </p><button class="btn" onclick="show('exams')">ابدأ الامتحانات</button></div>
+  <div class="hero"><h1>كل اللي تحتاجه في مكان واحد.</h1><p>منصة تعليمية عربية للامتحانات والمراجعة ومتابعة النتائج، تعمل مباشرة من GitHub Pages.</p><button class="btn" onclick="show('exams')">ابدأ الامتحانات</button></div>
   <div class="section"><h2>المواد</h2><div id="subjects" class="grid"></div></div>
   <div class="section"><h2>آخر الامتحانات</h2><div id="latest" class="list"></div></div>
   <div class="section"><div class="row" style="justify-content:space-between"><h2>الكتب</h2><button class="btn light" onclick="show('books')">عرض كل الكتب</button></div><div id="homeBooks" class="list"></div></div>
@@ -167,11 +168,34 @@ async function renderAdmin(){
 }
 function adminTab(tab,btn){document.querySelectorAll('#admin .tabs button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');['manage','add','books','results','backup'].forEach(x=>document.getElementById('admin-'+x).classList.toggle('hidden',x!==tab));if(tab==='manage')renderManage();if(tab==='add')renderAdd();if(tab==='books')renderAdminBooks();if(tab==='results')renderAdminResults();if(tab==='backup')renderBackup()}
 function renderManage(){document.getElementById('admin-manage').innerHTML=`<h3>إدارة الامتحانات</h3><div class="list">${state.exams.map(x=>`<div class="item"><div class="item-main"><b>${esc(x.title)}</b><span class="muted">${esc(x.subject)} · ${x.questions.length} سؤال · ${x.attempts?.length||0} نتيجة</span></div><div class="actions"><button class="btn red small" onclick="deleteExam('${esc(x.id)}')">حذف</button></div></div>`).join('')||'<p class="muted">لا توجد امتحانات.</p>'}</div>`}
-function renderAdd(){document.getElementById('admin-add').innerHTML=`<h3>إضافة امتحان جديد</h3><form id="addForm"><div class="formgrid"><div class="field"><label>اسم الامتحان</label><input id="ntitle" required></div><div class="field"><label>المادة</label><input id="nsubject" required placeholder="مثال: الرياضيات"></div><div class="field"><label>المدة بالدقائق</label><input id="nduration" type="number" min="0" value="15"></div><div class="field"><label>عدد الأسئلة</label><input id="ncount" type="number" min="1" value="5"></div></div><button class="btn">إنشاء الامتحان</button></form>`;document.getElementById('addForm').onsubmit=e=>{e.preventDefault();createExam()}}
-async function createExam(){
- const title=document.getElementById('ntitle').value.trim(),subject=document.getElementById('nsubject').value.trim(),duration=Number(document.getElementById('nduration').value)||0,count=Math.max(1,Number(document.getElementById('ncount').value)||1);const qs=[];
- for(let i=0;i<count;i++){const q=prompt(`السؤال ${i+1}`);if(!q||!q.trim())return;const options=[];for(let j=0;j<4;j++){const o=prompt(`السؤال ${i+1} - الاختيار ${j+1}`);if(!o||!o.trim())return;options.push(o.trim())}let c=Number(prompt('رقم الإجابة الصحيحة (1-4)','1'))-1;if(c<0||c>3)c=0;qs.push({text:q.trim(),options,correct:c})}
- try{await api('createExam',{exam:{id:'custom-'+Date.now().toString(36),title,subject,duration,attemptLimit:0,showScore:true,questions:qs}},true);await renderAdmin();alert('تم حفظ الامتحان في Google Sheet')}catch(err){alert(err.message)}
+function renderAdd(){
+ document.getElementById('admin-add').innerHTML=`<div class="builder-head"><div><h3>إنشاء امتحان جديد</h3><p class="muted" style="margin:5px 0 0">اكتب بيانات الامتحان ثم أضف الأسئلة والإجابات الصحيحة من نفس الصفحة.</p></div><span class="builder-step">خطوة 1 من 2</span></div>
+ <form id="addForm"><div class="formgrid"><div class="field"><label>اسم الامتحان</label><input id="ntitle" required placeholder="مثال: امتحان الرياضيات - الوحدة الأولى"></div><div class="field"><label>المادة</label><input id="nsubject" required placeholder="مثال: الرياضيات"></div><div class="field"><label>المدة بالدقائق</label><input id="nduration" type="number" min="0" value="15"><div class="help-text">اتركها 0 إذا كان الامتحان بدون مؤقت.</div></div><div class="field"><label>عدد الأسئلة</label><input id="ncount" type="number" min="1" max="100" value="5"><div class="help-text">يمكنك تغيير العدد ثم الضغط على «تجهيز الأسئلة».</div></div></div><button class="btn" type="submit">تجهيز الأسئلة ←</button></form><div id="questionEditor" class="hidden"></div>`;
+ document.getElementById('addForm').onsubmit=e=>{e.preventDefault();prepareQuestions()};
+}
+function prepareQuestions(){
+ const title=document.getElementById('ntitle').value.trim(),subject=document.getElementById('nsubject').value.trim(),duration=Number(document.getElementById('nduration').value)||0,count=Math.min(100,Math.max(1,Number(document.getElementById('ncount').value)||1));
+ if(!title||!subject){alert('أكمل اسم الامتحان والمادة أولًا.');return}
+ const old=[...document.querySelectorAll('.question-builder')].map(card=>({text:card.querySelector('.q-text')?.value||'',options:[...card.querySelectorAll('.q-option')].map(x=>x.value||''),correct:Number(card.querySelector('.q-correct:checked')?.value??0)}));
+ const editor=document.getElementById('questionEditor');
+ editor.classList.remove('hidden');
+ editor.innerHTML=`<div class="builder-head" style="margin-top:22px"><div><h3>أسئلة الامتحان</h3><p class="muted" style="margin:5px 0 0">لكل سؤال 4 اختيارات. اضغط الدائرة بجانب الاختيار الصحيح.</p></div><span class="builder-step">خطوة 2 من 2</span></div><div class="builder-summary"><span class="summary-pill">📚 ${esc(subject)}</span><span class="summary-pill">📝 ${count} سؤال</span><span class="summary-pill">⏱️ ${duration?duration+' دقيقة':'بدون مؤقت'}</span></div><div id="questionCards"></div><div class="sticky-actions"><button class="btn green" type="button" onclick="saveExam()">حفظ الامتحان في Google Sheets</button><button class="btn light" type="button" onclick="renderAdd()">إلغاء</button></div>`;
+ const wrap=document.getElementById('questionCards');
+ for(let i=0;i<count;i++){const q=old[i]||{};const opts=q.options||[];wrap.insertAdjacentHTML('beforeend',`<div class="question-builder" data-index="${i}"><div class="question-builder-head"><div class="row"><div class="question-number">${i+1}</div><strong>السؤال ${i+1}</strong></div><span>اختر إجابة صحيحة واحدة</span></div><div class="field"><label>نص السؤال</label><textarea class="q-text" rows="2" placeholder="اكتب نص السؤال هنا...">${esc(q.text||'')}</textarea></div><div><label>الاختيارات</label>${[0,1,2,3].map(j=>`<div class="option-editor"><input class="q-correct" type="radio" name="correct-${i}" value="${j}" ${Number(q.correct||0)===j?'checked':''} title="تحديد كإجابة صحيحة"><input class="q-option" type="text" value="${esc(opts[j]||'')}" placeholder="الاختيار ${j+1}"></div>`).join('')}</div></div>`)}
+ editor.scrollIntoView({behavior:'smooth',block:'start'});
+}
+async function saveExam(){
+ const title=document.getElementById('ntitle').value.trim(),subject=document.getElementById('nsubject').value.trim(),duration=Number(document.getElementById('nduration').value)||0;
+ const cards=[...document.querySelectorAll('.question-builder')];const qs=[];
+ for(let i=0;i<cards.length;i++){const card=cards[i],text=card.querySelector('.q-text').value.trim(),options=[...card.querySelectorAll('.q-option')].map(x=>x.value.trim()),checked=card.querySelector('.q-correct:checked');
+  if(!text){alert(`اكتب نص السؤال رقم ${i+1}.`);card.querySelector('.q-text').focus();return}
+  if(options.some(x=>!x)){alert(`أكمل الاختيارات الأربعة في السؤال رقم ${i+1}.`);const bad=card.querySelector('.q-option:not([value])');if(bad)bad.focus();return}
+  if(!checked){alert(`حدد الإجابة الصحيحة للسؤال رقم ${i+1}.`);return}
+  qs.push({text,options,correct:Number(checked.value)});
+ }
+ if(!qs.length)return;
+ const btn=document.querySelector('#questionEditor .btn.green');if(btn){btn.disabled=true;btn.textContent='جاري الحفظ...'}
+ try{await api('createExam',{exam:{id:'custom-'+Date.now().toString(36),title,subject,duration,attemptLimit:0,showScore:true,questions:qs}},true);await renderAdmin();await refreshCloud();alert('تم حفظ الامتحان بنجاح في Google Sheets ✅')}catch(err){if(btn){btn.disabled=false;btn.textContent='حفظ الامتحان في Google Sheets'}alert(err.message)}
 }
 async function deleteExam(id){if(!confirm('حذف الامتحان وكل نتائجه من قاعدة البيانات؟'))return;try{await api('deleteExam',{examId:id},true);await renderAdmin();await refreshCloud();alert('تم حذف الامتحان')}catch(err){alert(err.message)}}
 function renderAdminBooks(){
