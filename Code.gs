@@ -17,7 +17,7 @@ function setup() {
   ensureAttemptsSchema_(ss);
   ensureSheet_(ss, SHEETS.BOOKS, ['id','subject','title','url','createdAt','active']);
   ensureSheet_(ss, SHEETS.VIDEOS, ['id','subject','title','url','createdAt','active']);
-  ensureSheet_(ss, SHEETS.STUDENTS, ['id','name','code','createdAt','updatedAt','active']);
+  ensureSheet_(ss, SHEETS.STUDENTS, ['id','name','code','createdAt','updatedAt','active','phone']);
   if (!PropertiesService.getScriptProperties().getProperty(ADMIN_TOKEN_PROPERTY)) {
     PropertiesService.getScriptProperties().setProperty(ADMIN_TOKEN_PROPERTY, 'CHANGE_THIS_ADMIN_TOKEN');
   }
@@ -74,18 +74,27 @@ function requireAdmin_(body) {
   const raw = CacheService.getScriptCache().get('admin_session_' + token);
   if (!raw || Number(raw) < Date.now()) throw new Error('جلسة الإدارة منتهية، سجل الدخول مرة أخرى');
 }
-function studentLogin_(name, code) {
-  const cleanName = normalizeName_(name);
+function studentLogin_(identifier, code) {
+  const key = String(identifier || '').trim().replace(/\s+/g,' ');
   const cleanCode = normalizeCode_(code);
-  validateTripleName_(cleanName);
+  if (!key) throw new Error('اكتب اسم الطالب أو رقم الهاتف');
   if (!cleanCode) throw new Error('اكتب كود الطالب');
+  const phone = normalizePhone_(key);
+  const isPhone = /^01\d{9}$/.test(phone);
+  const cleanName = normalizeName_(key);
+  if (!isPhone && cleanName.split(' ').filter(Boolean).length !== 3) throw new Error('اكتب اسمًا ثلاثيًا أو رقم هاتف مصري صحيحًا.');
   const rows = rows_(SHEETS.STUDENTS);
-  const row = rows.find(r => r[0] && String(r[5]).toLowerCase() !== 'false' && String(r[2]).trim() === cleanCode);
-  if (!row) throw new Error('الاسم أو الكود غير صحيح. تأكد من البيانات أو اطلب كودًا من المشرف.');
-  if (normalizeName_(row[1]) !== cleanName) throw new Error('الاسم الثلاثي لا يطابق الكود المدخل.');
+  const row = rows.find(r => {
+    if (!r[0] || String(r[5]).toLowerCase() === 'false') return false;
+    if (normalizeCode_(r[2]) !== cleanCode) return false;
+    const rowPhone = normalizePhone_(r[6] || '');
+    return isPhone ? rowPhone === phone : normalizeName_(r[1]) === cleanName;
+  });
+  if (!row) throw new Error('البيانات غير صحيحة. تأكد من الاسم/الهاتف والكود أو اطلب كودًا من المشرف.');
   const token = newToken_(), expires = Date.now() + STUDENT_SESSION_TTL;
-  CacheService.getScriptCache().put('student_session_' + token, JSON.stringify({expiresAt:expires,studentId:String(row[0]),name:String(row[1])}), 21600);
-  return {ok:true,session:token,expiresAt:expires,studentId:String(row[0]),name:String(row[1])};
+  const displayName = String(row[1] || '').trim() || ('طالب ' + String(row[6] || ''));
+  CacheService.getScriptCache().put('student_session_' + token, JSON.stringify({expiresAt:expires,studentId:String(row[0]),name:displayName}), 21600);
+  return {ok:true,session:token,expiresAt:expires,studentId:String(row[0]),name:displayName};
 }
 function requireStudent_(body) {
   const token = String(body.studentSession || '');
@@ -99,6 +108,7 @@ function requireStudent_(body) {
 function newToken_() { return Utilities.getUuid().replace(/-/g,'') + Utilities.getUuid().replace(/-/g,''); }
 function normalizeName_(v) { return String(v || '').trim().replace(/\s+/g,' '); }
 function normalizeCode_(v) { return String(v || '').trim().replace(/\s+/g,''); }
+function normalizePhone_(v) { let x=String(v||'').trim().replace(/[\s\-()]/g,''); if(/^\+20/.test(x)) x='0'+x.slice(3); if(/^20/.test(x)) x='0'+x.slice(2); return x; }
 function validateTripleName_(name) { if (name.split(' ').filter(Boolean).length !== 3) throw new Error('اسم الطالب يجب أن يكون ثلاثيًا بالضبط.'); }
 function validateCode_(code) { if (!/^[A-Za-z0-9_-]{4,32}$/.test(code)) throw new Error('الكود يجب أن يكون من 4 إلى 32 حرفًا أو رقمًا، بدون مسافات.'); }
 
@@ -144,8 +154,22 @@ function listVideos_() { return rows_(SHEETS.VIDEOS).filter(r=>r[0]&&String(r[5]
 function createVideo_(video) { if(!video||!video.title||!video.subject||!video.url)throw new Error('بيانات الفيديو ناقصة'); const u=String(video.url).trim(); if(!/^https?:\/\//i.test(u))throw new Error('رابط الفيديو غير صحيح'); const id='vid-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);getSheet_(SHEETS.VIDEOS).appendRow([id,String(video.subject).trim(),String(video.title).trim(),u,new Date().toISOString(),true]);return {ok:true}; }
 function deleteVideo_(id){if(!id)throw new Error('معرف الفيديو ناقص');deleteRowsByValue_(SHEETS.VIDEOS,1,String(id));return {ok:true};}
 
-function listStudents_(){return rows_(SHEETS.STUDENTS).filter(r=>r[0]&&String(r[5]).toLowerCase()!=='false').map(r=>({id:String(r[0]),name:String(r[1]),code:String(r[2]),createdAt:r[3],updatedAt:r[4],active:true}));}
-function createStudent_(student){const name=normalizeName_(student&&student.name),code=normalizeCode_(student&&student.code);validateTripleName_(name);validateCode_(code);const lock=LockService.getScriptLock();lock.waitLock(15000);try{const existing=rows_(SHEETS.STUDENTS).some(r=>normalizeCode_(r[2])===code&&String(r[5]).toLowerCase()!=='false');if(existing)throw new Error('هذا الكود مستخدم بالفعل، اختر كودًا آخر.');const id='stu-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);const now=new Date().toISOString();getSheet_(SHEETS.STUDENTS).appendRow([id,name,code,now,now,true]);return {ok:true,student:{id,name,code}};}finally{lock.releaseLock();}}
+function listStudents_(){return rows_(SHEETS.STUDENTS).filter(r=>r[0]&&String(r[5]).toLowerCase()!=='false').map(r=>({id:String(r[0]),name:String(r[1]||''),code:String(r[2]),createdAt:r[3],updatedAt:r[4],active:true,phone:String(r[6]||'')}));}
+function createStudent_(student){
+  const name=normalizeName_(student&&student.name), phone=normalizePhone_(student&&student.phone), code=normalizeCode_(student&&student.code);
+  if(name) validateTripleName_(name);
+  if(!name && !/^01\d{9}$/.test(phone)) throw new Error('اكتب اسمًا ثلاثيًا أو رقم هاتف مصري صحيحًا.');
+  if(phone && !/^01\d{9}$/.test(phone)) throw new Error('رقم الهاتف يجب أن يكون 11 رقمًا ويبدأ بـ 01.');
+  validateCode_(code);
+  const lock=LockService.getScriptLock(); lock.waitLock(15000);
+  try{
+    const existing=rows_(SHEETS.STUDENTS).some(r=>(normalizeCode_(r[2])===code || (phone && normalizePhone_(r[6]||'')===phone))&&String(r[5]).toLowerCase()!=='false');
+    if(existing) throw new Error(phone && rows_(SHEETS.STUDENTS).some(r=>normalizePhone_(r[6]||'')===phone&&String(r[5]).toLowerCase()!=='false') ? 'رقم الهاتف مستخدم بالفعل.' : 'هذا الكود مستخدم بالفعل، اختر كودًا آخر.');
+    const id='stu-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7), now=new Date().toISOString();
+    getSheet_(SHEETS.STUDENTS).appendRow([id,name,code,now,now,true,phone]);
+    return {ok:true,student:{id,name,code,phone}};
+  }finally{lock.releaseLock();}
+}
 function updateStudentCode_(id,code){id=String(id||'');code=normalizeCode_(code);if(!id)throw new Error('معرف الطالب ناقص');validateCode_(code);const rows=rows_(SHEETS.STUDENTS);if(rows.some(r=>String(r[0])!==id&&normalizeCode_(r[2])===code&&String(r[5]).toLowerCase()!=='false'))throw new Error('هذا الكود مستخدم بالفعل.');const sh=getSheet_(SHEETS.STUDENTS),data=sh.getDataRange().getValues();for(let i=1;i<data.length;i++)if(String(data[i][0])===id){sh.getRange(i+1,3).setValue(code);sh.getRange(i+1,5).setValue(new Date().toISOString());return {ok:true};}throw new Error('الطالب غير موجود');}
 function deleteStudent_(id){if(!id)throw new Error('معرف الطالب ناقص');deleteRowsByValue_(SHEETS.STUDENTS,1,String(id));return {ok:true};}
 
