@@ -156,18 +156,24 @@ function deleteVideo_(id){if(!id)throw new Error('معرف الفيديو ناق
 
 function listStudents_(){return rows_(SHEETS.STUDENTS).filter(r=>r[0]&&String(r[5]).toLowerCase()!=='false').map(r=>({id:String(r[0]),name:String(r[1]||''),code:String(r[2]),createdAt:r[3],updatedAt:r[4],active:true,phone:String(r[6]||'')}));}
 function createStudent_(student){
-  const name=normalizeName_(student&&student.name), phone=normalizePhone_(student&&student.phone), code=normalizeCode_(student&&student.code);
-  if(name) validateTripleName_(name);
-  if(!name && !/^01\d{9}$/.test(phone)) throw new Error('اكتب اسمًا ثلاثيًا أو رقم هاتف مصري صحيحًا.');
-  if(phone && !/^01\d{9}$/.test(phone)) throw new Error('رقم الهاتف يجب أن يكون 11 رقمًا ويبدأ بـ 01.');
+  const identifier=normalizeName_(student&&student.identifier);
+  const code=normalizeCode_(student&&student.code);
+  if(!identifier) throw new Error('اكتب اسم الطالب أو رقم الهاتف.');
+  const phone=normalizePhone_(identifier);
+  const isPhone=/^01\d{9}$/.test(phone);
+  const name=isPhone ? '' : identifier;
+  if(!isPhone) validateTripleName_(name);
+  if(isPhone && !/^01\d{9}$/.test(phone)) throw new Error('رقم الهاتف يجب أن يكون 11 رقمًا ويبدأ بـ 01.');
   validateCode_(code);
   const lock=LockService.getScriptLock(); lock.waitLock(15000);
   try{
-    const existing=rows_(SHEETS.STUDENTS).some(r=>(normalizeCode_(r[2])===code || (phone && normalizePhone_(r[6]||'')===phone))&&String(r[5]).toLowerCase()!=='false');
-    if(existing) throw new Error(phone && rows_(SHEETS.STUDENTS).some(r=>normalizePhone_(r[6]||'')===phone&&String(r[5]).toLowerCase()!=='false') ? 'رقم الهاتف مستخدم بالفعل.' : 'هذا الكود مستخدم بالفعل، اختر كودًا آخر.');
+    const all=rows_(SHEETS.STUDENTS).filter(r=>String(r[5]).toLowerCase()!=='false');
+    if(all.some(r=>normalizeCode_(r[2])===code)) throw new Error('هذا الكود مستخدم بالفعل، اختر كودًا آخر.');
+    if(isPhone && all.some(r=>normalizePhone_(r[6]||'')===phone)) throw new Error('رقم الهاتف مستخدم بالفعل.');
+    if(!isPhone && all.some(r=>normalizeName_(r[1])===name)) throw new Error('اسم الطالب مستخدم بالفعل.');
     const id='stu-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7), now=new Date().toISOString();
-    getSheet_(SHEETS.STUDENTS).appendRow([id,name,code,now,now,true,phone]);
-    return {ok:true,student:{id,name,code,phone}};
+    getSheet_(SHEETS.STUDENTS).appendRow([id,name,code,now,now,true,isPhone?phone:'']);
+    return {ok:true,student:{id,name,code,phone:isPhone?phone:''}};
   }finally{lock.releaseLock();}
 }
 function updateStudentCode_(id,code){id=String(id||'');code=normalizeCode_(code);if(!id)throw new Error('معرف الطالب ناقص');validateCode_(code);const rows=rows_(SHEETS.STUDENTS);if(rows.some(r=>String(r[0])!==id&&normalizeCode_(r[2])===code&&String(r[5]).toLowerCase()!=='false'))throw new Error('هذا الكود مستخدم بالفعل.');const sh=getSheet_(SHEETS.STUDENTS),data=sh.getDataRange().getValues();for(let i=1;i<data.length;i++)if(String(data[i][0])===id){sh.getRange(i+1,3).setValue(code);sh.getRange(i+1,5).setValue(new Date().toISOString());return {ok:true};}throw new Error('الطالب غير موجود');}
