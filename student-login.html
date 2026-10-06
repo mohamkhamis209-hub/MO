@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>دخول الطالب | منصتك التعليمية</title>
+<style>
+:root{--navy:#0b1d33;--navy2:#102941;--green:#10b981;--green2:#19d291;--bg:#f5f8fb;--ink:#17283b;--muted:#758397;--card:#fff;--line:#e4ebf0}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
+body.dark-mode{--bg:#0b1220;--ink:#edf5fb;--muted:#a9b7c5;--card:#151f2d;--line:#2b3a4b}
+.top{height:64px;background:#fff;border-bottom:1px solid #e7edf2;box-shadow:0 3px 18px rgba(12,31,50,.06);display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:20}.brand{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:950}.brand img{width:42px;height:42px;border-radius:12px;object-fit:cover}.top-actions{display:flex;gap:8px;align-items:center}.icon-btn{width:42px;height:42px;border:1px solid #e0e7ed;background:#fff;color:#111;border-radius:12px;font-size:19px;display:grid;place-items:center}.icon-btn:hover{background:#f1f5f8}
+body.dark-mode .top{background:#111a28;border-color:#293849;box-shadow:none}.dark-btn{color:#111;background:#fff}.dark-btn .moon{display:inline}.dark-btn .sun{display:none}body.dark-mode .dark-btn{background:#1d2938;color:#fff;border-color:#334456}.dark-btn .sun{ }body.dark-mode .dark-btn .moon{display:none}body.dark-mode .dark-btn .sun{display:inline}
+.wrap{min-height:calc(100vh - 64px);display:grid;place-items:center;padding:28px 14px 45px;background:linear-gradient(180deg,#f7fafc,#eef4f7)}body.dark-mode .wrap{background:linear-gradient(180deg,#0d1624,#0a111d)}
+.card{width:min(470px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:0 14px 45px rgba(18,38,59,.10);overflow:hidden}.card-head{background:linear-gradient(135deg,var(--navy),#16415d);color:#fff;padding:25px 22px;text-align:center}.card-head img{width:72px;height:72px;object-fit:cover;border-radius:18px;background:#fff;padding:4px;margin-bottom:10px}.card-head h1{font-size:23px;margin:0 0 6px}.card-head p{font-size:12px;color:#bcd0dc;margin:0;line-height:1.8}.body{padding:22px}.field{margin-bottom:14px}.field label{display:block;font-size:13px;font-weight:900;margin-bottom:7px}.input{width:100%;height:54px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:13px;padding:0 14px;outline:none}.input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(16,185,129,.10)}.login{width:100%;height:54px;border:0;border-radius:13px;background:linear-gradient(135deg,#0fa976,#19c992);color:#fff;font-weight:950;box-shadow:0 10px 22px rgba(16,185,129,.22)}.error{min-height:20px;color:#e34b61;font-size:12px;text-align:center;margin:8px 0}.divider{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:11px;margin:15px 0}.divider:before,.divider:after{content:"";height:1px;background:var(--line);flex:1}.secondary{width:100%;height:50px;border:1px solid var(--line);border-radius:13px;background:transparent;color:var(--ink);font-weight:900;margin-bottom:9px}.whatsapp{width:100%;min-height:50px;border:0;border-radius:13px;background:#25d366;color:#fff;font-weight:900}.hint{font-size:11px;color:var(--muted);text-align:center;line-height:1.8;margin:15px 0 0}.modal{display:none;position:fixed;inset:0;background:rgba(3,12,23,.70);backdrop-filter:blur(5px);z-index:100;align-items:center;justify-content:center;padding:14px}.modal.show{display:flex}.modal-card{width:min(450px,100%);max-height:92vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px}.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.close{width:38px;height:38px;border:0;border-radius:10px;background:#eef2f5;color:#17283b;font-size:20px}.modal p{font-size:12px;color:var(--muted);line-height:1.8;margin-top:0}.modal input,.modal select,.modal textarea{width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:11px 12px;margin-bottom:9px;outline:none}.modal input,.modal select{height:50px}.modal textarea{min-height:82px;resize:vertical}.send{width:100%;height:52px;border:0;border-radius:13px;background:#10b981;color:#fff;font-weight:950}.back{display:block;text-align:center;color:var(--muted);font-size:11px;margin-top:13px}
+@media(max-width:520px){.top{height:58px;padding:0 10px}.brand{font-size:16px}.brand img{width:38px;height:38px}.icon-btn{width:38px;height:38px}.wrap{min-height:calc(100vh - 58px);padding:15px 9px 30px;align-items:start}.card{border-radius:20px}.card-head{padding:20px 15px}.card-head img{width:62px;height:62px}.card-head h1{font-size:20px}.body{padding:16px}.input,.login{height:52px}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brand"><img src="assets/platform-logo.png" alt="منصتك التعليمية"><span>منصتك التعليمية</span></div>
+ <div class="top-actions"><button class="icon-btn dark-btn" id="themeBtn" aria-label="تغيير الوضع"><span class="moon">🌙</span><span class="sun">☀️</span></button></div>
+</header>
+<main class="wrap">
+ <section class="card">
+  <div class="card-head"><img src="assets/platform-logo.png" alt="شعار المنصة"><h1>تسجيل دخول الطالب</h1><p>أدخل كود الطالب للمتابعة إلى منصتك التعليمية.</p></div>
+  <div class="body">
+   <div class="field"><label for="studentCode">كود الطالب</label><input class="input" id="studentCode" type="text" placeholder="أدخل كود الطالب" autocomplete="off"></div>
+   <button class="login" id="loginBtn" type="button">تسجيل الدخول ↪</button>
+   <div class="error" id="student-error"></div>
+   <div class="divider">ليس لديك حساب؟</div>
+   <button class="secondary" id="requestBtn" type="button">👤 إنشاء حساب جديد</button>
+   <a class="whatsapp" href="https://wa.me/201033459821?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%20%D8%A7%D9%84%D9%85%D8%B4%D8%B1%D9%81%20%D9%84%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%83%D9%88%D8%AF%20%D8%A7%D9%84%D8%B7%D8%A7%D9%84%D8%A8" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px">💬 تواصل مع المشرف عبر WhatsApp</a>
+   <p class="hint">إذا كان هذا أول دخول لك من هاتف جديد، قد يُرسل طلب موافقة للمشرف تلقائيًا.</p>
+   <a class="back" href="index.html">← العودة</a>
+  </div>
+ </section>
+</main>
+<div class="modal" id="modal">
+ <div class="modal-card">
+  <div class="modal-head"><h3 style="margin:0">👤 إنشاء حساب جديد</h3><button class="close" id="closeModal">×</button></div>
+  <p>اكتب بياناتك كاملة. سيصل الطلب إلى المشرف، وبعد الموافقة سيمنحك كود الدخول.</p>
+  <input id="requestName" placeholder="الاسم بالكامل">
+  <input id="requestPhone" placeholder="رقم الهاتف" type="tel">
+  <select id="requestGrade"><option value="">اختر الصف</option></select>
+  <textarea id="requestNotes" placeholder="ملاحظات (اختياري)"></textarea>
+  <button class="send" id="sendRequest">📨 إرسال طلب إنشاء الحساب</button>
+ </div>
+</div>
+<script type="module">
+import { db, collection, query, where, getDocs, addDoc, updateDoc, ensureAnonymousAuth, serverTimestamp } from './js/firebase-config.js';
+import { getDeviceId } from './js/device.js';
+const themeBtn=document.getElementById('themeBtn');
+function applyTheme(){const dark=localStorage.getItem('darkMode')==='true';document.body.classList.toggle('dark-mode',dark)}
+applyTheme(); themeBtn.onclick=()=>{const dark=!document.body.classList.contains('dark-mode');document.body.classList.toggle('dark-mode',dark);localStorage.setItem('darkMode',dark)};
+const modal=document.getElementById('modal');
+const openModal=()=>modal.classList.add('show'); const closeModal=()=>modal.classList.remove('show');
+document.getElementById('requestBtn').onclick=openModal;document.getElementById('closeModal').onclick=closeModal;modal.onclick=e=>{if(e.target===modal)closeModal()};
+async function fillRequestGrades(){try{await ensureAnonymousAuth();const snap=await getDocs(collection(db,'grades'));const sel=document.getElementById('requestGrade');snap.forEach(d=>{const x=d.data();const o=document.createElement('option');o.value=x.code||d.id;o.textContent=x.name||x.code;sel.appendChild(o)});if(sel.options.length===1){['1','2','3'].forEach((v,i)=>{const o=document.createElement('option');o.value=v;o.textContent=['أولى ثانوي','ثانية ثانوي','ثالثة ثانوي'][i];sel.appendChild(o)})}}catch(e){console.warn('تعذر تحميل الصفوف',e)}}
+fillRequestGrades();
+document.getElementById('sendRequest').onclick=async()=>{const name=document.getElementById('requestName').value.trim(),phone=document.getElementById('requestPhone').value.trim(),grade=document.getElementById('requestGrade').value,notes=document.getElementById('requestNotes').value.trim();if(!name||!phone||!grade){alert('من فضلك اكتب الاسم والرقم والصف كاملين.');return}const cleanPhone=phone.replace(/[^0-9+]/g,'');try{await ensureAnonymousAuth();const existingStudent=await getDocs(query(collection(db,'students'),where('phone','==',cleanPhone)));if(!existingStudent.empty){alert('⚠️ هذا الرقم مسجل بالفعل. استخدم كود الدخول أو تواصل مع المشرف.');return}const pending=await getDocs(query(collection(db,'studentRequests'),where('phone','==',cleanPhone),where('status','==','pending')));if(!pending.empty){alert('⏳ تم إرسال طلب بهذا الرقم من قبل، والطلب ما زال قيد المراجعة.');return}await addDoc(collection(db,'studentRequests'),{name,phone:cleanPhone,grade,notes,status:'pending',createdAt:serverTimestamp()});closeModal();alert('✅ تم إرسال الطلب للمشرف بنجاح. بعد الموافقة سيظهر لك كود الدخول.')}catch(e){console.error(e);alert('❌ تعذر إرسال الطلب. تأكد من تفعيل Anonymous Authentication في Firebase.')}};
+async function studentLogin(){const code=document.getElementById('studentCode').value.trim(),err=document.getElementById('student-error');err.textContent='';if(!code){err.textContent='من فضلك أدخل كود الطالب';return}try{await ensureAnonymousAuth();const q=query(collection(db,'students'),where('code','==',code));const snap=await getDocs(q);if(snap.empty){err.textContent='كود غير صحيح';return}const docRef=snap.docs[0],data=docRef.data();if(data.status==='suspended'){alert(`⛔ حسابك معلق: ${data.suspendMessage||'يرجى التواصل مع المشرف.'}`);return}const device=getDeviceId(),ids=data.deviceIds||[];if(!ids.includes(device)){const pq=query(collection(db,'pendingDevices'),where('studentCode','==',code),where('deviceId','==',device),where('status','==','pending'));if(!(await getDocs(pq)).empty){alert('⏳ يوجد طلب معلق لهذا الجهاز بالفعل، انتظر موافقة المشرف.');return}await addDoc(collection(db,'pendingDevices'),{studentCode:code,deviceId:device,status:'pending',requestedAt:new Date(),grade:data.grade||'all'});alert('📱 تم إرسال طلب الجهاز الجديد للمشرف، انتظر موافقة المشرف.');return}const updates={lastLogin:new Date()};if(!data.firstLogin){updates.firstLogin=new Date();updates.status='active'}else if(data.status==='inactive')updates.status='active';await updateDoc(docRef.ref,updates);localStorage.setItem('studentCode',code);localStorage.setItem('studentGrade',data.grade||'all');localStorage.setItem('studentName',data.name||'');window.location.href='student-panel.html'}catch(e){console.error(e);err.textContent='حدث خطأ أثناء تسجيل الدخول. حاول مرة أخرى.'}}
+document.getElementById('loginBtn').onclick=studentLogin;document.getElementById('studentCode').onkeydown=e=>{if(e.key==='Enter')studentLogin()};
+</script>
+</body>
+</html>

@@ -1,0 +1,2546 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الطالب</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://www.youtube.com/iframe_api"></script>
+    
+    <!-- ============================================ -->
+    <!-- حماية ضد نسخ الروابط والمحتوى                -->
+    <!-- ============================================ -->
+    <script>
+        // 1. منع قائمة النقر بزر الماوس الأيمن
+        // تعطيل قائمة كليك يمين في المنصة بالكامل
+        function blockContextMenu(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }
+        document.addEventListener('contextmenu', blockContextMenu, true);
+        window.addEventListener('contextmenu', blockContextMenu, true);
+        document.oncontextmenu = blockContextMenu;
+        window.oncontextmenu = blockContextMenu;
+
+        // 2. منع اختصارات النسخ والتحكم
+        document.addEventListener('keydown', function(e) {
+            const ctrl = e.ctrlKey || e.metaKey;
+            
+            if (ctrl && e.key === 'c') {
+                e.preventDefault();
+                return false;
+            }
+            if (ctrl && e.key === 'u') {
+                e.preventDefault();
+                return false;
+            }
+            if (ctrl && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            if (ctrl && e.key === 's') {
+                e.preventDefault();
+                return false;
+            }
+            if (ctrl && e.key === 'p') {
+                e.preventDefault();
+                return false;
+            }
+            if (ctrl && e.key === 'a') {
+                e.preventDefault();
+                return false;
+            }
+            if (ctrl && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // منع فتح الروابط في نوافذ جديدة
+        document.addEventListener('click', function(e) {
+            const target = e.target;
+            if (target.tagName === 'A' && target.getAttribute('target') === '_blank') {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        }, true);
+
+        // منع استخدام اختصار Ctrl+Click لفتح رابط
+        document.addEventListener('mousedown', function(e) {
+            if (e.button === 1 || (e.ctrlKey && e.button === 0)) {
+                e.preventDefault();
+                return false;
+            }
+        }, true);
+
+        console.log('🛡️ تم تفعيل الحماية ضد النسخ');
+    </script>
+    <!-- ============================================ -->
+    <!-- نهاية الحماية                                -->
+    <!-- ============================================ -->
+
+    <style>
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        iframe {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        img, video {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: white;
+            border-bottom: 2px solid #eee;
+            margin-right: 270px;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .header-bar h2 {
+            margin: 0;
+            color: #1e2a36;
+            transition: color 0.3s;
+        }
+        .points-display {
+            background: #f39c12;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 2px 10px rgba(243,156,18,0.3);
+        }
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        .badge-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            min-width: 120px;
+            transition: 0.3s;
+            border: 2px solid #eee;
+        }
+        .badge-item:hover {
+            transform: scale(1.05);
+        }
+        .badge-item .icon {
+            font-size: 40px;
+        }
+        .badge-item .name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .badge-item .desc {
+            font-size: 12px;
+            color: #888;
+        }
+        .badge-item.locked {
+            opacity: 0.4;
+            filter: grayscale(1);
+        }
+        .badge-item.unlocked {
+            border-color: #f39c12;
+            background: #fff8e7;
+        }
+        .badge-item.gold {
+            border-color: #f1c40f;
+            background: #fffde7;
+        }
+        .badge-item.silver {
+            border-color: #bdc3c7;
+            background: #f8f9fa;
+        }
+        .badge-item.bronze {
+            border-color: #cd7f32;
+            background: #fdf2e9;
+        }
+        .theme-toggle-small {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+        .theme-toggle-small:hover {
+            background: rgba(0,0,0,0.1);
+            transform: scale(1.1);
+        }
+        body.dark-mode .theme-toggle-small:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .stat-card .label {
+            font-size: 13px;
+            color: #888;
+        }
+        .stat-card .icon {
+            font-size: 24px;
+        }
+        body.dark-mode .stat-card {
+            background: #2d2d44;
+            color: #e0e0e0;
+        }
+        body.dark-mode .stat-card .number {
+            color: #e0e0e0;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 10px;
+            margin: 5px 0;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .leaderboard-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .leaderboard-item .rank {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3498db;
+            min-width: 40px;
+        }
+        .leaderboard-item .name {
+            flex: 1;
+            margin: 0 15px;
+        }
+        .leaderboard-item .points {
+            font-weight: bold;
+            color: #f39c12;
+        }
+        .leaderboard-item.top1 {
+            border-right: 4px solid #f1c40f;
+            background: #fffde7;
+        }
+        .leaderboard-item.top2 {
+            border-right: 4px solid #bdc3c7;
+            background: #f8f9fa;
+        }
+        .leaderboard-item.top3 {
+            border-right: 4px solid #cd7f32;
+            background: #fdf2e9;
+        }
+        body.dark-mode .leaderboard-item {
+            background: #2d2d44;
+            color: #e0e0e0;
+        }
+        body.dark-mode .leaderboard-item.top1 {
+            background: #3d3d1c;
+        }
+        body.dark-mode .leaderboard-item.top2 {
+            background: #2d2d44;
+        }
+        body.dark-mode .leaderboard-item.top3 {
+            background: #3d2d1c;
+        }
+        .video-player-wrapper {
+            margin: 25px 0;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .video-player-wrapper h3 {
+            margin-bottom: 10px;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #000;
+        }
+        .video-container iframe,
+        .video-container .youtube-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        .video-watermark {
+            position: absolute;
+            z-index: 20;
+            pointer-events: none;
+            color: rgba(255,255,255,0.72);
+            background: rgba(0,0,0,0.20);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            text-shadow: 0 1px 3px #000;
+            user-select: none;
+            transition: left 2.2s ease, top 2.2s ease, opacity 0.5s ease;
+        }
+        .video-container:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            padding-bottom: 0;
+            border-radius: 0;
+            background: #000;
+        }
+        .video-container:-webkit-full-screen {
+            width: 100vw;
+            height: 100vh;
+            padding-bottom: 0;
+            border-radius: 0;
+            background: #000;
+        }
+
+        .video-container:fullscreen .yt-top-blocker,
+        .video-container:-webkit-full-screen .yt-top-blocker {
+            position: absolute !important;
+            z-index: 10000 !important;
+        }
+        .video-container:fullscreen .yt-bottom-left-blocker,
+        .video-container:-webkit-full-screen .yt-bottom-left-blocker {
+            position: absolute !important;
+            z-index: 10001 !important;
+        }
+        .video-container:fullscreen .yt-bottom-right-blocker,
+        .video-container:-webkit-full-screen .yt-bottom-right-blocker {
+            position: absolute !important;
+            z-index: 10002 !important;
+        }
+        .video-container:fullscreen iframe,
+        .video-container:fullscreen .youtube-player,
+        .video-container:-webkit-full-screen iframe,
+        .video-container:-webkit-full-screen .youtube-player {
+            border-radius: 0;
+        }
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 60px;
+            right: 15px;
+            z-index: 10003;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fullscreen-btn:hover {
+            background: rgba(0,0,0,0.9);
+            transform: scale(1.1);
+        }
+        .video-container:fullscreen .fullscreen-btn,
+        .video-container:-webkit-full-screen .fullscreen-btn {
+            display: flex !important;
+            z-index: 10003 !important;
+            bottom: 70px !important;
+            right: 18px !important;
+        }
+        .progress-info {
+            margin-top: 10px;
+            color: #888;
+            font-size: 14px;
+        }
+        .progress-bar {
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+            margin-top: 5px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        body.dark-mode .video-player-wrapper {
+            background: #2d2d44;
+        }
+        body.dark-mode .video-player-wrapper h3 {
+            color: #e0e0e0;
+        }
+        body.dark-mode .progress-info {
+            color: #aaa;
+        }
+        body.dark-mode .progress-bar {
+            background: #3d3d5c;
+        }
+        #questionFab{position:fixed;right:22px;bottom:92px;width:58px;height:58px;border:0;border-radius:50%;background:#25D366;color:#fff;font-size:25px;cursor:pointer;z-index:9998;box-shadow:0 8px 25px rgba(0,0,0,.22);transition:.2s;}
+        #questionFab:hover{transform:scale(1.06);}
+        #questionModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:18px;}
+        #questionModal .question-card{width:min(520px,100%);background:#fff;border-radius:22px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.25);direction:rtl;}
+        #questionModal textarea{width:100%;min-height:150px;resize:vertical;border:1px solid #ddd;border-radius:14px;padding:14px;font:inherit;outline:none;}
+        #questionModal .question-actions{display:flex;gap:10px;margin-top:14px;}
+        #questionModal button{border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:800;cursor:pointer;}
+        #questionSendBtn{background:#25D366;color:#fff;flex:1;}
+        #questionCloseBtn{background:#eee;color:#333;}
+
+        /* منع النسخ من الـ iframe */
+        .no-copy-iframe {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* ============================================ */
+        /* تكبير الكتب - Fullscreen داخل الموقع        */
+        /* ============================================ */
+        .book-fullscreen {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            padding-bottom: 0 !important;
+            height: 90vh !important;
+            width: 90vw !important;
+            z-index: 9999 !important;
+            background: #1a1a2e !important;
+            border-radius: 12px !important;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.8) !important;
+            border: 2px solid #444 !important;
+        }
+
+        .book-fullscreen iframe {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 10px !important;
+        }
+
+        .book-close-btn {
+            position: absolute !important;
+            top: 10px !important;
+            right: 10px !important;
+            z-index: 10000 !important;
+            background: rgba(0,0,0,0.7) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 20px !important;
+            padding: 8px 18px !important;
+            font-size: 16px !important;
+            cursor: pointer !important;
+            transition: 0.3s !important;
+            width: auto !important;
+            font-weight: bold !important;
+        }
+
+        .book-close-btn:hover {
+            background: rgba(231,76,60,0.9) !important;
+        }
+
+        body.dark-mode .book-fullscreen {
+            background: #0d0d1a !important;
+            border-color: #555 !important;
+        }
+
+        /* حماية الفيديو - منع روابط وعلامات YouTube العلوية */
+        .video-container iframe {
+            pointer-events: auto;
+        }
+
+        /* طبقة شفافة فوق شريط YouTube العلوي لمنع زر المشاركة/فتح YouTube */
+        .yt-top-blocker {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 64px !important;
+            z-index: 10000 !important;
+            background: transparent !important;
+            pointer-events: auto !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            cursor: default !important;
+        }
+
+        .yt-top-blocker * {
+            pointer-events: none !important;
+        }
+        .yt-top-blocker * {
+            pointer-events: none !important;
+        }
+
+        /* منطقتان منفصلتان فوق الأيقونات العلوية في YouTube */
+        .yt-left-blocker, .yt-right-blocker {
+            position: absolute !important;
+            top: 0 !important;
+            height: 72px !important;
+            z-index: 10001 !important;
+            background: transparent !important;
+            pointer-events: auto !important;
+        }
+        .yt-left-blocker { left: 0 !important; width: 90px !important; }
+        .yt-right-blocker { right: 0 !important; width: 190px !important; }
+
+        /* منع الضغط على شعار YouTube أسفل اليسار */
+        .yt-bottom-left-blocker {
+            position: absolute !important;
+            left: 0 !important;
+            bottom: 0 !important;
+            width: 125px !important;
+            height: 58px !important;
+            z-index: 1001 !important;
+            background: transparent !important;
+            pointer-events: auto !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            cursor: default !important;
+        }
+
+        .yt-bottom-left-blocker * {
+            pointer-events: none !important;
+        }
+
+        /* منع زر نسخ/مشاركة الرابط الموجود أسفل يمين مشغل YouTube */
+        .yt-bottom-right-blocker {
+            position: absolute !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 115px !important;
+            height: 62px !important;
+            z-index: 10002 !important;
+            background: transparent !important;
+            pointer-events: auto !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            cursor: default !important;
+        }
+
+        .yt-bottom-right-blocker * {
+            pointer-events: none !important;
+        }
+
+        /* حماية إضافية: منع قائمة السياق على كل عناصر المنصة */
+        html, body, button, a, img, .video-player-wrapper, .video-container, .yt-top-blocker,
+        .yt-bottom-left-blocker, .yt-bottom-right-blocker {
+            -webkit-touch-callout: none !important;
+        }
+
+        .video-container iframe::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 5;
+        }
+
+        @media (max-width: 768px) {
+            .book-fullscreen {
+                height: 95vh !important;
+                width: 95vw !important;
+                border-radius: 8px !important;
+            }
+            .book-close-btn {
+                top: 5px !important;
+                right: 5px !important;
+                padding: 6px 14px !important;
+                font-size: 14px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-bar {
+                margin-right: 0;
+                padding: 15px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .header-bar h2 {
+                font-size: 18px;
+            }
+            .badge-container {
+                gap: 8px;
+            }
+            .badge-item {
+                min-width: 80px;
+                padding: 12px;
+            }
+            .badge-item .icon {
+                font-size: 28px;
+            }
+            .dashboard-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .leaderboard-item {
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+            .fullscreen-btn {
+                bottom: 50px;
+                right: 10px;
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+            #questionFab{right:15px;bottom:88px;width:54px;height:54px;}
+            #questionModal .question-card{padding:18px;}
+        }
+    
+
+        /* ===== القائمة الجانبية للموبايل - تصميم التطبيق ===== */
+        .mobile-menu-toggle{display:none}
+        .mobile-sidebar-overlay{display:none}
+        .sidebar-profile-name{font-size:18px;font-weight:900;margin-top:8px;color:#fff}
+        .sidebar-profile-user{font-size:13px;opacity:.7;color:#fff;margin-top:3px}
+        @media(max-width:768px){
+            .mobile-menu-toggle{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:12px;background:#3a3a3a;color:#fff;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+            .mobile-sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:10000;opacity:0;visibility:hidden;transition:.22s}
+            .mobile-sidebar-overlay.open{opacity:1;visibility:visible}
+            .sidebar{display:flex!important;position:fixed!important;top:0!important;right:-330px!important;bottom:0!important;width:min(330px,86vw)!important;height:100vh!important;z-index:10001!important;margin:0!important;padding:24px 16px!important;overflow-y:auto!important;flex-direction:column!important;background:#292929!important;box-shadow:-12px 0 35px rgba(0,0,0,.28)!important;transition:right .25s ease!important}
+            .sidebar.mobile-open{right:0!important}
+            .sidebar .admin-img{width:76px!important;height:76px!important;border-radius:50%!important;object-fit:cover!important;margin:0 auto 8px!important;border:3px solid #31d796!important}
+            .sidebar h4{text-align:center!important;margin:0 0 2px!important;color:#fff!important;font-size:16px!important}
+            .sidebar .sidebar-profile-name,.sidebar .sidebar-profile-user{display:block!important;text-align:center!important}
+            .sidebar ul{display:flex!important;flex-direction:column!important;gap:5px!important;width:100%!important;margin:18px 0 0!important;padding:0!important}
+            .sidebar ul li{width:100%!important;box-sizing:border-box!important;margin:0!important;padding:14px 16px!important;border-radius:13px!important;color:#e9e9e9!important;font-size:16px!important;text-align:right!important;background:transparent!important}
+            .sidebar ul li:hover,.sidebar ul li.active-mobile-item{background:rgba(35,211,137,.18)!important;color:#35d79a!important}
+            .sidebar>button{margin-top:auto!important}
+            .header-bar{position:sticky;top:0;z-index:9998}
+            .header-bar h2{font-size:17px!important}
+        }
+
+        /* ===== واجهة الكورسات الجديدة ===== */
+        .courses-shell{max-width:1100px;margin:0 auto;direction:rtl}
+        .courses-hero{background:linear-gradient(135deg,#0f8f6d,#19c995);color:#fff;border-radius:26px;padding:24px 22px;margin-bottom:20px;box-shadow:0 14px 35px rgba(15,143,109,.18)}
+        .courses-hero h2{margin:0 0 7px;font-size:28px}.courses-hero p{margin:0;opacity:.92;line-height:1.8}
+        .course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+        .course-card-new{background:#fff;border:1px solid #e8edf0;border-radius:24px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.06);transition:.2s;cursor:pointer}
+        .course-card-new:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.1)}
+        .course-cover{height:175px;background:linear-gradient(135deg,#d9f7ee,#bfeadf);position:relative;overflow:hidden}
+        .course-cover img{width:100%;height:100%;object-fit:cover;display:block}.course-cover .course-cover-fallback{height:100%;display:flex;align-items:center;justify-content:center;font-size:68px}
+        .course-card-body{padding:18px}.course-card-body h3{margin:0 0 9px;font-size:22px;color:#1e2430}.course-meta{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 13px}.course-chip{background:#f0faf7;color:#0c8b69;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800}.course-desc{color:#7a8088;line-height:1.8;min-height:42px;font-size:14px}.course-open-btn{width:100%;border:0;border-radius:14px;padding:13px;background:#10b981;color:#fff;font:inherit;font-weight:900;cursor:pointer;margin-top:12px}.course-open-btn:hover{background:#0d9f70}
+        .course-detail-head{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}.course-back-btn{border:1px solid #10b981;background:#fff;color:#0b9b70;border-radius:12px;padding:10px 15px;font:inherit;font-weight:800;cursor:pointer}.course-detail-cover{width:100%;height:210px;border-radius:22px;object-fit:cover;background:#e9f8f3;margin-bottom:15px}.course-lessons{display:grid;gap:12px}.lesson-row{display:grid;grid-template-columns:110px 1fr auto;gap:13px;align-items:center;background:#fff;border:1px solid #e8edf0;border-radius:18px;padding:10px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.04)}.lesson-thumb{width:110px;height:68px;border-radius:12px;object-fit:cover;background:#eef5f3}.lesson-info h4{margin:0 0 5px;font-size:17px}.lesson-info p{margin:0;color:#858b93;font-size:13px}.lesson-status{font-size:12px;font-weight:800;color:#0a9b70}.lesson-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.lesson-actions button{border:0;border-radius:11px;padding:10px 13px;font:inherit;font-weight:800;cursor:pointer}.btn-green{background:#10b981;color:#fff}.btn-soft{background:#eff8f5;color:#087e60}.course-player-card{background:#fff;border-radius:24px;padding:16px;margin-bottom:18px;box-shadow:0 8px 25px rgba(0,0,0,.06);border:1px solid #e8edf0}.course-player-title{font-size:21px;font-weight:900;margin:0 0 12px}.course-player-nav{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:12px}.course-player-nav button{flex:1;min-width:130px;border:0;border-radius:12px;padding:11px;font:inherit;font-weight:900;cursor:pointer}.auto-play-box{display:flex;align-items:center;gap:8px;background:#f7faf9;padding:10px 13px;border-radius:12px;margin-top:10px;color:#555;font-size:14px}.auto-play-box input{width:18px;height:18px}.lesson-discuss-btn{background:#fff;border:1px solid #10b981!important;color:#0b9b70}
+        body.dark-mode .course-card-new,body.dark-mode .lesson-row,body.dark-mode .course-player-card{background:#1e2430;border-color:#303947;color:#fff}body.dark-mode .course-card-body h3{color:#fff}body.dark-mode .course-back-btn{background:#1e2430}body.dark-mode .auto-play-box{background:#252d38;color:#ddd}
+        @media(max-width:700px){.course-grid{grid-template-columns:1fr}.course-cover{height:185px}.lesson-row{grid-template-columns:88px 1fr}.lesson-row>div:last-child{grid-column:2}.lesson-thumb{width:88px;height:60px}.course-detail-cover{height:180px}.courses-hero h2{font-size:23px}}
+
+    
+        /* ===== منصتك التعليمية - الواجهة الجديدة ===== */
+        body{background:#f5f8fb;color:#162033;}
+        .sidebar{background:linear-gradient(180deg,#0b1d33 0%,#102941 100%)!important;border-left:1px solid rgba(255,255,255,.06);padding:18px 14px!important;}
+        .platform-brand{text-align:center;padding:4px 0 18px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:14px}.platform-logo{width:62px;height:62px;border-radius:18px;object-fit:cover;border:2px solid #12c98a;box-shadow:0 8px 22px rgba(0,0,0,.22)}.platform-brand-title{font-size:20px;font-weight:900;color:#fff;margin-top:9px}.platform-brand-sub{font-size:11px;color:#91a4b9;margin-top:4px}.sidebar-student-card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:11px;margin-bottom:10px;text-align:center}.sidebar-avatar{width:44px;height:44px;border-radius:50%;background:#12c98a;color:#08233a;display:flex;align-items:center;justify-content:center;margin:auto;font-size:22px;font-weight:900}.sidebar-profile-name{color:#fff!important;font-size:15px!important}.sidebar-profile-user{color:#8fa3b7!important;font-size:11px!important}.sidebar ul{margin-top:10px!important}.sidebar ul li{color:#dce7f0!important;border-radius:12px!important;font-size:14px!important;padding:12px 13px!important}.sidebar ul li:hover,.sidebar ul li.active-mobile-item{background:rgba(18,201,138,.15)!important;color:#22d99a!important;transform:none!important;border-right:3px solid #18d391}.header-bar{background:#fff!important;border-bottom:1px solid #e7edf2!important;margin-right:270px!important;padding:13px 25px!important;box-shadow:0 3px 18px rgba(14,35,55,.05);}.header-bar h2{color:#10233a!important;font-size:20px!important}.content{background:#f5f8fb;padding:24px 28px!important}.content>p{color:#758397!important}.mobile-bottom-nav{background:#0b1d33!important;border-top:1px solid rgba(255,255,255,.12)!important;box-shadow:0 -8px 24px rgba(0,0,0,.15)!important}.mobile-nav-item{color:#9eb0c2!important}.mobile-nav-item.active{color:#19d291!important}.mobile-nav-item.active .mobile-nav-icon{transform:translateY(-2px);filter:none}.mobile-nav-icon{font-size:21px!important}.courses-shell{max-width:1120px!important}.courses-hero{background:linear-gradient(135deg,#0b1d33,#123c5d 60%,#0e9f72)!important;border-radius:22px!important;padding:22px!important;box-shadow:0 14px 35px rgba(11,29,51,.14)!important}.courses-hero h2{font-size:25px!important}.course-grid{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))!important;gap:16px!important}.course-card-new{border-radius:20px!important;box-shadow:0 6px 22px rgba(19,43,67,.08)!important}.course-cover{height:205px!important;background:#e8f2f7!important}.course-card-body{padding:17px 18px 18px!important}.course-card-body h3{font-size:20px!important}.course-open-btn{background:linear-gradient(135deg,#0ab77f,#13c990)!important;border-radius:12px!important}.course-chip{background:#edf9f5!important;color:#0a986d!important}.lesson-row{border-radius:16px!important;box-shadow:0 4px 15px rgba(19,43,67,.05)!important}.course-player-card{border-radius:20px!important}.profile-page{max-width:850px;margin:auto}.profile-hero{background:linear-gradient(135deg,#0b1d33,#16415d);color:#fff;border-radius:22px;padding:24px;display:flex;align-items:center;gap:16px}.profile-avatar{width:68px;height:68px;border-radius:50%;background:#16ce8c;color:#08233a;display:flex;align-items:center;justify-content:center;font-size:32px}.profile-hero h2{color:#fff!important;border:0!important;margin:0!important;padding:0!important}.profile-hero p{margin:5px 0 0;color:#b9cad8}.profile-info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:16px 0}.profile-info-grid>div{background:#fff;border:1px solid #e7edf2;border-radius:16px;padding:15px}.profile-info-grid span{display:block;color:#8190a0;font-size:12px;margin-bottom:5px}.profile-info-grid b{color:#17283b}.profile-edit-btn{background:#10b981!important;max-width:320px}.question-fab{background:#10b981!important}
+        @media(max-width:768px){.header-bar{margin-right:0!important;padding:10px 12px!important}.content{margin-right:0!important;padding:14px 10px 90px!important}.sidebar{right:-330px!important}.sidebar.mobile-open{right:0!important}.profile-info-grid{grid-template-columns:1fr}.courses-hero{border-radius:18px!important}.course-cover{height:190px!important}}
+
+/* ===== تحديثات الهوية الجديدة ===== */
+/* ===== STUDENT THEME TOGGLE ===== */
+.student-header-actions{display:flex;align-items:center;gap:8px}.student-theme-toggle{position:static!important;width:42px!important;height:42px!important;margin:0!important;border-radius:12px!important;display:grid!important;place-items:center!important;border:1px solid #dfe7ed!important;background:#fff!important;color:#111!important;cursor:pointer!important;font-size:19px!important;box-shadow:0 4px 12px rgba(0,0,0,.06)!important}.student-theme-toggle .theme-sun{display:none}.student-theme-toggle .theme-moon{display:inline}body.dark-mode .student-theme-toggle{background:#1d2938!important;color:#fff!important;border-color:#344658!important}.student-theme-toggle .theme-sun{display:none}body.dark-mode .student-theme-toggle .theme-sun{display:inline}body.dark-mode .student-theme-toggle .theme-moon{display:none}
+
+body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mode .header-bar{background:#111a28!important;border-color:#293849!important;box-shadow:none!important}body.dark-mode .content{background:#0b1220!important;color:#edf5fb!important}body.dark-mode .content>p{color:#aebdcc!important}body.dark-mode .profile-info-grid>div,body.dark-mode .course-card-new,body.dark-mode .lesson-row,body.dark-mode .course-player-card,body.dark-mode .auto-play-box{background:#151f2d!important;border-color:#2b3a4b!important;color:#edf5fb!important}body.dark-mode .course-card-body h3,body.dark-mode .lesson-info h4,body.dark-mode .course-player-title{color:#fff!important}body.dark-mode .course-back-btn{background:#1d2938!important;color:#19d291!important;border-color:#19d291!important}body.dark-mode .profile-info-grid b{color:#fff!important}body.dark-mode .profile-info-grid span{color:#aebdcc!important}body.dark-mode .header-notification-only{background:#1d2938!important;color:#fff!important;border-color:#334456!important}
+
+.platform-compact-header{min-height:54px!important;padding:8px 16px!important;background:#fff!important;border-bottom:1px solid #e8edf2!important;display:flex!important;align-items:center!important;justify-content:space-between!important;box-shadow:0 3px 16px rgba(12,31,50,.05)!important}
+.header-notification-only{width:42px;height:42px;border-radius:12px;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;font-size:22px;border:1px solid #e3e8ed;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.header-notification-only span{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:20px;background:#ef4444;color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:900}
+.founder-card{max-width:920px;margin:0 auto 18px;background:linear-gradient(135deg,#0b1d33,#123b58 65%,#0e9f72);border-radius:24px;padding:26px;display:flex;align-items:center;gap:24px;color:#fff;box-shadow:0 14px 35px rgba(11,29,51,.15)}
+.founder-photo{width:145px;height:145px;border-radius:50%;object-fit:cover;border:5px solid rgba(255,255,255,.92);box-shadow:0 10px 28px rgba(0,0,0,.22);flex:0 0 auto}
+.founder-kicker{display:inline-block;color:#7ff0c5;font-weight:900;font-size:13px;margin-bottom:6px}.founder-copy h2{color:#fff!important;border:0!important;padding:0!important;margin:0 0 8px!important}.founder-copy p{margin:0;color:#d8e7ef;line-height:1.9;font-size:15px}.founder-features{max-width:920px;margin:0 auto}
+@media(max-width:768px){.platform-compact-header{margin-right:0!important;padding:7px 10px!important;min-height:50px!important}.header-notification-only{width:38px;height:38px;font-size:20px}.founder-card{padding:20px 16px;border-radius:20px;flex-direction:column;text-align:center;gap:12px}.founder-photo{width:118px;height:118px}.founder-copy h2{font-size:21px!important}.founder-copy p{font-size:13px;line-height:1.8}}
+</style>
+</head>
+<body>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            const btn = document.querySelector('.theme-toggle-small');
+            if (btn) { btn.setAttribute('aria-pressed', String(isDark)); btn.setAttribute('title', isDark ? 'الوضع النهاري' : 'الوضع الليلي'); }
+        }
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+
+    <div class="sidebar">
+        <div class="platform-brand">
+            <img src="assets/platform-logo.png" alt="منصتك التعليمية" class="platform-logo">
+            
+            
+            <div class="platform-brand-title">منصتك التعليمية</div>
+            <div class="platform-brand-sub">تعلم • اختبر • تقدم</div>
+        </div>
+        <div class="sidebar-student-card">
+            <div class="sidebar-avatar" id="sidebarStudentAvatar">👤</div>
+            <div class="sidebar-profile-name" id="sidebarStudentName">الطالب</div>
+            <div class="sidebar-profile-user" id="sidebarStudentUser">student</div>
+        </div>
+        <ul>
+            <li onclick="window.loadSection('dashboard')">📊 الرئيسية</li>
+            <li onclick="window.loadSection('videos')">🎬 الفيديوهات</li>
+            <li onclick="window.loadSection('books')">📚 الكتب</li>
+            <li onclick="window.loadSection('exams')">📝 الاختبارات</li>
+            <li onclick="window.loadSection('notifications')">🔔 الإشعارات</li>
+            
+            <li onclick="window.loadSection('myProgress')">📊 تقدمي</li>
+            
+            <li onclick="window.showFounderSection()" style="font-weight:800;">🎓 مؤسس المنصة</li>
+            <li onclick="window.openQuestionModal()">💬 عندي سؤال</li>
+        </ul>
+        <button onclick="window.logoutStudent()" style="margin-top:20px; background:#e74c3c; color:white; border:none; padding:10px; border-radius:8px; cursor:pointer; width:100%; font-size:16px;">🚪 خروج</button>
+    </div>
+
+    <div class="header-bar platform-compact-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+            <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" onclick="window.toggleMobileSidebar()" aria-label="فتح القائمة">☰</button>
+        </div>
+        <div class="student-header-actions"><button type="button" class="theme-toggle-small student-theme-toggle" onclick="window.toggleTheme()" aria-label="تغيير الوضع" title="الوضع الليلي"><span class="theme-moon">🌙</span><span class="theme-sun">☀️</span></button><div class="header-notification-only" onclick="window.loadSection('notifications')" aria-label="الإشعارات" title="الإشعارات">
+            🔔 <span id="notif-count">0</span>
+        </div>
+        </div>
+    </div>
+
+    <div class="mobile-sidebar-overlay" id="mobileSidebarOverlay" onclick="window.closeMobileSidebar()"></div>
+
+    <div class="content" id="student-content">
+        <p style="font-size:18px; color:#666;">اختر ما تريد من القائمة الجانبية</p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- شريط التنقل السفلي للموبايل -->
+    <!-- ============================================ -->
+    <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="التنقل الرئيسي">
+        <button type="button" class="mobile-nav-item active" data-section="dashboard" onclick="window.bottomNavGo('dashboard', this)"><span class="mobile-nav-icon">🏠</span><span>الرئيسية</span></button>
+        <button type="button" class="mobile-nav-item" data-section="videos" onclick="window.bottomNavGo('videos', this)"><span class="mobile-nav-icon">🎬</span><span>كورساتي</span></button>
+        <button type="button" class="mobile-nav-item" data-section="exams" onclick="window.bottomNavGo('exams', this)"><span class="mobile-nav-icon">📝</span><span>امتحاناتي</span></button>
+        <button type="button" class="mobile-nav-item" data-section="myProgress" onclick="window.bottomNavGo('myProgress', this)"><span class="mobile-nav-icon">📊</span><span>تقدمي</span></button>
+        <button type="button" class="mobile-nav-item" data-section="notifications" onclick="window.bottomNavGo('notifications', this)"><span class="mobile-nav-icon">🔔</span><span>الإشعارات</span><b class="mobile-nav-badge" id="mobile-notif-count">0</b></button>
+    </nav>
+
+
+
+    <div id="profileCompletionModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10001;align-items:center;justify-content:center;padding:18px">
+      <div style="width:min(520px,100%);background:#fff;border-radius:22px;padding:22px;direction:rtl">
+        <h2 style="margin-top:0">📝 أكمل بيانات حسابك</h2><p style="color:#777;line-height:1.8">لازم تكمل البيانات الناقصة قبل استخدام المنصة. سيتم حفظها في حسابك.</p>
+        <input id="profileName" placeholder="الاسم بالكامل" style="width:100%;height:48px;margin:6px 0;padding:0 12px;border:1px solid #ddd;border-radius:12px">
+        <input id="profilePhone" placeholder="رقم الهاتف" type="tel" style="width:100%;height:48px;margin:6px 0;padding:0 12px;border:1px solid #ddd;border-radius:12px">
+        <select id="profileGrade" style="width:100%;height:48px;margin:6px 0;padding:0 12px;border:1px solid #ddd;border-radius:12px"><option value="">اختر الصف</option><option value="1">أولى ثانوي</option><option value="2">ثانية ثانوي</option><option value="3">ثالثة ثانوي</option></select>
+        <button onclick="window.saveRequiredProfile()" style="width:100%;margin-top:10px;height:50px;border:0;border-radius:13px;background:#159b68;color:#fff;font-weight:900">💾 حفظ البيانات والمتابعة</button>
+      </div>
+    </div>
+    <div id="lessonQuestionModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:18px">
+      <div style="width:min(520px,100%);background:#fff;border-radius:22px;padding:22px;direction:rtl">
+        <h2 style="margin-top:0">💬 سؤال تحت الدرس</h2><p id="lessonQuestionTitle" style="color:#777"></p>
+        <textarea id="lessonQuestionText" maxlength="1000" placeholder="اكتب سؤالك..." style="width:100%;min-height:130px;padding:12px;border:1px solid #ddd;border-radius:12px"></textarea>
+        <div style="display:flex;gap:10px;margin-top:12px"><button onclick="window.sendLessonQuestion()" style="flex:1;padding:12px;border:0;border-radius:12px;background:#159b68;color:#fff;font-weight:800">إرسال</button><button onclick="window.closeLessonQuestionModal()" style="padding:12px 18px;border:0;border-radius:12px">إلغاء</button></div>
+      </div>
+    </div>
+    <div id="questionModal" onclick="if(event.target===this) window.closeQuestionModal()">
+        <div class="question-card">
+            <h2 style="margin:0 0 8px;color:#252b52;">💬 عندي سؤال</h2>
+            <p style="margin:0 0 14px;color:#777;line-height:1.8;">اكتب سؤالك وسيتم فتح واتساب للمشرف مع اسمك وكودك تلقائيًا.</p>
+            <textarea id="studentQuestion" maxlength="1000" placeholder="اكتب سؤالك هنا..."></textarea>
+            <div class="question-actions">
+                <button id="questionSendBtn" onclick="window.sendStudentQuestion()">📱 إرسال على واتساب</button>
+                <button id="questionCloseBtn" onclick="window.closeQuestionModal()">إلغاء</button>
+            </div>
+        </div>
+    </div>
+    <button id="questionFab" onclick="window.openQuestionModal()" aria-label="عندي سؤال" title="عندي سؤال">💬</button>
+
+    <!-- ============================================ -->
+    <!-- دوال الجسر العامة (غير module)               -->
+    <!-- ============================================ -->
+    <script>
+        // هذه الدوال هي "جسر" بين onclick والدوال الحقيقية داخل الـ module
+        window.loadSection = function(section) {
+            if (window._moduleLoadSection) {
+                window._moduleLoadSection(section);
+            } else {
+                console.warn('⚠️ الـ module لم يكتمل تحميله بعد، حاول مرة أخرى');
+                setTimeout(function() {
+                    if (window._moduleLoadSection) {
+                        window._moduleLoadSection(section);
+                    }
+                }, 500);
+            }
+        };
+
+        window.bottomNavGo = function(section, el) {
+            document.querySelectorAll('.mobile-nav-item').forEach(function(item) {
+                item.classList.toggle('active', item === el);
+            });
+            window.loadSection(section);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.toggleMobileSidebar = function() {
+            const sidebar=document.querySelector('.sidebar');
+            const overlay=document.getElementById('mobileSidebarOverlay');
+            if(!sidebar) return;
+            const open=sidebar.classList.toggle('mobile-open');
+            if(overlay) overlay.classList.toggle('open',open);
+            document.body.style.overflow=open?'hidden':'';
+        };
+        window.closeMobileSidebar = function() {
+            const sidebar=document.querySelector('.sidebar');
+            const overlay=document.getElementById('mobileSidebarOverlay');
+            if(sidebar) sidebar.classList.remove('mobile-open');
+            if(overlay) overlay.classList.remove('open');
+            document.body.style.overflow='';
+        };
+        document.addEventListener('DOMContentLoaded',function(){
+            const name=localStorage.getItem('studentName')||'الطالب';
+            const code=localStorage.getItem('studentCode')||'student';
+            const n=document.getElementById('sidebarStudentName');
+            const u=document.getElementById('sidebarStudentUser');
+            if(n) n.textContent=name;
+            if(u) u.textContent=code;
+            document.querySelectorAll('.sidebar li').forEach(li=>li.addEventListener('click',()=>window.closeMobileSidebar()));
+        });
+
+        window.logoutStudent = function() {
+            if (window._moduleLogout) {
+                window._moduleLogout();
+            } else {
+                localStorage.removeItem('studentCode');
+                localStorage.removeItem('studentGrade');
+                localStorage.removeItem('studentName');
+                window.location.href = 'student-login.html';
+            }
+        };
+
+        window.openQuestionModal = function(lessonTitle = '') {
+            if (window._moduleOpenQuestionModal) {
+                window._moduleOpenQuestionModal(lessonTitle);
+            } else {
+                const modal = document.getElementById('questionModal');
+                const input = document.getElementById('studentQuestion');
+                if (modal) {
+                    modal.style.display = 'flex';
+                    if (input) input.placeholder = lessonTitle ? `اكتب سؤالك عن: ${lessonTitle}` : 'اكتب سؤالك هنا...';
+                    setTimeout(() => { if (input) input.focus(); }, 50);
+                }
+            }
+        };
+
+        window.closeQuestionModal = function() {
+            if (window._moduleCloseQuestionModal) {
+                window._moduleCloseQuestionModal();
+            } else {
+                const modal = document.getElementById('questionModal');
+                if (modal) modal.style.display = 'none';
+            }
+        };
+
+        window.sendStudentQuestion = function() {
+            if (window._moduleSendStudentQuestion) {
+                window._moduleSendStudentQuestion();
+            } else {
+                const input = document.getElementById('studentQuestion');
+                const question = (input?.value || '').trim();
+                const name = localStorage.getItem('studentName') || 'طالب';
+                const code = localStorage.getItem('studentCode') || 'غير معروف';
+                if (!question) { alert('⚠️ اكتب سؤالك أولاً'); input?.focus(); return; }
+                const lessonLine = currentQuestionLesson ? `\n🎬 الدرس: ${currentQuestionLesson}` : '';
+            const message = `🎓 سؤال من طالب\n👤 الاسم: ${name}\n🔑 الكود: ${code}${lessonLine}\n\n💬 السؤال:\n${question}`;
+                window.open(`https://wa.me/201033459821?text=${encodeURIComponent(message)}`, '_blank');
+                if (input) input.value = '';
+                const modal = document.getElementById('questionModal');
+                if (modal) modal.style.display = 'none';
+            }
+        };
+
+        window.submitSingleExamAnswer = function(examId, questionIndex) {
+            if (window._moduleSubmitExamAnswer) {
+                window._moduleSubmitExamAnswer(examId, questionIndex);
+            } else {
+                alert('⏳ جاري تحميل النظام، حاول مرة أخرى خلال ثانية');
+                setTimeout(function() {
+                    if (window._moduleSubmitExamAnswer) {
+                        window._moduleSubmitExamAnswer(examId, questionIndex);
+                    }
+                }, 1000);
+            }
+        };
+
+        // ============================================
+        // دالة تكبير الكتاب داخل الموقع
+        // ============================================
+        window.toggleBookFullscreen = function(bookId) {
+            const container = document.getElementById(bookId);
+            if (!container) {
+                console.error('❌ الكتاب غير موجود:', bookId);
+                return;
+            }
+            
+            const isFullscreen = container.classList.contains('book-fullscreen');
+            
+            if (isFullscreen) {
+                container.classList.remove('book-fullscreen');
+                container.style.position = 'relative';
+                container.style.paddingBottom = '75%';
+                container.style.height = '0';
+                container.style.width = '100%';
+                container.style.top = 'auto';
+                container.style.left = 'auto';
+                container.style.zIndex = 'auto';
+                container.style.background = '#f0f0f0';
+                container.style.borderRadius = '10px';
+                container.style.transform = 'none';
+                container.style.boxShadow = 'none';
+                container.style.border = '1px solid #ddd';
+                
+                const iframe = container.querySelector('iframe');
+                if (iframe) {
+                    iframe.style.position = 'absolute';
+                    iframe.style.top = '0';
+                    iframe.style.left = '0';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.borderRadius = '10px';
+                }
+                
+                const btn = container.parentElement.querySelector('.book-fullscreen-btn');
+                if (btn) btn.innerHTML = '⛶ تكبير';
+                
+                const closeBtn = container.querySelector('.book-close-btn');
+                if (closeBtn) closeBtn.style.display = 'none';
+                
+                document.body.style.overflow = '';
+            } else {
+                container.classList.add('book-fullscreen');
+                container.style.position = 'fixed';
+                container.style.top = '50%';
+                container.style.left = '50%';
+                container.style.transform = 'translate(-50%, -50%)';
+                container.style.paddingBottom = '0';
+                container.style.height = '90vh';
+                container.style.width = '90vw';
+                container.style.zIndex = '9999';
+                container.style.background = '#1a1a2e';
+                container.style.borderRadius = '12px';
+                container.style.boxShadow = '0 25px 70px rgba(0,0,0,0.8)';
+                container.style.border = '2px solid #444';
+                
+                const iframe = container.querySelector('iframe');
+                if (iframe) {
+                    iframe.style.position = 'absolute';
+                    iframe.style.top = '0';
+                    iframe.style.left = '0';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.borderRadius = '10px';
+                }
+                
+                const btn = container.parentElement.querySelector('.book-fullscreen-btn');
+                if (btn) btn.innerHTML = '✕ إغلاق';
+                
+                let closeBtn = container.querySelector('.book-close-btn');
+                if (!closeBtn) {
+                    closeBtn = document.createElement('button');
+                    closeBtn.className = 'book-close-btn';
+                    closeBtn.textContent = '✕ إغلاق';
+                    closeBtn.style.cssText = `
+                        position: absolute !important;
+                        top: 10px !important;
+                        right: 10px !important;
+                        z-index: 10000 !important;
+                        background: rgba(0,0,0,0.7) !important;
+                        color: white !important;
+                        border: none !important;
+                        border-radius: 20px !important;
+                        padding: 8px 18px !important;
+                        font-size: 16px !important;
+                        cursor: pointer !important;
+                        transition: 0.3s !important;
+                        width: auto !important;
+                        font-weight: bold !important;
+                    `;
+                    closeBtn.onmouseover = () => closeBtn.style.background = 'rgba(231,76,60,0.9)';
+                    closeBtn.onmouseout = () => closeBtn.style.background = 'rgba(0,0,0,0.7)';
+                    closeBtn.onclick = () => window.toggleBookFullscreen(bookId);
+                    container.appendChild(closeBtn);
+                }
+                closeBtn.style.display = 'flex';
+                
+                document.body.style.overflow = 'hidden';
+            }
+        };
+
+        // إغلاق التكبير عند الضغط على ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const fullscreenBooks = document.querySelectorAll('.book-fullscreen');
+                fullscreenBooks.forEach(book => {
+                    const bookId = book.id;
+                    if (bookId) {
+                        window.toggleBookFullscreen(bookId);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- ============================================ -->
+    <!-- الكود الأساسي - module                       -->
+    <!-- ============================================ -->
+    <script type="module">
+        import { 
+            db, collection, getDocs, query, where, doc, getDoc, 
+            addDoc, updateDoc, serverTimestamp, setDoc 
+        } from './js/firebase-config.js';
+
+        // ترتيب محتوى كل قسم: الأحدث أولاً، بدون تغيير ترتيب الأقسام نفسها.
+        function contentTime(data) {
+            const v = data?.addedAt ?? data?.createdAt ?? data?.sentAt ?? data?.publishedAt ?? data?.uploadedAt ?? data?.date;
+            if (!v) return 0;
+            if (typeof v?.toMillis === 'function') return v.toMillis();
+            if (typeof v?.toDate === 'function') { const d = v.toDate(); return d instanceof Date ? d.getTime() : 0; }
+            if (v instanceof Date) return v.getTime();
+            if (typeof v === 'number') return v;
+            const t = Date.parse(String(v));
+            return Number.isFinite(t) ? t : 0;
+        }
+        function sortContentNewestFirst(items) {
+            return items.sort((a,b) => contentTime(b.data || b) - contentTime(a.data || a));
+        }
+
+        // ============================================
+        // تعريف الشارات
+        // ============================================
+        const BADGES = {
+            'first_login': { icon: '🥇', name: 'المنصة', desc: 'أول دخول للمنصة', condition: 'firstLogin' },
+            'watcher_5': { icon: '🥈', name: 'المتعلم', desc: 'مشاهدة 5 فيديوهات', condition: 'watched_5' },
+            'watcher_10': { icon: '🥉', name: 'النجم', desc: 'مشاهدة 10 فيديوهات', condition: 'watched_10' },
+            'watcher_20': { icon: '🏆', name: 'المحترف', desc: 'مشاهدة 20 فيديو', condition: 'watched_20' },
+            'book_reader': { icon: '📚', name: 'الكتابي', desc: 'قراءة 3 كتب', condition: 'books_3' },
+        };
+
+        // ============================================
+        // متغيرات عامة
+        // ============================================
+        const studentCode = localStorage.getItem('studentCode');
+        const studentName = localStorage.getItem('studentName') || 'طالب';
+        let players = {};
+        let progressIntervals = {};
+        let currentSessionId = null;
+        let entryTimestamp = null;
+        let heartbeatInterval = null;
+        let courseVideosState = [];
+        let currentCourseState = null;
+        let currentCourseVideoIndex = 0;
+        let currentQuestionLesson = '';
+
+        async function ensureRequiredProfile(){
+            const code=localStorage.getItem('studentCode'); if(!code) return;
+            try{
+              const snap=await getDocs(query(collection(db,'students'),where('code','==',code))); if(snap.empty)return;
+              const d=snap.docs[0], x=d.data(); const missing=[]; if(!String(x.name||'').trim())missing.push('name'); if(!String(x.phone||'').trim())missing.push('phone'); if(!String(x.grade||'').trim())missing.push('grade');
+              if(!missing.length){localStorage.setItem('studentName',x.name||'');localStorage.setItem('studentGrade',x.grade||'all');return;}
+              document.getElementById('profileName').value=x.name||''; document.getElementById('profilePhone').value=x.phone||''; document.getElementById('profileGrade').value=x.grade||''; document.getElementById('profileCompletionModal').style.display='flex';
+            }catch(e){console.warn('profile check',e);}
+        }
+        window.saveRequiredProfile=async function(){
+            const code=localStorage.getItem('studentCode')||''; const name=document.getElementById('profileName').value.trim(); const phone=document.getElementById('profilePhone').value.trim(); const grade=document.getElementById('profileGrade').value;
+            if(!name||!phone||!grade)return alert('⚠️ يجب إكمال الاسم والرقم والصف');
+            const dup=await getDocs(query(collection(db,'students'),where('phone','==',phone))); if(!dup.empty && dup.docs[0].data().code!==code)return alert('⚠️ رقم الهاتف مستخدم بالفعل');
+            const snap=await getDocs(query(collection(db,'students'),where('code','==',code))); if(snap.empty)return; await updateDoc(snap.docs[0].ref,{name,phone,grade,profileComplete:true,updatedAt:serverTimestamp()}); localStorage.setItem('studentName',name);localStorage.setItem('studentGrade',grade);document.getElementById('profileCompletionModal').style.display='none'; alert('✅ تم حفظ بياناتك'); location.reload();
+        };
+        setTimeout(ensureRequiredProfile,300);
+
+        // ============================================
+        // دالة استخراج معرف الفيديو من رابط يوتيوب
+        // ============================================
+        function extractYouTubeId(url) {
+            if (!url) return null;
+            const watchMatch = url.match(/youtube\.com\/watch\?v=([^&]+)/);
+            if (watchMatch) return watchMatch[1];
+            const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
+            if (shortMatch) return shortMatch[1];
+            const embedMatch = url.match(/youtube\.com\/embed\/([^?&]+)/);
+            if (embedMatch) return embedMatch[1];
+            const shortsMatch = url.match(/youtube\.com\/shorts\/([^?&]+)/);
+            if (shortsMatch) return shortsMatch[1];
+            return null;
+        }
+
+        // ============================================
+        // نظام الحضور والجلسات
+        // ============================================
+        async function recordLogin() {
+            if (!studentCode) return;
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                const now = new Date();
+                entryTimestamp = now;
+                
+                const sessionRef = await addDoc(collection(db, 'sessions'), {
+                    studentCode: studentCode,
+                    studentName: studentName,
+                    loginTime: serverTimestamp(),
+                    loginTimeString: now.toLocaleTimeString('ar-EG'),
+                    loginTimeMs: now.getTime(),
+                    logoutTime: null,
+                    logoutTimeString: null,
+                    logoutTimeMs: null,
+                    duration: 0,
+                    date: today,
+                    isActive: true,
+                    lastHeartbeat: serverTimestamp(),
+                    lastHeartbeatString: now.toLocaleTimeString('ar-EG')
+                });
+                currentSessionId = sessionRef.id;
+                
+                if (heartbeatInterval) clearInterval(heartbeatInterval);
+                heartbeatInterval = setInterval(async () => {
+                    if (currentSessionId && studentCode) {
+                        try {
+                            const now2 = new Date();
+                            await updateDoc(doc(db, 'sessions', currentSessionId), {
+                                lastHeartbeat: serverTimestamp(),
+                                lastHeartbeatString: now2.toLocaleTimeString('ar-EG')
+                            });
+                        } catch (e) {}
+                    }
+                }, 30000);
+                
+                const q = query(
+                    collection(db, 'attendance'),
+                    where('studentCode', '==', studentCode),
+                    where('date', '==', today)
+                );
+                const snap = await getDocs(q);
+                
+                if (snap.empty) {
+                    await addDoc(collection(db, 'attendance'), {
+                        studentCode: studentCode,
+                        studentName: studentName,
+                        loginTime: serverTimestamp(),
+                        loginTimeMs: now.getTime(),
+                        logoutTime: null,
+                        logoutTimeMs: null,
+                        duration: 0,
+                        date: today,
+                        status: 'present',
+                        sessionsCount: 1,
+                        isActive: true
+                    });
+                } else {
+                    const docRef = snap.docs[0].ref;
+                    const data = snap.docs[0].data();
+                    const sessionsCount = (data.sessionsCount || 0) + 1;
+                    await updateDoc(docRef, {
+                        loginTime: serverTimestamp(),
+                        loginTimeMs: now.getTime(),
+                        logoutTime: null,
+                        logoutTimeMs: null,
+                        sessionsCount: sessionsCount,
+                        isActive: true
+                    });
+                }
+                
+                console.log('✅ تم تسجيل الدخول');
+            } catch (error) {
+                console.error('خطأ في تسجيل الدخول:', error);
+            }
+        }
+
+        async function recordLogout() {
+            if (!studentCode) return;
+            try {
+                const now = new Date();
+                const today = new Date().toISOString().split('T')[0];
+                
+                if (currentSessionId) {
+                    try {
+                        const sessionRef = doc(db, 'sessions', currentSessionId);
+                        const sessionSnap = await getDoc(sessionRef);
+                        if (sessionSnap.exists() && sessionSnap.data().isActive !== false) {
+                            const data = sessionSnap.data();
+                            const loginTimeMs = data.loginTimeMs || data.loginTime?.toDate?.()?.getTime();
+                            let duration = 0;
+                            if (loginTimeMs) {
+                                duration = Math.round((now.getTime() - loginTimeMs) / 60000);
+                            }
+                            await updateDoc(sessionRef, {
+                                logoutTime: serverTimestamp(),
+                                logoutTimeString: now.toLocaleTimeString('ar-EG'),
+                                logoutTimeMs: now.getTime(),
+                                duration: duration,
+                                isActive: false
+                            });
+                            console.log('✅ تم تحديث الجلسة');
+                        }
+                    } catch (e) {
+                        console.warn('خطأ في تحديث الجلسة:', e);
+                    }
+                }
+                
+                const q = query(
+                    collection(db, 'attendance'),
+                    where('studentCode', '==', studentCode),
+                    where('date', '==', today),
+                    where('isActive', '==', true)
+                );
+                const snap = await getDocs(q);
+                
+                if (!snap.empty) {
+                    const docRef = snap.docs[0].ref;
+                    const data = snap.docs[0].data();
+                    const loginTimeMs = data.loginTimeMs || data.loginTime?.toDate?.()?.getTime();
+                    let totalDuration = data.duration || 0;
+                    if (loginTimeMs) {
+                        totalDuration = Math.round((now.getTime() - loginTimeMs) / 60000);
+                    }
+                    await updateDoc(docRef, {
+                        logoutTime: serverTimestamp(),
+                        logoutTimeString: now.toLocaleTimeString('ar-EG'),
+                        logoutTimeMs: now.getTime(),
+                        duration: totalDuration,
+                        isActive: false
+                    });
+                    console.log('✅ تم تحديث attendance');
+                }
+                
+                if (heartbeatInterval) {
+                    clearInterval(heartbeatInterval);
+                    heartbeatInterval = null;
+                }
+                
+                console.log('✅ تم تسجيل الخروج بنجاح');
+            } catch (error) {
+                console.error('خطأ في تسجيل الخروج:', error);
+            }
+        }
+
+        function sendExitBeacon() {
+            if (!studentCode || !currentSessionId) return;
+            
+            const now = new Date();
+            const today = new Date().toISOString().split('T')[0];
+            
+            const exitData = {
+                studentCode: studentCode,
+                sessionId: currentSessionId,
+                date: today,
+                logoutTime: now.toISOString(),
+                logoutTimeString: now.toLocaleTimeString('ar-EG'),
+                logoutTimeMs: now.getTime()
+            };
+            
+            try {
+                const blob = new Blob([JSON.stringify(exitData)], { type: 'application/json' });
+                const sent = navigator.sendBeacon('/api/logout', blob);
+                if (sent) {
+                    console.log('✅ تم إرسال Beacon للخروج');
+                } else {
+                    console.warn('⚠️ فشل إرسال Beacon، استخدام الطريقة التقليدية');
+                    recordLogout();
+                }
+            } catch (e) {
+                console.warn('⚠️ خطأ في sendBeacon:', e);
+                recordLogout();
+            }
+        }
+
+        window.addEventListener('beforeunload', function() {
+            sendExitBeacon();
+        });
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                recordLogout();
+            } else {
+                (async () => {
+                    if (studentCode) {
+                        const today = new Date().toISOString().split('T')[0];
+                        const q = query(
+                            collection(db, 'sessions'),
+                            where('studentCode', '==', studentCode),
+                            where('date', '==', today),
+                            where('isActive', '==', true)
+                        );
+                        const snap = await getDocs(q);
+                        if (snap.empty) {
+                            console.log('🔄 العودة للصفحة - تسجيل دخول جديد');
+                            recordLogin();
+                        }
+                    }
+                })();
+            }
+        });
+
+        window.addEventListener('pagehide', function() {
+            sendExitBeacon();
+        });
+
+        window.addEventListener('popstate', function() {
+            recordLogout();
+        });
+
+        setInterval(async () => {
+            if (studentCode && currentSessionId) {
+                try {
+                    const sessionRef = doc(db, 'sessions', currentSessionId);
+                    const sessionSnap = await getDoc(sessionRef);
+                    if (sessionSnap.exists() && sessionSnap.data().isActive === true) {
+                        const now = new Date();
+                        const data = sessionSnap.data();
+                        const loginTimeMs = data.loginTimeMs || data.loginTime?.toDate?.()?.getTime();
+                        let duration = 0;
+                        if (loginTimeMs) {
+                            duration = Math.round((now.getTime() - loginTimeMs) / 60000);
+                        }
+                        await updateDoc(sessionRef, {
+                            logoutTime: serverTimestamp(),
+                            logoutTimeString: now.toLocaleTimeString('ar-EG'),
+                            logoutTimeMs: now.getTime(),
+                            duration: duration,
+                            isActive: false
+                        });
+                        console.log('🔄 حفظ احتياطي للخروج');
+                    }
+                } catch (e) {}
+            }
+        }, 60000);
+
+        // ============================================
+        // حفظ التقدم في Firebase
+        // ============================================
+        async function saveProgress(videoId, watchedSeconds, totalDuration) {
+            if (!studentCode || !videoId) return;
+            try {
+                const progressQuery = query(
+                    collection(db, 'progress'),
+                    where('studentCode', '==', studentCode),
+                    where('videoId', '==', videoId)
+                );
+                const snap = await getDocs(progressQuery);
+                const completed = totalDuration > 0 && watchedSeconds >= totalDuration;
+
+                if (snap.empty) {
+                    await addDoc(collection(db, 'progress'), {
+                        studentCode: studentCode,
+                        videoId: videoId,
+                        watchedSeconds: watchedSeconds,
+                        totalDuration: totalDuration,
+                        completed: completed,
+                        lastUpdated: serverTimestamp()
+                    });
+                } else {
+                    const docRef = snap.docs[0].ref;
+                    await updateDoc(docRef, {
+                        watchedSeconds: watchedSeconds,
+                        totalDuration: totalDuration,
+                        completed: completed,
+                        lastUpdated: serverTimestamp()
+                    });
+                }
+            } catch (error) {
+                console.error('خطأ في حفظ التقدم:', error);
+            }
+        }
+
+        // ============================================
+        // حساب النقاط
+        // ============================================
+        async function getStudentPoints(code) {
+            if (!code) return 0;
+            try {
+                const progressSnap = await getDocs(query(collection(db, 'progress'), where('studentCode', '==', code)));
+                let points = 0;
+                progressSnap.forEach(d => {
+                    const data = d.data();
+                    if (data.watchedSeconds > 0) points += 10;
+                });
+                return points;
+            } catch (error) {
+                console.error('خطأ في حساب النقاط:', error);
+                return 0;
+            }
+        }
+
+        async function updatePointsDisplay(code) {
+            if (!code) return;
+            const points = await getStudentPoints(code);
+            const display = document.getElementById('pointsDisplay');
+            if (display) display.innerText = `⭐ ${points}`;
+        }
+
+        // ============================================
+        // تحديث لوحة المتصدرين
+        // ============================================
+        async function updateLeaderboard() {
+            try {
+                const studentsSnap = await getDocs(collection(db, 'students'));
+                const leaderboard = [];
+                
+                for (const doc of studentsSnap.docs) {
+                    const data = doc.data();
+                    const code = data.code;
+                    
+                    const progressSnap = await getDocs(query(collection(db, 'progress'), where('studentCode', '==', code)));
+                    let videosWatched = 0;
+                    progressSnap.forEach(p => {
+                        if (p.data().watchedSeconds > 0) videosWatched++;
+                    });
+                    
+                    leaderboard.push({
+                        code: code,
+                        name: data.name || 'طالب',
+                        grade: data.grade || 'all',
+                        points: points,
+                        videosWatched: videosWatched,
+                        firstLogin: data.firstLogin
+                    });
+                }
+                
+                leaderboard.sort((a, b) => b.points - a.points);
+                
+                for (let i = 0; i < leaderboard.length; i++) {
+                    const item = leaderboard[i];
+                    await setDoc(doc(db, 'leaderboard', item.code), {
+                        ...item,
+                        rank: i + 1,
+                        updatedAt: serverTimestamp()
+                    });
+                }
+                
+                console.log('✅ تم تحديث لوحة المتصدرين');
+            } catch (error) {
+                console.error('خطأ في تحديث المتصدرين:', error);
+            }
+        }
+
+        // ============================================
+        // تهيئة مشغلات YouTube مع حماية إضافية
+        // ============================================
+        function initYouTubePlayers(videosData) {
+            window.onYouTubeIframeAPIReady = function() {
+                console.log('✅ YouTube API ready');
+                videosData.forEach(video => {
+                    const videoId = video.id;
+                    const data = video.data;
+                    const youtubeId = extractYouTubeId(data.url);
+                    
+                    if (!youtubeId) {
+                        console.warn('رابط يوتيوب غير صحيح:', data.url);
+                        return;
+                    }
+
+                    (async () => {
+                        try {
+                            const progressQuery = query(
+                                collection(db, 'progress'),
+                                where('studentCode', '==', studentCode),
+                                where('videoId', '==', videoId)
+                            );
+                            const progressSnap = await getDocs(progressQuery);
+                            let watched = 0;
+                            let total = 0;
+                            if (!progressSnap.empty) {
+                                const pData = progressSnap.docs[0].data();
+                                watched = pData.watchedSeconds || 0;
+                                total = pData.totalDuration || 0;
+                            }
+
+                            const container = document.getElementById(`player-${videoId}`);
+                            if (!container) return;
+
+                            const player = new YT.Player(container, {
+                                height: '100%',
+                                width: '100%',
+                                videoId: youtubeId,
+                                playerVars: {
+                                    'controls': 1,
+                                    'rel': 0,
+                                    'modestbranding': 1,
+                                    'iv_load_policy': 3,
+                                    'cc_load_policy': 0,
+                                    'fs': 0,
+                                    'autohide': 1,
+                                    'autoplay': 0,
+                                    'enablejsapi': 1,
+                                    'origin': window.location.origin,
+                                    'showinfo': 0,
+                                    'disablekb': 1
+                                },
+                                events: {
+                                    'onReady': function(event) {
+                                        console.log(`🎬 الفيديو ${videoId} جاهز`);
+                                        const progressText = document.getElementById(`progress-text-${videoId}`);
+                                        if (progressText) {
+                                            progressText.innerText = '🟢 اضغط على زر التشغيل للمشاهدة';
+                                        }
+                                        updateProgressUI(videoId, watched, total);
+                                        
+                                        // محاولة إخفاء زر المشاركة
+                                        try {
+                                            const iframe = container.querySelector('iframe');
+                                            if (iframe) {
+                                                // منع النقر على عناصر يوتيوب
+                                                iframe.style.pointerEvents = 'auto';
+                                            }
+                                        } catch(e) {}
+                                    },
+                                    'onStateChange': async function(event) {
+                                        const state = event.data;
+                                        if (state === YT.PlayerState.PLAYING) {
+                                            if (progressIntervals[videoId]) {
+                                                clearInterval(progressIntervals[videoId]);
+                                            }
+                                            progressIntervals[videoId] = setInterval(async () => {
+                                                if (player && player.getCurrentTime) {
+                                                    const currentTime = Math.floor(player.getCurrentTime());
+                                                    const duration = Math.floor(player.getDuration() || 0);
+                                                    if (duration > 0) {
+                                                        await saveProgress(videoId, currentTime, duration);
+                                                        updateProgressUI(videoId, currentTime, duration);
+                                                    }
+                                                }
+                                            }, 5000);
+                                        } else if (state === YT.PlayerState.PAUSED || state === YT.PlayerState.ENDED) {
+                                            if (progressIntervals[videoId]) {
+                                                clearInterval(progressIntervals[videoId]);
+                                                delete progressIntervals[videoId];
+                                            }
+                                            if (player && player.getCurrentTime) {
+                                                const currentTime = Math.floor(player.getCurrentTime());
+                                                const duration = Math.floor(player.getDuration() || 0);
+                                                if (duration > 0) {
+                                                    await saveProgress(videoId, currentTime, duration);
+                                                    updateProgressUI(videoId, currentTime, duration);
+                                                }
+                                            }
+                                        }
+                                    },
+                                    'onError': function(event) {
+                                        console.error('❌ خطأ في مشغل يوتيوب:', event.data);
+                                    }
+                                }
+                            });
+
+                            players[videoId] = player;
+
+                            const wrapper = container.parentElement;
+                            if (wrapper) {
+                                const oldBtn = wrapper.querySelector('.fullscreen-btn');
+                                if (oldBtn) oldBtn.remove();
+
+                                const fullscreenBtn = document.createElement('button');
+                                fullscreenBtn.className = 'fullscreen-btn';
+                                fullscreenBtn.innerHTML = '⛶';
+                                fullscreenBtn.title = 'تكبير الفيديو';
+                                fullscreenBtn.setAttribute('aria-label', 'تكبير الفيديو');
+                                fullscreenBtn.addEventListener('click', function(e) {
+                                    e.stopPropagation();
+                                    const videoContainer = container.closest('.video-container') || container.parentElement;
+                                    if (!videoContainer) return;
+                                    try {
+                                        if (document.fullscreenElement === videoContainer) {
+                                            if (document.exitFullscreen) document.exitFullscreen();
+                                            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                                        } else if (videoContainer.requestFullscreen) {
+                                            videoContainer.requestFullscreen();
+                                        } else if (videoContainer.webkitRequestFullscreen) {
+                                            videoContainer.webkitRequestFullscreen();
+                                        } else if (videoContainer.msRequestFullscreen) {
+                                            videoContainer.msRequestFullscreen();
+                                        }
+                                    } catch(err) {
+                                        console.error('Fullscreen error:', err);
+                                    }
+                                });
+                                wrapper.style.position = 'relative';
+
+                                const videoContainer = container.closest('.video-container') || container.parentElement;
+                                if (videoContainer) {
+                                    // زر التكبير يكون داخل حاوية الفيديو نفسها حتى يظل ظاهرًا في Fullscreen
+                                    videoContainer.appendChild(fullscreenBtn);
+                                    let watermark = videoContainer.querySelector('.video-watermark');
+                                    if (!watermark) {
+                                        watermark = document.createElement('div');
+                                        watermark.className = 'video-watermark';
+                                        watermark.textContent = `${studentName} • ${studentCode}`;
+                                        videoContainer.appendChild(watermark);
+                                    }
+                                    const moveWatermark = () => {
+                                        const maxX = Math.max(5, videoContainer.clientWidth - watermark.offsetWidth - 5);
+                                        const maxY = Math.max(5, videoContainer.clientHeight - watermark.offsetHeight - 5);
+                                        watermark.style.left = `${Math.floor(5 + Math.random() * Math.max(1, maxX - 5))}px`;
+                                        watermark.style.top = `${Math.floor(5 + Math.random() * Math.max(1, maxY - 5))}px`;
+                                    };
+                                    moveWatermark();
+                                    if (watermark._timer) clearInterval(watermark._timer);
+                                    watermark._timer = setInterval(moveWatermark, 7000);
+                                    videoContainer.addEventListener('fullscreenchange', moveWatermark);
+                                }
+                            }
+
+                        } catch (error) {
+                            console.error('خطأ في تهيئة المشغل:', error);
+                        }
+                    })();
+                });
+            };
+
+            if (window.YT && window.YT.Player) {
+                window.onYouTubeIframeAPIReady();
+            }
+        }
+
+        // ============================================
+        // تحديث واجهة التقدم
+        // ============================================
+        function updateProgressUI(videoId, watched, total) {
+            const fill = document.getElementById(`progress-fill-${videoId}`);
+            const text = document.getElementById(`progress-text-${videoId}`);
+            if (!fill || !text) return;
+
+            const percent = total > 0 ? Math.min(100, Math.round((watched / total) * 100)) : 0;
+            const completed = total > 0 && watched >= total;
+            fill.style.width = percent + '%';
+            
+            const watchedMin = Math.floor(watched / 60);
+            const watchedSec = Math.floor(watched % 60);
+            const totalMin = Math.floor(total / 60);
+            const totalSec = Math.floor(total % 60);
+            
+            text.innerText = `⏱️ شاهدت ${watchedMin}:${watchedSec.toString().padStart(2, '0')} من ${totalMin}:${totalSec.toString().padStart(2, '0')} (${percent}%) ${completed ? '✅ مكتمل' : ''}`;
+        }
+
+        // ============================================
+        // حساب عدد الشارات
+        // ============================================
+        async function getBadgesCount(code) {
+            try {
+                const progressSnap = await getDocs(query(collection(db, 'progress'), where('studentCode', '==', code)));
+                let watchedCount = 0;
+                progressSnap.forEach(d => {
+                    if (d.data().watchedSeconds > 0) watchedCount++;
+                });
+                
+                let count = 0;
+                if (watchedCount >= 20) count++;
+                if (watchedCount >= 10) count++;
+                if (watchedCount >= 5) count++;
+                
+                try {
+                    const q = query(collection(db, 'students'), where('code', '==', code));
+                    const studentSnap = await getDocs(q);
+                    if (!studentSnap.empty) {
+                        const studentData = studentSnap.docs[0].data();
+                        if (studentData.firstLogin) {
+                            count++;
+                        }
+                    }
+                } catch(e) {}
+                
+                const booksSnap = await getDocs(collection(db, 'books'));
+                if (booksSnap.size >= 3) count++;
+                
+                return count;
+            } catch (error) {
+                return 0;
+            }
+        }
+
+        // ============================================
+        // دالة حساب ظهور النتيجة
+        // ============================================
+        function isExamRevealReady(submittedAt, reveal) {
+            if (reveal === 'instant') return true;
+            if (reveal === 'never') return false;
+            let t = submittedAt?.toDate ? submittedAt.toDate().getTime() : new Date(submittedAt || 0).getTime();
+            if (!t) return false;
+            const delay = reveal === '24h' ? 24*60*60*1000 : reveal === '3d' ? 3*24*60*60*1000 : 0;
+            return Date.now() >= t + delay;
+        }
+
+        // ============================================
+        // دالة إرسال إجابة سؤال واحد
+        // ============================================
+        async function submitSingleExamAnswer(examId, questionIndex) {
+            try {
+                const examSnap = await getDoc(doc(db, 'exams', examId));
+                if (!examSnap.exists()) return alert('الاختبار غير موجود');
+                const exam = examSnap.data();
+                const question = exam.questions?.[questionIndex];
+                if (!question) return alert('السؤال غير موجود');
+
+                let value = null;
+                if (question.type === 'text') {
+                    value = document.getElementById(`answer_${examId}_${questionIndex}`)?.value?.trim() || '';
+                } else {
+                    const selected = document.querySelector(`input[name="exam_${examId}_${questionIndex}"]:checked`);
+                    value = selected ? selected.value : null;
+                }
+
+                if (value === null || value === '') return alert('اختر أو اكتب إجابتك أولاً');
+
+                const existingQ = query(
+                    collection(db, 'examAnswers'),
+                    where('examId', '==', examId),
+                    where('studentCode', '==', studentCode)
+                );
+                const existingSnap = await getDocs(existingQ);
+
+                let answerDoc = null;
+                if (!existingSnap.empty) {
+                    answerDoc = existingSnap.docs[0];
+                }
+
+                let answers = {};
+                let autoCorrect = 0;
+                let autoTotal = 0;
+                let submittedAt = new Date();
+
+                if (answerDoc) {
+                    const old = answerDoc.data();
+                    answers = {...(old.answers || {})};
+                    submittedAt = old.submittedAt || submittedAt;
+                }
+                answers[String(questionIndex)] = value;
+
+                (exam.questions || []).forEach((qst, i) => {
+                    const a = answers[String(i)];
+                    if (a === undefined || a === null) return;
+                    if (qst.type === 'mcq') {
+                        autoTotal++;
+                        if (Number(a) === Number(qst.correct)) autoCorrect++;
+                    } else if (qst.type === 'truefalse') {
+                        autoTotal++;
+                        if (String(a) === String(qst.correct)) autoCorrect++;
+                    }
+                });
+
+                const payload = {
+                    examId,
+                    examTitle: exam.title || '',
+                    studentCode: studentCode,
+                    studentName: studentName || localStorage.getItem('studentName') || 'طالب',
+                    studentGrade: localStorage.getItem('studentGrade') || 'all',
+                    answers,
+                    autoCorrect,
+                    autoTotal,
+                    submittedAt
+                };
+
+                if (answerDoc) {
+                    await updateDoc(answerDoc.ref, payload);
+                } else {
+                    await addDoc(collection(db, 'examAnswers'), payload);
+                }
+
+                alert('✅ تم إرسال إجابتك للمشرف');
+                loadSection('exams');
+            } catch (e) {
+                console.error('خطأ في إرسال الإجابة:', e);
+                alert('❌ حدث خطأ أثناء إرسال الإجابة');
+            }
+        }
+
+        // ============================================
+        // عرض قسم مؤسس المنصة
+        // ============================================
+        function showFounderSection() {
+            const content = document.getElementById('student-content');
+            content.innerHTML = `<div class="founder-page">
+              <div class="founder-card">
+                <img src="assets/mo.jpg" alt="مؤسس المنصة" class="founder-photo">
+                <div class="founder-copy"><span class="founder-kicker">مؤسس المنصة</span><h2>مؤسس منصتك التعليمية</h2><p>منصة تعليمية تجمع الكورسات والمحاضرات والكتب والاختبارات في مكان واحد، لتسهيل التعلم والمتابعة لكل طالب.</p></div>
+              </div>
+              <div class="profile-info-grid founder-features"><div><span>الكورسات</span><b>محاضرات مرتبة حسب الصف</b></div><div><span>المحتوى</span><b>كتب واختبارات لكل كورس</b></div><div><span>الأسئلة</span><b>أسئلة خاصة وأسئلة تحت المحاضرات</b></div><div><span>المتابعة</span><b>حفظ آخر مشاهدة وتقدم الطالب</b></div></div>
+            </div>`;
+        }
+
+        window.showFounderSection = showFounderSection;
+
+        // ============================================
+        // دوال سؤال الطالب عبر واتساب
+        // ============================================
+        let currentLessonQuestionVideoId='';
+        function showLessonQuestionsUnderPlayer(videoId){
+            const box=document.getElementById('lesson-questions-'+videoId); if(!box) return;
+            getDocs(query(collection(db,'lessonQuestions'),where('videoId','==',videoId))).then(snap=>{
+              const rows=[]; snap.forEach(d=>rows.push({id:d.id,...d.data()})); rows.sort((a,b)=>contentTime(a)-contentTime(b));
+              box.innerHTML=rows.length?rows.map(x=>`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>👤 ${escCourse(x.studentName||'طالب')}</b><p style="margin:6px 0">${escCourse(x.question)}</p>${x.answer?`<div style="background:#effaf5;border-right:4px solid #12a56b;padding:9px;border-radius:10px"><b>${x.answerPinned?'📌 إجابة المشرف':'👨‍🏫 المشرف'}</b><div>${escCourse(x.answer)}</div></div>`:''}</div>`).join(''):'<div style="color:#888">لا توجد أسئلة بعد. كن أول من يسأل.</div>';
+            }).catch(()=>{box.innerHTML='<div style="color:#888">تعذر تحميل الأسئلة.</div>';});
+        }
+        window.openLessonQuestionModal=function(videoId,title){currentLessonQuestionVideoId=videoId;document.getElementById('lessonQuestionTitle').textContent='الدرس: '+title;document.getElementById('lessonQuestionText').value='';document.getElementById('lessonQuestionModal').style.display='flex';};
+        window.closeLessonQuestionModal=function(){document.getElementById('lessonQuestionModal').style.display='none';};
+        window.sendLessonQuestion=async function(){const q=document.getElementById('lessonQuestionText').value.trim(); if(!q)return alert('اكتب سؤالك أولاً'); const code=localStorage.getItem('studentCode')||''; const name=localStorage.getItem('studentName')||'طالب'; const videoId=currentLessonQuestionVideoId; if(!videoId)return; const dup=await getDocs(query(collection(db,'lessonQuestions'),where('studentCode','==',code),where('videoId','==',videoId),where('question','==',q))); if(!dup.empty)return alert('⚠️ أرسلت نفس السؤال من قبل'); const title=document.getElementById('lessonQuestionTitle').textContent.replace('الدرس: ',''); await addDoc(collection(db,'lessonQuestions'),{studentCode:code,studentName:name,videoId,lessonTitle:title,question:q,answer:'',answerPinned:false,createdAt:serverTimestamp()}); window.closeLessonQuestionModal(); showLessonQuestionsUnderPlayer(videoId); alert('✅ تم نشر سؤالك تحت الدرس');};
+        const SUPERVISOR_WHATSAPP = '201033459821';
+
+        function openQuestionModal(lessonTitle = '') {
+            const modal = document.getElementById('questionModal');
+            const input = document.getElementById('studentQuestion');
+            if (!modal || !input) return;
+            currentQuestionLesson = lessonTitle || '';
+            input.value = '';
+            input.placeholder = currentQuestionLesson ? `اكتب سؤالك عن: ${currentQuestionLesson}` : 'اكتب سؤالك هنا...';
+            modal.style.display = 'flex';
+            setTimeout(() => input.focus(), 50);
+        }
+
+        function closeQuestionModal() {
+            const modal = document.getElementById('questionModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function sendStudentQuestion() {
+            const input = document.getElementById('studentQuestion');
+            const question = (input?.value || '').trim();
+            const name = localStorage.getItem('studentName') || 'طالب';
+            const code = localStorage.getItem('studentCode') || 'غير معروف';
+            if (!question) { alert('⚠️ اكتب سؤالك أولاً'); input?.focus(); return; }
+            const message = `🎓 سؤال من طالب\n👤 الاسم: ${name}\n🔑 الكود: ${code}\n\n💬 السؤال:\n${question}`;
+            window.open(`https://wa.me/${SUPERVISOR_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+            input.value = '';
+            closeQuestionModal();
+        }
+
+        // ============================================
+        // نظام الكورسات الجديد
+        // ============================================
+        function escCourse(v) {
+            return String(v ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+        }
+        function gradeLabel(code) {
+            if (code === '1') return 'الصف الأول الثانوي';
+            if (code === '2') return 'الصف الثاني الثانوي';
+            if (code === '3') return 'الصف الثالث الثانوي';
+            return code === 'all' || !code ? 'للجميع' : code;
+        }
+        function youtubeThumb(url) {
+            const id = extractYouTubeId(url);
+            return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : '';
+        }
+        function getCourseImage(course, firstVideo) {
+            return course?.imageUrl || youtubeThumb(firstVideo?.data?.url) || 'assets/platform-logo.png';
+        }
+        async function loadVisibleVideos(studentGrade) {
+            let snap;
+            try {
+                snap = await getDocs(query(collection(db, 'videos'), where('grade', 'in', [studentGrade, 'all'])));
+            } catch (e) {
+                const all = await getDocs(collection(db, 'videos'));
+                const arr=[]; all.forEach(d=>{const x=d.data(); if(!x.grade || x.grade===studentGrade || x.grade==='all') arr.push({id:d.id,data:x});});
+                return arr;
+            }
+            const arr=[]; snap.forEach(d=>arr.push({id:d.id,data:d.data()}));
+            sortContentNewestFirst(arr);
+            return arr;
+        }
+        async function buildCourses(studentGrade) {
+            const videos = await loadVisibleVideos(studentGrade);
+            let courseDocs=[];
+            try {
+                const cs = await getDocs(collection(db,'courses'));
+                cs.forEach(d=>{
+                    const data=d.data();
+                    if (!data.grade || data.grade==='all' || data.grade===studentGrade) courseDocs.push({id:d.id,data});
+                });
+            } catch(e) { console.warn('تعذر تحميل الكورسات:',e); }
+            const access={};
+            if(studentCode){
+                try{ const accessSnap=await getDocs(query(collection(db,'courseAccessRequests'),where('studentCode','==',studentCode))); accessSnap.forEach(d=>{const x=d.data();access[x.courseId]=x.status;}); }catch(e){console.warn('تعذر تحميل طلبات الكورسات',e);}
+            }
+            const courses=[];
+            courseDocs.forEach(c=>{
+                const vids=videos.filter(v=>v.data.courseId===c.id);
+                courses.push({id:c.id,data:c.data,videos:vids,accessStatus:access[c.id]||'none'});
+            });
+            const uncategorized=videos.filter(v=>!v.data.courseId);
+            const grouped={};
+            uncategorized.forEach(v=>{
+                const key=v.data.courseName || `grade-${v.data.grade||studentGrade}`;
+                if(!grouped[key]) grouped[key]=[];
+                grouped[key].push(v);
+            });
+            Object.entries(grouped).forEach(([key,vids],i)=>{
+                const first=vids[0]?.data||{};
+                courses.push({
+                    id:`legacy-${key}`,
+                    data:{
+                        name:first.courseName || (key.startsWith('grade-') ? `كورس ${gradeLabel(first.grade||studentGrade)}` : key),
+                        subject:first.subject || 'المحتوى التعليمي',
+                        grade:first.grade || studentGrade,
+                        description:first.courseDescription || 'الدروس والفيديوهات المتاحة للطالب',
+                        imageUrl:first.courseImage || ''
+                    },
+                    videos:vids,
+                    accessStatus:'approved',
+                    legacy:true
+                });
+            });
+            return courses.filter(c=>c.videos.length>0 || !c.legacy);
+        }
+        window.requestCourseAccess=async function(courseId,courseName){
+            const code=localStorage.getItem('studentCode')||'', name=localStorage.getItem('studentName')||'طالب', grade=localStorage.getItem('studentGrade')||'all';
+            const dup=await getDocs(query(collection(db,'courseAccessRequests'),where('studentCode','==',code),where('courseId','==',courseId))); if(!dup.empty){const st=dup.docs[0].data().status; if(st==='pending')return alert('⏳ طلبك قيد المراجعة بالفعل'); if(st==='approved')return alert('✅ أنت مشترك بالفعل');}
+            await addDoc(collection(db,'courseAccessRequests'),{studentCode:code,studentName:name,grade,courseId,courseName,status:'pending',createdAt:serverTimestamp()}); alert('✅ تم إرسال طلب دخول الكورس للمشرف'); await showCoursesHome(document.getElementById('student-content'),grade);
+        };
+        window.openCourse = async function(courseId, studentGrade) {
+            const courses = await buildCourses(studentGrade || localStorage.getItem('studentGrade') || 'all');
+            currentCourseState = courses.find(c=>c.id===courseId) || null;
+            if(currentCourseState && !String(courseId).startsWith('legacy-') && currentCourseState.accessStatus!=='approved'){ alert('🔐 يجب موافقة المشرف على دخول هذا الكورس أولاً.'); return; }
+            if(!currentCourseState) return alert('الكورس غير موجود');
+            await loadSection('courseDetail');
+        };
+        async function showCoursesHome(container, studentGrade) {
+            const courses=await buildCourses(studentGrade);
+            let html=`<div class="courses-shell">
+                <div class="courses-hero"><h2>🎬 كورساتي</h2><p>اختار الكورس وابدأ من آخر درس وقفت عنده، وكل تقدمك بيتحفظ تلقائيًا.</p></div>
+                <div class="course-grid">`;
+            if(!courses.length){
+                html+=`<div style="background:#fff;border-radius:20px;padding:35px;text-align:center;color:#777;grid-column:1/-1">لا توجد كورسات متاحة حاليًا.</div>`;
+            } else {
+                for(const c of courses){
+                    const first=c.videos[0]; const d=c.data||{}; const image=getCourseImage(d,first);
+                    html+=`<article class="course-card-new">
+                        <div class="course-cover">${image?`<img src="${escCourse(image)}" alt="${escCourse(d.name||'الكورس')}" loading="lazy">`:`<div class="course-cover-fallback">🎓</div>`}</div>
+                        <div class="course-card-body"><h3>${escCourse(d.name||'كورس تعليمي')}</h3>
+                        <div class="course-meta"><span class="course-chip">📚 ${escCourse(d.subject||'المادة')}</span><span class="course-chip">🎓 ${escCourse(gradeLabel(d.grade||studentGrade))}</span><span class="course-chip">📖 ${c.videos.length} درس</span><span class="course-chip">🎥 ${c.videos.length} فيديو</span></div>
+                        <div class="course-desc">${escCourse(d.description||'ابدأ الكورس وشاهد الدروس بالترتيب.')}</div>
+                        ${c.accessStatus==='approved'?`<button class="course-open-btn" type="button" onclick="window.openCourse('${escCourse(c.id)}','${escCourse(studentGrade)}')">افتح الكورس</button>`:c.accessStatus==='pending'?`<button class="course-open-btn" type="button" disabled>⏳ الطلب قيد المراجعة</button>`:`<button class="course-open-btn" type="button" onclick="window.requestCourseAccess('${escCourse(c.id)}','${escCourse(d.name||'الكورس')}')">🔐 اطلب دخول الكورس</button>`}</div></article>`;
+                }
+            }
+            html+=`</div></div>`; container.innerHTML=html;
+        }
+        async function getProgressMap(videoIds) {
+            const map={};
+            if(!studentCode || !videoIds.length) return map;
+            try {
+                const snap=await getDocs(query(collection(db,'progress'),where('studentCode','==',studentCode)));
+                snap.forEach(d=>{const x=d.data(); if(videoIds.includes(x.videoId)) map[x.videoId]=x;});
+            } catch(e){console.warn('تعذر تحميل تقدم الفيديوهات:',e);}
+            return map;
+        }
+        async function showCourseDetail(container, course, studentGrade) {
+            if(!course){ await showCoursesHome(container,studentGrade); return; }
+            courseVideosState=course.videos.slice();
+            // ترتيب الدروس برقم الدرس إن وُجد، ثم الأحدث
+            courseVideosState.sort((a,b)=>{
+                const ao=Number(a.data.lessonOrder ?? a.data.order ?? 999999), bo=Number(b.data.lessonOrder ?? b.data.order ?? 999999);
+                if(ao!==bo) return ao-bo;
+                return contentTime(a.data)-contentTime(b.data);
+            });
+            const ids=courseVideosState.map(v=>v.id); const progress=await getProgressMap(ids); const d=course.data||{};
+            const first=courseVideosState[0]; const image=getCourseImage(d,first);
+            let html=`<div class="courses-shell">
+                <div class="course-detail-head"><div><button class="course-back-btn" onclick="window.loadSection('videos')">‹ رجوع للكورسات</button><h2 style="margin:13px 0 3px">${escCourse(d.name||'الكورس')}</h2><div style="color:#7d858d">${escCourse(d.subject||'')} ${d.grade?`• ${escCourse(gradeLabel(d.grade))}`:''}</div></div><div class="course-meta"><span class="course-chip">📖 ${courseVideosState.length} درس</span><span class="course-chip">🎥 ${courseVideosState.length} فيديو</span></div></div>
+                ${image?`<img class="course-detail-cover" src="${escCourse(image)}" alt="${escCourse(d.name||'الكورس')}">`:''}
+                <div class="course-player-card" id="coursePlayerCard" style="display:none"></div>
+                <div class="lesson-actions"><label class="auto-play-box"><input id="courseAutoPlay" type="checkbox" ${localStorage.getItem('courseAutoPlay')==='true'?'checked':''} onchange="localStorage.setItem('courseAutoPlay',this.checked)"> تشغيل الفيديو التالي تلقائيًا</label></div>
+                <h3 style="margin:18px 0 12px">📚 الدروس</h3><div class="course-lessons">`;
+            courseVideosState.forEach((v,i)=>{
+                const x=v.data||{}, p=progress[v.id], pct=p&&p.totalDuration?Math.min(100,Math.round((p.watchedSeconds||0)/p.totalDuration*100)):0; const thumb=youtubeThumb(x.url);
+                html+=`<div class="lesson-row" onclick="window.playCourseVideo(${i})"><img class="lesson-thumb" src="${escCourse(thumb)}" onerror="this.style.display='none'" alt=""><div class="lesson-info"><h4>${i+1}. ${escCourse(x.title||'الدرس')}</h4><p>${x.duration?escCourse(x.duration):'فيديو تعليمي'} ${pct?`• ${pct}% مكتمل`:''}</p></div><div class="lesson-status">${pct>=95?'✅ مكتمل':pct>0?'▶ مستمر':'▶ ابدأ'}</div></div>`;
+            });
+            html+=`</div></div>`; container.innerHTML=html;
+            // استرجاع آخر درس من تقدم الطالب
+            let lastIndex=0; let best=0; for(let i=0;i<courseVideosState.length;i++){const p=progress[courseVideosState[i].id]; const t=p?.lastUpdated?.toMillis?.()||0; if(t>best){best=t;lastIndex=i;}}
+            if(best && localStorage.getItem('autoOpenLastLesson')==='true') setTimeout(()=>window.playCourseVideo(lastIndex),80);
+        }
+        window.playCourseVideo = async function(index) {
+            if(index<0 || index>=courseVideosState.length) return;
+            currentCourseVideoIndex=index;
+            const v=courseVideosState[index], d=v.data||{}, card=document.getElementById('coursePlayerCard');
+            if(!card) return;
+            const youtubeId=extractYouTubeId(d.url); if(!youtubeId) return alert('رابط الفيديو غير صحيح');
+            card.style.display='block'; card.innerHTML=`<h3 class="course-player-title">${index+1}. ${escCourse(d.title||'الدرس')}</h3>
+                <div class="video-container" id="course-video-container-${v.id}" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;background:#000">
+                  <div id="course-player-${v.id}" style="position:absolute;inset:0"></div>
+                  <button type="button" class="fullscreen-btn" onclick="window.toggleCourseFullscreen(event,'${escCourse(v.id)}')">⛶</button>
+                  <div style="position:absolute;bottom:10px;right:10px;z-index:10;color:rgba(255,255,255,.35);font-size:11px;pointer-events:none;background:rgba(0,0,0,.3);padding:4px 9px;border-radius:4px">${escCourse(studentName)} • ${escCourse(studentCode)}</div>
+                </div>
+                <div class="progress-info" id="course-progress-info-${v.id}"><div class="progress-bar"><div class="progress-fill" id="progress-fill-${v.id}" style="width:0%"></div></div><p id="progress-text-${v.id}">⏳ جاري التحميل...</p></div>
+                <div class="course-player-nav"><button class="btn-soft" onclick="window.playCourseVideo(${index-1})" ${index===0?'disabled':''}>‹ الفيديو السابق</button><button class="lesson-discuss-btn" onclick="window.openLessonQuestionModal(${JSON.stringify(v.id)},${JSON.stringify(d.title||'الدرس')})">💬 سؤال تحت الدرس</button><button class="btn-green" onclick="window.playCourseVideo(${index+1})" ${index===courseVideosState.length-1?'disabled':''}>الفيديو التالي ›</button></div><div id="lesson-questions-${v.id}" style="margin-top:14px;background:#fff;border-radius:16px;padding:14px"><h4 style="margin-top:0">💬 أسئلة الطلاب</h4><div>جاري تحميل الأسئلة...</div></div>`;
+            showLessonQuestionsUnderPlayer(v.id);
+            card.scrollIntoView({behavior:'smooth',block:'start'});
+            if(window.coursePlayer) try{window.coursePlayer.destroy()}catch(e){}
+            const create=()=>{
+                window.coursePlayer=new YT.Player(`course-player-${v.id}`,{
+                    height:'100%',width:'100%',videoId:youtubeId,playerVars:{controls:1,rel:0,modestbranding:1,iv_load_policy:3,fs:0,autohide:1,autoplay:1,enablejsapi:1,origin:window.location.origin},host:'https://www.youtube-nocookie.com',events:{
+                        onReady:async ev=>{ try{const q=await getDocs(query(collection(db,'progress'),where('studentCode','==',studentCode),where('videoId','==',v.id))); if(!q.empty){const p=q.docs[0].data(); if(p.watchedSeconds>5 && p.totalDuration && p.watchedSeconds<p.totalDuration-5) ev.target.seekTo(p.watchedSeconds,true); updateProgressUI(v.id,p.watchedSeconds||0,p.totalDuration||0);} }catch(e){} startCourseProgress(v.id,ev.target); },
+                        onStateChange:ev=>{ if(ev.data===YT.PlayerState.ENDED){ saveProgress(v.id,Math.floor(ev.target.getDuration()),Math.floor(ev.target.getDuration())); const auto=document.getElementById('courseAutoPlay')?.checked; if(auto && index<courseVideosState.length-1) setTimeout(()=>window.playCourseVideo(index+1),500); } }
+                    }
+                });
+            };
+            if(window.YT&&window.YT.Player) create(); else { window.onYouTubeIframeAPIReady=create; const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag); }
+        };
+        function startCourseProgress(videoId,player){ if(progressIntervals[videoId]) clearInterval(progressIntervals[videoId]); progressIntervals[videoId]=setInterval(async()=>{try{const cur=Math.floor(player.getCurrentTime?.()||0),dur=Math.floor(player.getDuration?.()||0);if(dur>0){await saveProgress(videoId,cur,dur);updateProgressUI(videoId,cur,dur);}}catch(e){}},5000); }
+        window.toggleCourseFullscreen=function(event,videoId){event?.preventDefault();event?.stopPropagation();const el=document.getElementById(`course-video-container-${videoId}`);if(!el)return;const active=document.fullscreenElement||document.webkitFullscreenElement;if(active===el){document.exitFullscreen?.();document.webkitExitFullscreen?.();}else{el.requestFullscreen?.()||el.webkitRequestFullscreen?.();}};
+
+        function showProfileSection(){
+            const c=document.getElementById('student-content');
+            const name=localStorage.getItem('studentName')||'الطالب';
+            const code=localStorage.getItem('studentCode')||'—';
+            const grade=localStorage.getItem('studentGrade')||'—';
+            const phone=localStorage.getItem('studentPhone')||'—';
+            c.innerHTML=`<div class="profile-page"><div class="profile-hero"><div class="profile-avatar">👤</div><div><h2>حسابي</h2><p>${escapeHtml(name)}</p></div></div><div class="profile-info-grid"><div><span>الاسم</span><b>${escapeHtml(name)}</b></div><div><span>الكود</span><b>${escapeHtml(code)}</b></div><div><span>رقم الهاتف</span><b>${escapeHtml(phone)}</b></div><div><span>الصف</span><b>${escapeHtml(gradeLabel(grade))}</b></div></div><button class="profile-edit-btn" onclick="document.getElementById('profileCompletionModal').style.display='flex'">✏️ تعديل/استكمال البيانات</button></div>`;
+        }
+
+        // ============================================
+        // دالة تحميل الأقسام الرئيسية
+        // ============================================
+        async function loadSection(section) {
+            if (section === 'profile') {
+                showFounderSection();
+                return;
+            }
+            const container = document.getElementById('student-content');
+            container.innerHTML = `<h2>⏳ جاري التحميل...</h2>`;
+
+            const studentGrade = localStorage.getItem('studentGrade') || 'all';
+            const code = localStorage.getItem('studentCode');
+            if (!code && section !== 'profile') {
+                window.location.href = 'student-login.html';
+                return;
+            }
+
+
+            // ============================================
+            // الرئيسية (Dashboard)
+            // ============================================
+            if (section === 'dashboard') {
+                try {
+                    const progressSnap = await getDocs(query(collection(db, 'progress'), where('studentCode', '==', code)));
+                    const videosSnap = await getDocs(query(collection(db, 'videos'), where('grade', 'in', [studentGrade, 'all'])));
+                    const booksSnap = await getDocs(query(collection(db, 'books'), where('grade', 'in', [studentGrade, 'all'])));
+                    
+                    let watched = 0;
+                    progressSnap.forEach(p => {
+                        if (p.data().watchedSeconds > 0) watched++;
+                    });
+                    
+                    const totalVideos = videosSnap.size;
+                    const totalBooks = booksSnap.size;
+                    
+                    const today = new Date().toISOString().split('T')[0];
+                    const sessionsQuery = query(
+                        collection(db, 'sessions'),
+                        where('studentCode', '==', code),
+                        where('date', '==', today)
+                    );
+                    const sessionsSnap = await getDocs(sessionsQuery);
+                    
+                    const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+                    const startStr = monthStart.toISOString().split('T')[0];
+                    const attendanceQuery = query(
+                        collection(db, 'attendance'),
+                        where('studentCode', '==', code)
+                    );
+                    const attendanceSnap = await getDocs(attendanceQuery);
+                    let attendanceCount = 0;
+                    attendanceSnap.forEach(d => {
+                        const data = d.data();
+                        if (data.date >= startStr && data.status === 'present') {
+                            attendanceCount++;
+                        }
+                    });
+                    
+                    
+                    let html = `
+                        <h2>📊 الرئيسية</h2>
+                        <p style="color:#888; margin-bottom:20px;">مرحباً ${studentName}، إليك ملخص تقدمك</p>
+                        
+                        <div class="dashboard-stats">
+                            <div class="stat-card">
+                                <div class="icon">🎬</div>
+                                <div class="number">${watched}/${totalVideos}</div>
+                                <div class="label">فيديوهات شاهدتها</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="icon">📚</div>
+                                <div class="number">${totalBooks}</div>
+                                <div class="label">كتب متاحة</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="icon">📅</div>
+                                <div class="number">${attendanceCount}</div>
+                                <div class="label">أيام الحضور هذا الشهر</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="icon">🔁</div>
+                                <div class="number">${sessionsSnap.size}</div>
+                                <div class="label">مرات الدخول اليوم</div>
+                            </div>
+                        </div>
+                        
+                        <div style="background:white; padding:20px; border-radius:15px; box-shadow:0 2px 10px rgba(0,0,0,0.05); margin-top:20px;">
+                            <h3>📈 تقدمك</h3>
+                            <div style="margin-top:15px;">
+                                <p>نسبة إنجاز الفيديوهات: ${totalVideos > 0 ? Math.round((watched/totalVideos)*100) : 0}%</p>
+                                <div style="background:#eee; border-radius:10px; height:15px; overflow:hidden;">
+                                    <div style="background:#3498db; height:15px; border-radius:10px; width:${totalVideos > 0 ? (watched/totalVideos)*100 : 0}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML = html;
+                } catch (error) {
+                    console.error('خطأ في تحميل الرئيسية:', error);
+                    container.innerHTML = `<h2>📊 الرئيسية</h2><p style="color:red;">حدث خطأ في تحميل البيانات</p>`;
+                }
+            }
+            
+            // ============================================
+            // الكورسات - واجهة منظمة مثل التصميم المطلوب
+            // ============================================
+            else if (section === 'videos') {
+                await showCoursesHome(container, studentGrade);
+            }
+            else if (section === 'courseDetail') {
+                await showCourseDetail(container, currentCourseState, studentGrade);
+            }
+            // ============================================
+            // الكتب - مع زر تكبير داخل الموقع
+            // ============================================
+            else if (section === 'books') {
+                try {
+                    const q = query(collection(db, 'books'), where('grade', 'in', [studentGrade, 'all']));
+                    const snap = await getDocs(q);
+                    let html = `<h2>📚 الكتب</h2>`;
+                    
+                    if (snap.empty) {
+                        html += `<p>لا توجد كتب حالياً</p>`;
+                    } else {
+                        const booksData = snap.docs.map(d => ({ id: d.id, data: d.data() }));
+                        sortContentNewestFirst(booksData);
+                        booksData.forEach((item, index) => {
+                            const data = item.data;
+                            let originalUrl = data.url || '';
+                            let embedUrl = originalUrl;
+                            let fileId = null;
+                            const bookId = `book-${index}-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
+                            
+                            // تنظيف الرابط
+                            originalUrl = originalUrl.replace(/[?&]rm=minimal/g, '');
+                            originalUrl = originalUrl.replace(/[?&]authuser=\d+/g, '');
+                            originalUrl = originalUrl.replace(/[?&]usp=sharing/g, '');
+                            
+                            // استخراج معرف الملف من Google Drive
+                            if (originalUrl.includes('drive.google.com')) {
+                                const patterns = [
+                                    /\/d\/([^\/]+)/,
+                                    /id=([^&]+)/,
+                                    /file\/d\/([^\/]+)/,
+                                    /open\?id=([^&]+)/
+                                ];
+                                
+                                for (const pattern of patterns) {
+                                    const match = originalUrl.match(pattern);
+                                    if (match && match[1] && match[1].length > 10) {
+                                        fileId = match[1];
+                                        break;
+                                    }
+                                }
+                                
+                                if (fileId) {
+                                    embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+                                }
+                            }
+                            
+                            const isDrive = originalUrl.includes('drive.google.com');
+                            
+                            html += `
+                                <div style="margin:25px 0; background:white; padding:15px; border-radius:15px; box-shadow:0 2px 10px rgba(0,0,0,0.05); position:relative;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
+                                        <h3 style="margin:0;">📖 ${data.title || 'كتاب'}</h3>
+                                        ${isDrive ? `
+                                            <button onclick="window.toggleBookFullscreen('${bookId}')" 
+                                                class="book-fullscreen-btn"
+                                                style="background:#3498db; border:none; color:white; font-size:18px; cursor:pointer; padding:8px 16px; border-radius:8px; transition:0.3s; width:auto; display:flex; align-items:center; gap:8px;"
+                                                onmouseover="this.style.background='#2980b9'" 
+                                                onmouseout="this.style.background='#3498db'"
+                                                title="تكبير الكتاب">
+                                                ⛶ تكبير
+                                            </button>
+                                        ` : ''}
+                                    </div>
+                                    ${isDrive ? `
+                                        <div id="${bookId}" style="position:relative; padding-bottom:75%; height:0; overflow:hidden; border-radius:10px; background:#f0f0f0; border:1px solid #ddd; transition:all 0.3s;">
+                                            <iframe 
+                                                src="${embedUrl}" 
+                                                style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:10px;"
+                                                allowfullscreen
+                                                loading="lazy"
+                                                sandbox="allow-scripts allow-same-origin allow-forms">
+                                            </iframe>
+                                        </div>
+                                        <div style="margin-top:8px; text-align:center;">
+                                            <span style="color:#888; font-size:12px;">📖 للقراءة فقط - اضغط على زر "⛶ تكبير" للتكبير</span>
+                                        </div>
+                                    ` : `
+                                        <div style="padding:20px; background:#fff3cd; border-radius:10px; border:1px solid #ffc107;">
+                                            <p style="color:#856404; margin:0;">⚠️ الرابط ليس من Google Drive أو غير صحيح</p>
+                                            <p style="color:#856404; font-size:12px; margin-top:5px;">الرابط: <span style="word-break:break-all;">${originalUrl}</span></p>
+                                        </div>
+                                    `}
+                                </div>
+                            `;
+                        });
+                    }
+                    container.innerHTML = html;
+                } catch (error) {
+                    console.error('خطأ في تحميل الكتب:', error);
+                    container.innerHTML = `<p style="color:red;">❌ حدث خطأ في تحميل الكتب: ${error.message}</p>`;
+                }
+            }
+            
+            // ============================================
+            // الاختبارات
+            // ============================================
+            else if (section === 'exams') {
+                container.innerHTML = `<h2>⏳ جاري تحميل الاختبارات...</h2>`;
+                try {
+                    const q = query(collection(db, 'exams'), where('grade', 'in', [studentGrade, 'all']));
+                    const snap = await getDocs(q);
+
+                    let html = `<h2>📝 الاختبارات</h2>`;
+                    if (snap.empty) {
+                        html += `<div style="background:white;border-radius:15px;padding:30px;text-align:center;color:#777;">لا توجد اختبارات حالياً</div>`;
+                    }
+
+                    const examData = snap.docs.map(d => ({ id: d.id, data: d.data() }));
+                    sortContentNewestFirst(examData);
+                    for (const item of examData) {
+                        const data = item.data;
+                        const examId = item.id;
+
+                        if (Array.isArray(data.questions)) {
+                            let answersSnap;
+                            try {
+                                answersSnap = await getDocs(query(
+                                    collection(db, 'examAnswers'),
+                                    where('examId', '==', examId),
+                                    where('studentCode', '==', code)
+                                ));
+                            } catch (e) {
+                                answersSnap = { empty:true, docs:[] };
+                            }
+
+                            const previous = answersSnap.docs?.[0]?.data?.() || null;
+                            const reveal = data.answerReveal || 'instant';
+
+                            html += `<div style="border:1px solid #e0e0e0;padding:20px;margin:20px 0;border-radius:15px;background:white;box-shadow:0 2px 10px rgba(0,0,0,.04);">
+                                <h3 style="margin-top:0;">📝 ${data.title || 'اختبار'}</h3>
+                                <p style="color:#777;">عدد الأسئلة: ${data.questions.length}</p>`;
+
+                            data.questions.forEach((qst, qi) => {
+                                const savedAnswer = previous?.answers ? previous.answers[String(qi)] : undefined;
+                                const locked = savedAnswer !== undefined && savedAnswer !== null;
+                                const typeText = qst.type === 'mcq' ? 'اختيار من متعدد' :
+                                                 qst.type === 'truefalse' ? 'صح أو خطأ' : 'علل / بما تفسر';
+
+                                let answerControl = '';
+                                if (qst.type === 'mcq') {
+                                    answerControl = (qst.options || []).map((op, oi) =>
+                                        `<label style="display:block;padding:10px;margin:7px 0;border:1px solid #ddd;border-radius:10px;cursor:${locked?'default':'pointer'};">
+                                            <input type="radio" name="exam_${examId}_${qi}" value="${oi}" ${String(savedAnswer)===String(oi)?'checked':''} ${locked?'disabled':''}>
+                                            ${op}
+                                        </label>`).join('');
+                                } else if (qst.type === 'truefalse') {
+                                    answerControl = `
+                                        <label style="display:inline-block;padding:10px;margin-left:8px;border:1px solid #ddd;border-radius:10px;">
+                                            <input type="radio" name="exam_${examId}_${qi}" value="true" ${String(savedAnswer)==='true'?'checked':''} ${locked?'disabled':''}> صح
+                                        </label>
+                                        <label style="display:inline-block;padding:10px;border:1px solid #ddd;border-radius:10px;">
+                                            <input type="radio" name="exam_${examId}_${qi}" value="false" ${String(savedAnswer)==='false'?'checked':''} ${locked?'disabled':''}> خطأ
+                                        </label>`;
+                                } else {
+                                    answerControl = `<textarea id="answer_${examId}_${qi}" ${locked?'disabled':''} placeholder="اكتب إجابتك..." style="width:100%;min-height:110px;padding:12px;border:1px solid #ddd;border-radius:10px;">${locked?String(savedAnswer):''}</textarea>`;
+                                }
+
+                                const canReveal = previous && isExamRevealReady(previous.submittedAt, reveal);
+                                let feedback = '';
+                                if (locked && previous) {
+                                    if (reveal === 'never') {
+                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#f7f7f7;color:#777;">🔒 لن تظهر نتيجة هذا السؤال.</div>`;
+                                    } else if (!canReveal) {
+                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#fff8e8;color:#8a6500;">⏳ سيتم إظهار نتيجة الإجابة حسب الوقت الذي حدده المشرف.</div>`;
+                                    } else if (qst.type === 'mcq') {
+                                        const ok = Number(savedAnswer) === Number(qst.correct);
+                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:${ok?'#eaf8ef':'#fff0f0'};color:${ok?'#218838':'#c0392b'};font-weight:800;">${ok?'✅ إجابتك صحيحة':'❌ إجابتك غير صحيحة'}<br>الإجابة الصحيحة: ${qst.options?.[Number(qst.correct)] || ''}</div>`;
+                                    } else if (qst.type === 'truefalse') {
+                                        const ok = String(savedAnswer) === String(qst.correct);
+                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:${ok?'#eaf8ef':'#fff0f0'};color:${ok?'#218838':'#c0392b'};font-weight:800;">${ok?'✅ إجابتك صحيحة':'❌ إجابتك غير صحيحة'}<br>الإجابة الصحيحة: ${qst.correct === 'true' ? 'صح' : 'خطأ'}</div>`;
+                                    } else {
+                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#f3f6ff;color:#4056a1;">✍️ تم إرسال إجابتك للمشرف للتصحيح.</div>`;
+                                    }
+                                }
+
+                                html += `<div style="margin-top:18px;padding:16px;border:1px solid #eee;border-radius:12px;background:#fafafa;">
+                                    <div style="font-weight:800;margin-bottom:8px;">${qi+1}. ${qst.text}</div>
+                                    ${qst.imageUrl ? `<img src="${qst.imageUrl}" alt="صورة السؤال" style="display:block;max-width:100%;max-height:320px;object-fit:contain;border-radius:12px;margin:10px 0;background:#fff;">` : ''}
+                                    <small style="color:#888;">${typeText}</small>
+                                    <div style="margin-top:10px;">${answerControl}</div>
+                                    ${locked ? '<span style="display:inline-block;margin-top:8px;color:#777;">🔐 تم إرسال الإجابة</span>' :
+                                        `<button class="btn-sm btn-add" style="margin-top:10px;width:auto;padding:8px 20px;" onclick="window.submitSingleExamAnswer('${examId}', ${qi})">📤 إرسال الإجابة</button>`}
+                                    ${feedback}
+                                </div>`;
+                            });
+
+                            html += `</div>`;
+                        } else {
+                            html += `<div style="border:1px solid #e0e0e0; padding:20px; margin:20px 0; border-radius:15px; background:white;">
+                                <h3>${data.title || 'اختبار'}</h3>
+                                <p><strong>النوع:</strong> ${data.type || ''}</p>
+                                <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-top:10px;">
+                                    ${data.type === 'image' ? `<img src="${data.content || ''}" width="100%" style="border-radius:10px;">` :
+                                      data.type === 'video' ? `<video controls controlsList="nodownload" src="${data.content || ''}" width="100%" style="border-radius:10px;"></video>` :
+                                      `<p style="font-size:18px;">${data.content || ''}</p>`}
+                                </div>
+                            </div>`;
+                        }
+                    }
+
+                    container.innerHTML = html;
+                } catch (error) {
+                    console.error('خطأ في تحميل الاختبارات:', error);
+                    container.innerHTML = `<p style="color:red;">حدث خطأ في تحميل الاختبارات</p>`;
+                }
+            }
+            
+            // ============================================
+            // الإشعارات
+            // ============================================
+            else if (section === 'notifications') {
+                try {
+                    const q = query(collection(db, 'notifications'), where('grade', 'in', [studentGrade, 'all']));
+                    const snap = await getDocs(q);
+                    let html = `<h2>🔔 الإشعارات</h2>`;
+                    let count = 0;
+                    let found = false;
+                    const notifData = snap.docs.map(d => ({ id: d.id, data: d.data() }));
+                    sortContentNewestFirst(notifData);
+                    notifData.forEach(item => {
+                        const data = item.data;
+                        if (data.targetStudent === 'all' || data.targetStudent === code) {
+                            found = true;
+                            count++;
+                            html += `<div style="border-bottom:1px solid #eee; padding:20px; background:white; margin-bottom:15px; border-radius:12px; box-shadow:0 1px 5px rgba(0,0,0,0.03);">
+                                        <p style="font-size:17px;">${data.text}</p>`;
+                            if (data.mediaUrl) {
+                                if (data.mediaType === 'video') {
+                                    html += `<video controls controlsList="nodownload" src="${data.mediaUrl}" width="100%" height="250" style="border-radius:10px; margin-top:10px;"></video>`;
+                                } else {
+                                    html += `<img src="${data.mediaUrl}" width="100%" style="border-radius:10px; margin-top:10px;">`;
+                                }
+                            }
+                            html += `<small style="color:#888;">${data.sentAt?.toDate?.()?.toLocaleString() || ''}</small>
+                                    </div>`;
+                        }
+                    });
+                    if (!found) html += `<p>لا توجد إشعارات لك حالياً</p>`;
+                    document.getElementById('notif-count').innerText = count;
+                    const mobileNotif = document.getElementById('mobile-notif-count');
+                    if (mobileNotif) mobileNotif.innerText = count;
+                    container.innerHTML = html;
+                } catch (error) {
+                    console.error('خطأ في تحميل الإشعارات:', error);
+                    container.innerHTML = `<p style="color:red;">حدث خطأ في تحميل الإشعارات</p>`;
+                }
+            }
+
+            
+            // ============================================
+            // تقدمي الشخصي
+            // ============================================
+            else if (section === 'myProgress') {
+                try {
+                    const studentSnap = await getDoc(doc(db, 'students', code));
+                    const studentData = studentSnap.exists() ? studentSnap.data() : {};
+                    
+                    const videosSnap = await getDocs(query(collection(db, 'videos'), where('grade', 'in', [studentGrade, 'all'])));
+                    const videos = {};
+                    videosSnap.forEach(d => {
+                        videos[d.id] = d.data();
+                    });
+                    
+                    const progressQuery = query(collection(db, 'progress'), where('studentCode', '==', code));
+                    const progressSnap = await getDocs(progressQuery);
+                    const progress = {};
+                    progressSnap.forEach(d => {
+                        const data = d.data();
+                        progress[data.videoId] = data;
+                    });
+
+                    const totalVideos = Object.keys(videos).length;
+                    
+                    let html = `<h2>📊 تقدمي</h2>
+                                <p style="color:#888; margin-bottom:20px;">${studentName}، إليك تفاصيل تقدمك</p>
+                                
+                                <div style="background:white; padding:20px; border-radius:15px; box-shadow:0 2px 10px rgba(0,0,0,0.05); margin-bottom:20px;">
+                                    <h3>📊 ملخص التقدم</h3>
+                                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:15px; margin-top:15px;">
+                                        <div style="text-align:center;">
+                                            <div style="font-size:28px; font-weight:bold; color:#3498db;">${Object.keys(progress).length}</div>
+                                            <div style="color:#888;">فيديوهات تفاعلت معها</div>
+                                        </div>
+                                        <div style="text-align:center;">
+                                            <div style="font-size:28px; font-weight:bold; color:#27ae60;">${totalVideos}</div>
+                                            <div style="color:#888;">إجمالي الفيديوهات</div>
+                                        </div>
+                                        <div style="text-align:center;">
+                                            <div style="font-size:28px; font-weight:bold; color:#f39c12;">${totalVideos > 0 ? Math.round((Object.keys(progress).length/totalVideos)*100) : 0}%</div>
+                                            <div style="color:#888;">نسبة الإنجاز</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="background:white; padding:20px; border-radius:15px; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+                                    <h3>🎬 تفاصيل الفيديوهات</h3>
+                                    <div style="overflow-x:auto; margin-top:15px;">
+                                    <table border="1" cellpadding="10" style="width:100%; border-collapse:collapse;">
+                                        <tr>
+                                            <th>الفيديو</th>
+                                            <th>المشاهدة</th>
+                                            <th>المدة</th>
+                                            <th>النسبة</th>
+                                            <th>الحالة</th>
+                                        </tr>`;
+                    
+                    if (Object.keys(videos).length === 0) {
+                        html += `<tr><td colspan="5" style="text-align:center;">لا توجد فيديوهات</td></tr>`;
+                    }
+                    
+                    for (const [videoId, video] of Object.entries(videos)) {
+                        const p = progress[videoId];
+                        const watched = p ? p.watchedSeconds : 0;
+                        const total = p ? p.totalDuration : 0;
+                        const percent = total > 0 ? Math.min(100, Math.round((watched / total) * 100)) : 0;
+                        const completed = p && p.completed ? '✅ مكتمل' : (watched > 0 ? '⏳ قيد المشاهدة' : '❌ لم يشاهد');
+                        
+                        const watchedMin = Math.floor(watched / 60);
+                        const watchedSec = Math.floor(watched % 60);
+                        const totalMin = Math.floor(total / 60);
+                        const totalSec = Math.floor(total % 60);
+                        
+                        html += `<tr>
+                                    <td>${video.title}</td>
+                                    <td>${watchedMin}:${watchedSec.toString().padStart(2, '0')}</td>
+                                    <td>${totalMin}:${totalSec.toString().padStart(2, '0')}</td>
+                                    <td>${percent}%</td>
+                                    <td>${completed}</td>
+                                </tr>`;
+                    }
+                    
+                    html += `</table></div></div>`;
+                    container.innerHTML = html;
+                } catch (error) {
+                    console.error('خطأ في تحميل تقدمك:', error);
+                    container.innerHTML = `<p style="color:red;">حدث خطأ في تحميل تقدمك</p>`;
+                }
+            }
+        }
+
+        // ============================================
+        // تسجيل الخروج
+        // ============================================
+        function logoutStudent() {
+            recordLogout();
+            localStorage.removeItem('studentCode');
+            localStorage.removeItem('studentGrade');
+            localStorage.removeItem('studentName');
+            window.location.href = 'student-login.html';
+        }
+
+        // ============================================
+        // ربط الدوال بالنافذة العالمية
+        // ============================================
+        window._moduleLoadSection = loadSection;
+        window._moduleLogout = logoutStudent;
+        window._moduleOpenQuestionModal = openQuestionModal;
+        window._moduleCloseQuestionModal = closeQuestionModal;
+        window._moduleSendStudentQuestion = sendStudentQuestion;
+        window._moduleSubmitExamAnswer = submitSingleExamAnswer;
+
+        // ============================================
+        // بداية التحميل
+        // ============================================
+        recordLogin();
+        loadSection('dashboard');
+
+        console.log('✅ تم تحميل لوحة الطالب بنجاح');
+        console.log('👤 الطالب:', studentName, studentCode);
+    </script>
+
+</body>
+</html>
