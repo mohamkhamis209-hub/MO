@@ -586,6 +586,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
 <script src="js/firebase-config.js" type="module"></script>
     <script src="js/device.js" type="module"></script>
     <script type="module">
+        import { IMGBB_API_KEY, IMGBB_MAX_BYTES } from './js/image-config.js';
         import {
             db, storage, auth, ensureAnonymousAuth, ref, uploadBytes, getDownloadURL, listAll, deleteObject,
             collection, addDoc, getDocs, deleteDoc, doc, updateDoc,
@@ -2528,6 +2529,27 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             document.getElementById('content-area').innerHTML = html;
         };
 
+        async function uploadImageToImgBB(file, folder = 'mansatak') {
+            if (!file) return { url: '', deleteUrl: '' };
+            if (!file.type?.startsWith('image/')) throw new Error('الملف المختار ليس صورة صحيحة');
+            if (file.size > IMGBB_MAX_BYTES) throw new Error('حجم الصورة يجب ألا يتجاوز 32 ميجابايت');
+            const form = new FormData();
+            form.append('key', IMGBB_API_KEY); form.append('image', file);
+            form.append('name', `${folder}_${Date.now()}`);
+            const response = await fetch('https://api.imgbb.com/1/upload', {method:'POST', body:form});
+            let result=null; try {result=await response.json();} catch(_){}
+            if (!response.ok || !result?.success || !result?.data?.url)
+                throw new Error(result?.error?.message || `فشل رفع الصورة (HTTP ${response.status})`);
+            return {url:result.data.url,displayUrl:result.data.display_url||result.data.url,
+                deleteUrl:result.data.delete_url||'',thumbUrl:result.data.thumb?.url||'',
+                mediumUrl:result.data.medium?.url||'',width:result.data.width||null,
+                height:result.data.height||null,provider:'imgbb'};
+        }
+        function imageUploadStatus(inputId,text,isError=false){
+            const el=document.getElementById(inputId+'Status'); if(!el)return;
+            el.textContent=text; el.style.display='block'; el.style.color=isError?'#c0392b':'#0a956c';
+        }
+
         async function getCourseOptionsHtml(selected='') {
             let html='<option value="">📂 اختر الكورس</option>';
             try {
@@ -2544,20 +2566,15 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             const grade=document.getElementById('courseGrade')?.value||'all';
             const description=document.getElementById('courseDescription')?.value.trim();
             const file=document.getElementById('courseImageFile')?.files?.[0];
-            if(!name) return alert('اكتب اسم الكورس');
-            let imageUrl='';
+            if(!name)return alert('اكتب اسم الكورس');
+            const btn=document.querySelector('#courseAddBtn');if(btn){btn.disabled=true;btn.textContent='⏳ جاري الرفع...';}
             try{
-                if(file){
-                    if(!file.type.startsWith('image/')) return alert('اختر صورة صحيحة');
-                    if(file.size>5*1024*1024) return alert('حجم الصورة يجب ألا يتجاوز 5 ميجابايت');
-                    const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-                    const storageRef=ref(storage,`course-images/${Date.now()}_${safe}`);
-                    await uploadBytes(storageRef,file,{contentType:file.type});
-                    imageUrl=await getDownloadURL(storageRef);
-                }
-                await addDoc(collection(db,'courses'),{name,subject,grade,description,imageUrl,active:true,createdAt:serverTimestamp()});
-                alert('✅ تم إنشاء الكورس'); window.showCourses();
-            }catch(e){console.error(e);alert('❌ تعذر إنشاء الكورس: '+e.message);}
+                let imageData={};
+                if(file){imageUploadStatus('courseImageFile','⏳ جاري رفع صورة الكورس...');imageData=await uploadImageToImgBB(file,'courses');imageUploadStatus('courseImageFile','✅ تم رفع الصورة بنجاح');}
+                await addDoc(collection(db,'courses'),{name,subject,grade,description,imageUrl:imageData.url||'',imageThumbUrl:imageData.thumbUrl||'',imageDeleteUrl:imageData.deleteUrl||'',imageProvider:imageData.provider||'',imageWidth:imageData.width||null,imageHeight:imageData.height||null,active:true,createdAt:serverTimestamp()});
+                alert('✅ تم إنشاء الكورس ورفع صورته');window.showCourses();
+            }catch(e){console.error(e);imageUploadStatus('courseImageFile','❌ '+e.message,true);alert('❌ تعذر إنشاء الكورس: '+e.message);}
+            finally{if(btn){btn.disabled=false;btn.textContent='➕ إضافة كورس';}}
         };
         window.deleteCourse = async function(id){
             if(!confirm('حذف الكورس؟ لن يتم حذف الفيديوهات التابعة له، لكنها ستصبح بدون كورس.')) return;
@@ -2571,7 +2588,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             await getGrades();
             const snap=await getDocs(collection(db,'courses')); const courses=[]; snap.forEach(d=>courses.push({id:d.id,...d.data()}));
             const vidsSnap=await getDocs(collection(db,'videos')); const counts={}; vidsSnap.forEach(d=>{const x=d.data(); if(x.courseId) counts[x.courseId]=(counts[x.courseId]||0)+1;});
-            let html=`<h2>🎓 الكورسات</h2><div class="filter-bar"><input id="courseName" placeholder="اسم الكورس"><input id="courseSubject" placeholder="المادة"><select id="courseGrade">${getGradeOptions('all')}</select><input id="courseImageFile" type="file" accept="image/*"><input id="courseDescription" placeholder="وصف مختصر"><button onclick="addCourse()" class="btn-sm btn-add">➕ إضافة كورس</button></div>`;
+            let html=`<h2>🎓 الكورسات</h2><div class="filter-bar"><input id="courseName" placeholder="اسم الكورس"><input id="courseSubject" placeholder="المادة"><select id="courseGrade">${getGradeOptions('all')}</select><input id="courseImageFile" type="file" accept="image/*" onchange="imageUploadStatus('courseImageFile','📷 الصورة جاهزة للرفع')"><span id="courseImageFileStatus" style="display:none;font-size:12px;font-weight:700;width:100%;"></span><input id="courseDescription" placeholder="وصف مختصر"><button id="courseAddBtn" onclick="addCourse()" class="btn-sm btn-add">➕ إضافة كورس</button></div>`;
             html+=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:15px;margin-top:18px">`;
             if(!courses.length) html+=`<div style="background:white;padding:25px;border-radius:15px;color:#777">لا توجد كورسات بعد. أضف أول كورس من النموذج بالأعلى.</div>`;
             courses.forEach(c=>{html+=`<div style="background:white;border:1px solid #ddd;border-radius:18px;overflow:hidden"><div style="height:145px;background:#eaf7f3"><img src="${escapeHtml(c.imageUrl || 'assets/platform-logo.png')}" style="width:100%;height:100%;object-fit:cover"></div><div style="padding:15px"><h3 style="margin:0 0 7px">${escapeHtml(c.name||'كورس')}</h3><p style="color:#777;margin:0 0 7px">${escapeHtml(c.subject||'')} • ${escapeHtml(c.grade==='1'?'أولى ثانوي':c.grade==='2'?'ثانية ثانوي':c.grade==='3'?'ثالثة ثانوي':'للجميع')}</p><p style="color:#0a956c;font-weight:800">🎥 ${counts[c.id]||0} فيديو</p><button onclick="deleteCourse('${escapeHtml(c.id)}')" class="btn-sm" style="background:#e74c3c;color:white">🗑️ حذف الكورس</button></div></div>`;});
@@ -2592,40 +2609,21 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
         }
 
         window.addVideo = async function() {
-            const title = document.getElementById('vidTitle').value.trim();
-            let url = document.getElementById('vidUrl').value.trim();
-            const grade = document.getElementById('vidGrade').value;
-            const type = document.getElementById('vidType').value;
-            const courseId = document.getElementById('vidCourse')?.value || '';
-            const lessonOrder = Number(document.getElementById('vidLessonOrder')?.value || 0);
-
-            if (!title || !url) return alert('املأ عنوان الفيديو والرابط');
-            if (!courseId) return alert('اختر الكورس أولاً قبل إضافة الفيديو');
-
-            const videoId = extractYouTubeId(url);
-            if (videoId) {
-                url = `https://www.youtube.com/embed/${videoId}`;
-            } else {
-                if (!url.includes('youtube.com/embed/') && !url.includes('youtu.be/')) {
-                    if (!confirm('⚠️ الرابط ليس رابط يوتيوب صحيح! هل أنت متأكد من الرابط؟')) {
-                        return;
-                    }
-                }
-            }
-
-            await addDoc(collection(db, 'videos'), {
-                title,
-                url,
-                grade,
-                courseId: courseId || null,
-                lessonOrder: lessonOrder || 0,
-                type: type || 'normal',
-                addedAt: serverTimestamp()
-            });
-            alert('✅ تمت الإضافة');
-            window.showVideos();
+            const title=document.getElementById('vidTitle').value.trim();let url=document.getElementById('vidUrl').value.trim();
+            const grade=document.getElementById('vidGrade').value,type=document.getElementById('vidType').value;
+            const courseId=document.getElementById('vidCourse')?.value||'',lessonOrder=Number(document.getElementById('vidLessonOrder')?.value||0);
+            const imageFile=document.getElementById('vidImageFile')?.files?.[0];
+            if(!title||!url)return alert('املأ عنوان الفيديو والرابط');if(!courseId)return alert('اختر الكورس أولاً قبل إضافة الفيديو');
+            const videoId=extractYouTubeId(url);if(videoId)url=`https://www.youtube.com/embed/${videoId}`;
+            else if(!url.includes('youtube.com/embed/')&&!url.includes('youtu.be/')&&!confirm('⚠️ الرابط ليس رابط يوتيوب صحيح! هل أنت متأكد من الرابط؟'))return;
+            const btn=document.querySelector('#videoAddBtn');if(btn){btn.disabled=true;btn.textContent='⏳ جاري الحفظ...';}
+            try{
+                let imageData={};if(imageFile){imageUploadStatus('vidImageFile','⏳ جاري رفع صورة الدرس...');imageData=await uploadImageToImgBB(imageFile,'lessons');imageUploadStatus('vidImageFile','✅ تم رفع صورة الدرس');}
+                await addDoc(collection(db,'videos'),{title,url,grade,courseId:courseId||null,lessonOrder:lessonOrder||0,type:type||'normal',imageUrl:imageData.url||'',thumbnailUrl:imageData.thumbUrl||'',imageDeleteUrl:imageData.deleteUrl||'',imageProvider:imageData.provider||'',imageWidth:imageData.width||null,imageHeight:imageData.height||null,addedAt:serverTimestamp()});
+                alert('✅ تمت إضافة الدرس بنجاح');window.showVideos();
+            }catch(e){console.error(e);imageUploadStatus('vidImageFile','❌ '+e.message,true);alert('❌ تعذر إضافة الدرس: '+e.message);}
+            finally{if(btn){btn.disabled=false;btn.textContent='➕ إضافة';}}
         };
-
         window.endLiveStream = async function(videoId) {
             if (!confirm('⚠️ هل أنت متأكد من إنهاء هذا البث المباشر؟ سيتحول إلى فيديو عادي.')) return;
             try {
@@ -2683,11 +2681,13 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                                 ${await getCourseOptionsHtml('')}
                             </select>
                             <input id="vidLessonOrder" type="number" min="1" placeholder="ترتيب الدرس" style="max-width:130px">
+                            <input id="vidImageFile" type="file" accept="image/*" onchange="imageUploadStatus('vidImageFile','📷 صورة الدرس جاهزة للرفع')" title="صورة الدرس">
+                            <span id="vidImageFileStatus" style="display:none;font-size:12px;font-weight:700;width:100%;"></span>
                             <select id="vidType">
                                 <option value="normal">🎬 فيديو عادي</option>
                                 
                             </select>
-                            <button onclick="addVideo()" class="btn-sm btn-add">➕ إضافة</button>
+                            <button id="videoAddBtn" onclick="addVideo()" class="btn-sm btn-add">➕ إضافة</button>
                             <button onclick="showCourses()" class="btn-sm" style="background:#34495e;color:#fff">🎓 إضافة/إدارة الكورسات</button>
                         </div>
                         <div class="filter-bar">
@@ -2772,13 +2772,15 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                         <div class="filter-bar">
                             <input id="bookTitle" placeholder="عنوان الكتاب">
                             <input id="bookUrl" placeholder="رابط جوجل درايف أو أي رابط" style="flex:2; min-width:200px;">
+                            <input id="bookImageFile" type="file" accept="image/*" onchange="imageUploadStatus('bookImageFile','📷 صورة الكتاب جاهزة للرفع')" title="صورة الكتاب">
+                            <span id="bookImageFileStatus" style="display:none;font-size:12px;font-weight:700;width:100%;"></span>
                             <select id="bookGrade">
                                 ${getGradeOptions('all')}
                             </select>
                             <select id="bookCourse" required>
                                 ${await getCourseOptionsHtml('')}
                             </select>
-                            <button onclick="addBook()" class="btn-sm btn-add">➕ إضافة الكتاب للكورس</button>
+                            <button id="bookAddBtn" onclick="addBook()" class="btn-sm btn-add">➕ إضافة الكتاب للكورس</button>
                         </div>
                         <div class="filter-bar">
                             <select id="filterBookGrade" onchange="showBooks()">
@@ -2864,25 +2866,17 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
         };
 
         window.addBook = async function() {
-            const title = document.getElementById('bookTitle').value.trim();
-            const url = document.getElementById('bookUrl').value.trim();
-            const grade = document.getElementById('bookGrade').value;
-            const courseId = document.getElementById('bookCourse')?.value || '';
-
-            if (!title || !url) return alert('املأ عنوان الكتاب والرابط');
-            if (!courseId) return alert('اختر الكورس أولاً قبل إضافة الكتاب');
-
-            await addDoc(collection(db, 'books'), {
-                title,
-                url,
-                grade,
-                courseId,
-                addedAt: serverTimestamp()
-            });
-            alert('✅ تمت إضافة الكتاب للكورس');
-            window.showBooks();
+            const title=document.getElementById('bookTitle').value.trim(),url=document.getElementById('bookUrl').value.trim();
+            const grade=document.getElementById('bookGrade').value,courseId=document.getElementById('bookCourse')?.value||'',imageFile=document.getElementById('bookImageFile')?.files?.[0];
+            if(!title||!url)return alert('املأ عنوان الكتاب والرابط');if(!courseId)return alert('اختر الكورس أولاً قبل إضافة الكتاب');
+            const btn=document.querySelector('#bookAddBtn');if(btn){btn.disabled=true;btn.textContent='⏳ جاري الحفظ...';}
+            try{
+                let imageData={};if(imageFile){imageUploadStatus('bookImageFile','⏳ جاري رفع صورة الكتاب...');imageData=await uploadImageToImgBB(imageFile,'books');imageUploadStatus('bookImageFile','✅ تم رفع صورة الكتاب');}
+                await addDoc(collection(db,'books'),{title,url,grade,courseId,imageUrl:imageData.url||'',thumbnailUrl:imageData.thumbUrl||'',imageDeleteUrl:imageData.deleteUrl||'',imageProvider:imageData.provider||'',imageWidth:imageData.width||null,imageHeight:imageData.height||null,addedAt:serverTimestamp()});
+                alert('✅ تمت إضافة الكتاب للكورس');window.showBooks();
+            }catch(e){console.error(e);imageUploadStatus('bookImageFile','❌ '+e.message,true);alert('❌ تعذر إضافة الكتاب: '+e.message);}
+            finally{if(btn){btn.disabled=false;btn.textContent='➕ إضافة الكتاب للكورس';}}
         };
-
         window.searchBooks = function() { window.showBooks(); };
         window.clearBookSearch = function() { document.getElementById('searchBook').value = ''; window.showBooks(); };
 
