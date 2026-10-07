@@ -22,10 +22,11 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 const auth = getAuth(app);
-const ensureAnonymousAuth = () => signInAnonymously(auth);
+const ensureAnonymousAuth = () => auth.currentUser ? Promise.resolve(auth.currentUser) : signInAnonymously(auth);
+const authReady = ensureAnonymousAuth();
 
 export { 
-    db, storage, auth, ensureAnonymousAuth, ref, uploadBytes, getDownloadURL, listAll, deleteObject,
+    db, storage, auth, ensureAnonymousAuth, authReady, ref, uploadBytes, getDownloadURL, listAll, deleteObject,
     collection, addDoc, getDocs, deleteDoc, doc, updateDoc, 
     query, where, getDoc, setDoc, serverTimestamp
 };
