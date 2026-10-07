@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دخول المشرف</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <img src="assets/platform-logo.png" alt="Logo" class="logo">
+        <h2>دخول المشرف</h2>
+        <input type="text" id="username" placeholder="اسم المستخدم">
+        <input type="password" id="code" placeholder="الكود السري">
+        <button onclick="adminLogin()">دخول</button>
+        <p id="error-msg" style="color:red; margin-top:10px;"></p>
+    </div>
+
+    <script type="module">
+        import { db, collection, query, where, getDocs } from './js/firebase-config.js';
+
+        const ADMIN_USER = 'Mohamed';
+        const ADMIN_PASS = '25112009';
+
+        async function hashPassword(password) {
+            const data = new TextEncoder().encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        window.adminLogin = async function() {
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('code').value.trim();
+            const error = document.getElementById('error-msg');
+            error.innerText = '';
+
+            if (!user || !pass) {
+                error.innerText = '❌ أدخل اسم المستخدم والكود السري';
+                return;
+            }
+
+            // المشرف الأساسي
+            if (user === ADMIN_USER && pass === ADMIN_PASS) {
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminRole', 'primary');
+                localStorage.setItem('adminName', 'Mohamed');
+                localStorage.setItem('adminPermissions', JSON.stringify(['*']));
+                window.location.href = 'admin-panel.html';
+                return;
+            }
+
+            // المشرف المساعد
+            try {
+                const q = query(collection(db, 'assistantAdmins'), where('username', '==', user));
+                const snap = await getDocs(q);
+
+                if (snap.empty) {
+                    error.innerText = '❌ اسم المستخدم أو الكود غير صحيح';
+                    return;
+                }
+
+                const assistantDoc = snap.docs[0];
+                const data = assistantDoc.data();
+
+                if (data.status === 'suspended') {
+                    error.innerText = '⛔ حساب المشرف المساعد موقوف';
+                    return;
+                }
+
+                const passwordHash = await hashPassword(pass);
+                if (passwordHash !== data.passwordHash) {
+                    error.innerText = '❌ اسم المستخدم أو الكود غير صحيح';
+                    return;
+                }
+
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminRole', 'assistant');
+                localStorage.setItem('adminId', assistantDoc.id);
+                localStorage.setItem('adminName', data.name || user);
+                localStorage.setItem('adminPermissions', JSON.stringify(data.permissions || []));
+
+                window.location.href = 'admin-panel.html';
+            } catch (e) {
+                console.error(e);
+                error.innerText = '❌ حدث خطأ أثناء تسجيل الدخول';
+            }
+        };
+
+        window.addEventListener('load', function() {
+            console.log('✅ صفحة دخول المشرف جاهزة');
+        });
+    </script>
+</body>
+</html>
