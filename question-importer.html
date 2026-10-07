@@ -7,7 +7,8 @@ body{font-family:Tajawal,Tahoma,Arial;background:#f4f7fb;margin:0;color:#172033}
 <div class="card"><h2>🧩 أسئلة الاختبار</h2><p class="hint">يمكن أن يكون السؤال صورة فقط. وفي الأسئلة المقالية/الكتابية يمكنك تفعيل «يحتاج تصحيح يدوي».</p><div id="questions"></div><button class="primary" id="saveBtn">💾 حفظ الاختبار</button></div></div>
 <div id="cameraModal" class="cameraModal hidden"><div class="cameraBox"><h3>📷 تصوير ورقة الأسئلة</h3><video id="cameraVideo" autoplay playsinline></video><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px"><button class="primary" id="takePhoto">📸 التقاط الصورة</button><button class="gray" id="closeCamera">إغلاق</button></div><canvas id="cameraCanvas" class="hidden"></canvas></div></div>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><script type="module">
-import {db,storage,auth,ensureAnonymousAuth,ref,uploadBytes,getDownloadURL,collection,getDocs,addDoc,serverTimestamp,authReady} from './js/firebase-config.js';
+import {db,auth,ensureAnonymousAuth,collection,getDocs,addDoc,serverTimestamp,authReady} from './js/firebase-config.js';
+import {IMGBB_API_KEY,IMGBB_MAX_BYTES} from './js/image-config.js';
 const $=id=>document.getElementById(id);let questions=[],allGrades=[],allCourses=[],allVideos=[],cameraStream=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 function gradeName(g){return g?.name||({1:'أولى ثانوي',2:'ثانية ثانوي',3:'ثالثة ثانوي'}[String(g?.code||g)]||String(g||''));}
@@ -48,6 +49,74 @@ $('clearBtn').onclick=()=>{questions=[];$('preview').classList.add('hidden');$('
 $('cameraBtn').onclick=async()=>{try{if(!navigator.mediaDevices?.getUserMedia)throw Error('المتصفح لا يدعم الكاميرا المباشرة');cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false});$('cameraVideo').srcObject=cameraStream;$('cameraModal').classList.remove('hidden')}catch(e){alert('❌ تعذر تشغيل الكاميرا. اسمح للمتصفح باستخدام الكاميرا ثم جرّب مرة أخرى.\n'+e.message)}};
 function closeCam(){if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null}$('cameraVideo').srcObject=null;$('cameraModal').classList.add('hidden')}$('closeCamera').onclick=closeCam;$('takePhoto').onclick=async()=>{const v=$('cameraVideo'),c=$('cameraCanvas');if(!v.videoWidth)return alert('انتظر حتى تظهر صورة الكاميرا');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0,c.width,c.height);c.toBlob(async b=>{closeCam();const f=new File([b],'camera-exam.jpg',{type:'image/jpeg'});await processImage(f)},'image/jpeg',.94)};
 $('questions').addEventListener('input',e=>{const b=e.target.closest('.q');if(!b)return;const i=+b.dataset.i,q=questions[i];if(e.target.classList.contains('qtext'))q.text=e.target.value;if(e.target.classList.contains('opt'))q.options[e.target.dataset.j]=e.target.value;if(e.target.classList.contains('model'))q.correctText=e.target.value});$('questions').addEventListener('change',e=>{const b=e.target.closest('.q');if(!b)return;const i=+b.dataset.i,q=questions[i];if(e.target.classList.contains('qtype')){q.type=e.target.value;if(e.target.value==='truefalse')q.options=['صح','خطأ'];else if(!q.options?.length)q.options=['','','',''];render()}if(e.target.classList.contains('correct'))q.correct=e.target.value;if(e.target.classList.contains('manualReview'))q.manualReview=e.target.checked;if(e.target.classList.contains('qimg')){const f=e.target.files[0];if(f){q.localImage=f;q.imagePreview=URL.createObjectURL(f);$('status').textContent='🖼️ تم اختيار صورة السؤال. ستُحفظ مع السؤال عند حفظ الاختبار.';render()}}});
-$('saveBtn').onclick=async()=>{const title=$('examTitle').value.trim(),scopeType=$('scopeType').value,grade=$('grade').value,courseId=$('courseId').value,videoId=$('videoId').value;if(!title)return alert('اكتب عنوان الاختبار');if(scopeType!=='global'&&!courseId)return alert('اختر الكورس');if(scopeType==='lesson'&&!videoId)return alert('اختر الدرس');if(!questions.length)return alert('أضف سؤالًا واحدًا على الأقل');if(questions.some(q=>!q.text.trim()&&!q.localImage&&!q.imageUrl))return alert('كل سؤال يجب أن يحتوي على نص أو صورة');const cleaned=[]; for(const q of questions){let imageUrl=q.imageUrl||''; if(q.localImage){if(!auth.currentUser)await ensureAnonymousAuth();const rr=ref(storage,`exam-question-images/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`);await uploadBytes(rr,q.localImage,{contentType:q.localImage.type||'image/jpeg',cacheControl:'public,max-age=31536000'});imageUrl=await getDownloadURL(rr)} cleaned.push({text:q.text.trim(),type:q.type,options:(q.options||[]).filter(Boolean),correct:q.correct??null,correctText:q.correctText||'',manualReview:!!q.manualReview,imageUrl});} try{await addDoc(collection(db,'exams'),{title,scopeType,grade,courseId:scopeType==='global'?'':courseId,videoId:scopeType==='lesson'?videoId:'',lessonVideoId:scopeType==='lesson'?videoId:'',questions:cleaned,answerReveal:$('reveal').value,structured:true,createdAt:serverTimestamp(),source:'image-camera-manual'});alert('✅ تم حفظ الاختبار. راجع الأسئلة قبل الاعتماد النهائي.');location.reload()}catch(e){alert('❌ تعذر الحفظ: '+e.message)}};
+$('saveBtn').onclick=async()=>{
+  const btn=$('saveBtn');
+  try{
+    const title=$('examTitle').value.trim(),scopeType=$('scopeType').value,grade=$('grade').value,courseId=$('courseId').value,videoId=$('videoId').value;
+    if(!title)return alert('اكتب عنوان الاختبار');
+    if(scopeType!=='global'&&!courseId)return alert('اختر الكورس');
+    if(scopeType==='lesson'&&!videoId)return alert('اختر الدرس');
+    if(!questions.length)return alert('أضف سؤالًا واحدًا على الأقل');
+    if(questions.some(q=>!String(q.text||'').trim()&&!q.localImage&&!q.imageUrl))return alert('كل سؤال يجب أن يحتوي على نص أو صورة');
+
+    btn.disabled=true;
+    btn.textContent='⏳ جاري حفظ الاختبار...';
+    $('status').textContent='⏳ جاري تجهيز الأسئلة وحفظ الصور...';
+    await authReady;
+    if(!auth.currentUser) await ensureAnonymousAuth();
+
+    async function uploadQuestionImage(file){
+      if(!file) return '';
+      if(file.size>IMGBB_MAX_BYTES) throw new Error('صورة أحد الأسئلة أكبر من 32 ميجابايت.');
+      const fd=new FormData();
+      fd.append('key',IMGBB_API_KEY);
+      fd.append('image',file);
+      const res=await fetch('https://api.imgbb.com/1/upload',{method:'POST',body:fd});
+      const data=await res.json().catch(()=>({}));
+      if(!res.ok || !data.success || !data.data?.url) throw new Error(data.error?.message||'تعذر رفع صورة السؤال');
+      return data.data.url;
+    }
+
+    const cleaned=[];
+    for(let i=0;i<questions.length;i++){
+      const q=questions[i];
+      $('status').textContent=`⏳ حفظ السؤال ${i+1} من ${questions.length}...`;
+      let imageUrl=q.imageUrl||'';
+      if(q.localImage) imageUrl=await uploadQuestionImage(q.localImage);
+      cleaned.push({
+        text:String(q.text||'').trim(),
+        type:q.type||'essay',
+        options:(q.options||[]).map(x=>String(x||'').trim()).filter(Boolean),
+        correct:q.correct??null,
+        correctText:String(q.correctText||'').trim(),
+        manualReview:!!q.manualReview,
+        imageUrl
+      });
+    }
+
+    $('status').textContent='⏳ جاري حفظ الاختبار في قاعدة البيانات...';
+    await addDoc(collection(db,'exams'),{
+      title,scopeType,grade,
+      courseId:scopeType==='global'?'':courseId,
+      videoId:scopeType==='lesson'?videoId:'',
+      lessonVideoId:scopeType==='lesson'?videoId:'',
+      questions:cleaned,
+      answerReveal:$('reveal').value,
+      structured:true,
+      createdAt:serverTimestamp(),
+      source:'image-camera-manual'
+    });
+    $('status').textContent='✅ تم حفظ الاختبار بنجاح بكل الأسئلة والصور.';
+    alert('✅ تم حفظ الاختبار بنجاح');
+    location.reload();
+  }catch(e){
+    console.error('خطأ في حفظ الاختبار:',e);
+    $('status').textContent='❌ تعذر حفظ الاختبار: '+(e?.message||e);
+    alert('❌ تعذر حفظ الاختبار\n\n'+(e?.message||'حدث خطأ غير معروف'));
+  }finally{
+    btn.disabled=false;
+    btn.textContent='💾 حفظ الاختبار';
+  }
+};
 loadData().catch(e=>$('status').textContent='❌ تعذر تحميل الصفوف والكورسات: '+e.message);
 </script></body></html>
