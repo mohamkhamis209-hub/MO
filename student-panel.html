@@ -1842,13 +1842,14 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         // دوال سؤال الطالب عبر واتساب
         // ============================================
         let currentLessonQuestionVideoId='';
-        function showLessonQuestionsUnderPlayer(videoId){
+        async function showLessonQuestionsUnderPlayer(videoId){
             const box=document.getElementById('lesson-questions-'+videoId); if(!box) return;
-            getDocs(query(collection(db,'lessonQuestions'),where('videoId','==',videoId))).then(snap=>{
+            getDocs(query(collection(db,'lessonQuestions'),where('videoId','==',videoId))).then(async snap=>{
               const rows=[]; snap.forEach(d=>rows.push({id:d.id,...d.data()})); rows.sort((a,b)=>contentTime(a)-contentTime(b));
-              box.innerHTML=rows.length?rows.map(x=>`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>👤 ${escCourse(x.studentName||'طالب')}</b><p style="margin:6px 0">${escCourse(x.question)}</p>${x.answer?`<div style="background:#effaf5;border-right:4px solid #12a56b;padding:9px;border-radius:10px"><b>${x.answerPinned?'📌 إجابة المشرف':'👨‍🏫 المشرف'}</b><div>${escCourse(x.answer)}</div></div>`:''}</div>`).join(''):'<div style="color:#888">لا توجد أسئلة بعد. كن أول من يسأل.</div>';
+              const rendered=[]; for(const x of rows){ let rs=[]; try{const r=await getDocs(query(collection(db,'lessonQuestionReplies'),where('questionId','==',x.id))); r.forEach(d=>rs.push({id:d.id,...d.data()}));}catch(e){}; rendered.push(`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>👤 ${escCourse(x.studentName||'طالب')}</b><p style="margin:6px 0;white-space:pre-wrap">${escCourse(x.question)}</p>${x.answer?`<div style="background:#effaf5;border-right:4px solid #12a56b;padding:9px;border-radius:10px"><b>${x.answerPinned?'📌 إجابة المشرف المثبتة':'👨‍🏫 المشرف'}</b><div>${escCourse(x.answer)}</div></div>`:''}${rs.map(r=>`<div style="margin:7px 0;padding:8px 12px;background:#f6f8fb;border-radius:10px"><b>💬 ${escCourse(r.studentName||'طالب')}</b><div>${escCourse(r.reply||'')}</div></div>`).join('')}<button class="btn-sm btn-secondary" style="margin-top:8px" onclick="window.replyLessonQuestion('${escCourse(x.id)}','${escCourse(videoId)}')">💬 رد</button></div>`);} box.innerHTML=rendered.length?rendered.join(''):'<div style="color:#888">لا توجد أسئلة بعد. كن أول من يسأل.</div>';
             }).catch(()=>{box.innerHTML='<div style="color:#888">تعذر تحميل الأسئلة.</div>';});
         }
+        window.replyLessonQuestion=async function(questionId,videoId){const reply=prompt('اكتب ردك على السؤال:'); if(!reply?.trim())return; const code=localStorage.getItem('studentCode')||''; const name=localStorage.getItem('studentName')||'طالب'; await addDoc(collection(db,'lessonQuestionReplies'),{questionId,videoId,studentCode:code,studentName:name,reply:reply.trim(),createdAt:serverTimestamp()}); showLessonQuestionsUnderPlayer(videoId);};
         window.openLessonQuestionModal=function(videoId,title){currentLessonQuestionVideoId=videoId;document.getElementById('lessonQuestionTitle').textContent='الدرس: '+title;document.getElementById('lessonQuestionText').value='';document.getElementById('lessonQuestionModal').style.display='flex';};
         window.closeLessonQuestionModal=function(){document.getElementById('lessonQuestionModal').style.display='none';};
         window.sendLessonQuestion=async function(){const q=document.getElementById('lessonQuestionText').value.trim(); if(!q)return alert('اكتب سؤالك أولاً'); const code=localStorage.getItem('studentCode')||''; const name=localStorage.getItem('studentName')||'طالب'; const videoId=currentLessonQuestionVideoId; if(!videoId)return; const dup=await getDocs(query(collection(db,'lessonQuestions'),where('studentCode','==',code),where('videoId','==',videoId),where('question','==',q))); if(!dup.empty)return alert('⚠️ أرسلت نفس السؤال من قبل'); const title=document.getElementById('lessonQuestionTitle').textContent.replace('الدرس: ',''); await addDoc(collection(db,'lessonQuestions'),{studentCode:code,studentName:name,videoId,lessonTitle:title,question:q,answer:'',answerPinned:false,createdAt:serverTimestamp()}); window.closeLessonQuestionModal(); showLessonQuestionsUnderPlayer(videoId); alert('✅ تم نشر سؤالك تحت الدرس');};
@@ -1870,16 +1871,22 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             if (modal) modal.style.display = 'none';
         }
 
-        function sendStudentQuestion() {
+        async function sendStudentQuestion() {
             const input = document.getElementById('studentQuestion');
             const question = (input?.value || '').trim();
             const name = localStorage.getItem('studentName') || 'طالب';
             const code = localStorage.getItem('studentCode') || 'غير معروف';
             if (!question) { alert('⚠️ اكتب سؤالك أولاً'); input?.focus(); return; }
-            const message = `🎓 سؤال من طالب\n👤 الاسم: ${name}\n🔑 الكود: ${code}\n\n💬 السؤال:\n${question}`;
+            try {
+                const dup=await getDocs(query(collection(db,'privateQuestions'),where('studentCode','==',code),where('question','==',question),where('status','==','pending')));
+                if(!dup.empty){ alert('⚠️ أرسلت نفس السؤال بالفعل وهو قيد المراجعة.'); return; }
+                await addDoc(collection(db,'privateQuestions'),{studentCode:code,studentName:name,question,lessonTitle:currentQuestionLesson||'سؤال خاص للمشرف',status:'pending',answer:'',createdAt:serverTimestamp()});
+            } catch(e){ console.warn('private question save',e); }
+            const message = `🎓 سؤال خاص من طالب\n👤 الاسم: ${name}\n🔑 الكود: ${code}\n\n💬 السؤال:\n${question}`;
             window.open(`https://wa.me/${SUPERVISOR_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
             input.value = '';
             closeQuestionModal();
+            alert('✅ تم إرسال السؤال للمشرف');
         }
 
         // ============================================
@@ -2015,11 +2022,45 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                 const x=v.data||{}, p=progress[v.id], pct=p&&p.totalDuration?Math.min(100,Math.round((p.watchedSeconds||0)/p.totalDuration*100)):0; const thumb=youtubeThumb(x.url);
                 html+=`<div class="lesson-row" onclick="window.playCourseVideo(${i})"><img class="lesson-thumb" src="${escCourse(thumb)}" onerror="this.style.display='none'" alt=""><div class="lesson-info"><h4>${i+1}. ${escCourse(x.title||'الدرس')}</h4><p>${x.duration?escCourse(x.duration):'فيديو تعليمي'} ${pct?`• ${pct}% مكتمل`:''}</p></div><div class="lesson-status">${pct>=95?'✅ مكتمل':pct>0?'▶ مستمر':'▶ ابدأ'}</div></div>`;
             });
+            let courseBooks=[],courseExams=[];
+            try{
+                const [bs,es]=await Promise.all([getDocs(collection(db,'books')),getDocs(collection(db,'exams'))]);
+                bs.forEach(x=>{const v=x.data();if(String(v.courseId||'')===String(course.id)&&!v.lessonVideoId)courseBooks.push({id:x.id,data:v});});
+                es.forEach(x=>{const v=x.data();if(String(v.courseId||'')===String(course.id)&&!v.videoId&&!v.lessonVideoId)courseExams.push({id:x.id,data:v});});
+            }catch(e){}
+            if(courseBooks.length||courseExams.length){
+                html+=`<div style="margin-top:20px;background:#fff;border-radius:18px;padding:18px"><h3>📚 محتوى الكورس العام</h3>`;
+                courseBooks.forEach(b=>{const u=b.data.url||'';html+=`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>📖 ${escCourse(b.data.title||'كتاب')}</b><button class="btn-sm btn-add" style="margin-right:8px" onclick="window.openExternalBook('${escCourse(u)}')">فتح الكتاب</button></div>`;});
+                courseExams.forEach(e=>html+=`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>📝 ${escCourse(e.data.title||'اختبار')}</b><button class="btn-sm btn-green" style="margin-right:8px" onclick="window.openAttachedExam('${escCourse(e.id)}')">ابدأ الاختبار</button></div>`);
+                html+=`</div>`;
+            }
             html+=`</div></div>`; container.innerHTML=html;
             // استرجاع آخر درس من تقدم الطالب
             let lastIndex=0; let best=0; for(let i=0;i<courseVideosState.length;i++){const p=progress[courseVideosState[i].id]; const t=p?.lastUpdated?.toMillis?.()||0; if(t>best){best=t;lastIndex=i;}}
             if(best && localStorage.getItem('autoOpenLastLesson')==='true') setTimeout(()=>window.playCourseVideo(lastIndex),80);
         }
+        async function getAttachedLessonContent(videoId, courseId){
+            const out={exams:[],books:[]};
+            try{
+                const [es,bs]=await Promise.all([getDocs(collection(db,'exams')),getDocs(collection(db,'books'))]);
+                es.forEach(d=>{const x=d.data(); if(String(x.videoId||x.lessonVideoId||'')===String(videoId) && (!courseId || String(x.courseId||'')===String(courseId))) out.exams.push({id:d.id,data:x});});
+                bs.forEach(d=>{const x=d.data(); if(String(x.lessonVideoId||'')===String(videoId) && (!courseId || String(x.courseId||'')===String(courseId))) out.books.push({id:d.id,data:x});});
+            }catch(e){console.warn('تعذر تحميل محتوى الدرس',e);}
+            return out;
+        }
+        function renderAttachedExamCard(exam){
+            const e=exam.data||{}; const id=exam.id;
+            return `<div class="video-attached-exam" style="margin-top:16px;padding:18px;border-radius:16px;background:#f7f4ff;border:1px solid #ddd2ff"><h3 style="margin:0 0 6px;color:#6d28d9">📝 امتحان الدرس: ${escCourse(e.title||'اختبار')}</h3><p style="color:#777;margin-top:4px">${Array.isArray(e.questions)?e.questions.length:0} سؤال — حل الاختبار من قسم الاختبارات أو افتحه هنا.</p><button class="btn-green" type="button" onclick="window.openAttachedExam('${escCourse(id)}')">▶️ ابدأ امتحان الفيديو</button></div>`;
+        }
+        window.openAttachedExam=async function(examId){
+            const snap=await getDoc(doc(db,'exams',examId)); if(!snap.exists()) return alert('الاختبار غير موجود');
+            const exam=snap.data(); const container=document.getElementById('coursePlayerCard'); if(!container)return;
+            let html=`<div style="background:#fff;border-radius:16px;padding:18px;margin-top:15px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><h3 style="margin:0">📝 ${escCourse(exam.title||'اختبار')}</h3><button class="btn-soft" onclick="window.playCourseVideo(${currentCourseVideoIndex})">↩️ رجوع للفيديو</button></div>`;
+            let answers=null; try{const q=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode))); answers=q.empty?null:q.docs[0].data();}catch(e){}
+            (exam.questions||[]).forEach((qst,qi)=>{const saved=answers?.answers?.[String(qi)]; const locked=saved!==undefined&&saved!==null; let control=''; if(qst.type==='mcq') control=(qst.options||[]).map((o,oi)=>`<label style="display:block;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:10px"><input type="radio" name="exam_${id}_${qi}" value="${oi}" ${String(saved)===String(oi)?'checked':''} ${locked?'disabled':''}> ${escCourse(o)}</label>`).join(''); else if(qst.type==='truefalse') control=`<label><input type="radio" name="exam_${id}_${qi}" value="true" ${String(saved)==='true'?'checked':''} ${locked?'disabled':''}> صح</label> <label><input type="radio" name="exam_${id}_${qi}" value="false" ${String(saved)==='false'?'checked':''} ${locked?'disabled':''}> خطأ</label>`; else control=`<textarea id="answer_${id}_${qi}" ${locked?'disabled':''} style="width:100%;min-height:100px;margin-top:8px" placeholder="اكتب إجابتك...">${locked?escCourse(saved):''}</textarea>`; html+=`<div style="padding:14px;margin-top:12px;border:1px solid #eee;border-radius:12px;background:#fafafa"><b>${qi+1}. ${escCourse(qst.text||'')}</b>${qst.imageUrl?`<img src="${escCourse(qst.imageUrl)}" style="max-width:100%;max-height:260px;display:block;margin:10px 0;border-radius:10px">`:''}<div style="margin-top:10px">${control}</div>${locked?'<div style="color:#777;margin-top:8px">🔐 تم إرسال الإجابة</div>':`<button class="btn-sm btn-add" style="margin-top:10px" onclick="window.submitSingleExamAnswer('${escCourse(id)}',${qi},true)">📤 إرسال الإجابة</button>`}</div>`;});
+            html+='</div>'; container.innerHTML=html; container.scrollIntoView({behavior:'smooth',block:'start'});
+        };
+
         window.playCourseVideo = async function(index) {
             if(index<0 || index>=courseVideosState.length) return;
             currentCourseVideoIndex=index;
@@ -2035,6 +2076,10 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                 <div class="progress-info" id="course-progress-info-${v.id}"><div class="progress-bar"><div class="progress-fill" id="progress-fill-${v.id}" style="width:0%"></div></div><p id="progress-text-${v.id}">⏳ جاري التحميل...</p></div>
                 <div class="course-player-nav"><button class="btn-soft" onclick="window.playCourseVideo(${index-1})" ${index===0?'disabled':''}>‹ الفيديو السابق</button><button class="lesson-discuss-btn" onclick="window.openLessonQuestionModal(${JSON.stringify(v.id)},${JSON.stringify(d.title||'الدرس')})">💬 سؤال تحت الدرس</button><button class="btn-green" onclick="window.playCourseVideo(${index+1})" ${index===courseVideosState.length-1?'disabled':''}>الفيديو التالي ›</button></div><div id="lesson-questions-${v.id}" style="margin-top:14px;background:#fff;border-radius:16px;padding:14px"><h4 style="margin-top:0">💬 أسئلة الطلاب</h4><div>جاري تحميل الأسئلة...</div></div>`;
             showLessonQuestionsUnderPlayer(v.id);
+            const attached=await getAttachedLessonContent(v.id,currentCourseState?.id||'');
+            const attachBox=document.createElement('div'); attachBox.id='attached-lesson-content-'+v.id;
+            attachBox.innerHTML=attached.exams.map(renderAttachedExamCard).join('') + attached.books.map(b=>{const x=b.data||{};const url=x.url||'';const tel=/^(https?:\/\/)?(t\.me\/|telegram\.me\/)/i.test(url);return `<div style="margin-top:14px;padding:14px;border-radius:14px;background:#fff;border:1px solid #eee"><b>📚 كتاب مرتبط بالدرس: ${escCourse(x.title||'كتاب')}</b><div style="margin-top:8px"><button class="btn-sm btn-add" onclick="window.openExternalBook('${escCourse(url)}')">${tel?'📲 فتح الكتاب على Telegram':'📖 فتح الكتاب'}</button></div></div>`;}).join('');
+            if(attachBox.innerHTML) card.appendChild(attachBox);
             card.scrollIntoView({behavior:'smooth',block:'start'});
             if(window.coursePlayer) try{window.coursePlayer.destroy()}catch(e){}
             const create=()=>{
@@ -2055,6 +2100,8 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             // يفتح فقط بعد ضغط الطالب على الزر.
             window.open(url, '_blank', 'noopener,noreferrer');
         };
+
+        window.openExternalBook=function(url){ if(!url)return; window.open(url,'_blank','noopener,noreferrer'); };
 
         function showProfileSection(){
             const c=document.getElementById('student-content');
@@ -2183,106 +2230,14 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             // ============================================
             else if (section === 'books') {
                 try {
-                    const q = query(collection(db, 'books'), where('grade', 'in', [studentGrade, 'all']));
-                    const snap = await getDocs(q);
-                    let html = `<h2>📚 الكتب</h2>`;
-                    
-                    if (snap.empty) {
-                        html += `<p>لا توجد كتب حالياً</p>`;
-                    } else {
-                        const booksData = snap.docs.map(d => ({ id: d.id, data: d.data() }));
-                        sortContentNewestFirst(booksData);
-                        booksData.forEach((item, index) => {
-                            const data = item.data;
-                            let originalUrl = data.url || '';
-                            let embedUrl = originalUrl;
-                            let fileId = null;
-                            const bookId = `book-${index}-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
-                            
-                            // تنظيف الرابط
-                            originalUrl = originalUrl.replace(/[?&]rm=minimal/g, '');
-                            originalUrl = originalUrl.replace(/[?&]authuser=\d+/g, '');
-                            originalUrl = originalUrl.replace(/[?&]usp=sharing/g, '');
-                            
-                            // استخراج معرف الملف من Google Drive
-                            if (originalUrl.includes('drive.google.com')) {
-                                const patterns = [
-                                    /\/d\/([^\/]+)/,
-                                    /id=([^&]+)/,
-                                    /file\/d\/([^\/]+)/,
-                                    /open\?id=([^&]+)/
-                                ];
-                                
-                                for (const pattern of patterns) {
-                                    const match = originalUrl.match(pattern);
-                                    if (match && match[1] && match[1].length > 10) {
-                                        fileId = match[1];
-                                        break;
-                                    }
-                                }
-                                
-                                if (fileId) {
-                                    embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
-                                }
-                            }
-                            
-                            const isDrive = originalUrl.includes('drive.google.com');
-                            const isTelegram = /(^|https?:\/\/)(t\.me|telegram\.me)\//i.test(originalUrl) || /telegram\.dog/i.test(originalUrl);
-                            
-                            html += `
-                                <div style="margin:25px 0; background:white; padding:15px; border-radius:15px; box-shadow:0 2px 10px rgba(0,0,0,0.05); position:relative;">
-                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
-                                        <h3 style="margin:0;">📖 ${data.title || 'كتاب'}</h3>
-                                        ${isDrive ? `
-                                            <button onclick="window.toggleBookFullscreen('${bookId}')" 
-                                                class="book-fullscreen-btn"
-                                                style="background:#3498db; border:none; color:white; font-size:18px; cursor:pointer; padding:8px 16px; border-radius:8px; transition:0.3s; width:auto; display:flex; align-items:center; gap:8px;"
-                                                onmouseover="this.style.background='#2980b9'" 
-                                                onmouseout="this.style.background='#3498db'"
-                                                title="تكبير الكتاب">
-                                                ⛶ تكبير
-                                            </button>
-                                        ` : isTelegram ? `
-                                            <button type="button" onclick="window.openBookLink('${escCourse(originalUrl)}')" 
-                                                style="background:#229ED9;border:none;color:#fff;font-size:15px;cursor:pointer;padding:9px 15px;border-radius:10px;font-weight:800;">
-                                                📲 فتح/تحميل الكتاب
-                                            </button>
-                                        ` : ''}
-                                    </div>
-                                    ${isDrive ? `
-                                        <div id="${bookId}" style="position:relative; padding-bottom:75%; height:0; overflow:hidden; border-radius:10px; background:#f0f0f0; border:1px solid #ddd; transition:all 0.3s;">
-                                            <iframe 
-                                                src="${embedUrl}" 
-                                                style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:10px;"
-                                                allowfullscreen
-                                                loading="lazy"
-                                                sandbox="allow-scripts allow-same-origin allow-forms">
-                                            </iframe>
-                                        </div>
-                                        <div style="margin-top:8px; text-align:center;">
-                                            <span style="color:#888; font-size:12px;">📖 للقراءة فقط - اضغط على زر "⛶ تكبير" للتكبير</span>
-                                        </div>
-                                    ` : isTelegram ? `
-                                        <div style="padding:22px;background:#eef8ff;border-radius:12px;border:1px solid #bfe3f7;text-align:center;">
-                                            <div style="font-size:36px;margin-bottom:8px;">📲</div>
-                                            <strong style="display:block;color:#1676a6;margin-bottom:6px;">كتاب على Telegram</strong>
-                                            <span style="color:#6b7785;font-size:13px;line-height:1.8;">لن يتم فتح Telegram تلقائيًا. اضغط الزر بنفسك لفتح الكتاب أو تحميله.</span>
-                                        </div>
-                                    ` : `
-                                        <div style="padding:20px; background:#fff3cd; border-radius:10px; border:1px solid #ffc107;">
-                                            <p style="color:#856404; margin:0;">⚠️ الرابط ليس من Google Drive أو Telegram أو غير صحيح</p>
-                                            <p style="color:#856404; font-size:12px; margin-top:5px;">الرابط: <span style="word-break:break-all;">${escCourse(originalUrl)}</span></p>
-                                        </div>
-                                    `}
-                                </div>
-                            `;
-                        });
-                    }
-                    container.innerHTML = html;
-                } catch (error) {
-                    console.error('خطأ في تحميل الكتب:', error);
-                    container.innerHTML = `<p style="color:red;">❌ حدث خطأ في تحميل الكتب: ${error.message}</p>`;
-                }
+                    const snap = await getDocs(collection(db, 'books'));
+                    const booksData=snap.docs.map(d=>({id:d.id,data:d.data()})).filter(x=>{const g=x.data.grade||'all'; return g==='all'||g===studentGrade;});
+                    sortContentNewestFirst(booksData);
+                    let html=`<h2>📚 الكتب</h2><p style="color:#777">الكتب المرتبطة بالكورس أو بالدرس تظهر هنا. روابط Telegram لا تفتح إلا بعد ضغطك على الزر.</p>`;
+                    if(!booksData.length) html+=`<div style="background:#fff;border-radius:15px;padding:30px;text-align:center;color:#777">لا توجد كتب متاحة حالياً.</div>`;
+                    for(const item of booksData){const data=item.data||{}; const url=String(data.url||''); const isTelegram=/^(https?:\/\/)?(t\.me\/|telegram\.me\/)/i.test(url); const isDrive=url.includes('drive.google.com'); const courseLabel=data.courseId?'مرتبط بكورس':'كتاب عام'; const lessonLabel=data.lessonVideoId?'📌 مرتبط بدرس محدد':''; html+=`<div style="background:#fff;border-radius:16px;padding:16px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)"><div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">${data.imageUrl?`<img src="${escCourse(data.imageUrl)}" style="width:90px;height:110px;object-fit:cover;border-radius:12px">`:''}<div style="flex:1"><h3 style="margin:0 0 6px">📖 ${escCourse(data.title||'كتاب')}</h3><div style="color:#777">${courseLabel} ${lessonLabel}</div><div style="margin-top:12px"><button class="btn-sm btn-add" onclick="window.openExternalBook('${escCourse(url)}')">${isTelegram?'📲 فتح الكتاب على Telegram':isDrive?'📖 فتح الكتاب':'🔗 فتح الكتاب'}</button></div></div></div></div>`;}
+                    container.innerHTML=html;
+                } catch(error){console.error(error);container.innerHTML=`<p style="color:red">❌ حدث خطأ في تحميل الكتب</p>`;}
             }
             
             // ============================================

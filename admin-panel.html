@@ -520,7 +520,8 @@ body{margin:0;background:#f5f8fb!important}
             <li onclick="window.showSection('dashboard')" data-permission="dashboard">📊 الرئيسية</li>
             <li onclick="window.showSection('students')" data-permission="students">👨‍🎓 الطلاب</li>
             <li onclick="window.showSection('pendingRequests')" data-permission="pendingRequests">⏳ الطلبات المعلقة <span id="pendingRequestsBadge" style="display:none;background:#ef4444;color:#fff;border-radius:999px;padding:2px 7px;font-size:11px;margin-right:6px;font-weight:900">0</span></li>
-            <li onclick="window.showSection('lessonQuestions')" data-permission="lessonQuestions">💬 أسئلة الدروس</li>
+            <li onclick="window.showSection('lessonQuestions')" data-permission="lessonQuestions">💬 أسئلة الدروس العامة</li>
+            <li onclick="window.showSection('privateQuestions')" data-permission="privateQuestions">🔒 الأسئلة الخاصة</li>
             <li onclick="window.showSection('courses')" data-permission="courses">🎓 الكورسات</li>
             <li onclick="window.showSection('videos')" data-permission="videos">🎬 الفيديوهات</li>
             <li onclick="window.showSection('books')" data-permission="books">📚 الكتب</li>
@@ -694,7 +695,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
         }
 
         const ASSISTANT_PERMISSIONS = [
-            ['dashboard','الرئيسية'],['students','الطلاب'],['pendingRequests','الطلبات المعلقة'],['registrationRequests','طلبات التسجيل (قديم)'],['courseRequests','طلبات دخول الكورسات (قديم)'],['lessonQuestions','أسئلة الدروس'],
+            ['dashboard','الرئيسية'],['students','الطلاب'],['pendingRequests','الطلبات المعلقة'],['privateQuestions','الأسئلة الخاصة'],['registrationRequests','طلبات التسجيل (قديم)'],['courseRequests','طلبات دخول الكورسات (قديم)'],['lessonQuestions','أسئلة الدروس'],
             ['courses','الكورسات'],['videos','الفيديوهات'],['books','الكتب'],['exams','الاختبارات'],['notifications','الإشعارات'],['progress','تقدم الطلاب']
         ];
 
@@ -775,17 +776,18 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             if(!requirePermission('pendingRequests')) return;
             updatePendingRequestsBadge();
             try {
-                const [regSnap, deviceSnap, courseSnap, studentsSnap, coursesSnap] = await Promise.all([
+                const [regSnap, deviceSnap, courseSnap, privateSnap, studentsSnap, coursesSnap] = await Promise.all([
                     getDocs(query(collection(db,'studentRequests'),where('status','==','pending'))),
                     getDocs(query(collection(db,'pendingDevices'),where('status','==','pending'))),
                     getDocs(query(collection(db,'courseAccessRequests'),where('status','==','pending'))),
+                    getDocs(query(collection(db,'privateQuestions'),where('status','==','pending'))),
                     getDocs(collection(db,'students')),
                     getDocs(collection(db,'courses'))
                 ]);
                 const students={}; studentsSnap.forEach(d=>students[d.id]={id:d.id,...d.data()});
                 const byCode={}; Object.values(students).forEach(x=>{if(x.code) byCode[String(x.code).toUpperCase()]=x;});
                 const courses={}; coursesSnap.forEach(d=>courses[d.id]=d.data());
-                const total=regSnap.size+deviceSnap.size+courseSnap.size;
+                const total=regSnap.size+deviceSnap.size+courseSnap.size+privateSnap.size;
 
                 let html=`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
                     <div><h2 style="margin-bottom:6px">⏳ الطلبات المعلقة</h2><p style="color:#777;margin-top:0">كل الطلبات التي تحتاج موافقة المشرف في مكان واحد.</p></div>
@@ -795,6 +797,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                     <div class="admin-section-card"><div style="font-size:26px">👤</div><b>طلبات إنشاء الحساب</b><div style="font-size:25px;font-weight:900;color:#10b981">${regSnap.size}</div></div>
                     <div class="admin-section-card"><div style="font-size:26px">📱</div><b>طلبات هاتف/جهاز جديد</b><div style="font-size:25px;font-weight:900;color:#f59e0b">${deviceSnap.size}</div></div>
                     <div class="admin-section-card"><div style="font-size:26px">🎓</div><b>طلبات دخول الكورسات</b><div style="font-size:25px;font-weight:900;color:#8b5cf6">${courseSnap.size}</div></div>
+                    <div class="admin-section-card"><div style="font-size:26px">🔒</div><b>أسئلة خاصة</b><div style="font-size:25px;font-weight:900;color:#ef4444">${privateSnap.size}</div></div>
                 </div>`;
 
                 html+=`<div class="admin-section-card"><h3>👤 طلبات إنشاء حساب جديد</h3>`;
@@ -807,6 +810,11 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 deviceSnap.forEach(d=>{const x=d.data(); const st=byCode[String(x.studentCode||'').toUpperCase()]||{}; html+=`<div style="border:1px solid #e7edf2;border-radius:14px;padding:14px;margin:10px 0;background:#fff7ed"><b>👤 ${escapeHtml(st.name||x.studentCode||'طالب')}</b><div style="color:#666;margin:5px 0">🔑 الكود: ${escapeHtml(x.studentCode||'—')} · 📱 الجهاز: ${escapeHtml(x.deviceId||'—')} · 🎓 ${escapeHtml(st.grade||x.grade||'—')}</div><small style="color:#888">${contentTime(x)?new Date(contentTime(x)).toLocaleString('ar-EG'):'—'}</small><div style="margin-top:10px"><button class="btn-sm btn-success" onclick="approveDevice('${d.id}', '${escapeHtml(x.studentCode||'')}', '${escapeHtml(x.deviceId||'')}')">✅ موافقة</button> <button class="btn-sm btn-danger" onclick="rejectDevice('${d.id}')">❌ رفض</button></div></div>`});
                 html+=`</div>`;
 
+                html+=`<div class="admin-section-card" style="margin-top:16px"><h3>🔒 الأسئلة الخاصة للمشرف</h3>`;
+                if(privateSnap.empty) html+=`<p style="color:#777">لا توجد أسئلة خاصة معلقة.</p>`;
+                privateSnap.forEach(d=>{const x=d.data(); html+=`<div style="border:1px solid #e7edf2;border-radius:14px;padding:14px;margin:10px 0;background:#fff"><b>👤 ${escapeHtml(x.studentName||x.studentCode||'طالب')}</b><div style="color:#666;margin:5px 0">${escapeHtml(x.lessonTitle||'سؤال عام')}</div><p style="white-space:pre-wrap">${escapeHtml(x.question||'')}</p><textarea id="private_ans_${d.id}" placeholder="اكتب الرد الخاص للطالب..." style="width:100%;min-height:70px;padding:10px;border:1px solid #ddd;border-radius:10px">${escapeHtml(x.answer||'')}</textarea><div style="margin-top:8px"><button class="btn-sm btn-success" onclick="answerPrivateQuestion('${d.id}')">💾 حفظ وإرسال</button><button class="btn-sm btn-danger" onclick="closePrivateQuestion('${d.id}')">✓ إغلاق الطلب</button></div></div>`});
+                html+=`</div>`;
+
                 html+=`<div class="admin-section-card" style="margin-top:16px"><h3>🎓 طلبات دخول الكورسات</h3>`;
                 if(courseSnap.empty) html+=`<p style="color:#777">لا توجد طلبات دخول كورسات معلقة.</p>`;
                 courseSnap.forEach(d=>{const x=d.data(); html+=`<div style="border:1px solid #e7edf2;border-radius:14px;padding:14px;margin:10px 0;background:#faf7ff"><b>👤 ${escapeHtml(x.studentName||x.studentCode||'طالب')}</b><div style="color:#666;margin:5px 0">🎓 ${escapeHtml(courses[x.courseId]?.name||x.courseName||x.courseId||'كورس')} · الصف: ${escapeHtml(x.grade||'—')}</div><div style="margin-top:10px"><button class="btn-sm btn-success" onclick="approveCourseRequest('${d.id}')">✅ موافقة</button> <button class="btn-sm btn-danger" onclick="rejectCourseRequest('${d.id}')">❌ رفض</button></div></div>`});
@@ -815,6 +823,17 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 document.getElementById('content-area').innerHTML=html;
             } catch(e) { console.error(e); document.getElementById('content-area').innerHTML='<div class="admin-section-card"><h2>❌ تعذر تحميل الطلبات</h2><p>تأكد من صلاحيات Firestore ثم أعد المحاولة.</p></div>'; }
         };
+
+        window.showPrivateQuestions=async function(){
+            if(!requirePermission('privateQuestions')) return;
+            const snap=await getDocs(query(collection(db,'privateQuestions'),where('status','==','pending')));
+            let html=`<h2>🔒 الأسئلة الخاصة</h2><p style="color:#777">هذه الأسئلة لا يراها الطلاب الآخرون.</p>`;
+            if(snap.empty) html+=`<div class="admin-section-card">لا توجد أسئلة خاصة.</div>`;
+            snap.forEach(d=>{const x=d.data(); html+=`<div class="admin-section-card" style="margin:12px 0"><b>👤 ${escapeHtml(x.studentName||x.studentCode||'طالب')}</b><div style="color:#777">${escapeHtml(x.lessonTitle||'سؤال عام')}</div><p style="white-space:pre-wrap">${escapeHtml(x.question||'')}</p><textarea id="pq_${d.id}" style="width:100%;min-height:80px" placeholder="الرد">${escapeHtml(x.answer||'')}</textarea><button class="btn-sm btn-success" onclick="answerPrivateQuestion('${d.id}')">💾 حفظ الرد</button></div>`});
+            document.getElementById('content-area').innerHTML=html;
+        };
+        window.answerPrivateQuestion=async function(id){const answer=document.getElementById('pq_'+id)?.value.trim()||document.getElementById('private_ans_'+id)?.value.trim()||''; if(!answer)return alert('اكتب الرد'); await updateDoc(doc(db,'privateQuestions',id),{answer,status:'answered',answeredAt:serverTimestamp(),answeredBy:adminName}); alert('✅ تم حفظ الرد الخاص'); window.showPendingRequests();};
+        window.closePrivateQuestion=async function(id){await updateDoc(doc(db,'privateQuestions',id),{status:'closed',closedAt:serverTimestamp(),closedBy:adminName}); window.showPendingRequests();};
 
         // ============================================
         // طلبات التسجيل + طلبات دخول الكورسات + أسئلة الدروس
@@ -1321,7 +1340,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
 
         function hasPermission(permission) {
             if (isPrimaryAdmin() || adminPermissions.includes('*') || adminPermissions.includes(permission)) return true;
-            if (permission === 'pendingRequests') return adminPermissions.includes('registrationRequests') || adminPermissions.includes('courseRequests');
+            if (permission === 'pendingRequests') return adminPermissions.includes('registrationRequests') || adminPermissions.includes('courseRequests') || adminPermissions.includes('privateQuestions') || isPrimaryAdmin();
             return false;
         }
 
@@ -1357,12 +1376,13 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
 
         window.updatePendingRequestsBadge = async function updatePendingRequestsBadge() {
             try {
-                const [a,b,c] = await Promise.all([
+                const [a,b,c,d] = await Promise.all([
                     getDocs(query(collection(db,'studentRequests'),where('status','==','pending'))),
                     getDocs(query(collection(db,'pendingDevices'),where('status','==','pending'))),
-                    getDocs(query(collection(db,'courseAccessRequests'),where('status','==','pending')))
+                    getDocs(query(collection(db,'courseAccessRequests'),where('status','==','pending'))),
+                    getDocs(query(collection(db,'privateQuestions'),where('status','==','pending')))
                 ]);
-                const n=a.size+b.size+c.size;
+                const n=a.size+b.size+c.size+d.size;
                 const badge=document.getElementById('pendingRequestsBadge');
                 if(badge){ badge.textContent=n; badge.style.display=n?'inline-block':'none'; }
             } catch(e) {}
@@ -1370,7 +1390,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
 
         window.showSection = function(section) {
             const permissionMap = {
-                dashboard:'dashboard', students:'students', pendingRequests:'pendingRequests', registrationRequests:'registrationRequests', courseRequests:'courseRequests', lessonQuestions:'lessonQuestions', courses:'courses', videos:'videos', books:'books', exams:'exams', notifications:'notifications', dangerZone:'dangerZone'
+                dashboard:'dashboard', students:'students', pendingRequests:'pendingRequests', privateQuestions:'privateQuestions', registrationRequests:'registrationRequests', courseRequests:'courseRequests', lessonQuestions:'lessonQuestions', courses:'courses', videos:'videos', books:'books', exams:'exams', notifications:'notifications', dangerZone:'dangerZone'
             };
             if (section !== 'assistants' && !requirePermission(permissionMap[section] || section)) return;
             if (section === 'assistants' && !isPrimaryAdmin()) return alert('⛔ هذا القسم للمشرف الأساسي فقط');
@@ -1380,6 +1400,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 case 'dashboard': showDashboard(); break;
                 case 'students': window.showStudents(); break;
                 case 'pendingRequests': window.showPendingRequests(); break;
+                case 'privateQuestions': window.showPrivateQuestions(); break;
                 case 'registrationRequests': window.showRegistrationRequests(); break;
                 case 'courseRequests': window.showCourseRequests(); break;
                 case 'lessonQuestions': window.showLessonQuestions(); break;
@@ -2561,6 +2582,17 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             } catch(e) { console.warn('تعذر تحميل الكورسات:',e); }
             return html;
         }
+        async function getVideoOptionsHtml(selected='') {
+            let html='<option value="">📹 بدون ربط بفيديو</option>';
+            try {
+                const snap=await getDocs(collection(db,'videos'));
+                const arr=[]; snap.forEach(d=>arr.push({id:d.id,...d.data()}));
+                arr.sort((a,b)=>String(a.title||'').localeCompare(String(b.title||''),'ar'));
+                arr.forEach(v=>{html+=`<option value="${escapeHtml(v.id)}" ${v.id===selected?'selected':''}>${escapeHtml(v.title||'فيديو')}</option>`;});
+            } catch(e) { console.warn('تعذر تحميل الفيديوهات:',e); }
+            return html;
+        }
+
         window.addCourse = async function(){
             const name=document.getElementById('courseName')?.value.trim();
             const subject=document.getElementById('courseSubject')?.value.trim();
@@ -2781,6 +2813,8 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                             <select id="bookCourse" required>
                                 ${await getCourseOptionsHtml('')}
                             </select>
+                            <select id="bookLessonVideo">${await getVideoOptionsHtml('')}</select>
+                            <small style="width:100%;color:#777">اختياري: اربط الكتاب بدرس/فيديو معين ليظهر تحته فقط.</small>
                             <button id="bookAddBtn" onclick="addBook()" class="btn-sm btn-add">➕ إضافة الكتاب للكورس</button>
                         </div>
                         <div class="filter-bar">
@@ -2806,6 +2840,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                     cleanUrl = cleanUrl.replace(/[?&]authuser=\d+/g, '');
                     cleanUrl = cleanUrl.replace(/[?&]usp=sharing/g, '');
                     
+                    const isTelegram = /^(https?:\/\/)?(t\.me\/|telegram\.me\/)/i.test(cleanUrl);
                     let embedUrl = cleanUrl;
                     
                     if (cleanUrl.includes('drive.google.com')) {
@@ -2846,18 +2881,10 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                                     <button onclick="deleteItem('books','${b.id}')" class="btn-sm" style="background:#e74c3c; color:white;">🗑️ حذف</button>
                                 </div>
                             </div>
-                            <div style="position:relative; padding-bottom:75%; height:0; overflow:hidden; border-radius:10px; background:#f5f5f5; border:1px solid #ddd;">
-                                <iframe 
-                                    src="${embedUrl}" 
-                                    style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:10px;"
-                                    allowfullscreen
-                                    loading="lazy"
-                                    allow="autoplay; encrypted-media">
-                                </iframe>
-                            </div>
+                            ${isTelegram ? `<div style="padding:28px;text-align:center;border-radius:14px;background:#eef8ff;border:1px solid #cfe9ff"><div style="font-size:42px">📲</div><h3>كتاب على Telegram</h3><p style="color:#667">لن يتم فتح Telegram تلقائياً. افتحه فقط عند الضغط على الزر.</p><a href="${escapeHtml(b.url)}" target="_blank" rel="noopener noreferrer" class="btn-sm" style="display:inline-block;background:#229ED9;color:white;text-decoration:none">📲 فتح الكتاب</a></div>` : `<div style="position:relative; padding-bottom:75%; height:0; overflow:hidden; border-radius:10px; background:#f5f5f5; border:1px solid #ddd;"><iframe src="${embedUrl}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:10px;" allowfullscreen loading="lazy" allow="autoplay; encrypted-media"></iframe></div>`}
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; flex-wrap:wrap; gap:5px;">
-                                <span style="color:#888; font-size:12px;">📖 الرابط: <a href="${b.url}" target="_blank" style="color:#3498db; text-decoration:none; word-break:break-all;">${b.url}</a></span>
-                                <a href="${embedUrl}" target="_blank" style="color:#3498db; font-size:12px; text-decoration:none;">🔗 فتح في تبويب جديد</a>
+                                <span style="color:#888; font-size:12px;">📖 الرابط: <span style="word-break:break-all;">${escapeHtml(b.url)}</span></span>
+                                <a href="${escapeHtml(b.url)}" target="_blank" rel="noopener noreferrer" style="color:#3498db; font-size:12px; text-decoration:none;">🔗 فتح في تبويب جديد</a>
                             </div>
                         </div>
                     `;
@@ -2873,7 +2900,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             const btn=document.querySelector('#bookAddBtn');if(btn){btn.disabled=true;btn.textContent='⏳ جاري الحفظ...';}
             try{
                 let imageData={};if(imageFile){imageUploadStatus('bookImageFile','⏳ جاري رفع صورة الكتاب...');imageData=await uploadImageToImgBB(imageFile,'books');imageUploadStatus('bookImageFile','✅ تم رفع صورة الكتاب');}
-                await addDoc(collection(db,'books'),{title,url,grade,courseId,imageUrl:imageData.url||'',thumbnailUrl:imageData.thumbUrl||'',imageDeleteUrl:imageData.deleteUrl||'',imageProvider:imageData.provider||'',imageWidth:imageData.width||null,imageHeight:imageData.height||null,addedAt:serverTimestamp()});
+                await addDoc(collection(db,'books'),{title,url,grade,courseId,lessonVideoId:document.getElementById('bookLessonVideo')?.value||'',imageUrl:imageData.url||'',thumbnailUrl:imageData.thumbUrl||'',imageDeleteUrl:imageData.deleteUrl||'',imageProvider:imageData.provider||'',imageWidth:imageData.width||null,imageHeight:imageData.height||null,addedAt:serverTimestamp()});
                 alert('✅ تمت إضافة الكتاب للكورس');window.showBooks();
             }catch(e){console.error(e);imageUploadStatus('bookImageFile','❌ '+e.message,true);alert('❌ تعذر إضافة الكتاب: '+e.message);}
             finally{if(btn){btn.disabled=false;btn.textContent='➕ إضافة الكتاب للكورس';}}
@@ -2898,7 +2925,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             }
             list.innerHTML = window.__examQuestions.map((q, i) => {
                 const typeText = q.type === 'mcq' ? 'اختيار من متعدد' :
-                                 q.type === 'truefalse' ? 'صح أو خطأ' : 'علل / بما تفسر';
+                                 q.type === 'truefalse' ? 'صح أو خطأ' : q.type === 'short' ? 'إجابة قصيرة' : q.type === 'other' ? 'نوع آخر' : 'مقالي / إجابة كتابية';
                 const options = q.type === 'mcq'
                     ? `<div style="margin-top:8px;">${q.options.map((o,j)=>`<span style="display:inline-block;padding:6px 10px;margin:3px;border-radius:8px;background:${j===q.correct?'#e8f7ee':'#f3f4f6'};">${j===q.correct?'✅ ':''}${esc(o)}</span>`).join('')}</div>`
                     : q.type === 'truefalse'
@@ -2973,6 +3000,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             const title = document.getElementById('exTitle').value.trim();
             const grade = document.getElementById('exGrade').value;
             const courseId = document.getElementById('exCourse')?.value || '';
+            const videoId = document.getElementById('exVideo')?.value || '';
             const reveal = document.getElementById('exReveal').value;
 
             if (!title) return alert('اكتب عنوان الاختبار');
@@ -2983,6 +3011,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 title,
                 grade,
                 courseId,
+                videoId,
                 questions: window.__examQuestions,
                 answerReveal: reveal,
                 structured: true,
@@ -3040,7 +3069,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                                 status = String(ans) === String(q.correct)
                                     ? '<span style="color:#27ae60;font-weight:800;">✅ صحيحة</span>'
                                     : '<span style="color:#e74c3c;font-weight:800;">❌ خاطئة</span>';
-                            } else if (q.type === 'text') {
+                            } else if (['text','short','essay','other'].includes(q.type)) {
                                 status = '<span style="color:#f39c12;font-weight:800;">✍️ تصحيح يدوي</span>';
                             }
 
@@ -3095,6 +3124,8 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                         <input id="exTitle" placeholder="عنوان الاختبار" style="width:100%;margin-bottom:8px;">
                         <select id="exGrade" style="width:100%;margin-bottom:8px;">${getGradeOptions('all')}</select>
                         <select id="exCourse" required style="width:100%;margin-bottom:8px;">${await getCourseOptionsHtml('')}</select>
+                        <select id="exVideo" style="width:100%;margin-bottom:8px;">${await getVideoOptionsHtml('')}</select>
+                        <small style="display:block;color:#777;margin-bottom:8px">🎬 لو اخترت فيديو سيظهر هذا الاختبار مباشرة أسفل الفيديو للطالب.</small>
                         <select id="exReveal" style="width:100%;margin-bottom:8px;">
                             <option value="instant">⚡ ظهور النتيجة فور الإجابة</option>
                             <option value="24h">🕐 ظهور النتيجة بعد 24 ساعة</option>
@@ -3110,7 +3141,9 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                             <select id="newQuestionType" onchange="renderQuestionTypeFields()" style="width:100%;margin-top:8px;">
                                 <option value="mcq">🔘 اختيار من متعدد</option>
                                 <option value="truefalse">✅❌ صح أو خطأ</option>
-                                <option value="text">✍️ علل / بما تفسر</option>
+                                <option value="text">✍️ مقالي / إجابة كتابية</option>
+                                <option value="short">📝 إجابة قصيرة</option>
+                                <option value="other">🔹 نوع آخر</option>
                             </select>
                             <div id="questionTypeFields"></div>
                             <button onclick="addExamQuestion()" class="btn-sm btn-add" style="margin-top:10px;">➕ إضافة السؤال للاختبار</button>
@@ -3143,6 +3176,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                         <h4>${esc(e.title || 'اختبار')} <span class="grade-badge grade-custom">${esc(gradeText)}</span></h4>
                         <p><strong>الأسئلة:</strong> ${isStructured ? e.questions.length : 'قديم'}</p>
                         <p><strong>ظهور الإجابة:</strong> ${revealText}</p>
+                        ${e.videoId ? '<p style="color:#8b5cf6;font-weight:800">🎬 مرتبط بفيديو — يظهر أسفل الدرس</p>' : ''}
                         ${isStructured ? '<p style="color:#27ae60;">✅ اختبار تفاعلي</p>' : '<p style="color:#888;">اختبار قديم محفوظ كما هو.</p>'}
                         ${isStructured ? `<button onclick="viewExamAnswers('${e.id}')" class="btn-sm btn-search">👀 مشاهدة إجابات الطلاب</button>` : ''}
                         <button onclick="deleteItem('exams','${e.id}')" class="btn-sm btn-danger">🗑️ حذف</button>

@@ -27,6 +27,8 @@ button{border:0;border-radius:11px;padding:11px 16px;font:inherit;font-weight:80
     <div class="grid">
       <div><label>عنوان الاختبار</label><input id="examTitle" placeholder="مثال: امتحان الوحدة الأولى"></div>
       <div><label>الصف</label><select id="grade"><option value="1">أولى ثانوي</option><option value="2">ثانية ثانوي</option><option value="3">ثالثة ثانوي</option><option value="all">كل الصفوف</option></select></div>
+      <div><label>الكورس</label><select id="courseId"><option value="">بدون ربط</option></select></div>
+      <div><label>الفيديو / الدرس</label><select id="videoId"><option value="">بدون ربط</option></select></div>
     </div>
     <input id="imageFile" type="file" accept="image/*">
     <img id="preview" class="preview" hidden>
@@ -47,36 +49,47 @@ button{border:0;border-radius:11px;padding:11px 16px;font:inherit;font-weight:80
 
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script type="module">
-import { db, collection, addDoc, serverTimestamp, authReady } from './js/firebase-config.js';
+import { db, collection, getDocs, addDoc, serverTimestamp, authReady } from './js/firebase-config.js';
+import { IMGBB_API_KEY } from './js/image-config.js';
 
 const $=id=>document.getElementById(id);
 let questions=[];
 
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
 
+function normalizeArabicDigits(str){return String(str||'').replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)));}
 function parseQuestions(text){
-  const lines=text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
-  const starts=[];
-  lines.forEach((line,i)=>{
-    if(/^(?:سؤال\s*)?\d+\s*[-.)،:]?/.test(line) || /^[-•]\s+/.test(line)) starts.push(i);
-  });
-  if(!starts.length) return [{text:lines.join(' '),options:[]}];
+  const normalized=normalizeArabicDigits(text).replace(/\u00a0/g,' ').replace(/\r/g,'');
+  const blocks=normalized.split(/(?=(?:^|\n)\s*(?:س(?:ؤال)?\s*)?\d+\s*[\).:،-])/gim).map(x=>x.trim()).filter(Boolean);
+  const chunks=blocks.length>1?blocks:[normalized.trim()];
   const out=[];
-  for(let n=0;n<starts.length;n++){
-    const a=starts[n], b=starts[n+1]??lines.length;
-    let chunk=lines.slice(a,b);
-    const first=chunk.shift()||'';
-    let body=first.replace(/^(?:سؤال\s*)?\d+\s*[-.)،:]?\s*/,'').trim();
-    const opts=[];
-    const rest=[];
-    for(const line of chunk){
-      if(/^(?:[أإا]\s*[\)\.:\-]|ب\s*[\)\.:\-]|ج\s*[\)\.:\-]|د\s*[\)\.:\-]|[A-Da-d]\s*[\)\.:\-])/.test(line)){
-        opts.push(line.replace(/^(?:[أإا]\s*[\)\.:\-]|ب\s*[\)\.:\-]|ج\s*[\)\.:\-]|د\s*[\)\.:\-]|[A-Da-d]\s*[\)\.:\-])\s*/,'').trim());
-      } else rest.push(line);
+  for(const raw of chunks){
+    if(!raw) continue;
+    const lines=raw.split(/\n+/).map(x=>x.trim()).filter(Boolean);
+    let first=lines.shift()||'';
+    first=first.replace(/^(?:س(?:ؤال)?\s*)?\d+\s*[\).:،-]?\s*/i,'').trim();
+    const opts=[]; const rest=[];
+    for(const line of lines){
+      const m=line.match(/^\s*(?:[أإا]ول|[أإا]\s*[\).:؛-]|ب\s*[\).:؛-]|ج\s*[\).:؛-]|د\s*[\).:؛-]|[A-Da-d]\s*[\).:؛-]|\(?[1-4]\)?\s*[\).:؛-])\s*(.+)$/i);
+      if(m) opts.push(m[1]||''); else rest.push(line);
     }
-    out.push({text:[body,...rest].join(' ').trim(),options:opts,type:opts.length>=2?'mcq':'essay',correct:0});
+    let textPart=[first,...rest].join(' ').replace(/\s+/g,' ').trim();
+    if(!textPart && opts.length) textPart='سؤال';
+    out.push({text:textPart,options:opts,type:opts.length>=2?'mcq':'essay',correct:0,modelAnswer:''});
   }
   return out;
+}
+
+async function loadLinks(){
+  try{
+    await authReady;
+    const cs=await getDocs(collection(db,'courses'));
+    $('courseId').innerHTML='<option value="">بدون ربط</option>';
+    cs.forEach(d=>{const x=d.data(); $('courseId').insertAdjacentHTML('beforeend',`<option value="${esc(d.id)}">${esc(x.name||'كورس')}</option>`);});
+    const vs=await getDocs(collection(db,'videos'));
+    $('videoId').innerHTML='<option value="">بدون ربط</option>';
+    vs.forEach(d=>{const x=d.data(); $('videoId').insertAdjacentHTML('beforeend',`<option value="${esc(d.id)}">${esc(x.title||'فيديو')}</option>`);});
+  }catch(e){console.warn(e);}
 }
 
 function render(){
@@ -117,9 +130,11 @@ $('ocrBtn').onclick=async()=>{
   const f=$('imageFile').files[0]; if(!f)return alert('اختر صورة أولاً');
   $('status').textContent='⏳ جاري قراءة الصورة بالعربي...';
   try{
-    const {data}=await Tesseract.recognize(f,'ara+eng',{logger:m=>{
+    const img=new Image(); img.src=URL.createObjectURL(f); await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;});
+    const canvas=document.createElement('canvas'); const scale=Math.min(2.2,Math.max(1,1800/img.width)); canvas.width=Math.round(img.width*scale); canvas.height=Math.round(img.height*scale); const ctx=canvas.getContext('2d'); ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    const {data}=await Tesseract.recognize(canvas,'ara+eng',{logger:m=>{
       if(m.status) $('status').textContent=`⏳ ${m.status} ${m.progress?Math.round(m.progress*100)+'%':''}`;
-    }});
+    },config:{tessedit_pageseg_mode:'6',preserve_interword_spaces:'1'}});
     questions=parseQuestions(data.text);
     render();
     $('status').textContent=`✅ تم استخراج ${questions.length} سؤال. راجعهم قبل الحفظ.`;
@@ -139,20 +154,28 @@ $('questions').addEventListener('change',e=>{
   if(e.target.classList.contains('correct')) questions[i].correct=e.target.value;
 });
 
+loadLinks();
+
 $('saveBtn').onclick=async()=>{
   if(!questions.length)return alert('لا توجد أسئلة');
-  const title=$('examTitle').value.trim()||'اختبار جديد', grade=$('grade').value;
+  const title=$('examTitle').value.trim()||'اختبار جديد', grade=$('grade').value, courseId=$('courseId').value||'', videoId=$('videoId').value||'';
   $('status').textContent='⏳ جاري حفظ الاختبار...';
   try{
     await authReady;
+    let sourceImageUrl='';
+    const imageFile=$('imageFile').files[0];
+    if(imageFile){
+      try{ const fd=new FormData(); fd.append('key',IMGBB_API_KEY); fd.append('image',imageFile); const rr=await fetch('https://api.imgbb.com/1/upload',{method:'POST',body:fd}); const jj=await rr.json(); if(jj?.success) sourceImageUrl=jj.data.url||''; }catch(e){ console.warn('تعذر رفع صورة المصدر',e); }
+    }
     const cleaned=questions.map(q=>{
       const x={text:q.text.trim(),type:q.type||'essay',options:(q.options||[]).map(s=>String(s||'').trim()).filter(Boolean)};
       if(x.type==='mcq') x.correct=Math.max(0,Math.min(3,Number(q.correct)||0));
       else if(x.type==='truefalse') x.correct=String(q.correct)==='true';
       else if(q.modelAnswer) x.modelAnswer=q.modelAnswer.trim();
+      if(sourceImageUrl) x.imageUrl=sourceImageUrl;
       return x;
     });
-    await addDoc(collection(db,'exams'),{title,grade,questions:cleaned,createdAt:serverTimestamp(),source:'image-ocr'});
+    await addDoc(collection(db,'exams'),{title,grade,courseId,videoId,questions:cleaned,structured:true,createdAt:serverTimestamp(),source:'image-ocr'});
     $('status').textContent='✅ تم حفظ الاختبار بكل الأسئلة.';
     alert('تم حفظ الاختبار بنجاح');
   }catch(e){console.error(e);$('status').textContent='❌ تعذر الحفظ: '+e.message;}
