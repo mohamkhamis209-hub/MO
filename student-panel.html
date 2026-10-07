@@ -2031,6 +2031,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             const snap=await getDoc(doc(db,'exams',examId));
             if(!snap.exists()) return alert('❌ الاختبار غير موجود');
             const exam=snap.data();
+            const id=examId;
             let container=document.getElementById('coursePlayerCard');
             if(!container){
                 const main=document.getElementById('student-content');
