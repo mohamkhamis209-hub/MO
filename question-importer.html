@@ -1,211 +1,31 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>استيراد الأسئلة من صورة</title>
-<style>
-body{font-family:Arial,Tahoma,sans-serif;background:#f5f8fb;margin:0;color:#162033}
-.wrap{max-width:1100px;margin:25px auto;padding:0 15px}
-.card{background:#fff;border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 8px 25px rgba(0,0,0,.06)}
-input,select,textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid #dce4ea;border-radius:11px;padding:11px;margin:6px 0}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-button{border:0;border-radius:11px;padding:11px 16px;font:inherit;font-weight:800;cursor:pointer}
-.primary{background:#10b981;color:#fff}.blue{background:#229ED9;color:#fff}.muted{background:#edf2f5}
-.q{border:1px solid #e1e7ec;border-radius:15px;padding:16px;margin:12px 0}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.status{padding:10px;border-radius:10px;background:#eef8f5;margin-top:10px}
-.preview{max-width:100%;max-height:360px;display:block;border-radius:12px;margin-top:10px}
-@media(max-width:700px){.grid,.opts{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="card">
-    <h1>📷 إضافة أسئلة من صورة كتاب</h1>
-    <p>ارفع صورة تحتوي على سؤال واحد أو عدة أسئلة. سيتم استخراج النص والاختيارات ثم يمكنك مراجعة كل سؤال وتحديد نوعه والإجابة الصحيحة.</p>
-    <div class="grid">
-      <div><label>عنوان الاختبار</label><input id="examTitle" placeholder="مثال: امتحان الوحدة الأولى"></div>
-      <div><label>نوع الارتباط</label><select id="scopeType"><option value="course">📚 للكورس بالكامل</option><option value="grade">🎓 للصف بالكامل</option><option value="lesson">🎬 لحصة / فيديو محدد</option></select></div>
-      <div id="gradeWrap"><label>الصف</label><select id="grade"><option value="1">أولى ثانوي</option><option value="2">ثانية ثانوي</option><option value="3">ثالثة ثانوي</option><option value="all">كل الصفوف</option></select></div>
-      <div id="courseWrap"><label>الكورس</label><select id="courseId"><option value="">اختر الكورس</option></select></div>
-      <div id="videoWrap" style="display:none"><label>الفيديو / الحصة</label><select id="videoId"><option value="">اختر الفيديو</option></select></div>
-    </div>
-    <input id="imageFile" type="file" accept="image/*">
-    <img id="preview" class="preview" hidden>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-      <button class="primary" id="ocrBtn">🔎 قراءة كل الأسئلة</button>
-      <button class="blue" id="translateBtn" disabled>🌐 تحويل النص للعربية</button>
-      <button class="muted" id="clearBtn">مسح</button>
-    </div>
-    <div id="status" class="status">جاهز.</div>
-  </div>
-
-  <div class="card" id="questionsCard" hidden>
-    <h2>📝 مراجعة الأسئلة</h2>
-    <p>يمكنك تعديل النص والاختيارات وتحديد نوع كل سؤال قبل الحفظ.</p>
-    <div id="questions"></div>
-    <button class="primary" id="saveBtn">💾 حفظ الاختبار بكل الأسئلة</button>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-<script type="module">
-import { db, collection, getDocs, addDoc, serverTimestamp, authReady } from './js/firebase-config.js';
-import { IMGBB_API_KEY } from './js/image-config.js';
-
-const $=id=>document.getElementById(id);
-let questions=[];
-
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
-
-async function translateTextToArabic(text){
-  const value=String(text||'').trim(); if(!value) return value;
-  if(/[\u0600-\u06FF]/.test(value) && value.replace(/[^\u0600-\u06FF]/g,'').length >= Math.max(3, value.length*0.18)) return value;
-  try{ const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(value.slice(0,450))+'&langpair=auto|ar'); const j=await r.json(); return j?.responseData?.translatedText || value; }catch(e){ return value; }
-}
-
-function normalizeArabicDigits(str){return String(str||'').replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)));}
-function parseQuestions(text){
-  const normalized=normalizeArabicDigits(text).replace(/\u00a0/g,' ').replace(/\r/g,'');
-  const blocks=normalized.split(/(?=(?:^|\n)\s*(?:س(?:ؤال)?\s*)?(?:\d+|[١-٩]+)\s*[\).:،-])/gim).map(x=>x.trim()).filter(Boolean);
-  const chunks=blocks.length>1?blocks:[normalized.trim()];
-  const out=[];
-  for(const raw of chunks){
-    if(!raw) continue;
-    const lines=raw.split(/\n+/).map(x=>x.trim()).filter(Boolean);
-    let first=lines.shift()||'';
-    first=first.replace(/^(?:س(?:ؤال)?\s*)?\d+\s*[\).:،-]?\s*/i,'').trim();
-    const opts=[]; const rest=[];
-    for(const line of lines){
-      const m=line.match(/^\s*(?:[أإا]ول|[أإا]\s*[\).:؛-]|ب\s*[\).:؛-]|ج\s*[\).:؛-]|د\s*[\).:؛-]|[A-Da-d]\s*[\).:؛-]|\(?[1-4]\)?\s*[\).:؛-])\s*(.+)$/i);
-      if(m) opts.push(m[1]||''); else rest.push(line);
-    }
-    let textPart=[first,...rest].join(' ').replace(/\s+/g,' ').trim();
-    if(!textPart && opts.length) textPart='سؤال';
-    out.push({text:textPart,options:opts,type:opts.length>=2?'mcq':'essay',correct:0,modelAnswer:''});
-  }
-  return out;
-}
-
-async function loadLinks(){
-  try{
-    await authReady;
-    const cs=await getDocs(collection(db,'courses'));
-    $('courseId').innerHTML='<option value="">بدون ربط</option>';
-    cs.forEach(d=>{const x=d.data(); $('courseId').insertAdjacentHTML('beforeend',`<option value="${esc(d.id)}">${esc(x.name||'كورس')}</option>`);});
-    const vs=await getDocs(collection(db,'videos'));
-    $('videoId').innerHTML='<option value="">بدون ربط</option>';
-    vs.forEach(d=>{const x=d.data(); $('videoId').insertAdjacentHTML('beforeend',`<option value="${esc(d.id)}">${esc(x.title||'فيديو')}</option>`);});
-  }catch(e){console.warn(e);}
-}
-
-function render(){
-  $('questions').innerHTML=questions.map((q,i)=>`
-  <div class="q" data-i="${i}">
-    <div><b>السؤال ${i+1}</b></div>
-    <textarea class="qtext" rows="3">${esc(q.text)}</textarea>
-    <label>نوع السؤال</label>
-    <select class="qtype">
-      <option value="mcq" ${q.type==='mcq'?'selected':''}>اختيار من متعدد</option>
-      <option value="truefalse" ${q.type==='truefalse'?'selected':''}>صح أو خطأ</option>
-      <option value="essay" ${q.type==='essay'?'selected':''}>مقالي / إجابة كتابية</option>
-      <option value="short" ${q.type==='short'?'selected':''}>إجابة قصيرة</option>
-      <option value="other" ${q.type==='other'?'selected':''}>نوع آخر</option>
-    </select>
-    <div class="opts">
-      ${[0,1,2,3].map(j=>`<input class="opt" data-j="${j}" value="${esc(q.options?.[j]||'')}" placeholder="الاختيار ${j+1}">`).join('')}
-    </div>
-    <label>الإجابة الصحيحة</label>
-    <select class="correct">
-      <option value="0" ${String(q.correct)==='0'?'selected':''}>الأولى</option>
-      <option value="1" ${String(q.correct)==='1'?'selected':''}>الثانية</option>
-      <option value="2" ${String(q.correct)==='2'?'selected':''}>الثالثة</option>
-      <option value="3" ${String(q.correct)==='3'?'selected':''}>الرابعة</option>
-      <option value="true" ${q.correct===true||q.correct==='true'?'selected':''}>صح</option>
-      <option value="false" ${q.correct===false||q.correct==='false'?'selected':''}>خطأ</option>
-    </select>
-    <input class="model" value="${esc(q.modelAnswer||'')}" placeholder="الإجابة النموذجية للمقالي / القصير">
-  </div>`).join('');
-  $('questionsCard').hidden=false;
-}
-
-$('imageFile').onchange=()=>{
-  const f=$('imageFile').files[0];
-  if(f){$('preview').src=URL.createObjectURL(f);$('preview').hidden=false;}
-};
-$('ocrBtn').onclick=async()=>{
-  const f=$('imageFile').files[0]; if(!f)return alert('اختر صورة أولاً');
-  $('status').textContent='⏳ جاري قراءة الصورة بالعربي...';
-  try{
-    const img=new Image(); img.src=URL.createObjectURL(f); await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;});
-    const canvas=document.createElement('canvas'); const scale=Math.min(2.2,Math.max(1,1800/img.width)); canvas.width=Math.round(img.width*scale); canvas.height=Math.round(img.height*scale); const ctx=canvas.getContext('2d'); ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
-    const {data}=await Tesseract.recognize(canvas,'ara',{logger:m=>{
-      if(m.status) $('status').textContent=`⏳ ${m.status} ${m.progress?Math.round(m.progress*100)+'%':''}`;
-    },config:{tessedit_pageseg_mode:'6',preserve_interword_spaces:'1'}});
-    questions=parseQuestions(data.text);
-    render();
-    $('translateBtn').disabled=false;
-    $('status').textContent=`✅ تم استخراج ${questions.length} سؤال من الصورة. اضغط «تحويل النص للعربية» إذا كانت الصورة بلغة أخرى، ثم راجع كل الأسئلة.`;
-  }catch(e){console.error(e);$('status').textContent='❌ فشلت قراءة الصورة: '+e.message;}
-};
-$('clearBtn').onclick=()=>{questions=[];$('questionsCard').hidden=true;$('status').textContent='جاهز.';$('preview').hidden=true;$('imageFile').value='';};
-
-$('questions').addEventListener('input',e=>{
-  const box=e.target.closest('.q'); if(!box)return; const i=+box.dataset.i;
-  if(e.target.classList.contains('qtext')) questions[i].text=e.target.value;
-  if(e.target.classList.contains('opt')) questions[i].options[e.target.dataset.j]=e.target.value;
-  if(e.target.classList.contains('model')) questions[i].modelAnswer=e.target.value;
-});
-$('questions').addEventListener('change',e=>{
-  const box=e.target.closest('.q'); if(!box)return; const i=+box.dataset.i;
-  if(e.target.classList.contains('qtype')) questions[i].type=e.target.value;
-  if(e.target.classList.contains('correct')) questions[i].correct=e.target.value;
-});
-
-loadLinks();
-
-function updateScopeUI(){
-  const type=$('scopeType').value;
-  $('courseWrap').style.display=type==='course'||type==='lesson'?'block':'none';
-  $('videoWrap').style.display=type==='lesson'?'block':'none';
-  $('gradeWrap').style.display=type==='grade'?'block':'none';
-}
-$('scopeType').onchange=updateScopeUI; updateScopeUI();
-
-$('translateBtn').onclick=async()=>{
-  if(!questions.length)return;
-  $('status').textContent='⏳ جاري تحويل الأسئلة والاختيارات إلى العربية...'; $('translateBtn').disabled=true;
-  try{ for(const q of questions){ q.text=await translateTextToArabic(q.text); q.options=await Promise.all((q.options||[]).map(translateTextToArabic)); if(q.modelAnswer) q.modelAnswer=await translateTextToArabic(q.modelAnswer); } render(); $('status').textContent='✅ تم تحويل النصوص إلى العربية. راجعها قبل الحفظ.'; } finally{ $('translateBtn').disabled=false; }
-};
-
-$('saveBtn').onclick=async()=>{
-  if(!questions.length)return alert('لا توجد أسئلة');
-  const title=$('examTitle').value.trim()||'اختبار جديد', scopeType=$('scopeType').value, grade=scopeType==='grade'?$('grade').value:'all', courseId=(scopeType==='course'||scopeType==='lesson')?$('courseId').value:'', videoId=scopeType==='lesson'?$('videoId').value:'';
-  if(scopeType==='course' && !courseId) return alert('اختر الكورس أولاً');
-  if(scopeType==='lesson' && (!courseId || !videoId)) return alert('اختر الكورس والحصة أولاً');
-  if(scopeType==='grade' && !grade) return alert('اختر الصف أولاً');
-  $('status').textContent='⏳ جاري حفظ الاختبار...';
-  try{
-    await authReady;
-    let sourceImageUrl='';
-    const imageFile=$('imageFile').files[0];
-    if(imageFile){
-      try{ const fd=new FormData(); fd.append('key',IMGBB_API_KEY); fd.append('image',imageFile); const rr=await fetch('https://api.imgbb.com/1/upload',{method:'POST',body:fd}); const jj=await rr.json(); if(jj?.success) sourceImageUrl=jj.data.url||''; }catch(e){ console.warn('تعذر رفع صورة المصدر',e); }
-    }
-    const cleaned=questions.map(q=>{
-      const x={text:q.text.trim(),type:q.type||'essay',options:(q.options||[]).map(s=>String(s||'').trim()).filter(Boolean)};
-      if(x.type==='mcq') x.correct=Math.max(0,Math.min(3,Number(q.correct)||0));
-      else if(x.type==='truefalse') x.correct=String(q.correct)==='true';
-      else if(q.modelAnswer) x.modelAnswer=q.modelAnswer.trim();
-      if(sourceImageUrl) x.imageUrl=sourceImageUrl;
-      return x;
-    });
-    await addDoc(collection(db,'exams'),{title,scopeType,grade,courseId,videoId,lessonVideoId:videoId,questions:cleaned,structured:true,createdAt:serverTimestamp(),source:'image-ocr'});
-    $('status').textContent='✅ تم حفظ الاختبار بكل الأسئلة.';
-    alert('تم حفظ الاختبار بنجاح');
-  }catch(e){console.error(e);$('status').textContent='❌ تعذر الحفظ: '+e.message;}
-};
-</script>
-</body>
-</html>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>إنشاء اختبار من صورة</title><style>body{font-family:Tahoma,Arial;background:#f5f8fb;margin:0;color:#162033}.wrap{max-width:1100px;margin:22px auto;padding:0 14px}.card{background:#fff;border-radius:20px;padding:20px;margin-bottom:16px;box-shadow:0 8px 28px #10263b12}h1,h2{margin-top:0}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}label{font-weight:800;font-size:13px}input,select,textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #dbe4ea;border-radius:12px;font:inherit;margin:6px 0 12px}button{border:0;border-radius:12px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer}.primary{background:#10b981;color:#fff}.blue{background:#229ed9;color:#fff}.gray{background:#eef2f5}.preview{max-width:100%;max-height:420px;display:block;margin:12px auto;border-radius:14px}.q{border:1px solid #e1e8ee;border-radius:16px;padding:16px;margin:12px 0}.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.status{padding:12px;border-radius:12px;background:#eef8f5}.hint{color:#6b7280;font-size:13px}.hidden{display:none!important}@media(max-width:700px){.grid,.opts{grid-template-columns:1fr}}</style></head><body><div class="wrap">
+<div class="card"><h1>📝 إنشاء اختبار من صورة</h1><p class="hint">اكتب عنوان الاختبار، حدد مكان ظهوره، ثم ارفع صورة أو صوّر بالكاميرا. سيتم استخراج جميع الأسئلة والاختيارات الموجودة بالصورة، ثم تراجعها قبل الحفظ.</p>
+<div class="grid"><div><label>عنوان الاختبار</label><input id="examTitle" placeholder="مثال: اختبار الدرس الأول"></div><div><label>مكان ظهور الاختبار</label><select id="scopeType"><option value="lesson">🎬 درس / فيديو محدد</option><option value="course">📚 الكورس بالكامل</option><option value="grade">🎓 الصف بالكامل</option></select></div><div><label>الصف</label><select id="grade"><option value="all">كل الصفوف</option></select></div><div id="courseWrap"><label>الكورس</label><select id="courseId"><option value="">اختر الكورس</option></select></div><div id="videoWrap"><label>الدرس / الفيديو</label><select id="videoId"><option value="">اختر الدرس</option></select></div></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary" id="uploadBtn">🖼️ رفع صورة من الجهاز</button><button class="blue" id="cameraBtn">📷 تصوير بالكاميرا</button><button class="gray" id="clearBtn">مسح</button></div><input id="uploadFile" type="file" accept="image/*" class="hidden"><input id="cameraFile" type="file" accept="image/*" capture="environment" class="hidden"><img id="preview" class="preview hidden"><div id="status" class="status">جاهز.</div></div>
+<div class="card hidden" id="questionsCard"><h2>🔎 مراجعة الاختبار</h2><p class="hint">تم استخراج الأسئلة من الصورة. راجع النص والاختيارات وحدد الإجابة الصحيحة. في صح/خطأ سيظهر اختيار صح أو خطأ.</p><div id="questions"></div><button class="primary" id="saveBtn">💾 حفظ الاختبار</button></div></div>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><script type="module">
+import {db,collection,getDocs,addDoc,serverTimestamp,authReady} from './js/firebase-config.js';
+const $=id=>document.getElementById(id); let questions=[],allCourses=[],allVideos=[],allGrades=[];
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function gradeName(g){return g?.name||({1:'أولى ثانوي',2:'ثانية ثانوي',3:'ثالثة ثانوي'}[String(g?.code||g)]||String(g||''));}
+async function loadData(){await authReady;const [gs,cs,vs]=await Promise.all([getDocs(collection(db,'grades')),getDocs(collection(db,'courses')),getDocs(collection(db,'videos'))]);allGrades=gs.docs.map(d=>({id:d.id,...d.data()}));allCourses=cs.docs.map(d=>({id:d.id,...d.data()}));allVideos=vs.docs.map(d=>({id:d.id,...d.data()}));
+$('grade').innerHTML='<option value="all">كل الصفوف</option>'+allGrades.map(g=>`<option value="${esc(g.code||g.id)}">${esc(gradeName(g))}</option>`).join('');
+// ensure built-in grades are visible even if not yet stored
+const have=new Set(allGrades.map(g=>String(g.code||g.id))); for(const g of [{code:'1',name:'أولى ثانوي'},{code:'2',name:'ثانية ثانوي'},{code:'3',name:'ثالثة ثانوي'}]) if(!have.has(g.code)) $('grade').insertAdjacentHTML('beforeend',`<option value="${g.code}">${g.name}</option>`);
+refreshCourses();refreshVideos();}
+function refreshCourses(){const grade=$('grade').value;let list=allCourses.filter(c=>grade==='all'||!c.grade||String(c.grade)===String(grade)||String(c.grade)==='all');$('courseId').innerHTML='<option value="">اختر الكورس</option>'+list.map(c=>`<option value="${esc(c.id)}">${esc(c.name||c.title||'كورس')}</option>`).join('');refreshVideos();}
+function refreshVideos(){const cid=$('courseId').value;const grade=$('grade').value;let list=allVideos.filter(v=>(!cid||String(v.courseId||v.course||'')===String(cid))&&(grade==='all'||!v.grade||String(v.grade)===String(grade)||String(v.grade)==='all'));$('videoId').innerHTML='<option value="">اختر الدرس / الفيديو</option>'+list.map(v=>`<option value="${esc(v.id)}">${esc(v.title||v.name||'درس')}</option>`).join('');}
+function updateScope(){const t=$('scopeType').value;$('courseWrap').classList.toggle('hidden',t==='grade');$('videoWrap').classList.toggle('hidden',t!=='lesson');if(t!=='grade')refreshCourses();}
+$('scopeType').onchange=updateScope;$('grade').onchange=refreshCourses;$('courseId').onchange=refreshVideos;
+function normalize(s){return String(s||'').replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d))).replace(//g,'').replace(/ /g,' ');}
+function parseQuestions(raw){let text=normalize(raw);let lines=text.split(/
++/).map(x=>x.trim()).filter(Boolean);let out=[],cur=null;const qStart=/^(?:س(?:ؤال)?\s*)?(\d{1,3})\s*[\).:：-]\s*(.*)$/i;const opt=/^(?:\(?([A-Da-dأبجد1-4])\)?\s*[\).:：-]|([أبجد])\s*[-:：)]|\-\s*)(.*)$/i;function push(){if(cur){cur.text=cur.text.replace(/\s+/g,' ').trim();if(cur.text||cur.options.length)out.push(cur);}cur=null}for(const line of lines){let qm=line.match(qStart);if(qm){push();cur={text:qm[2]||'',options:[],type:'essay',correct:null,modelAnswer:''};continue}let om=line.match(opt);if(!cur){cur={text:'',options:[],type:'essay',correct:null,modelAnswer:''}}if(om&&om[3]!==undefined){cur.options.push(om[3].trim());continue}if(/^(صح|خطأ|صواب|خاطئ|true|false)$/i.test(line)&&cur){cur.options=['صح','خطأ'];cur.type='truefalse';cur.correct=null;continue}if(cur.options.length<4 && /^[أبجد]\s+/.test(line)){cur.options.push(line.replace(/^[أبجد]\s+/,'').trim());continue}cur.text+=(cur.text?' ':'')+line}push();if(out.length===0&&text.trim())out=[{text:text.replace(/\s+/g,' ').trim(),options:[],type:'essay',correct:null,modelAnswer:''}];return out}
+function render(){const typeOpts=(q)=>q.type==='truefalse'?'<input class="tfOpt" value="صح" disabled><input class="tfOpt" value="خطأ" disabled>':[0,1,2,3].map(j=>`<input class="opt" data-j="${j}" value="${esc(q.options?.[j]||'')}" placeholder="الإجابة ${j+1}">`).join('');$('questions').innerHTML=questions.map((q,i)=>`<div class="q" data-i="${i}"><b>السؤال ${i+1}</b><textarea class="qtext" rows="3">${esc(q.text)}</textarea><label>نوع السؤال</label><select class="qtype"><option value="mcq" ${q.type==='mcq'?'selected':''}>اختيار من متعدد</option><option value="truefalse" ${q.type==='truefalse'?'selected':''}>صح أو خطأ</option><option value="short" ${q.type==='short'?'selected':''}>إجابة قصيرة</option><option value="essay" ${q.type==='essay'?'selected':''}>مقالي</option></select><div class="opts">${typeOpts(q)}</div><label>الإجابة الصحيحة</label><select class="correct">${q.type==='truefalse'?'<option value="true">صح</option><option value="false">خطأ</option>':'<option value="0">الأولى</option><option value="1">الثانية</option><option value="2">الثالثة</option><option value="3">الرابعة</option><option value="">غير محددة</option>'}</select><input class="model" value="${esc(q.modelAnswer||'')}" placeholder="الإجابة النموذجية إذا كان السؤال مقاليًا/قصيرًا"></div>`).join('');$('questionsCard').classList.remove('hidden');}
+function setFile(f){if(!f)return;$('preview').src=URL.createObjectURL(f);$('preview').classList.remove('hidden');runOCR(f)}
+$('uploadBtn').onclick=()=>$('uploadFile').click();$('cameraBtn').onclick=()=>$('cameraFile').click();$('uploadFile').onchange=e=>setFile(e.target.files[0]);$('cameraFile').onchange=e=>setFile(e.target.files[0]);
+async function runOCR(f){$('status').textContent='⏳ جاري قراءة الصورة بالعربي والإنجليزي...';try{const img=new Image();img.src=URL.createObjectURL(f);await new Promise((a,b)=>{img.onload=a;img.onerror=b});const c=document.createElement('canvas'),scale=Math.min(2.5,Math.max(1,2200/img.width));c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);const r=await Tesseract.recognize(c,'ara+eng',{logger:m=>{if(m.status)$('status').textContent=`⏳ ${m.status} ${m.progress?Math.round(m.progress*100)+'%':''}`},config:{tessedit_pageseg_mode:'6',preserve_interword_spaces:'1'}});questions=parseQuestions(r.data.text);if(!questions.length)throw Error('لم يتم العثور على أسئلة واضحة');questions.forEach(q=>{if(q.options.length>=2)q.type='mcq';});render();$('status').textContent=`✅ تم استخراج ${questions.length} سؤال. راجعها وحدد الإجابات الصحيحة قبل الحفظ.`}catch(e){console.error(e);$('status').textContent='❌ '+e.message}}
+$('questions').addEventListener('input',e=>{const b=e.target.closest('.q');if(!b)return;const i=+b.dataset.i;if(e.target.classList.contains('qtext'))questions[i].text=e.target.value;if(e.target.classList.contains('opt'))questions[i].options[e.target.dataset.j]=e.target.value;if(e.target.classList.contains('model'))questions[i].modelAnswer=e.target.value});$('questions').addEventListener('change',e=>{const b=e.target.closest('.q');if(!b)return;const i=+b.dataset.i;if(e.target.classList.contains('qtype')){questions[i].type=e.target.value;if(e.target.value==='truefalse'){questions[i].options=['صح','خطأ'];questions[i].correct=null}else if(!questions[i].options?.length)questions[i].options=['','','',''];render()}if(e.target.classList.contains('correct'))questions[i].correct=e.target.value});
+$('clearBtn').onclick=()=>location.reload();
+$('saveBtn').onclick=async()=>{const title=$('examTitle').value.trim();const scopeType=$('scopeType').value,grade=$('grade').value,courseId=$('courseId').value,videoId=$('videoId').value;if(!title)return alert('اكتب عنوان الاختبار');if(scopeType==='course'&&!courseId)return alert('اختر الكورس');if(scopeType==='lesson'&&(!courseId||!videoId))return alert('اختر الكورس والدرس');if(!questions.length)return alert('لا توجد أسئلة');const cleaned=questions.map(q=>({text:q.text.trim(),type:q.type,options:(q.options||[]).filter(Boolean),correct:q.correct??null,modelAnswer:q.modelAnswer||''}));$('saveBtn').disabled=true;$('saveBtn').textContent='⏳ جاري الحفظ...';try{await addDoc(collection(db,'exams'),{title,scopeType,grade,courseId:scopeType==='grade'?'':courseId,videoId:scopeType==='lesson'?videoId:'',lessonVideoId:scopeType==='lesson'?videoId:'',questions:cleaned,structured:true,createdAt:serverTimestamp(),source:'image-ocr-ar+eng'});alert('✅ تم حفظ الاختبار بنجاح');location.reload()}catch(e){alert('❌ تعذر الحفظ: '+e.message)}finally{$('saveBtn').disabled=false;$('saveBtn').textContent='💾 حفظ الاختبار'}};
+loadData().then(updateScope).catch(e=>$('status').textContent='❌ تعذر تحميل الصفوف والكورسات: '+e.message);
+</script></body></html>

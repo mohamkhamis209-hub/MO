@@ -2133,17 +2133,26 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                 const id=(u.match(/[?&]id=([^&]+)/i)||[])[1];
                 if(id) return `https://drive.google.com/file/d/${id}/preview`;
             }
+            if(/\.(pdf)(?:[?#].*)?$/i.test(u)) return u;
             if(/^https?:\/\//i.test(u)) return u;
             return 'https://'+u.replace(/^\/+/, '');
         }
+        function isTelegramBookUrl(url){ return /^(?:https?:\/\/)?(?:www\.)?(?:t\.me|telegram\.me)\//i.test(String(url||'').trim()); }
         window.openBookReader=function(url,title){
             if(!url) return alert('رابط الكتاب غير موجود');
             const modal=document.getElementById('bookReaderModal'), frame=document.getElementById('bookReaderFrame'), fallback=document.getElementById('bookReaderFallback'), btn=document.getElementById('bookReaderFallbackBtn');
             document.getElementById('bookReaderTitle').textContent='📖 '+(title||'الكتاب');
-            const viewer=normalizeBookViewerUrl(url);
-            frame.src=viewer; frame.style.display='block'; fallback.style.display='none'; modal.style.display='flex'; document.body.style.overflow='hidden';
-            btn.onclick=()=>window.open(url,'_blank','noopener,noreferrer');
-            setTimeout(()=>{ try{ frame.contentWindow.location.href; }catch(e){} },1200);
+            const raw=String(url).trim();
+            const tg=isTelegramBookUrl(raw);
+            const viewer=normalizeBookViewerUrl(raw);
+            frame.style.display=tg?'none':'block';
+            fallback.style.display='block';
+            const msg=fallback.querySelector('[data-book-fallback-msg]');
+            if(msg) msg.textContent=tg?'هذا الكتاب موجود على Telegram. اضغط الزر لفتح الكتاب في Telegram.':'إذا لم يظهر الكتاب داخل المنصة، افتحه بالرابط الأصلي.';
+            btn.textContent=tg?'📲 فتح الكتاب في Telegram':'🔗 فتح الرابط الأصلي';
+            btn.onclick=()=>window.open(raw,'_blank','noopener,noreferrer');
+            modal.style.display='flex'; document.body.style.overflow='hidden';
+            if(!tg){ frame.src=viewer; setTimeout(()=>{ try{ frame.contentWindow.location.href; }catch(e){} },1200); }
         };
         window.closeBookReader=function(){const m=document.getElementById('bookReaderModal'); if(m){m.style.display='none';document.body.style.overflow='';document.getElementById('bookReaderFrame').src='about:blank';}};
         window.bookReaderFullscreen=function(){const el=document.querySelector('#bookReaderModal .book-reader-shell'); if(!el)return; if(document.fullscreenElement) document.exitFullscreen?.(); else el.requestFullscreen?.();};
