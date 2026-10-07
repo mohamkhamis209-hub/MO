@@ -1064,8 +1064,9 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             addDoc, updateDoc, serverTimestamp, setDoc, ensureAnonymousAuth 
         } from './js/firebase-config.js';
 
-        // تأمين جلسة Firebase المجهولة قبل أي قراءة/كتابة
-        try { await ensureAnonymousAuth(); } catch (e) { console.warn('تعذر تسجيل الدخول المجهول مؤقتاً:', e); }
+        // تسجيل Firebase يتم بشكل غير حاجب حتى لا تتوقف لوحة الطالب إذا تأخر الاتصال أو المصادقة.
+        let firebaseAuthReady = false;
+        const firebaseAuthPromise = Promise.resolve().then(() => ensureAnonymousAuth()).then(() => { firebaseAuthReady = true; return true; }).catch(e => { console.warn('تعذر تسجيل الدخول المجهول مؤقتاً:', e); return false; });
 
         // ترتيب محتوى كل قسم: الأحدث أولاً، بدون تغيير ترتيب الأقسام نفسها.
         function contentTime(data) {
@@ -2496,6 +2497,9 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             }
         }
 
+        // إتاحة التنقل للواجهة حتى لو حدث خطأ في جزء لاحق من الكود.
+        window._moduleLoadSection = loadSection;
+
         // ============================================
         // تسجيل الخروج
         // ============================================
@@ -2520,7 +2524,16 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         // ============================================
         // بداية التحميل
         // ============================================
-        (async()=>{ try { await ensureAnonymousAuth(); } catch(e) { console.warn('Firebase anonymous auth:', e); } recordLogin(); loadSection('dashboard'); })();
+        (async()=>{
+            // لا ننتظر Firebase إلى ما لا نهاية؛ اللوحة نفسها يجب أن تفتح فوراً.
+            await Promise.race([firebaseAuthPromise, new Promise(r=>setTimeout(r,5000))]);
+            try { recordLogin(); } catch(e) { console.warn('recordLogin:',e); }
+            try { await loadSection('dashboard'); } catch(e) {
+                console.error('فشل تحميل الرئيسية:', e);
+                const c=document.getElementById('student-content');
+                if(c) c.innerHTML=`<div style="background:#fff;border-radius:18px;padding:24px;text-align:center"><h2>⚠️ تعذر تحميل البيانات</h2><p style="color:#777">تأكد من اتصال Firebase ثم اضغط إعادة المحاولة.</p><button onclick="location.reload()" style="border:0;border-radius:12px;padding:12px 20px;background:#10b981;color:#fff;font-weight:800;cursor:pointer">🔄 إعادة المحاولة</button></div>`;
+            }
+        })();
 
         console.log('✅ تم تحميل لوحة الطالب بنجاح');
         console.log('👤 الطالب:', studentName, studentCode);
