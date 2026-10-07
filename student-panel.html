@@ -1916,13 +1916,22 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                     if (!data.grade || data.grade==='all' || data.grade===studentGrade) courseDocs.push({id:d.id,data});
                 });
             } catch(e) { console.warn('تعذر تحميل الكورسات:',e); }
-            // أي كورس مرتبط بصف الطالب متاح له تلقائيًا؛ لا يوجد طلب دخول للكورس.
-            // لو أن المشرف لم يحدد صفًا للكورس، يظهر فقط للكورسات العامة (all).
+            // الكورس متاح تلقائيًا للطالب عندما يكون مرتبطًا بصفه (أو كورس عام).
+            // لم يعد الطالب يحتاج إلى إرسال طلب دخول للكورس.
             const courses=[];
             courseDocs.forEach(c=>{
                 const vids=videos.filter(v=>v.data.courseId===c.id);
-                const matchingGrade = !c.data.grade || c.data.grade==='all' || String(c.data.grade)===String(studentGrade);
-                courses.push({id:c.id,data:c.data,videos:vids,accessStatus:matchingGrade?'approved':'none'});
+                const courseGrade = c.data?.grade == null ? 'all' : String(c.data.grade);
+                const studentGradeValue = String(studentGrade || 'all');
+                const gradeAliases = {
+                    '1':['1','أولى','اولى','أولى ثانوي','اولى ثانوي','الصف الأول الثانوي'],
+                    '2':['2','ثانية','ثانيه','ثانية ثانوي','ثانيه ثانوي','الصف الثاني الثانوي'],
+                    '3':['3','ثالثة','ثالثه','ثالثة ثانوي','ثالثه ثانوي','الصف الثالث الثانوي'],
+                    'all':['all','الكل','جميع']
+                };
+                const allowed = courseGrade==='all' || (gradeAliases[studentGradeValue] || [studentGradeValue]).includes(courseGrade) ||
+                    Object.values(gradeAliases).some(list => list.includes(courseGrade) && list.includes(studentGradeValue));
+                courses.push({id:c.id,data:c.data,videos:vids,accessStatus:allowed?'approved':'none'});
             });
             const uncategorized=videos.filter(v=>!v.data.courseId);
             const grouped={};
@@ -1950,8 +1959,8 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             return courses.filter(c=>c.videos.length>0 || !c.legacy);
         }
         window.requestCourseAccess=async function(courseId,courseName){
-            alert('✅ الكورس متاح لك تلقائيًا حسب الصف المسجل في حسابك، ولا يحتاج إلى إرسال طلب.');
             const grade=localStorage.getItem('studentGrade')||'all';
+            alert('✅ هذا الكورس متاح لك تلقائيًا حسب الصف المسجل في حسابك.');
             await showCoursesHome(document.getElementById('student-content'),grade);
         };
         window.openCourse = async function(courseId, studentGrade) {
@@ -1959,7 +1968,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             const courses = await buildCourses(grade);
             currentCourseState = courses.find(c=>c.id===courseId) || null;
             if(!currentCourseState) return alert('الكورس غير موجود أو غير متاح لصفك');
-            if(currentCourseState.accessStatus!=='approved') return alert('🔐 هذا الكورس غير متاح لصفك الحالي.');
+            if(currentCourseState.accessStatus!=='approved') return alert('🔒 هذا الكورس غير متاح لصفك الحالي.');
             await loadSection('courseDetail');
         };
         async function showCoursesHome(container, studentGrade) {
@@ -2170,86 +2179,72 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                 await showCourseDetail(container, currentCourseState, studentGrade);
             }
             // ============================================
-            // الكتب - مع زر تكبير داخل الموقع
+            // الكتب
             // ============================================
-            else if (section === 'books') {
+            async function loadBooks(container, studentGrade) {
                 try {
-                    const q = query(collection(db, 'books'), where('grade', 'in', [studentGrade, 'all']));
+                    const grades = [studentGrade, 'all'].filter(Boolean);
+                    const q = query(collection(db, 'books'), where('grade', 'in', grades));
                     const snap = await getDocs(q);
-                    let html = `<div class="courses-shell"><div class="courses-hero"><h2>📚 الكتب</h2><p>كتب صفك متاحة هنا. روابط Telegram لا تفتح تلقائيًا؛ ستفتح فقط عند ضغطك على زر الكتاب.</p></div>`;
+                    let html = `<div class="courses-shell"><div class="courses-hero"><h2>📚 الكتب</h2><p>الكتب المتاحة لصفك. روابط Telegram لا تفتح إلا عند ضغطك على زر الكتاب.</p></div>`;
                     if (snap.empty) {
                         html += `<div style="background:#fff;border-radius:18px;padding:30px;text-align:center;color:#777;box-shadow:0 6px 20px rgba(0,0,0,.05)">لا توجد كتب حالياً</div>`;
                     } else {
-                        const booksData = snap.docs.map(d => ({ id: d.id, data: d.data() }));
+                        const booksData = snap.docs.map(d => ({ id:d.id, data:d.data() }));
                         sortContentNewestFirst(booksData);
                         html += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;">`;
-                        booksData.forEach((item, index) => {
-                            const data = item.data;
-                            const originalUrl = String(data.url || '').trim();
-                            const cleanUrl = originalUrl.replace(/[?&]rm=minimal/g, '').replace(/[?&]authuser=\d+/g, '').replace(/[?&]usp=sharing/g, '');
-                            const title = escCourse(data.title || 'كتاب');
-                            const cover = data.imageUrl || data.thumbnailUrl || 'assets/platform-logo.png';
-                            const isTelegram = /(^|\/\/)(t\.me|telegram\.me)(\/|$)/i.test(cleanUrl) || /telegram/i.test(cleanUrl);
-                            const isDrive = /drive\.google\.com/i.test(cleanUrl);
-                            let fileId = null, embedUrl = '';
-                            if (isDrive) {
-                                const patterns = [/\/d\/([^\/]+)/, /id=([^&]+)/, /file\/d\/([^\/]+)/, /open\?id=([^&]+)/];
-                                for (const pattern of patterns) {
-                                    const match = cleanUrl.match(pattern);
-                                    if (match && match[1]) { fileId = match[1]; break; }
+                        booksData.forEach((item,index)=>{
+                            const data=item.data||{};
+                            const title=escCourse(data.title||'كتاب');
+                            const raw=String(data.url||'').trim();
+                            const clean=raw.replace(/[?&](rm=minimal|authuser=\d+|usp=sharing)/g,'');
+                            const cover=String(data.imageUrl||data.thumbnailUrl||'assets/platform-logo.png');
+                            const tg=/^(?:https?:\/\/)?(?:www\.)?(?:t\.me|telegram\.me)\//i.test(clean)||/telegram/i.test(clean);
+                            const drive=/drive\.google\.com/i.test(clean);
+                            let fileId=null, embed='';
+                            if(drive){
+                                for(const pat of [/\/d\/([^\/]+)/,/[?&]id=([^&]+)/,/\/file\/d\/([^\/]+)/]){
+                                    const m=clean.match(pat); if(m&&m[1]){fileId=m[1];break;}
                                 }
-                                if (fileId) embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
-                                else if (/\/view/i.test(cleanUrl)) embedUrl = cleanUrl.replace('/view','/preview');
+                                if(fileId) embed=`https://drive.google.com/file/d/${encodeURIComponent(fileId)}/preview`;
+                                else if(/\/view(?:\?|$)/i.test(clean)) embed=clean.replace('/view','/preview');
                             }
-                            const bookId = `book-${index}-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
-                            if (isTelegram) {
-                                html += `<article style="background:#fff;border:1px solid #e5ebf0;border-radius:20px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);">
-                                    <div style="height:170px;background:#f1f7fb;"><img src="${escCourse(cover)}" alt="${title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-                                    <div style="padding:17px;">
-                                        <div style="font-size:12px;color:#1597d4;font-weight:900;margin-bottom:5px;">📲 كتاب عبر Telegram</div>
-                                        <h3 style="margin:0 0 8px;">📖 ${title}</h3>
-                                        <p style="color:#7d8791;line-height:1.7;margin:0 0 14px;font-size:13px;">لن يتم فتح Telegram داخل الموقع. اضغط فقط عندما تكون جاهزًا لفتح الكتاب أو تنزيله من Telegram.</p>
-                                        <button type="button" onclick="window.openExternalBook('${escCourse(cleanUrl)}')" style="width:100%;border:0;border-radius:12px;padding:12px;background:#1597d4;color:#fff;font:inherit;font-weight:900;cursor:pointer;">📲 فتح الكتاب / التحميل من Telegram</button>
-                                    </div>
+                            const bookId=`book-${index}-${Date.now()}-${Math.random().toString(36).slice(2,6)}`;
+                            if(tg){
+                                html+=`<article class="book-card" style="background:#fff;border:1px solid #e5ebf0;border-radius:20px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06)">
+                                  <div style="height:170px;background:#f1f7fb"><img src="${escCourse(cover)}" alt="${title}" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+                                  <div style="padding:17px"><div style="font-size:12px;color:#1597d4;font-weight:900;margin-bottom:5px">📲 كتاب عبر Telegram</div><h3 style="margin:0 0 8px">📖 ${title}</h3><p style="color:#7d8791;line-height:1.7;margin:0 0 14px;font-size:13px">لن يتم فتح Telegram داخل الموقع تلقائيًا.</p><button type="button" onclick="window.openExternalBook('${escCourse(clean)}')" style="width:100%;border:0;border-radius:12px;padding:12px;background:#1597d4;color:#fff;font:inherit;font-weight:900;cursor:pointer">📲 فتح الكتاب / التحميل</button></div>
                                 </article>`;
-                            } else if (isDrive && embedUrl) {
-                                html += `<article style="background:#fff;border:1px solid #e5ebf0;border-radius:20px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:15px;">
-                                    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;"><h3 style="margin:0;">📖 ${title}</h3><button onclick="window.toggleBookFullscreen('${bookId}')" class="book-fullscreen-btn" style="background:#3498db;border:none;color:white;font-size:16px;cursor:pointer;padding:8px 14px;border-radius:9px;">⛶ تكبير</button></div>
-                                    <div id="${bookId}" style="position:relative;padding-bottom:75%;height:0;overflow:hidden;border-radius:12px;background:#f0f0f0;border:1px solid #ddd;">
-                                        <iframe src="${escCourse(embedUrl)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px;" allowfullscreen loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
-                                    </div>
-                                    <div style="margin-top:8px;text-align:center;color:#888;font-size:12px;">📖 للقراءة داخل الموقع</div>
+                            } else if(drive && embed){
+                                html+=`<article class="book-card" style="background:#fff;border:1px solid #e5ebf0;border-radius:20px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:15px">
+                                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px"><h3 style="margin:0">📖 ${title}</h3><button type="button" onclick="window.toggleBookFullscreen('${bookId}')" class="book-fullscreen-btn" style="background:#3498db;border:none;color:white;font-size:16px;cursor:pointer;padding:8px 14px;border-radius:9px">⛶ تكبير</button></div>
+                                  <div id="${bookId}" style="position:relative;padding-bottom:75%;height:0;overflow:hidden;border-radius:12px;background:#f0f0f0;border:1px solid #ddd"><iframe src="${escCourse(embed)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms"></iframe></div>
+                                  <div style="margin-top:8px;text-align:center;color:#888;font-size:12px">📖 للقراءة داخل الموقع</div>
                                 </article>`;
-                            } else if (cleanUrl) {
-                                html += `<article style="background:#fff;border:1px solid #e5ebf0;border-radius:20px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);">
-                                    <div style="height:170px;background:#f1f5f8;"><img src="${escCourse(cover)}" alt="${title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-                                    <div style="padding:17px;"><h3 style="margin:0 0 8px;">📖 ${title}</h3><p style="color:#7d8791;line-height:1.7;margin:0 0 14px;font-size:13px;">هذا رابط خارجي. لن يفتح إلا بعد الضغط على الزر.</p><button type="button" onclick="window.openExternalBook('${escCourse(cleanUrl)}')" style="width:100%;border:0;border-radius:12px;padding:12px;background:#0f8f6d;color:#fff;font:inherit;font-weight:900;cursor:pointer;">🔗 فتح / تحميل الكتاب</button></div>
-                                </article>`;
+                            } else if(clean){
+                                html+=`<article class="book-card" style="background:#fff;border:1px solid #e5ebf0;border-radius:20px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06)"><div style="height:170px;background:#f1f5f8"><img src="${escCourse(cover)}" alt="${title}" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><div style="padding:17px"><h3 style="margin:0 0 8px">📖 ${title}</h3><p style="color:#7d8791;line-height:1.7;margin:0 0 14px;font-size:13px">هذا رابط خارجي ولن يفتح إلا عند الضغط.</p><button type="button" onclick="window.openExternalBook('${escCourse(clean)}')" style="width:100%;border:0;border-radius:12px;padding:12px;background:#0f8f6d;color:#fff;font:inherit;font-weight:900;cursor:pointer">🔗 فتح / تحميل الكتاب</button></div></article>`;
                             } else {
-                                html += `<article style="background:#fff;border:1px solid #eee;border-radius:18px;padding:18px;"><h3 style="margin-top:0;">📖 ${title}</h3><p style="color:#b24b37;">⚠️ لا يوجد رابط للكتاب.</p></article>`;
+                                html+=`<article class="book-card" style="background:#fff;border:1px solid #eee;border-radius:18px;padding:18px"><h3 style="margin-top:0">📖 ${title}</h3><p style="color:#b24b37">⚠️ لا يوجد رابط للكتاب.</p></article>`;
                             }
                         });
-                        html += `</div>`;
+                        html+=`</div>`;
                     }
-                    html += `</div>`;
-                    container.innerHTML = html;
-                } catch (error) {
-                    console.error('خطأ في تحميل الكتب:', error);
-                    container.innerHTML = `<p style="color:red;">❌ حدث خطأ في تحميل الكتب: ${error.message}</p>`;
+                    html+=`</div>`;
+                    container.innerHTML=html;
+                } catch(error){
+                    console.error('خطأ في تحميل الكتب:',error);
+                    container.innerHTML=`<p style="color:red">❌ حدث خطأ في تحميل الكتب: ${escCourse(error?.message||'خطأ غير معروف')}</p>`;
                 }
             }
 
-            // فتح الرابط الخارجي للكتاب فقط بعد ضغط الطالب — لا توجد فتحة تلقائية لـ Telegram.
-            window.openExternalBook = function(url){
-                const safe = String(url || '').trim();
+            window.openExternalBook=function(url){
+                const safe=String(url||'').trim();
                 if(!safe) return alert('❌ رابط الكتاب غير موجود');
-                try {
-                    const u = new URL(safe);
+                try{
+                    const u=new URL(safe);
                     if(!/^https?:$/i.test(u.protocol)) throw new Error('invalid protocol');
-                    window.open(u.href, '_blank', 'noopener,noreferrer');
-                } catch(e) {
-                    alert('❌ رابط الكتاب غير صحيح');
-                }
+                    window.open(u.href,'_blank','noopener,noreferrer');
+                }catch(e){ alert('❌ رابط الكتاب غير صحيح'); }
             };
 
             // ============================================
