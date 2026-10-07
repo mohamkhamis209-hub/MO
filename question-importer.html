@@ -28,7 +28,7 @@ function render(){
  <textarea class="qtext" rows="3" placeholder="نص السؤال (اختياري إذا كانت صورة السؤال موجودة)">${esc(q.text)}</textarea>
  <label>نوع السؤال</label><select class="qtype">
  <option value="mcq" ${q.type==='mcq'?'selected':''}>اختيار من متعدد</option><option value="truefalse" ${q.type==='truefalse'?'selected':''}>صح أو خطأ</option><option value="short" ${q.type==='short'?'selected':''}>إجابة قصيرة</option><option value="essay" ${q.type==='essay'?'selected':''}>مقالي</option></select>
- <label>صورة السؤال <span class="hint">(يمكن أن يكون السؤال صورة فقط)</span></label><input class="qimg" type="file" accept="image/*" capture="environment">
+ <label>صورة السؤال <span class="hint">(يمكن أن يكون السؤال صورة فقط)</span></label><input class="qimg" type="file" accept="image/*">
  <div class="opts">${q.type==='truefalse'?'<span class="pill">صح</span><span class="pill">خطأ</span>':[0,1,2,3].map(j=>`<input class="opt" data-j="${j}" value="${esc(q.options?.[j]||'')}" placeholder="الاختيار ${j+1}">`).join('')}</div>
  <label>الإجابة الصحيحة <span class="hint">(تُستخدم للتصحيح التلقائي إذا لم يتم اختيار التصحيح اليدوي)</span></label>
  <select class="correct">${q.type==='truefalse'?`<option value="true" ${q.correct==='true'?'selected':''}>صح</option><option value="false" ${q.correct==='false'?'selected':''}>خطأ</option>`:'<option value="">غير محددة</option>'+[0,1,2,3].map(j=>`<option value="${j}" ${String(q.correct)===String(j)?'selected':''}>الاختيار ${j+1}</option>`).join('')}</select>
