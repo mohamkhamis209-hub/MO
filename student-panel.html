@@ -516,6 +516,17 @@
             border-color: #555 !important;
         }
 
+
+        /* قارئ الكتب داخل المنصة */
+        #bookReaderModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:20000;align-items:center;justify-content:center;padding:12px;direction:rtl;}
+        #bookReaderModal .book-reader-shell{width:min(1200px,100%);height:min(92vh,900px);background:#111827;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 25px 80px rgba(0,0,0,.5);}
+        #bookReaderModal .book-reader-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:#0b1220;color:#fff;}
+        #bookReaderModal .book-reader-head button{border:0;border-radius:10px;padding:9px 13px;cursor:pointer;font-weight:800;}
+        #bookReaderModal .book-reader-frame{flex:1;background:#222;position:relative;}
+        #bookReaderModal iframe{width:100%;height:100%;border:0;background:#fff;}
+        #bookReaderFallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;padding:25px;color:#fff;background:#111827;}
+        @media(max-width:700px){#bookReaderModal{padding:0}#bookReaderModal .book-reader-shell{height:100vh;border-radius:0}}
+
         /* حماية الفيديو - منع روابط وعلامات YouTube العلوية */
         .video-container iframe {
             pointer-events: auto;
@@ -819,6 +830,25 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             </div>
         </div>
     </div>
+
+    <div id="bookReaderModal" onclick="if(event.target===this) window.closeBookReader()">
+      <div class="book-reader-shell">
+        <div class="book-reader-head">
+          <div id="bookReaderTitle" style="font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">📖 الكتاب</div>
+          <div style="display:flex;gap:8px;flex-shrink:0">
+            <button onclick="window.bookReaderFullscreen()">⛶ ملء الشاشة</button>
+            <button onclick="window.closeBookReader()">✕ إغلاق</button>
+          </div>
+        </div>
+        <div class="book-reader-frame" id="bookReaderFrameWrap">
+          <iframe id="bookReaderFrame" title="قارئ الكتاب" allow="fullscreen" referrerpolicy="no-referrer"></iframe>
+          <div id="bookReaderFallback">
+            <div><div style="font-size:44px">📖</div><h3>تعذر عرض الكتاب داخل العارض</h3><p style="color:#cbd5e1">الرابط لا يسمح بالتضمين. جرّب رفع ملف PDF مباشر أو استخدام Google Drive مع صلاحية العرض.</p><button id="bookReaderFallbackBtn" style="background:#10b981;color:#fff;border:0;border-radius:10px;padding:11px 18px;font-weight:900;cursor:pointer">فتح الرابط</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <button id="questionFab" onclick="window.openQuestionModal()" aria-label="عندي سؤال" title="عندي سؤال">💬</button>
 
     <!-- ============================================ -->
@@ -2030,7 +2060,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             }catch(e){}
             if(courseBooks.length||courseExams.length){
                 html+=`<div style="margin-top:20px;background:#fff;border-radius:18px;padding:18px"><h3>📚 محتوى الكورس العام</h3>`;
-                courseBooks.forEach(b=>{const u=b.data.url||'';html+=`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>📖 ${escCourse(b.data.title||'كتاب')}</b><button class="btn-sm btn-add" style="margin-right:8px" onclick="window.openExternalBook('${escCourse(u)}')">فتح الكتاب</button></div>`;});
+                courseBooks.forEach(b=>{const u=b.data.url||'';html+=`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>📖 ${escCourse(b.data.title||'كتاب')}</b><button class="btn-sm btn-add" style="margin-right:8px" onclick="window.openBookReader('${escCourse(u)}', '${escCourse(b.data.title||'كتاب')}')">فتح الكتاب</button></div>`;});
                 courseExams.forEach(e=>html+=`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>📝 ${escCourse(e.data.title||'اختبار')}</b><button class="btn-sm btn-green" style="margin-right:8px" onclick="window.openAttachedExam('${escCourse(e.id)}')">ابدأ الاختبار</button></div>`);
                 html+=`</div>`;
             }
@@ -2078,7 +2108,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             showLessonQuestionsUnderPlayer(v.id);
             const attached=await getAttachedLessonContent(v.id,currentCourseState?.id||'');
             const attachBox=document.createElement('div'); attachBox.id='attached-lesson-content-'+v.id;
-            attachBox.innerHTML=attached.exams.map(renderAttachedExamCard).join('') + attached.books.map(b=>{const x=b.data||{};const url=x.url||'';const tel=/^(https?:\/\/)?(t\.me\/|telegram\.me\/)/i.test(url);return `<div style="margin-top:14px;padding:14px;border-radius:14px;background:#fff;border:1px solid #eee"><b>📚 كتاب مرتبط بالدرس: ${escCourse(x.title||'كتاب')}</b><div style="margin-top:8px"><button class="btn-sm btn-add" onclick="window.openExternalBook('${escCourse(url)}')">${tel?'📲 فتح الكتاب على Telegram':'📖 فتح الكتاب'}</button></div></div>`;}).join('');
+            attachBox.innerHTML=attached.exams.map(renderAttachedExamCard).join('') + attached.books.map(b=>{const x=b.data||{};const url=x.url||'';const tel=/^(https?:\/\/)?(t\.me\/|telegram\.me\/)/i.test(url);return `<div style="margin-top:14px;padding:14px;border-radius:14px;background:#fff;border:1px solid #eee"><b>📚 كتاب مرتبط بالدرس: ${escCourse(x.title||'كتاب')}</b><div style="margin-top:8px"><button class="btn-sm btn-add" onclick="window.openBookReader('${escCourse(url)}', '${escCourse(x.title||'كتاب')}')">📖 فتح الكتاب داخل المنصة</button></div></div>`;}).join('');
             if(attachBox.innerHTML) card.appendChild(attachBox);
             card.scrollIntoView({behavior:'smooth',block:'start'});
             if(window.coursePlayer) try{window.coursePlayer.destroy()}catch(e){}
@@ -2095,13 +2125,30 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         function startCourseProgress(videoId,player){ if(progressIntervals[videoId]) clearInterval(progressIntervals[videoId]); progressIntervals[videoId]=setInterval(async()=>{try{const cur=Math.floor(player.getCurrentTime?.()||0),dur=Math.floor(player.getDuration?.()||0);if(dur>0){await saveProgress(videoId,cur,dur);updateProgressUI(videoId,cur,dur);}}catch(e){}},5000); }
         window.toggleCourseFullscreen=function(event,videoId){event?.preventDefault();event?.stopPropagation();const el=document.getElementById(`course-video-container-${videoId}`);if(!el)return;const active=document.fullscreenElement||document.webkitFullscreenElement;if(active===el){document.exitFullscreen?.();document.webkitExitFullscreen?.();}else{el.requestFullscreen?.()||el.webkitRequestFullscreen?.();}};
 
-        window.openBookLink = function(url){
-            if(!url) return;
-            // يفتح فقط بعد ضغط الطالب على الزر.
-            window.open(url, '_blank', 'noopener,noreferrer');
+        function normalizeBookViewerUrl(url){
+            let u=String(url||'').trim(); if(!u) return '';
+            if(u.includes('drive.google.com')){
+                const m=u.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
+                if(m?.[1]) return `https://drive.google.com/file/d/${m[1]}/preview`;
+                const id=(u.match(/[?&]id=([^&]+)/i)||[])[1];
+                if(id) return `https://drive.google.com/file/d/${id}/preview`;
+            }
+            if(/^https?:\/\//i.test(u)) return u;
+            return 'https://'+u.replace(/^\/+/, '');
+        }
+        window.openBookReader=function(url,title){
+            if(!url) return alert('رابط الكتاب غير موجود');
+            const modal=document.getElementById('bookReaderModal'), frame=document.getElementById('bookReaderFrame'), fallback=document.getElementById('bookReaderFallback'), btn=document.getElementById('bookReaderFallbackBtn');
+            document.getElementById('bookReaderTitle').textContent='📖 '+(title||'الكتاب');
+            const viewer=normalizeBookViewerUrl(url);
+            frame.src=viewer; frame.style.display='block'; fallback.style.display='none'; modal.style.display='flex'; document.body.style.overflow='hidden';
+            btn.onclick=()=>window.open(url,'_blank','noopener,noreferrer');
+            setTimeout(()=>{ try{ frame.contentWindow.location.href; }catch(e){} },1200);
         };
-
-        window.openExternalBook=function(url){ if(!url)return; window.open(url,'_blank','noopener,noreferrer'); };
+        window.closeBookReader=function(){const m=document.getElementById('bookReaderModal'); if(m){m.style.display='none';document.body.style.overflow='';document.getElementById('bookReaderFrame').src='about:blank';}};
+        window.bookReaderFullscreen=function(){const el=document.querySelector('#bookReaderModal .book-reader-shell'); if(!el)return; if(document.fullscreenElement) document.exitFullscreen?.(); else el.requestFullscreen?.();};
+        window.openBookLink=window.openBookReader;
+        window.openExternalBook=window.openBookReader;
 
         function showProfileSection(){
             const c=document.getElementById('student-content');
@@ -2235,7 +2282,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                     sortContentNewestFirst(booksData);
                     let html=`<h2>📚 الكتب</h2><p style="color:#777">الكتب المرتبطة بالكورس أو بالدرس تظهر هنا. روابط Telegram لا تفتح إلا بعد ضغطك على الزر.</p>`;
                     if(!booksData.length) html+=`<div style="background:#fff;border-radius:15px;padding:30px;text-align:center;color:#777">لا توجد كتب متاحة حالياً.</div>`;
-                    for(const item of booksData){const data=item.data||{}; const url=String(data.url||''); const isTelegram=/^(https?:\/\/)?(t\.me\/|telegram\.me\/)/i.test(url); const isDrive=url.includes('drive.google.com'); const courseLabel=data.courseId?'مرتبط بكورس':'كتاب عام'; const lessonLabel=data.lessonVideoId?'📌 مرتبط بدرس محدد':''; html+=`<div style="background:#fff;border-radius:16px;padding:16px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)"><div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">${data.imageUrl?`<img src="${escCourse(data.imageUrl)}" style="width:90px;height:110px;object-fit:cover;border-radius:12px">`:''}<div style="flex:1"><h3 style="margin:0 0 6px">📖 ${escCourse(data.title||'كتاب')}</h3><div style="color:#777">${courseLabel} ${lessonLabel}</div><div style="margin-top:12px"><button class="btn-sm btn-add" onclick="window.openExternalBook('${escCourse(url)}')">${isTelegram?'📲 فتح الكتاب على Telegram':isDrive?'📖 فتح الكتاب':'🔗 فتح الكتاب'}</button></div></div></div></div>`;}
+                    for(const item of booksData){const data=item.data||{}; const url=String(data.url||''); const isTelegram=/^(https?:\/\/)?(t\.me\/|telegram\.me\/)/i.test(url); const isDrive=url.includes('drive.google.com'); const courseLabel=data.courseId?'مرتبط بكورس':'كتاب عام'; const lessonLabel=data.lessonVideoId?'📌 مرتبط بدرس محدد':''; html+=`<div style="background:#fff;border-radius:16px;padding:16px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)"><div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">${data.imageUrl?`<img src="${escCourse(data.imageUrl)}" style="width:90px;height:110px;object-fit:cover;border-radius:12px">`:''}<div style="flex:1"><h3 style="margin:0 0 6px">📖 ${escCourse(data.title||'كتاب')}</h3><div style="color:#777">${courseLabel} ${lessonLabel}</div><div style="margin-top:12px"><button class="btn-sm btn-add" onclick="window.openBookReader('${escCourse(url)}', '${escCourse(data.title||'كتاب')}')">📖 فتح الكتاب داخل المنصة</button></div></div></div></div>`;}
                     container.innerHTML=html;
                 } catch(error){console.error(error);container.innerHTML=`<p style="color:red">❌ حدث خطأ في تحميل الكتب</p>`;}
             }
@@ -2254,7 +2301,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                         html += `<div style="background:white;border-radius:15px;padding:30px;text-align:center;color:#777;">لا توجد اختبارات حالياً</div>`;
                     }
 
-                    const examData = snap.docs.map(d => ({ id: d.id, data: d.data() }));
+                    const examData = snap.docs.map(d => ({ id: d.id, data: d.data() })).filter(item => !item.data.videoId && !item.data.lessonVideoId);
                     sortContentNewestFirst(examData);
                     for (const item of examData) {
                         const data = item.data;

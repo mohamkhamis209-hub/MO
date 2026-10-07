@@ -26,14 +26,16 @@ button{border:0;border-radius:11px;padding:11px 16px;font:inherit;font-weight:80
     <p>ارفع صورة تحتوي على سؤال واحد أو عدة أسئلة. سيتم استخراج النص والاختيارات ثم يمكنك مراجعة كل سؤال وتحديد نوعه والإجابة الصحيحة.</p>
     <div class="grid">
       <div><label>عنوان الاختبار</label><input id="examTitle" placeholder="مثال: امتحان الوحدة الأولى"></div>
-      <div><label>الصف</label><select id="grade"><option value="1">أولى ثانوي</option><option value="2">ثانية ثانوي</option><option value="3">ثالثة ثانوي</option><option value="all">كل الصفوف</option></select></div>
-      <div><label>الكورس</label><select id="courseId"><option value="">بدون ربط</option></select></div>
-      <div><label>الفيديو / الدرس</label><select id="videoId"><option value="">بدون ربط</option></select></div>
+      <div><label>نوع الارتباط</label><select id="scopeType"><option value="course">📚 للكورس بالكامل</option><option value="grade">🎓 للصف بالكامل</option><option value="lesson">🎬 لحصة / فيديو محدد</option></select></div>
+      <div id="gradeWrap"><label>الصف</label><select id="grade"><option value="1">أولى ثانوي</option><option value="2">ثانية ثانوي</option><option value="3">ثالثة ثانوي</option><option value="all">كل الصفوف</option></select></div>
+      <div id="courseWrap"><label>الكورس</label><select id="courseId"><option value="">اختر الكورس</option></select></div>
+      <div id="videoWrap" style="display:none"><label>الفيديو / الحصة</label><select id="videoId"><option value="">اختر الفيديو</option></select></div>
     </div>
     <input id="imageFile" type="file" accept="image/*">
     <img id="preview" class="preview" hidden>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-      <button class="primary" id="ocrBtn">🔎 قراءة الصورة</button>
+      <button class="primary" id="ocrBtn">🔎 قراءة كل الأسئلة</button>
+      <button class="blue" id="translateBtn" disabled>🌐 تحويل النص للعربية</button>
       <button class="muted" id="clearBtn">مسح</button>
     </div>
     <div id="status" class="status">جاهز.</div>
@@ -57,10 +59,16 @@ let questions=[];
 
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
 
+async function translateTextToArabic(text){
+  const value=String(text||'').trim(); if(!value) return value;
+  if(/[\u0600-\u06FF]/.test(value) && value.replace(/[^\u0600-\u06FF]/g,'').length >= Math.max(3, value.length*0.18)) return value;
+  try{ const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(value.slice(0,450))+'&langpair=auto|ar'); const j=await r.json(); return j?.responseData?.translatedText || value; }catch(e){ return value; }
+}
+
 function normalizeArabicDigits(str){return String(str||'').replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)));}
 function parseQuestions(text){
   const normalized=normalizeArabicDigits(text).replace(/\u00a0/g,' ').replace(/\r/g,'');
-  const blocks=normalized.split(/(?=(?:^|\n)\s*(?:س(?:ؤال)?\s*)?\d+\s*[\).:،-])/gim).map(x=>x.trim()).filter(Boolean);
+  const blocks=normalized.split(/(?=(?:^|\n)\s*(?:س(?:ؤال)?\s*)?(?:\d+|[١-٩]+)\s*[\).:،-])/gim).map(x=>x.trim()).filter(Boolean);
   const chunks=blocks.length>1?blocks:[normalized.trim()];
   const out=[];
   for(const raw of chunks){
@@ -132,12 +140,13 @@ $('ocrBtn').onclick=async()=>{
   try{
     const img=new Image(); img.src=URL.createObjectURL(f); await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;});
     const canvas=document.createElement('canvas'); const scale=Math.min(2.2,Math.max(1,1800/img.width)); canvas.width=Math.round(img.width*scale); canvas.height=Math.round(img.height*scale); const ctx=canvas.getContext('2d'); ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
-    const {data}=await Tesseract.recognize(canvas,'ara+eng',{logger:m=>{
+    const {data}=await Tesseract.recognize(canvas,'ara',{logger:m=>{
       if(m.status) $('status').textContent=`⏳ ${m.status} ${m.progress?Math.round(m.progress*100)+'%':''}`;
     },config:{tessedit_pageseg_mode:'6',preserve_interword_spaces:'1'}});
     questions=parseQuestions(data.text);
     render();
-    $('status').textContent=`✅ تم استخراج ${questions.length} سؤال. راجعهم قبل الحفظ.`;
+    $('translateBtn').disabled=false;
+    $('status').textContent=`✅ تم استخراج ${questions.length} سؤال من الصورة. اضغط «تحويل النص للعربية» إذا كانت الصورة بلغة أخرى، ثم راجع كل الأسئلة.`;
   }catch(e){console.error(e);$('status').textContent='❌ فشلت قراءة الصورة: '+e.message;}
 };
 $('clearBtn').onclick=()=>{questions=[];$('questionsCard').hidden=true;$('status').textContent='جاهز.';$('preview').hidden=true;$('imageFile').value='';};
@@ -156,9 +165,26 @@ $('questions').addEventListener('change',e=>{
 
 loadLinks();
 
+function updateScopeUI(){
+  const type=$('scopeType').value;
+  $('courseWrap').style.display=type==='course'||type==='lesson'?'block':'none';
+  $('videoWrap').style.display=type==='lesson'?'block':'none';
+  $('gradeWrap').style.display=type==='grade'?'block':'none';
+}
+$('scopeType').onchange=updateScopeUI; updateScopeUI();
+
+$('translateBtn').onclick=async()=>{
+  if(!questions.length)return;
+  $('status').textContent='⏳ جاري تحويل الأسئلة والاختيارات إلى العربية...'; $('translateBtn').disabled=true;
+  try{ for(const q of questions){ q.text=await translateTextToArabic(q.text); q.options=await Promise.all((q.options||[]).map(translateTextToArabic)); if(q.modelAnswer) q.modelAnswer=await translateTextToArabic(q.modelAnswer); } render(); $('status').textContent='✅ تم تحويل النصوص إلى العربية. راجعها قبل الحفظ.'; } finally{ $('translateBtn').disabled=false; }
+};
+
 $('saveBtn').onclick=async()=>{
   if(!questions.length)return alert('لا توجد أسئلة');
-  const title=$('examTitle').value.trim()||'اختبار جديد', grade=$('grade').value, courseId=$('courseId').value||'', videoId=$('videoId').value||'';
+  const title=$('examTitle').value.trim()||'اختبار جديد', scopeType=$('scopeType').value, grade=scopeType==='grade'?$('grade').value:'all', courseId=(scopeType==='course'||scopeType==='lesson')?$('courseId').value:'', videoId=scopeType==='lesson'?$('videoId').value:'';
+  if(scopeType==='course' && !courseId) return alert('اختر الكورس أولاً');
+  if(scopeType==='lesson' && (!courseId || !videoId)) return alert('اختر الكورس والحصة أولاً');
+  if(scopeType==='grade' && !grade) return alert('اختر الصف أولاً');
   $('status').textContent='⏳ جاري حفظ الاختبار...';
   try{
     await authReady;
@@ -175,7 +201,7 @@ $('saveBtn').onclick=async()=>{
       if(sourceImageUrl) x.imageUrl=sourceImageUrl;
       return x;
     });
-    await addDoc(collection(db,'exams'),{title,grade,courseId,videoId,questions:cleaned,structured:true,createdAt:serverTimestamp(),source:'image-ocr'});
+    await addDoc(collection(db,'exams'),{title,scopeType,grade,courseId,videoId,lessonVideoId:videoId,questions:cleaned,structured:true,createdAt:serverTimestamp(),source:'image-ocr'});
     $('status').textContent='✅ تم حفظ الاختبار بكل الأسئلة.';
     alert('تم حفظ الاختبار بنجاح');
   }catch(e){console.error(e);$('status').textContent='❌ تعذر الحفظ: '+e.message;}
