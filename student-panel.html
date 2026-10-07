@@ -1061,8 +1061,11 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
     <script type="module">
         import { 
             db, collection, getDocs, query, where, doc, getDoc, 
-            addDoc, updateDoc, serverTimestamp, setDoc 
+            addDoc, updateDoc, serverTimestamp, setDoc, ensureAnonymousAuth 
         } from './js/firebase-config.js';
+
+        // تأمين جلسة Firebase المجهولة قبل أي قراءة/كتابة
+        try { await ensureAnonymousAuth(); } catch (e) { console.warn('تعذر تسجيل الدخول المجهول مؤقتاً:', e); }
 
         // ترتيب محتوى كل قسم: الأحدث أولاً، بدون تغيير ترتيب الأقسام نفسها.
         function contentTime(data) {
@@ -1968,7 +1971,6 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             const courses = await buildCourses(grade);
             currentCourseState = courses.find(c=>c.id===courseId) || null;
             if(!currentCourseState) return alert('الكورس غير موجود أو غير متاح لصفك');
-            if(currentCourseState.accessStatus!=='approved') return alert('🔒 هذا الكورس غير متاح لصفك الحالي.');
             await loadSection('courseDetail');
         };
         async function showCoursesHome(container, studentGrade) {
@@ -2518,8 +2520,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         // ============================================
         // بداية التحميل
         // ============================================
-        recordLogin();
-        loadSection('dashboard');
+        (async()=>{ try { await ensureAnonymousAuth(); } catch(e) { console.warn('Firebase anonymous auth:', e); } recordLogin(); loadSection('dashboard'); })();
 
         console.log('✅ تم تحميل لوحة الطالب بنجاح');
         console.log('👤 الطالب:', studentName, studentCode);
