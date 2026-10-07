@@ -729,7 +729,22 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
 .founder-photo{width:145px;height:145px;border-radius:50%;object-fit:cover;border:5px solid rgba(255,255,255,.92);box-shadow:0 10px 28px rgba(0,0,0,.22);flex:0 0 auto}
 .founder-kicker{display:inline-block;color:#7ff0c5;font-weight:900;font-size:13px;margin-bottom:6px}.founder-copy h2{color:#fff!important;border:0!important;padding:0!important;margin:0 0 8px!important}.founder-copy p{margin:0;color:#d8e7ef;line-height:1.9;font-size:15px}.founder-features{max-width:920px;margin:0 auto}
 @media(max-width:768px){.platform-compact-header{margin-right:0!important;padding:7px 10px!important;min-height:50px!important}.header-notification-only{width:38px;height:38px;font-size:20px}.founder-card{padding:20px 16px;border-radius:20px;flex-direction:column;text-align:center;gap:12px}.founder-photo{width:118px;height:118px}.founder-copy h2{font-size:21px!important}.founder-copy p{font-size:13px;line-height:1.8}}
-</style>
+
+        /* عارض صور الاختبار: تكبير + تحريك الصورة */
+        .exam-image-wrap{position:relative;margin:12px 0;border-radius:14px;background:#fff;overflow:hidden;text-align:center;border:1px solid #eee}
+        .exam-question-image{display:block;max-width:100%;max-height:340px;width:auto;height:auto;margin:0 auto;object-fit:contain;user-select:none;-webkit-user-drag:none;cursor:zoom-in}
+        .exam-image-zoom-btn{position:absolute;left:10px;bottom:10px;z-index:2;border:0;border-radius:12px;padding:9px 14px;background:rgba(15,23,42,.88);color:#fff;font-weight:900;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+        .exam-image-modal{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:18px;touch-action:none}
+        .exam-image-modal.show{display:flex}
+        .exam-image-stage{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none}
+        .exam-image-modal-img{max-width:none;max-height:none;width:auto;height:auto;transform-origin:center center;user-select:none;-webkit-user-drag:none;cursor:grab;will-change:transform}
+        .exam-image-modal-img.dragging{cursor:grabbing}
+        .exam-image-tools{position:fixed;top:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100001;background:rgba(15,23,42,.9);padding:8px;border-radius:14px;box-shadow:0 8px 25px rgba(0,0,0,.25)}
+        .exam-image-tools button{border:0;border-radius:10px;min-width:44px;height:42px;padding:0 12px;background:#fff;color:#111827;font-weight:900;font-size:18px;cursor:pointer}
+        .exam-image-tools .exam-image-close{background:#ef4444;color:#fff}
+        .exam-image-zoom-label{min-width:62px!important;font-size:14px!important;background:transparent!important;color:#fff!important;cursor:default!important}
+        @media(max-width:600px){.exam-image-tools{top:10px}.exam-image-tools button{min-width:40px;height:38px;padding:0 9px}.exam-question-image{max-height:300px}}
+    </style>
 </head>
 <body>
     <script>
@@ -1085,6 +1100,20 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         });
     </script>
 
+
+    <div id="examImageModal" class="exam-image-modal" aria-hidden="true">
+        <div class="exam-image-tools">
+            <button type="button" onclick="window.examImageZoom(-0.25)" aria-label="تصغير">−</button>
+            <button type="button" onclick="window.examImageReset()" class="exam-image-zoom-label">100%</button>
+            <button type="button" onclick="window.examImageZoom(0.25)" aria-label="تكبير">+</button>
+            <button type="button" onclick="window.examImageReset()" aria-label="إعادة ضبط">↺</button>
+            <button type="button" onclick="window.closeExamImage()" class="exam-image-close" aria-label="إغلاق">✕</button>
+        </div>
+        <div id="examImageStage" class="exam-image-stage">
+            <img id="examImageModalImg" class="exam-image-modal-img" alt="صورة السؤال">
+        </div>
+    </div>
+
     <!-- ============================================ -->
     <!-- الكود الأساسي - module                       -->
     <!-- ============================================ -->
@@ -1133,6 +1162,76 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         // ============================================
         const studentCode = localStorage.getItem('studentCode');
         const studentName = localStorage.getItem('studentName') || 'طالب';
+
+        // ============================================
+        // عارض صور أسئلة الاختبار: تكبير وتحريك
+        // ============================================
+        let examImageScale = 1;
+        let examImageX = 0;
+        let examImageY = 0;
+        let examImageDragging = false;
+        let examImageStartX = 0;
+        let examImageStartY = 0;
+        let examImageStartPanX = 0;
+        let examImageStartPanY = 0;
+
+        function applyExamImageTransform(){
+            const img=document.getElementById('examImageModalImg');
+            const label=document.querySelector('.exam-image-zoom-label');
+            if(!img)return;
+            img.style.transform=`translate(${examImageX}px,${examImageY}px) scale(${examImageScale})`;
+            if(label) label.textContent=Math.round(examImageScale*100)+'%';
+        }
+        window.openExamImage=function(url){
+            if(!url)return;
+            const modal=document.getElementById('examImageModal');
+            const img=document.getElementById('examImageModalImg');
+            if(!modal||!img)return;
+            examImageScale=1; examImageX=0; examImageY=0;
+            img.src=url;
+            modal.classList.add('show');
+            modal.setAttribute('aria-hidden','false');
+            document.body.style.overflow='hidden';
+            applyExamImageTransform();
+        };
+        window.examImageZoom=function(delta){
+            const next=Math.max(.5,Math.min(5,examImageScale+delta));
+            examImageScale=next;
+            applyExamImageTransform();
+        };
+        window.examImageReset=function(){examImageScale=1;examImageX=0;examImageY=0;applyExamImageTransform();};
+        window.closeExamImage=function(){
+            const modal=document.getElementById('examImageModal');
+            const img=document.getElementById('examImageModalImg');
+            if(modal) {modal.classList.remove('show');modal.setAttribute('aria-hidden','true');}
+            if(img) img.src='';
+            document.body.style.overflow='';
+            examImageDragging=false;
+        };
+        document.addEventListener('keydown',e=>{if(e.key==='Escape')window.closeExamImage();});
+        document.addEventListener('wheel',e=>{
+            const modal=document.getElementById('examImageModal');
+            if(!modal?.classList.contains('show'))return;
+            e.preventDefault();
+            window.examImageZoom(e.deltaY<0?.2:-.2);
+        },{passive:false});
+        document.addEventListener('pointerdown',e=>{
+            const img=document.getElementById('examImageModalImg');
+            if(!img||e.target!==img)return;
+            examImageDragging=true; examImageStartX=e.clientX; examImageStartY=e.clientY; examImageStartPanX=examImageX; examImageStartPanY=examImageY; img.classList.add('dragging'); img.setPointerCapture?.(e.pointerId);
+        });
+        document.addEventListener('pointermove',e=>{
+            if(!examImageDragging)return;
+            examImageX=examImageStartPanX+(e.clientX-examImageStartX);
+            examImageY=examImageStartPanY+(e.clientY-examImageStartY);
+            applyExamImageTransform();
+        });
+        document.addEventListener('pointerup',()=>{
+            examImageDragging=false;
+            document.getElementById('examImageModalImg')?.classList.remove('dragging');
+        });
+        document.getElementById('examImageModal')?.addEventListener('click',e=>{if(e.target.id==='examImageStage')window.closeExamImage();});
+        window.addEventListener('resize',()=>{if(document.getElementById('examImageModal')?.classList.contains('show'))applyExamImageTransform();});
         let players = {};
         let progressIntervals = {};
         let currentSessionId = null;
@@ -1774,6 +1873,9 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         // ============================================
         async function submitSingleExamAnswer(examId, questionIndex) {
             try {
+                const attemptId=`${examId}__${studentCode}`.replace(/\//g,'_');
+                const attemptSnap=await getDoc(doc(db,'examAttempts',attemptId));
+                if(!attemptSnap.exists()) return alert('🔒 يجب فتح الاختبار من زر «ابدأ الاختبار» أولاً.');
                 const examSnap = await getDoc(doc(db, 'exams', examId));
                 if (!examSnap.exists()) return alert('الاختبار غير موجود');
                 const exam = examSnap.data(); const question = exam.questions?.[questionIndex];
@@ -1792,6 +1894,8 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                 const manualCorrect=Object.values(manualGrades).filter(v=>v===true).length;
                 const payload={examId,examTitle:exam.title||'',studentCode,studentName:studentName||localStorage.getItem('studentName')||'طالب',studentGrade:localStorage.getItem('studentGrade')||'all',answers,manualGrades,autoCorrect,autoTotal,manualCorrect,manualTotal,totalCorrect:autoCorrect+manualCorrect,totalQuestions:(exam.questions||[]).length,submittedAt};
                 if(refDoc) await updateDoc(refDoc.ref,payload); else await addDoc(collection(db,'examAnswers'),payload);
+                const answeredCount=Object.keys(answers).length;
+                if(answeredCount >= (exam.questions||[]).length) await finishExamAttempt(examId);
                 alert('✅ تم إرسال الإجابة. الأسئلة التي تحتاج تصحيحًا يدويًا ستظهر نتيجتها بعد مراجعة المشرف.'); loadSection('exams');
             } catch(e){console.error(e);alert('❌ حدث خطأ أثناء إرسال الإجابة');}
         }
@@ -2026,11 +2130,41 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             const e=exam.data||{}; const id=exam.id;
             return `<div class="video-attached-exam" style="margin-top:16px;padding:18px;border-radius:16px;background:#f7f4ff;border:1px solid #ddd2ff"><h3 style="margin:0 0 6px;color:#6d28d9">📝 امتحان الدرس: ${escCourse(e.title||'اختبار')}</h3><p style="color:#777;margin-top:4px">${Array.isArray(e.questions)?e.questions.length:0} سؤال — حل الاختبار من قسم الاختبارات أو افتحه هنا.</p><button class="btn-green" type="button" onclick="window.openAttachedExam('${escCourse(id)}')">▶️ ابدأ امتحان الفيديو</button></div>`;
         }
+        // ============================================
+        // قفل الاختبار: الطالب له دخول واحد فقط
+        // بمجرد فتح الاختبار يتم حجز المحاولة حتى لو خرج أو أغلق الصفحة.
+        // ============================================
+        async function claimExamAttempt(examId){
+            if(!studentCode) throw new Error('يجب تسجيل الدخول أولاً');
+            const attemptId=`${examId}__${studentCode}`.replace(/\//g,'_');
+            const attemptRef=doc(db,'examAttempts',attemptId);
+            const existing=await getDoc(attemptRef);
+            if(existing.exists()) return {allowed:false,attempt:existing.data()};
+            // نعتبر وجود إجابة سابقة أيضًا محاولة مستهلكة، حتى لا يستطيع الطالب تجاوز القفل.
+            try{
+                const old=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode)));
+                if(!old.empty) return {allowed:false,attempt:{legacy:true}};
+            }catch(e){}
+            await setDoc(attemptRef,{examId,studentCode,studentName,studentGrade:localStorage.getItem('studentGrade')||'all',status:'started',startedAt:serverTimestamp()});
+            return {allowed:true,attempt:{status:'started'}};
+        }
+        async function finishExamAttempt(examId){
+            if(!studentCode)return;
+            try{
+                const attemptId=`${examId}__${studentCode}`.replace(/\//g,'_');
+                await updateDoc(doc(db,'examAttempts',attemptId),{status:'submitted',submittedAt:serverTimestamp()});
+            }catch(e){console.warn('تعذر تحديث حالة محاولة الاختبار:',e);}
+        }
+
         window.openAttachedExam=async function(examId){
             try{
             const snap=await getDoc(doc(db,'exams',examId));
             if(!snap.exists()) return alert('❌ الاختبار غير موجود');
             const exam=snap.data();
+            const claim=await claimExamAttempt(examId);
+            if(!claim.allowed){
+                return alert('🔒 لا يمكنك دخول هذا الاختبار مرة أخرى.\n\nتم تسجيل دخولك للاختبار من قبل، والخروج من الاختبار يعتبر انتهاءً لمحاولتك.');
+            }
             const id=examId;
             let container=document.getElementById('coursePlayerCard');
             if(!container){
@@ -2041,7 +2175,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             container.style.display='block';
             let html=`<div style="background:#fff;border-radius:16px;padding:18px;margin-top:15px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><h3 style="margin:0">📝 ${escCourse(exam.title||'اختبار')}</h3><button class="btn-soft" onclick="window.playCourseVideo(${currentCourseVideoIndex})">↩️ رجوع للفيديو</button></div>`;
             let answers=null; try{const q=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode))); answers=q.empty?null:q.docs[0].data();}catch(e){}
-            (exam.questions||[]).forEach((qst,qi)=>{const saved=answers?.answers?.[String(qi)]; const locked=saved!==undefined&&saved!==null; let control=''; if(qst.type==='mcq') control=(qst.options||[]).map((o,oi)=>`<label style="display:block;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:10px"><input type="radio" name="exam_${id}_${qi}" value="${oi}" ${String(saved)===String(oi)?'checked':''} ${locked?'disabled':''}> ${escCourse(o)}</label>`).join(''); else if(qst.type==='truefalse') control=`<label><input type="radio" name="exam_${id}_${qi}" value="true" ${String(saved)==='true'?'checked':''} ${locked?'disabled':''}> صح</label> <label><input type="radio" name="exam_${id}_${qi}" value="false" ${String(saved)==='false'?'checked':''} ${locked?'disabled':''}> خطأ</label>`; else control=`<textarea id="answer_${id}_${qi}" ${locked?'disabled':''} style="width:100%;min-height:100px;margin-top:8px" placeholder="اكتب إجابتك...">${locked?escCourse(saved):''}</textarea>`; html+=`<div style="padding:14px;margin-top:12px;border:1px solid #eee;border-radius:12px;background:#fafafa"><b>${qi+1}. ${escCourse(qst.text||'')}</b>${qst.imageUrl?`<img src="${escCourse(qst.imageUrl)}" style="max-width:100%;max-height:260px;display:block;margin:10px 0;border-radius:10px">`:''}<div style="margin-top:10px">${control}</div>${locked?'<div style="color:#777;margin-top:8px">🔐 تم إرسال الإجابة</div>':`<button class="btn-sm btn-add" style="margin-top:10px" onclick="window.submitSingleExamAnswer('${escCourse(id)}',${qi},true)">📤 إرسال الإجابة</button>`}</div>`;});
+            (exam.questions||[]).forEach((qst,qi)=>{const saved=answers?.answers?.[String(qi)]; const locked=saved!==undefined&&saved!==null; let control=''; if(qst.type==='mcq') control=(qst.options||[]).map((o,oi)=>`<label style="display:block;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:10px"><input type="radio" name="exam_${id}_${qi}" value="${oi}" ${String(saved)===String(oi)?'checked':''} ${locked?'disabled':''}> ${escCourse(o)}</label>`).join(''); else if(qst.type==='truefalse') control=`<label><input type="radio" name="exam_${id}_${qi}" value="true" ${String(saved)==='true'?'checked':''} ${locked?'disabled':''}> صح</label> <label><input type="radio" name="exam_${id}_${qi}" value="false" ${String(saved)==='false'?'checked':''} ${locked?'disabled':''}> خطأ</label>`; else control=`<textarea id="answer_${id}_${qi}" ${locked?'disabled':''} style="width:100%;min-height:100px;margin-top:8px" placeholder="اكتب إجابتك...">${locked?escCourse(saved):''}</textarea>`; html+=`<div style="padding:14px;margin-top:12px;border:1px solid #eee;border-radius:12px;background:#fafafa"><b>${qi+1}. ${escCourse(qst.text||'')}</b>${qst.imageUrl?`<div class="exam-image-wrap"><img src="${escCourse(qst.imageUrl)}" class="exam-question-image" alt="صورة السؤال" onclick="window.openExamImage('${escCourse(qst.imageUrl)}')"><button type="button" class="exam-image-zoom-btn" onclick="event.stopPropagation();window.openExamImage('${escCourse(qst.imageUrl)}')">🔍 تكبير الصورة</button></div>`:''}<div style="margin-top:10px">${control}</div>${locked?'<div style="color:#777;margin-top:8px">🔐 تم إرسال الإجابة</div>':`<button class="btn-sm btn-add" style="margin-top:10px" onclick="window.submitSingleExamAnswer('${escCourse(id)}',${qi},true)">📤 إرسال الإجابة</button>`}</div>`;});
             html+='</div>';
             container.innerHTML=html;
             container.scrollIntoView({behavior:'smooth',block:'start'});
@@ -2261,113 +2395,36 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                 try {
                     const q = query(collection(db, 'exams'), where('grade', 'in', [studentGrade, 'all']));
                     const snap = await getDocs(q);
-
-                    let html = `<h2>📝 الاختبارات</h2>`;
-                    if (snap.empty) {
-                        html += `<div style="background:white;border-radius:15px;padding:30px;text-align:center;color:#777;">لا توجد اختبارات حالياً</div>`;
-                    }
-
-                    const examData = snap.docs.map(d => ({ id: d.id, data: d.data() })).filter(item => !item.data.videoId && !item.data.lessonVideoId);
+                    const examData = snap.docs.map(d => ({ id:d.id, data:d.data() }));
                     sortContentNewestFirst(examData);
-                    for (const item of examData) {
-                        const data = item.data;
-                        const examId = item.id;
-
-                        if (Array.isArray(data.questions)) {
-                            let answersSnap;
+                    let html = `<h2>📝 الاختبارات</h2>`;
+                    if (!examData.length) {
+                        html += `<div style="background:white;border-radius:15px;padding:30px;text-align:center;color:#777;">لا توجد اختبارات حالياً</div>`;
+                    } else {
+                        for (const item of examData) {
+                            const data=item.data||{};
+                            let previous=false;
                             try {
-                                answersSnap = await getDocs(query(
-                                    collection(db, 'examAnswers'),
-                                    where('examId', '==', examId),
-                                    where('studentCode', '==', code)
-                                ));
-                            } catch (e) {
-                                answersSnap = { empty:true, docs:[] };
-                            }
-
-                            const previous = answersSnap.docs?.[0]?.data?.() || null;
-                            const reveal = data.answerReveal || 'instant';
-
+                                const old=await getDocs(query(collection(db,'examAttempts'),where('examId','==',item.id),where('studentCode','==',code)));
+                                previous=!old.empty;
+                                if(!previous){
+                                    const legacy=await getDocs(query(collection(db,'examAnswers'),where('examId','==',item.id),where('studentCode','==',code)));
+                                    previous=!legacy.empty;
+                                }
+                            } catch(e) {}
                             html += `<div style="border:1px solid #e0e0e0;padding:20px;margin:20px 0;border-radius:15px;background:white;box-shadow:0 2px 10px rgba(0,0,0,.04);">
-                                <h3 style="margin-top:0;">📝 ${data.title || 'اختبار'}</h3>
-                                <p style="color:#777;">عدد الأسئلة: ${data.questions.length}</p>`;
-
-                            data.questions.forEach((qst, qi) => {
-                                const savedAnswer = previous?.answers ? previous.answers[String(qi)] : undefined;
-                                const locked = savedAnswer !== undefined && savedAnswer !== null;
-                                const typeText = qst.type === 'mcq' ? 'اختيار من متعدد' :
-                                                 qst.type === 'truefalse' ? 'صح أو خطأ' : 'علل / بما تفسر';
-
-                                let answerControl = '';
-                                if (qst.type === 'mcq') {
-                                    answerControl = (qst.options || []).map((op, oi) =>
-                                        `<label style="display:block;padding:10px;margin:7px 0;border:1px solid #ddd;border-radius:10px;cursor:${locked?'default':'pointer'};">
-                                            <input type="radio" name="exam_${examId}_${qi}" value="${oi}" ${String(savedAnswer)===String(oi)?'checked':''} ${locked?'disabled':''}>
-                                            ${op}
-                                        </label>`).join('');
-                                } else if (qst.type === 'truefalse') {
-                                    answerControl = `
-                                        <label style="display:inline-block;padding:10px;margin-left:8px;border:1px solid #ddd;border-radius:10px;">
-                                            <input type="radio" name="exam_${examId}_${qi}" value="true" ${String(savedAnswer)==='true'?'checked':''} ${locked?'disabled':''}> صح
-                                        </label>
-                                        <label style="display:inline-block;padding:10px;border:1px solid #ddd;border-radius:10px;">
-                                            <input type="radio" name="exam_${examId}_${qi}" value="false" ${String(savedAnswer)==='false'?'checked':''} ${locked?'disabled':''}> خطأ
-                                        </label>`;
-                                } else {
-                                    answerControl = `<textarea id="answer_${examId}_${qi}" ${locked?'disabled':''} placeholder="اكتب إجابتك..." style="width:100%;min-height:110px;padding:12px;border:1px solid #ddd;border-radius:10px;">${locked?String(savedAnswer):''}</textarea>`;
-                                }
-
-                                const canReveal = previous && isExamRevealReady(previous.submittedAt, reveal);
-                                let feedback = '';
-                                if (locked && previous) {
-                                    if (reveal === 'never') {
-                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#f7f7f7;color:#777;">🔒 لن تظهر نتيجة هذا السؤال.</div>`;
-                                    } else if (!canReveal) {
-                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#fff8e8;color:#8a6500;">⏳ سيتم إظهار نتيجة الإجابة حسب الوقت الذي حدده المشرف.</div>`;
-                                    } else if (qst.manualReview || ['text','short','essay','other'].includes(qst.type)) {
-                                        const mg=previous?.manualGrades?.[String(qi)];
-                                        feedback = mg===true ? `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#eaf8ef;color:#218838;font-weight:800;">✅ تمت مراجعة السؤال: صحيحة</div>` : mg===false ? `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#fff0f0;color:#c0392b;font-weight:800;">❌ تمت مراجعة السؤال: غير صحيحة</div>` : `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#fff8e8;color:#8a6500;font-weight:800;">⏳ هذا السؤال يحتاج تصحيحًا يدويًا من المشرف.</div>`;
-                                    } else if (qst.type === 'mcq') {
-                                        const ok = Number(savedAnswer) === Number(qst.correct);
-                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:${ok?'#eaf8ef':'#fff0f0'};color:${ok?'#218838':'#c0392b'};font-weight:800;">${ok?'✅ إجابتك صحيحة':'❌ إجابتك غير صحيحة'}<br>الإجابة الصحيحة: ${qst.options?.[Number(qst.correct)] || ''}</div>`;
-                                    } else if (qst.type === 'truefalse') {
-                                        const ok = String(savedAnswer) === String(qst.correct);
-                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:${ok?'#eaf8ef':'#fff0f0'};color:${ok?'#218838':'#c0392b'};font-weight:800;">${ok?'✅ إجابتك صحيحة':'❌ إجابتك غير صحيحة'}<br>الإجابة الصحيحة: ${qst.correct === 'true' ? 'صح' : 'خطأ'}</div>`;
-                                    } else {
-                                        feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#f3f6ff;color:#4056a1;">✍️ تم إرسال إجابتك للمشرف للتصحيح.</div>`;
-                                    }
-                                }
-
-                                html += `<div style="margin-top:18px;padding:16px;border:1px solid #eee;border-radius:12px;background:#fafafa;">
-                                    <div style="font-weight:800;margin-bottom:8px;">${qi+1}. ${qst.text}</div>
-                                    ${qst.imageUrl ? `<img src="${qst.imageUrl}" alt="صورة السؤال" style="display:block;max-width:100%;max-height:320px;object-fit:contain;border-radius:12px;margin:10px 0;background:#fff;">` : ''}
-                                    <small style="color:#888;">${typeText}</small>
-                                    <div style="margin-top:10px;">${answerControl}</div>
-                                    ${locked ? '<span style="display:inline-block;margin-top:8px;color:#777;">🔐 تم إرسال الإجابة</span>' :
-                                        `<button class="btn-sm btn-add" style="margin-top:10px;width:auto;padding:8px 20px;" onclick="window.submitSingleExamAnswer('${examId}', ${qi})">📤 إرسال الإجابة</button>`}
-                                    ${feedback}
-                                </div>`;
-                            });
-
-                            if(previous && isExamRevealReady(previous.submittedAt,reveal) && reveal!=='never'){ const total=Number(data.questions?.length||0),score=Number(previous.totalCorrect||previous.autoCorrect||0),pending=(data.questions||[]).filter((q,qi)=>{const a=previous.answers?.[String(qi)];return a!==undefined&&a!==null&&(q.manualReview||['text','short','essay','other'].includes(q.type))&&!Object.prototype.hasOwnProperty.call(previous.manualGrades||{},String(qi));}).length; html += `<div style="margin-top:14px;padding:14px;border-radius:12px;background:#f3f8ff;font-weight:800;">📊 النتيجة الحالية: ${score} / ${total}${pending?` — ⏳ ${pending} سؤال تحت التصحيح`:''}</div>`;}
-                            html += `</div>`;
-                        } else {
-                            html += `<div style="border:1px solid #e0e0e0; padding:20px; margin:20px 0; border-radius:15px; background:white;">
-                                <h3>${data.title || 'اختبار'}</h3>
-                                <p><strong>النوع:</strong> ${data.type || ''}</p>
-                                <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-top:10px;">
-                                    ${data.type === 'image' ? `<img src="${data.content || ''}" width="100%" style="border-radius:10px;">` :
-                                      data.type === 'video' ? `<video controls controlsList="nodownload" src="${data.content || ''}" width="100%" style="border-radius:10px;"></video>` :
-                                      `<p style="font-size:18px;">${data.content || ''}</p>`}
-                                </div>
+                                <h3 style="margin-top:0;">📝 ${escCourse(data.title||'اختبار')}</h3>
+                                <p style="color:#777;">عدد الأسئلة: ${Array.isArray(data.questions)?data.questions.length:0}</p>
+                                ${previous
+                                  ? `<button class="btn-sm" style="background:#e5e7eb;color:#6b7280;cursor:not-allowed" disabled>🔒 تم استخدام محاولة الاختبار</button>`
+                                  : `<button class="btn-sm btn-green" type="button" onclick="window.openAttachedExam('${escCourse(item.id)}')">▶️ ابدأ الاختبار</button>`}
                             </div>`;
                         }
                     }
-
-                    container.innerHTML = html;
-                } catch (error) {
-                    console.error('خطأ في تحميل الاختبارات:', error);
-                    container.innerHTML = `<p style="color:red;">حدث خطأ في تحميل الاختبارات</p>`;
+                    container.innerHTML=html;
+                } catch(error) {
+                    console.error('خطأ في تحميل الاختبارات:',error);
+                    container.innerHTML=`<p style="color:red;">حدث خطأ في تحميل الاختبارات: ${escCourse(error?.message||'')}</p>`;
                 }
             }
             
