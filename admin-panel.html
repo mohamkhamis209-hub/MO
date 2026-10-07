@@ -2771,7 +2771,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             let html = `<h2>📚 الكتب</h2>
                         <div class="filter-bar">
                             <input id="bookTitle" placeholder="عنوان الكتاب">
-                            <input id="bookUrl" placeholder="رابط جوجل درايف أو أي رابط" style="flex:2; min-width:200px;">
+                            <input id="bookUrl" placeholder="رابط Google Drive أو Telegram (t.me) أو رابط مباشر" style="flex:2; min-width:200px;">
                             <input id="bookImageFile" type="file" accept="image/*" onchange="imageUploadStatus('bookImageFile','📷 صورة الكتاب جاهزة للرفع')" title="صورة الكتاب">
                             <span id="bookImageFileStatus" style="display:none;font-size:12px;font-weight:700;width:100%;"></span>
                             <select id="bookGrade">
@@ -2782,6 +2782,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                             </select>
                             <button id="bookAddBtn" onclick="addBook()" class="btn-sm btn-add">➕ إضافة الكتاب للكورس</button>
                         </div>
+                        <div style="margin:-6px 0 12px;color:#687786;font-size:12px;">📲 روابط Telegram مدعومة. في حساب الطالب لن يفتح Telegram داخل الموقع أو تلقائيًا؛ يتم فتحه فقط عند الضغط على زر الكتاب.</div>
                         <div class="filter-bar">
                             <select id="filterBookGrade" onchange="showBooks()">
                                 ${getGradeOptions(gradeFilter)}
@@ -2918,6 +2919,94 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
         window.removeExamQuestion = function(index) {
             window.__examQuestions.splice(index, 1);
             window.renderExamQuestions();
+        };
+
+        // =========================================================
+        // OCR الأسئلة من صورة الكتاب — قابل للتعديل قبل الحفظ
+        // =========================================================
+        async function ensureTesseractLoaded(){
+            if(window.Tesseract) return window.Tesseract;
+            await new Promise((resolve,reject)=>{
+                const sc=document.createElement('script');
+                sc.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.0.4/dist/tesseract.min.js';
+                sc.onload=resolve;
+                sc.onerror=()=>reject(new Error('تعذر تحميل أداة قراءة الصور. تأكد من اتصال الإنترنت.'));
+                document.head.appendChild(sc);
+            });
+            return window.Tesseract;
+        }
+        function normalizeOcrDigits(text){
+            return String(text||'').replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d))).replace(/\u00a0/g,' ').replace(/[ـ]/g,'');
+        }
+        function parseQuestionOCR(raw){
+            const normalized=normalizeOcrDigits(raw).replace(/\r/g,'');
+            const lines=normalized.split('\n').map(x=>x.replace(/\s+/g,' ').trim()).filter(Boolean);
+            const options=[];
+            let firstOption=-1;
+            const optionRe=/^(?:[\(\[]?\s*(?:([A-Da-d])|([أ-ي])|([1-4]))\s*[\)\].:：-]?\s+)(.+)$/u;
+            // ندعم صور الكتب التي تستخدم: أ) / ب- / 1. / A) ...
+            for(let i=0;i<lines.length;i++){
+                const line=lines[i];
+                let m=line.match(/^\s*[\(\[]?\s*([أبجدABCabc1-4])\s*[\)\].:：-]\s*(.+)$/u);
+                if(!m) m=line.match(/^\s*([أبجدABCabc1-4])\s*[\)\].:：-]\s*(.+)$/u);
+                if(m){
+                    if(firstOption===-1) firstOption=i;
+                    options.push(m[2].trim());
+                }
+            }
+            let questionLines=firstOption>=0?lines.slice(0,firstOption):lines;
+            // بعض الكتب تجعل بداية السؤال بدون علامة ترقيم، لذا نحتفظ بكل ما قبل أول اختيار.
+            let question=questionLines.join(' ').trim();
+            // لو لم نلتقط الخيارات بعلاماتها، نجرب أسطرًا تبدأ بكلمات شائعة مثل "أ-" بأشكال مختلفة.
+            if(options.length<2){
+                const loose=[];
+                for(const line of lines){
+                    const m=line.match(/^\s*([أبجد1-4])\s*[-–—:\.]\s*(.+)$/u);
+                    if(m) loose.push(m[2].trim());
+                }
+                if(loose.length>=2){
+                    options.splice(0,options.length,...loose);
+                    const firstLoose=lines.findIndex(x=>/^\s*[أبجد1-4]\s*[-–—:\.]\s*.+$/u.test(x));
+                    question=(firstLoose>=0?lines.slice(0,firstLoose):lines).join(' ').trim();
+                }
+            }
+            return {question,options:options.slice(0,4),raw:normalized};
+        }
+        window.ocrQuestionFromImage = async function(){
+            const file=document.getElementById('questionImageFile')?.files?.[0];
+            const status=document.getElementById('questionOCRStatus');
+            if(!file) return alert('📷 اختر أو صوّر صورة السؤال أولاً.');
+            if(!file.type?.startsWith('image/')) return alert('⚠️ الملف يجب أن يكون صورة.');
+            if(status) status.textContent='⏳ جاري قراءة السؤال من الصورة...';
+            try{
+                const TesseractLib=await ensureTesseractLoaded();
+                const worker=await TesseractLib.createWorker('ara', 1, {
+                    logger:m=>{
+                        if(!status) return;
+                        if(m?.status==='recognizing text' && Number.isFinite(m.progress)) status.textContent=`⏳ جاري قراءة الصورة... ${Math.round(m.progress*100)}%`;
+                        else if(m?.status) status.textContent=`⏳ ${m.status}`;
+                    }
+                });
+                const result=await worker.recognize(file);
+                await worker.terminate();
+                const parsed=parseQuestionOCR(result?.data?.text||'');
+                const qBox=document.getElementById('newQuestionText');
+                if(qBox) qBox.value=parsed.question||'';
+                if(parsed.options[0]) document.getElementById('opt1') && (document.getElementById('opt1').value=parsed.options[0]);
+                if(parsed.options[1]) document.getElementById('opt2') && (document.getElementById('opt2').value=parsed.options[1]);
+                if(parsed.options[2]) document.getElementById('opt3') && (document.getElementById('opt3').value=parsed.options[2]);
+                if(parsed.options[3]) document.getElementById('opt4') && (document.getElementById('opt4').value=parsed.options[3]);
+                if(document.getElementById('newQuestionType')) document.getElementById('newQuestionType').value='mcq';
+                window.renderQuestionTypeFields();
+                // إعادة تعبئة الاختيارات بعد إعادة الرسم
+                parsed.options.forEach((v,i)=>{const el=document.getElementById('opt'+(i+1));if(el)el.value=v;});
+                if(status) status.textContent=`✅ تم استخراج ${parsed.options.length} اختيارات. راجع السؤال وحدد الإجابة الصحيحة ثم اضغط «إضافة السؤال للاختبار».`;
+                if(!parsed.question && !parsed.options.length) alert('⚠️ لم أستطع قراءة النص بشكل كافٍ. قرّب الصورة وصوّر السؤال بوضوح أو ارفعه مرة أخرى.');
+            }catch(e){
+                console.error('OCR error',e);
+                if(status) status.textContent='❌ تعذر استخراج النص من الصورة.';
+                alert('❌ تعذر قراءة الصورة تلقائيًا. يمكنك كتابة السؤال يدويًا مع الاحتفاظ بالصورة المرفوعة.');
+            }
         };
 
         window.addExamQuestion = async function() {
@@ -3105,7 +3194,10 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                             <h3 style="margin-top:0;">➕ إضافة سؤال</h3>
                             <textarea id="newQuestionText" placeholder="اكتب السؤال هنا..." style="width:100%;min-height:80px;padding:10px;border-radius:8px;border:1px solid #ddd;"></textarea>
                             <label style="display:block;margin-top:8px;font-weight:800;">🖼️ صورة مع السؤال (اختياري)</label>
-                            <input id="questionImageFile" type="file" accept="image/*" style="width:100%;margin-top:6px;">
+                            <input id="questionImageFile" type="file" accept="image/*" capture="environment" style="width:100%;margin-top:6px;">
+                            <button type="button" onclick="window.ocrQuestionFromImage()" class="btn-sm" style="margin-top:8px;background:#7c3aed;color:#fff;width:100%;">📷 تصوير / رفع صورة السؤال واستخراج النص والاختيارات تلقائيًا</button>
+                            <div id="questionOCRStatus" style="margin-top:7px;color:#6b7280;font-size:12px;font-weight:800;"></div>
+                            <p style="margin:7px 0 0;color:#8a8f98;font-size:12px;line-height:1.6;">يمكنك تصوير السؤال من الكتاب أو رفع صورة جاهزة. بعد الاستخراج راجع النص والاختيارات وحدد الإجابة الصحيحة قبل حفظ السؤال.</p>
                             <select id="newQuestionType" onchange="renderQuestionTypeFields()" style="width:100%;margin-top:8px;">
                                 <option value="mcq">🔘 اختيار من متعدد</option>
                                 <option value="truefalse">✅❌ صح أو خطأ</option>
