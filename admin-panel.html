@@ -3030,74 +3030,30 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             window.showExams();
         };
 
+        window.gradeExamQuestion = async function(answerId, qi, value) {
+            try {
+                const ar=await getDoc(doc(db,'examAnswers',answerId)); if(!ar.exists()) return alert('إجابة الطالب غير موجودة');
+                const a=ar.data(), grades={...(a.manualGrades||{})}; grades[String(qi)]=value;
+                const correct=Object.values(grades).filter(v=>v===true).length;
+                const auto=Number(a.autoCorrect||0); await updateDoc(ar.ref,{manualGrades:grades,manualCorrect:correct,totalCorrect:auto+correct,gradedAt:serverTimestamp()});
+                window.viewExamAnswers(a.examId);
+            } catch(e){console.error(e);alert('❌ تعذر حفظ التصحيح: '+e.message)}
+        };
         window.viewExamAnswers = async function(examId) {
             try {
-                const examSnap = await getDoc(doc(db, 'exams', examId));
-                if (!examSnap.exists()) return alert('الاختبار غير موجود');
-                const exam = examSnap.data();
-
-                const snap = await getDocs(query(collection(db, 'examAnswers'), where('examId', '==', examId)));
-                let rows = [];
-                snap.forEach(d => rows.push({id:d.id, ...d.data()}));
-                rows.sort((a,b) => String(b.submittedAt?.toDate?.() || b.submittedAt || '').localeCompare(String(a.submittedAt?.toDate?.() || a.submittedAt || '')));
-
-                let html = `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
-                    <h2>👀 إجابات الطلاب — ${esc(exam.title || '')}</h2>
-                    <button class="btn-sm btn-search" onclick="showExams()">↩️ رجوع للاختبارات</button>
-                </div>`;
-
-                if (!rows.length) {
-                    html += `<div class="group-card"><p>لا توجد إجابات لهذا الاختبار حتى الآن.</p></div>`;
-                } else {
-                    html += rows.map((a, idx) => {
-                        const answers = a.answers || {};
-                        const questions = exam.questions || [];
-                        const details = questions.map((q, qi) => {
-                            const ans = answers[String(qi)];
-                            const answerText = q.type === 'mcq'
-                                ? (ans === null || ans === undefined ? '—' : (q.options?.[Number(ans)] || ans))
-                                : q.type === 'truefalse'
-                                    ? (ans === 'true' ? 'صح' : ans === 'false' ? 'خطأ' : '—')
-                                    : (ans || '—');
-
-                            let status = '';
-                            if (q.type === 'mcq' && ans !== undefined && ans !== null) {
-                                status = Number(ans) === Number(q.correct)
-                                    ? '<span style="color:#27ae60;font-weight:800;">✅ صحيحة</span>'
-                                    : '<span style="color:#e74c3c;font-weight:800;">❌ خاطئة</span>';
-                            } else if (q.type === 'truefalse' && ans !== undefined && ans !== null) {
-                                status = String(ans) === String(q.correct)
-                                    ? '<span style="color:#27ae60;font-weight:800;">✅ صحيحة</span>'
-                                    : '<span style="color:#e74c3c;font-weight:800;">❌ خاطئة</span>';
-                            } else if (['text','short','essay','other'].includes(q.type)) {
-                                status = '<span style="color:#f39c12;font-weight:800;">✍️ تصحيح يدوي</span>';
-                            }
-
-                            return `<div style="padding:12px;border-top:1px solid #eee;">
-                                <b>${qi+1}. ${esc(q.text)}</b>
-                                <div style="margin-top:6px;">إجابة الطالب: <span style="white-space:pre-wrap;">${esc(String(answerText))}</span> ${status}</div>
-                                ${q.type === 'text' && q.correctText ? `<div style="margin-top:5px;color:#666;">الإجابة النموذجية: ${esc(q.correctText)}</div>` : ''}
-                            </div>`;
-                        }).join('');
-
-                        const submitted = a.submittedAt?.toDate ? a.submittedAt.toDate().toLocaleString('ar-EG') : (a.submittedAt || '—');
-                        return `<div style="border:1px solid #ddd;border-radius:14px;background:#fff;padding:16px;margin:14px 0;">
-                            <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;">
-                                <h3 style="margin:0;">👤 ${esc(a.studentName || 'طالب')}</h3>
-                                <span>🔑 الكود: <b>${esc(a.studentCode || '—')}</b></span>
-                            </div>
-                            <small style="color:#777;">وقت الإرسال: ${esc(submitted)}</small>
-                            <div style="margin-top:8px;">النتيجة الآلية: <b>${Number(a.autoCorrect || 0)}</b> / ${Number(a.autoTotal || 0)}</div>
-                            ${details}
-                        </div>`;
-                    }).join('');
-                }
-
-                document.getElementById('content-area').innerHTML = html;
-            } catch (e) {
-                console.error(e);
-                document.getElementById('content-area').innerHTML = '<p style="color:red;">حدث خطأ أثناء تحميل إجابات الطلاب.</p>';
-            }
+                const examSnap=await getDoc(doc(db,'exams',examId)); if(!examSnap.exists())return alert('الاختبار غير موجود');
+                const exam=examSnap.data(), snap=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId)));
+                let rows=[];snap.forEach(d=>rows.push({id:d.id,...d.data()}));
+                let html=`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2>👀 إجابات الطلاب — ${esc(exam.title||'')}</h2><button class="btn-sm btn-search" onclick="showExams()">↩️ رجوع للاختبارات</button></div>`;
+                if(!rows.length) html+=`<div class="group-card"><p>لا توجد إجابات لهذا الاختبار حتى الآن.</p></div>`;
+                else rows.forEach(a=>{
+                    const answers=a.answers||{}, grades=a.manualGrades||{}, questions=exam.questions||[]; let manualPending=0;
+                    const details=questions.map((q,qi)=>{const ans=answers[String(qi)];const manual=q.manualReview||['text','short','essay','other'].includes(q.type);let answerText=q.type==='mcq'?(ans==null?'—':q.options?.[Number(ans)]||ans):q.type==='truefalse'?(ans==='true'?'صح':ans==='false'?'خطأ':'—'):(ans||'—');let status='';if(manual){if(!Object.prototype.hasOwnProperty.call(grades,String(qi))){manualPending++;status='<span style="color:#f39c12;font-weight:800">⏳ يحتاج تصحيح يدوي</span>';}else status=grades[String(qi)]===true?'<span style="color:#27ae60;font-weight:800">✅ صحيح</span>':'<span style="color:#e74c3c;font-weight:800">❌ خطأ</span>';}else if(q.type==='mcq'&&ans!=null)status=Number(ans)===Number(q.correct)?'<span style="color:#27ae60;font-weight:800">✅ صحيحة</span>':'<span style="color:#e74c3c;font-weight:800">❌ خاطئة</span>';else if(q.type==='truefalse'&&ans!=null)status=String(ans)===String(q.correct)?'<span style="color:#27ae60;font-weight:800">✅ صحيحة</span>':'<span style="color:#e74c3c;font-weight:800">❌ خاطئة</span>';return `<div style="padding:14px;border-top:1px solid #eee"><b>${qi+1}. ${esc(q.text||'سؤال بصورة')}</b>${q.imageUrl?`<img src="${esc(q.imageUrl)}" style="display:block;max-width:320px;max-height:220px;object-fit:contain;margin:8px 0;border-radius:10px">`:''}<div style="margin-top:6px">إجابة الطالب: <span style="white-space:pre-wrap">${esc(String(answerText))}</span> ${status}</div>${manual?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:9px"><button class="btn-sm btn-add" onclick="gradeExamQuestion('${a.id}',${qi},true)">✅ اعتبرها صحيحة</button><button class="btn-sm btn-danger" onclick="gradeExamQuestion('${a.id}',${qi},false)">❌ اعتبرها خاطئة</button></div>`:''}</div>`}).join('');
+                    const total=questions.length, score=Number(a.totalCorrect??a.autoCorrect??0),submitted=a.submittedAt?.toDate?a.submittedAt.toDate().toLocaleString('ar-EG'):(a.submittedAt||'—');
+                    html+=`<div style="border:1px solid #ddd;border-radius:14px;background:#fff;padding:16px;margin:14px 0"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><h3 style="margin:0">👤 ${esc(a.studentName||'طالب')}</h3><span>🔑 ${esc(a.studentCode||'—')}</span></div><small style="color:#777">وقت الإرسال: ${esc(submitted)}</small><div style="margin-top:8px;font-weight:800">📊 النتيجة: ${score} / ${total}${manualPending?` — ⏳ ${manualPending} سؤال لم يُصحح`:''}</div>${details}</div>`;
+                });
+                document.getElementById('content-area').innerHTML=html;
+            }catch(e){console.error(e);document.getElementById('content-area').innerHTML='<p style="color:red">حدث خطأ أثناء تحميل إجابات الطلاب.</p>';}
         };
 
         window.showExams = async function() {
@@ -3119,7 +3075,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                     exams = exams.filter(e => String(e.title || '').toLowerCase().includes(searchTerm));
                 }
 
-                let html = `<h2>📝 الاختبارات</h2>
+                let html = `<h2>📝 الاختبارات</h2><div style="padding:14px;background:#eef8ff;border:1px solid #cfe9ff;border-radius:14px;margin-bottom:14px"><b>🚀 منشئ الاختبارات الجديد</b><p style="margin:6px 0;color:#667">يدعم الصفوف المخصصة، الاختبار العام، الكورس، الدرس، رفع الصورة، التصوير بالكاميرا، والأسئلة التي تحتاج تصحيحًا يدويًا.</p><button class="btn-sm btn-add" onclick="window.location.href='question-importer.html'">➕ فتح منشئ الاختبار</button></div>
                     <div class="filter-bar" style="display:block;">
                         <input id="exTitle" placeholder="عنوان الاختبار" style="width:100%;margin-bottom:8px;">
                         <select id="exGrade" style="width:100%;margin-bottom:8px;">${getGradeOptions('all')}</select>

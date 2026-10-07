@@ -1776,82 +1776,26 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             try {
                 const examSnap = await getDoc(doc(db, 'exams', examId));
                 if (!examSnap.exists()) return alert('الاختبار غير موجود');
-                const exam = examSnap.data();
-                const question = exam.questions?.[questionIndex];
+                const exam = examSnap.data(); const question = exam.questions?.[questionIndex];
                 if (!question) return alert('السؤال غير موجود');
-
                 let value = null;
-                if (question.type === 'text') {
-                    value = document.getElementById(`answer_${examId}_${questionIndex}`)?.value?.trim() || '';
-                } else {
-                    const selected = document.querySelector(`input[name="exam_${examId}_${questionIndex}"]:checked`);
-                    value = selected ? selected.value : null;
-                }
-
-                if (value === null || value === '') return alert('اختر أو اكتب إجابتك أولاً');
-
-                const existingQ = query(
-                    collection(db, 'examAnswers'),
-                    where('examId', '==', examId),
-                    where('studentCode', '==', studentCode)
-                );
-                const existingSnap = await getDocs(existingQ);
-
-                let answerDoc = null;
-                if (!existingSnap.empty) {
-                    answerDoc = existingSnap.docs[0];
-                }
-
-                let answers = {};
-                let autoCorrect = 0;
-                let autoTotal = 0;
-                let submittedAt = new Date();
-
-                if (answerDoc) {
-                    const old = answerDoc.data();
-                    answers = {...(old.answers || {})};
-                    submittedAt = old.submittedAt || submittedAt;
-                }
-                answers[String(questionIndex)] = value;
-
-                (exam.questions || []).forEach((qst, i) => {
-                    const a = answers[String(i)];
-                    if (a === undefined || a === null) return;
-                    if (qst.type === 'mcq') {
-                        autoTotal++;
-                        if (Number(a) === Number(qst.correct)) autoCorrect++;
-                    } else if (qst.type === 'truefalse') {
-                        autoTotal++;
-                        if (String(a) === String(qst.correct)) autoCorrect++;
-                    }
-                });
-
-                const payload = {
-                    examId,
-                    examTitle: exam.title || '',
-                    studentCode: studentCode,
-                    studentName: studentName || localStorage.getItem('studentName') || 'طالب',
-                    studentGrade: localStorage.getItem('studentGrade') || 'all',
-                    answers,
-                    autoCorrect,
-                    autoTotal,
-                    submittedAt
-                };
-
-                if (answerDoc) {
-                    await updateDoc(answerDoc.ref, payload);
-                } else {
-                    await addDoc(collection(db, 'examAnswers'), payload);
-                }
-
-                alert('✅ تم إرسال إجابتك للمشرف');
-                loadSection('exams');
-            } catch (e) {
-                console.error('خطأ في إرسال الإجابة:', e);
-                alert('❌ حدث خطأ أثناء إرسال الإجابة');
-            }
+                if (['text','short','essay','other'].includes(question.type)) value = document.getElementById(`answer_${examId}_${questionIndex}`)?.value?.trim() || '';
+                else { const selected=document.querySelector(`input[name="exam_${examId}_${questionIndex}"]:checked`); value=selected?selected.value:null; }
+                if (value===null || value==='') return alert('اختر أو اكتب إجابتك أولاً');
+                const existingSnap=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode)));
+                let refDoc=existingSnap.empty?null:existingSnap.docs[0], answers={}, manualGrades={}, submittedAt=new Date();
+                if(refDoc){const old=refDoc.data();answers={...(old.answers||{})};manualGrades={...(old.manualGrades||{})};submittedAt=old.submittedAt||submittedAt;}
+                answers[String(questionIndex)]=value;
+                let autoCorrect=0,autoTotal=0;
+                (exam.questions||[]).forEach((qst,i)=>{const a=answers[String(i)];if(a===undefined||a===null||qst.manualReview)return;if(qst.type==='mcq'){autoTotal++;if(Number(a)===Number(qst.correct))autoCorrect++;}else if(qst.type==='truefalse'){autoTotal++;if(String(a)===String(qst.correct))autoCorrect++;}});
+                const manualTotal=(exam.questions||[]).filter(q=>q.manualReview || ['text','short','essay','other'].includes(q.type)).length;
+                const manualCorrect=Object.values(manualGrades).filter(v=>v===true).length;
+                const payload={examId,examTitle:exam.title||'',studentCode,studentName:studentName||localStorage.getItem('studentName')||'طالب',studentGrade:localStorage.getItem('studentGrade')||'all',answers,manualGrades,autoCorrect,autoTotal,manualCorrect,manualTotal,totalCorrect:autoCorrect+manualCorrect,totalQuestions:(exam.questions||[]).length,submittedAt};
+                if(refDoc) await updateDoc(refDoc.ref,payload); else await addDoc(collection(db,'examAnswers'),payload);
+                alert('✅ تم إرسال الإجابة. الأسئلة التي تحتاج تصحيحًا يدويًا ستظهر نتيجتها بعد مراجعة المشرف.'); loadSection('exams');
+            } catch(e){console.error(e);alert('❌ حدث خطأ أثناء إرسال الإجابة');}
         }
-
+        
         // ============================================
         // عرض قسم مؤسس المنصة
         // ============================================
@@ -2367,6 +2311,9 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                                         feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#f7f7f7;color:#777;">🔒 لن تظهر نتيجة هذا السؤال.</div>`;
                                     } else if (!canReveal) {
                                         feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#fff8e8;color:#8a6500;">⏳ سيتم إظهار نتيجة الإجابة حسب الوقت الذي حدده المشرف.</div>`;
+                                    } else if (qst.manualReview || ['text','short','essay','other'].includes(qst.type)) {
+                                        const mg=previous?.manualGrades?.[String(qi)];
+                                        feedback = mg===true ? `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#eaf8ef;color:#218838;font-weight:800;">✅ تمت مراجعة السؤال: صحيحة</div>` : mg===false ? `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#fff0f0;color:#c0392b;font-weight:800;">❌ تمت مراجعة السؤال: غير صحيحة</div>` : `<div style="margin-top:10px;padding:10px;border-radius:9px;background:#fff8e8;color:#8a6500;font-weight:800;">⏳ هذا السؤال يحتاج تصحيحًا يدويًا من المشرف.</div>`;
                                     } else if (qst.type === 'mcq') {
                                         const ok = Number(savedAnswer) === Number(qst.correct);
                                         feedback = `<div style="margin-top:10px;padding:10px;border-radius:9px;background:${ok?'#eaf8ef':'#fff0f0'};color:${ok?'#218838':'#c0392b'};font-weight:800;">${ok?'✅ إجابتك صحيحة':'❌ إجابتك غير صحيحة'}<br>الإجابة الصحيحة: ${qst.options?.[Number(qst.correct)] || ''}</div>`;
@@ -2389,6 +2336,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                                 </div>`;
                             });
 
+                            if(previous && isExamRevealReady(previous.submittedAt,reveal) && reveal!=='never'){ const total=Number(data.questions?.length||0),score=Number(previous.totalCorrect||previous.autoCorrect||0),pending=(data.questions||[]).filter((q,qi)=>{const a=previous.answers?.[String(qi)];return a!==undefined&&a!==null&&(q.manualReview||['text','short','essay','other'].includes(q.type))&&!Object.prototype.hasOwnProperty.call(previous.manualGrades||{},String(qi));}).length; html += `<div style="margin-top:14px;padding:14px;border-radius:12px;background:#f3f8ff;font-weight:800;">📊 النتيجة الحالية: ${score} / ${total}${pending?` — ⏳ ${pending} سؤال تحت التصحيح`:''}</div>`;}
                             html += `</div>`;
                         } else {
                             html += `<div style="border:1px solid #e0e0e0; padding:20px; margin:20px 0; border-radius:15px; background:white;">
