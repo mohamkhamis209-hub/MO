@@ -2027,12 +2027,24 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             return `<div class="video-attached-exam" style="margin-top:16px;padding:18px;border-radius:16px;background:#f7f4ff;border:1px solid #ddd2ff"><h3 style="margin:0 0 6px;color:#6d28d9">📝 امتحان الدرس: ${escCourse(e.title||'اختبار')}</h3><p style="color:#777;margin-top:4px">${Array.isArray(e.questions)?e.questions.length:0} سؤال — حل الاختبار من قسم الاختبارات أو افتحه هنا.</p><button class="btn-green" type="button" onclick="window.openAttachedExam('${escCourse(id)}')">▶️ ابدأ امتحان الفيديو</button></div>`;
         }
         window.openAttachedExam=async function(examId){
-            const snap=await getDoc(doc(db,'exams',examId)); if(!snap.exists()) return alert('الاختبار غير موجود');
-            const exam=snap.data(); const container=document.getElementById('coursePlayerCard'); if(!container)return;
+            try{
+            const snap=await getDoc(doc(db,'exams',examId));
+            if(!snap.exists()) return alert('❌ الاختبار غير موجود');
+            const exam=snap.data();
+            let container=document.getElementById('coursePlayerCard');
+            if(!container){
+                const main=document.getElementById('student-content');
+                if(!main) return alert('تعذر فتح الاختبار');
+                container=main;
+            }
+            container.style.display='block';
             let html=`<div style="background:#fff;border-radius:16px;padding:18px;margin-top:15px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><h3 style="margin:0">📝 ${escCourse(exam.title||'اختبار')}</h3><button class="btn-soft" onclick="window.playCourseVideo(${currentCourseVideoIndex})">↩️ رجوع للفيديو</button></div>`;
             let answers=null; try{const q=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode))); answers=q.empty?null:q.docs[0].data();}catch(e){}
             (exam.questions||[]).forEach((qst,qi)=>{const saved=answers?.answers?.[String(qi)]; const locked=saved!==undefined&&saved!==null; let control=''; if(qst.type==='mcq') control=(qst.options||[]).map((o,oi)=>`<label style="display:block;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:10px"><input type="radio" name="exam_${id}_${qi}" value="${oi}" ${String(saved)===String(oi)?'checked':''} ${locked?'disabled':''}> ${escCourse(o)}</label>`).join(''); else if(qst.type==='truefalse') control=`<label><input type="radio" name="exam_${id}_${qi}" value="true" ${String(saved)==='true'?'checked':''} ${locked?'disabled':''}> صح</label> <label><input type="radio" name="exam_${id}_${qi}" value="false" ${String(saved)==='false'?'checked':''} ${locked?'disabled':''}> خطأ</label>`; else control=`<textarea id="answer_${id}_${qi}" ${locked?'disabled':''} style="width:100%;min-height:100px;margin-top:8px" placeholder="اكتب إجابتك...">${locked?escCourse(saved):''}</textarea>`; html+=`<div style="padding:14px;margin-top:12px;border:1px solid #eee;border-radius:12px;background:#fafafa"><b>${qi+1}. ${escCourse(qst.text||'')}</b>${qst.imageUrl?`<img src="${escCourse(qst.imageUrl)}" style="max-width:100%;max-height:260px;display:block;margin:10px 0;border-radius:10px">`:''}<div style="margin-top:10px">${control}</div>${locked?'<div style="color:#777;margin-top:8px">🔐 تم إرسال الإجابة</div>':`<button class="btn-sm btn-add" style="margin-top:10px" onclick="window.submitSingleExamAnswer('${escCourse(id)}',${qi},true)">📤 إرسال الإجابة</button>`}</div>`;});
-            html+='</div>'; container.innerHTML=html; container.scrollIntoView({behavior:'smooth',block:'start'});
+            html+='</div>';
+            container.innerHTML=html;
+            container.scrollIntoView({behavior:'smooth',block:'start'});
+            }catch(e){ console.error('خطأ في فتح الاختبار:',e); alert('❌ تعذر فتح الاختبار\n\n'+(e?.message||'حدث خطأ غير معروف')); }
         };
 
         window.playCourseVideo = async function(index) {
