@@ -1871,34 +1871,52 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         // ============================================
         // دالة إرسال إجابة سؤال واحد
         // ============================================
-        async function submitSingleExamAnswer(examId, questionIndex) {
-            try {
+        async function submitExam(examId){
+            try{
+                if(!studentCode) return alert('يجب تسجيل الدخول أولاً');
                 const attemptId=`${examId}__${studentCode}`.replace(/\//g,'_');
                 const attemptSnap=await getDoc(doc(db,'examAttempts',attemptId));
-                if(!attemptSnap.exists()) return alert('🔒 يجب فتح الاختبار من زر «ابدأ الاختبار» أولاً.');
-                const examSnap = await getDoc(doc(db, 'exams', examId));
-                if (!examSnap.exists()) return alert('الاختبار غير موجود');
-                const exam = examSnap.data(); const question = exam.questions?.[questionIndex];
-                if (!question) return alert('السؤال غير موجود');
-                let value = null;
-                if (['text','short','essay','other'].includes(question.type)) value = document.getElementById(`answer_${examId}_${questionIndex}`)?.value?.trim() || '';
-                else { const selected=document.querySelector(`input[name="exam_${examId}_${questionIndex}"]:checked`); value=selected?selected.value:null; }
-                if (value===null || value==='') return alert('اختر أو اكتب إجابتك أولاً');
-                const existingSnap=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode)));
-                let refDoc=existingSnap.empty?null:existingSnap.docs[0], answers={}, manualGrades={}, submittedAt=new Date();
-                if(refDoc){const old=refDoc.data();answers={...(old.answers||{})};manualGrades={...(old.manualGrades||{})};submittedAt=old.submittedAt||submittedAt;}
-                answers[String(questionIndex)]=value;
+                if(!attemptSnap.exists()) return alert('🔒 افتح الاختبار من زر «ابدأ الاختبار» أولاً.');
+                const attemptData=attemptSnap.data();
+                if(attemptData.status==='submitted') return alert('🔒 تم تسليم هذا الاختبار بالفعل.');
+                const examSnap=await getDoc(doc(db,'exams',examId));
+                if(!examSnap.exists()) return alert('الاختبار غير موجود');
+                const exam=examSnap.data();
+                const questions=Array.isArray(exam.questions)?exam.questions:[];
+                const answers={};
+                let unanswered=[];
+                for(let i=0;i<questions.length;i++){
+                    const q=questions[i]; let value=null;
+                    if(['text','short','essay','other'].includes(q.type)) value=document.getElementById(`answer_${examId}_${i}`)?.value?.trim()||'';
+                    else {const selected=document.querySelector(`input[name="exam_${examId}_${i}"]:checked`); value=selected?selected.value:null;}
+                    if(value===null||value==='') unanswered.push(i+1); else answers[String(i)]=value;
+                }
+                if(unanswered.length){
+                    const more=unanswered.length>8?` (${unanswered.slice(0,8).join('، ')}...)`:'';
+                    return alert(`⚠️ لم تجب عن ${unanswered.length} سؤال${more}.\n\nيجب الإجابة عن جميع الأسئلة قبل تسليم الاختبار.`);
+                }
+                if(!confirm('هل أنت متأكد أنك تريد تسليم الاختبار؟\nبعد التسليم لن يمكنك الدخول إليه مرة أخرى إلا إذا أعاد المشرف فتحه لك.')) return;
+                const btn=document.getElementById(`submit-exam-${examId}`); if(btn){btn.disabled=true;btn.textContent='⏳ جاري تسليم الاختبار...';}
                 let autoCorrect=0,autoTotal=0;
-                (exam.questions||[]).forEach((qst,i)=>{const a=answers[String(i)];if(a===undefined||a===null||qst.manualReview)return;if(qst.type==='mcq'){autoTotal++;if(Number(a)===Number(qst.correct))autoCorrect++;}else if(qst.type==='truefalse'){autoTotal++;if(String(a)===String(qst.correct))autoCorrect++;}});
-                const manualTotal=(exam.questions||[]).filter(q=>q.manualReview || ['text','short','essay','other'].includes(q.type)).length;
-                const manualCorrect=Object.values(manualGrades).filter(v=>v===true).length;
-                const payload={examId,examTitle:exam.title||'',studentCode,studentName:studentName||localStorage.getItem('studentName')||'طالب',studentGrade:localStorage.getItem('studentGrade')||'all',answers,manualGrades,autoCorrect,autoTotal,manualCorrect,manualTotal,totalCorrect:autoCorrect+manualCorrect,totalQuestions:(exam.questions||[]).length,submittedAt};
-                if(refDoc) await updateDoc(refDoc.ref,payload); else await addDoc(collection(db,'examAnswers'),payload);
-                const answeredCount=Object.keys(answers).length;
-                if(answeredCount >= (exam.questions||[]).length) await finishExamAttempt(examId);
-                alert('✅ تم إرسال الإجابة. الأسئلة التي تحتاج تصحيحًا يدويًا ستظهر نتيجتها بعد مراجعة المشرف.'); loadSection('exams');
-            } catch(e){console.error(e);alert('❌ حدث خطأ أثناء إرسال الإجابة');}
+                questions.forEach(q=>{
+                    const a=answers[String(questions.indexOf(q))];
+                    if(q.manualReview || ['text','short','essay','other'].includes(q.type)) return;
+                    if(q.type==='mcq'){autoTotal++;if(Number(a)===Number(q.correct))autoCorrect++;}
+                    else if(q.type==='truefalse'){autoTotal++;if(String(a)===String(q.correct))autoCorrect++;}
+                });
+                const manualTotal=questions.filter(q=>q.manualReview||['text','short','essay','other'].includes(q.type)).length;
+                const payload={examId,examTitle:exam.title||'',studentCode,studentName:studentName||localStorage.getItem('studentName')||'طالب',studentGrade:localStorage.getItem('studentGrade')||'all',answers,manualGrades:{},autoCorrect,autoTotal,manualCorrect:0,manualTotal,totalCorrect:autoCorrect,totalQuestions:questions.length,submittedAt:serverTimestamp()};
+                const existing=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode)));
+                if(existing.empty) await addDoc(collection(db,'examAnswers'),payload); else await updateDoc(existing.docs[0].ref,payload);
+                await updateDoc(doc(db,'examAttempts',attemptId),{status:'submitted',submittedAt:serverTimestamp()});
+                alert('✅ تم تسليم الاختبار بنجاح.');
+                await loadSection('exams');
+            }catch(e){console.error('خطأ في تسليم الاختبار:',e);alert('❌ تعذر تسليم الاختبار\n\n'+(e?.message||'حدث خطأ غير معروف'));}
+            finally{const btn=document.getElementById(`submit-exam-${examId}`);if(btn){btn.disabled=false;btn.textContent='📤 تسليم الاختبار';}}
         }
+        window.submitExam=submitExam;
+        // توافق مع أي استدعاء قديم داخل النسخة
+        window.submitSingleExamAnswer=async function(examId){return submitExam(examId);};
         
         // ============================================
         // عرض قسم مؤسس المنصة
@@ -2167,30 +2185,53 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
             }catch(e){console.warn('تعذر تحديث حالة محاولة الاختبار:',e);}
         }
 
+        function examResultHtml(exam, result){
+            if(!result) return '';
+            const reveal=exam.answerReveal||'instant';
+            if(reveal==='never') return `<div style="margin-top:14px;padding:13px;border-radius:12px;background:#f6f6f6;color:#777">🔒 نتيجة الاختبار مخفية حسب إعداد المشرف.</div>`;
+            if(!isExamRevealReady(result.submittedAt,reveal)) return `<div style="margin-top:14px;padding:13px;border-radius:12px;background:#fff8e8;color:#8a6500">⏳ نتيجة الاختبار ستظهر حسب الوقت الذي حدده المشرف.</div>`;
+            const auto=Number(result.autoCorrect||0), manualTotal=Number(result.manualTotal||0), manualCorrect=Number(result.manualCorrect||0), total=Number(result.totalQuestions||exam.questions?.length||0);
+            const pending=Math.max(0,manualTotal-manualCorrect-Object.keys(result.manualGrades||{}).filter(k=>Object.prototype.hasOwnProperty.call(result.manualGrades||{},k)).length+Object.keys(result.manualGrades||{}).length);
+            const gradedCount=Object.keys(result.manualGrades||{}).length;
+            const allManualDone=gradedCount>=manualTotal;
+            const score=auto+manualCorrect;
+            return `<div style="margin-top:14px;padding:14px;border-radius:14px;background:#eefaf3;border:1px solid #cdebd8"><div style="font-weight:900;font-size:18px">📊 نتيجتك: ${score} / ${total}</div><div style="margin-top:6px;color:#555">التصحيح التلقائي: ${auto} من ${Number(result.autoTotal||0)}${manualTotal?` • الأسئلة اليدوية: ${manualCorrect}/${manualTotal}`:''}</div>${manualTotal&&!allManualDone?`<div style="margin-top:8px;color:#a66a00;font-weight:800">⏳ ما زال هناك ${Math.max(0,manualTotal-gradedCount)} سؤال يحتاج تصحيحًا يدويًا. سيتم تحديث النتيجة بعد تصحيح المشرف.</div>`:'<div style="margin-top:8px;color:#218838;font-weight:800">✅ اكتمل تصحيح الاختبار.</div>'}</div>`;
+        }
         window.openAttachedExam=async function(examId){
             try{
-            const snap=await getDoc(doc(db,'exams',examId));
-            if(!snap.exists()) return alert('❌ الاختبار غير موجود');
-            const exam=snap.data();
-            const claim=await claimExamAttempt(examId);
-            if(!claim.allowed){
-                return alert('🔒 لا يمكنك دخول هذا الاختبار مرة أخرى.\n\nتم تسجيل دخولك للاختبار من قبل، والخروج من الاختبار يعتبر انتهاءً لمحاولتك.');
-            }
-            const id=examId;
-            let container=document.getElementById('coursePlayerCard');
-            if(!container){
-                const main=document.getElementById('student-content');
-                if(!main) return alert('تعذر فتح الاختبار');
-                container=main;
-            }
-            container.style.display='block';
-            let html=`<div style="background:#fff;border-radius:16px;padding:18px;margin-top:15px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><h3 style="margin:0">📝 ${escCourse(exam.title||'اختبار')}</h3><button class="btn-soft" onclick="window.playCourseVideo(${currentCourseVideoIndex})">↩️ رجوع للفيديو</button></div>`;
-            let answers=null; try{const q=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode))); answers=q.empty?null:q.docs[0].data();}catch(e){}
-            (exam.questions||[]).forEach((qst,qi)=>{const saved=answers?.answers?.[String(qi)]; const locked=saved!==undefined&&saved!==null; let control=''; if(qst.type==='mcq') control=(qst.options||[]).map((o,oi)=>`<label style="display:block;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:10px"><input type="radio" name="exam_${id}_${qi}" value="${oi}" ${String(saved)===String(oi)?'checked':''} ${locked?'disabled':''}> ${escCourse(o)}</label>`).join(''); else if(qst.type==='truefalse') control=`<label><input type="radio" name="exam_${id}_${qi}" value="true" ${String(saved)==='true'?'checked':''} ${locked?'disabled':''}> صح</label> <label><input type="radio" name="exam_${id}_${qi}" value="false" ${String(saved)==='false'?'checked':''} ${locked?'disabled':''}> خطأ</label>`; else control=`<textarea id="answer_${id}_${qi}" ${locked?'disabled':''} style="width:100%;min-height:100px;margin-top:8px" placeholder="اكتب إجابتك...">${locked?escCourse(saved):''}</textarea>`; html+=`<div style="padding:14px;margin-top:12px;border:1px solid #eee;border-radius:12px;background:#fafafa"><b>${qi+1}. ${escCourse(qst.text||'')}</b>${qst.imageUrl?`<div class="exam-image-wrap"><img src="${escCourse(qst.imageUrl)}" class="exam-question-image" alt="صورة السؤال" onclick="window.openExamImage('${escCourse(qst.imageUrl)}')"><button type="button" class="exam-image-zoom-btn" onclick="event.stopPropagation();window.openExamImage('${escCourse(qst.imageUrl)}')">🔍 تكبير الصورة</button></div>`:''}<div style="margin-top:10px">${control}</div>${locked?'<div style="color:#777;margin-top:8px">🔐 تم إرسال الإجابة</div>':`<button class="btn-sm btn-add" style="margin-top:10px" onclick="window.submitSingleExamAnswer('${escCourse(id)}',${qi},true)">📤 إرسال الإجابة</button>`}</div>`;});
-            html+='</div>';
-            container.innerHTML=html;
-            container.scrollIntoView({behavior:'smooth',block:'start'});
-            }catch(e){ console.error('خطأ في فتح الاختبار:',e); alert('❌ تعذر فتح الاختبار\n\n'+(e?.message||'حدث خطأ غير معروف')); }
+                const snap=await getDoc(doc(db,'exams',examId));
+                if(!snap.exists()) return alert('❌ الاختبار غير موجود');
+                const exam=snap.data();
+                const id=examId;
+                const attemptId=`${examId}__${studentCode}`.replace(/\//g,'_');
+                const attemptSnap=await getDoc(doc(db,'examAttempts',attemptId));
+                if(attemptSnap.exists() && attemptSnap.data().status==='submitted'){
+                    const rs=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode)));
+                    const result=rs.empty?null:rs.docs[0].data();
+                    return alert('🔒 تم تسليم هذا الاختبار بالفعل.\n\n'+(result?`درجتك الحالية: ${Number(result.totalCorrect||result.autoCorrect||0)} / ${Number(result.totalQuestions||exam.questions?.length||0)}`:'لا توجد نتيجة محفوظة بعد.')+'\n\nإذا أردت الإعادة، اطلب من المشرف إعادة فتح الاختبار لك.');
+                }
+                if(!attemptSnap.exists()){
+                    const claim=await claimExamAttempt(examId);
+                    if(!claim.allowed) return alert('🔒 لا يمكنك دخول هذا الاختبار مرة أخرى.\n\nتم تسجيل دخولك للاختبار من قبل، والخروج من الاختبار يعتبر انتهاءً لمحاولتك.');
+                }
+                let container=document.getElementById('coursePlayerCard');
+                if(!container){container=document.getElementById('student-content');}
+                if(!container) return alert('تعذر فتح الاختبار');
+                container.style.display='block';
+                let html=`<div style="background:#fff;border-radius:16px;padding:18px;margin-top:15px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><h3 style="margin:0">📝 ${escCourse(exam.title||'اختبار')}</h3><button class="btn-soft" onclick="window.playCourseVideo(${currentCourseVideoIndex})">↩️ رجوع للفيديو</button></div><p style="color:#777;margin-top:8px">⚠️ بعد الضغط على «تسليم الاختبار» لن تستطيع الدخول مرة أخرى إلا بعد إعادة فتحه من المشرف.</p>`;
+                const rs=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode)));
+                const previous=rs.empty?null:rs.docs[0].data();
+                if(previous){ html+=examResultHtml(exam,previous); }
+                (exam.questions||[]).forEach((qst,qi)=>{
+                    let control='';
+                    if(qst.type==='mcq') control=(qst.options||[]).map((o,oi)=>`<label style="display:block;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:10px"><input type="radio" name="exam_${id}_${qi}" value="${oi}"> ${escCourse(o)}</label>`).join('');
+                    else if(qst.type==='truefalse') control=`<label><input type="radio" name="exam_${id}_${qi}" value="true"> صح</label> <label><input type="radio" name="exam_${id}_${qi}" value="false"> خطأ</label>`;
+                    else control=`<textarea id="answer_${id}_${qi}" style="width:100%;min-height:100px;margin-top:8px" placeholder="اكتب إجابتك..."></textarea>`;
+                    html+=`<div style="padding:14px;margin-top:12px;border:1px solid #eee;border-radius:12px;background:#fafafa"><b>${qi+1}. ${escCourse(qst.text||'')}</b>${qst.imageUrl?`<div class="exam-image-wrap"><img src="${escCourse(qst.imageUrl)}" class="exam-question-image" alt="صورة السؤال" onclick="window.openExamImage('${escCourse(qst.imageUrl)}')"><button type="button" class="exam-image-zoom-btn" onclick="event.stopPropagation();window.openExamImage('${escCourse(qst.imageUrl)}')">🔍 تكبير الصورة</button></div>`:''}<div style="margin-top:10px">${control}</div></div>`;
+                });
+                html+=`<div style="margin-top:22px;padding-top:18px;border-top:2px solid #eee"><button id="submit-exam-${escCourse(examId)}" class="btn-green" type="button" style="width:100%;font-size:18px;padding:14px" onclick="window.submitExam('${escCourse(examId)}')">📤 تسليم الاختبار</button></div></div>`;
+                container.innerHTML=html; container.scrollIntoView({behavior:'smooth',block:'start'});
+            }catch(e){console.error('خطأ في فتح الاختبار:',e);alert('❌ تعذر فتح الاختبار\n\n'+(e?.message||'حدث خطأ غير معروف'));}
         };
 
         window.playCourseVideo = async function(index) {
@@ -2426,7 +2467,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                                 <h3 style="margin-top:0;">📝 ${escCourse(data.title||'اختبار')}</h3>
                                 <p style="color:#777;">عدد الأسئلة: ${Array.isArray(data.questions)?data.questions.length:0}</p>
                                 ${previous
-                                  ? `<button class="btn-sm" style="background:#e5e7eb;color:#6b7280;cursor:not-allowed" disabled>🔒 تم استخدام محاولة الاختبار</button>`
+                                  ? `<button class="btn-sm" style="background:#e5e7eb;color:#6b7280;cursor:not-allowed" disabled>🔒 تم تسليم الاختبار</button>${(()=>{return examResultHtml(data, previous)})()}`
                                   : `<button class="btn-sm btn-green" type="button" onclick="window.openAttachedExam('${escCourse(item.id)}')">▶️ ابدأ الاختبار</button>`}
                             </div>`;
                         }
