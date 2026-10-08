@@ -2188,14 +2188,71 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         function examResultHtml(exam, result){
             if(!result) return '';
             const reveal=exam.answerReveal||'instant';
-            if(reveal==='never') return `<div style="margin-top:14px;padding:13px;border-radius:12px;background:#f6f6f6;color:#777">🔒 نتيجة الاختبار مخفية حسب إعداد المشرف.</div>`;
-            if(!isExamRevealReady(result.submittedAt,reveal)) return `<div style="margin-top:14px;padding:13px;border-radius:12px;background:#fff8e8;color:#8a6500">⏳ نتيجة الاختبار ستظهر حسب الوقت الذي حدده المشرف.</div>`;
-            const auto=Number(result.autoCorrect||0), manualTotal=Number(result.manualTotal||0), manualCorrect=Number(result.manualCorrect||0), total=Number(result.totalQuestions||exam.questions?.length||0);
-            const pending=Math.max(0,manualTotal-manualCorrect-Object.keys(result.manualGrades||{}).filter(k=>Object.prototype.hasOwnProperty.call(result.manualGrades||{},k)).length+Object.keys(result.manualGrades||{}).length);
-            const gradedCount=Object.keys(result.manualGrades||{}).length;
+            if(reveal==='never') return `<div style="margin-top:14px;padding:13px;border-radius:12px;background:#f6f6f6;color:#777">🔒 نتيجة الاختبار وتصحيح الإجابات مخفيان حسب إعداد المشرف.</div>`;
+            if(!isExamRevealReady(result.submittedAt,reveal)) return `<div style="margin-top:14px;padding:13px;border-radius:12px;background:#fff8e8;color:#8a6500">⏳ ستظهر نتيجتك والأخطاء والإجابات الصحيحة حسب المدة التي حددها المشرف.</div>`;
+
+            const questions=Array.isArray(exam.questions)?exam.questions:[];
+            const answers=result.answers||{};
+            const grades=result.manualGrades||{};
+            const auto=Number(result.autoCorrect||0), manualTotal=Number(result.manualTotal||0), manualCorrect=Number(result.manualCorrect||0), total=Number(result.totalQuestions||questions.length||0);
+            const gradedCount=Object.keys(grades).length;
             const allManualDone=gradedCount>=manualTotal;
-            const score=auto+manualCorrect;
-            return `<div style="margin-top:14px;padding:14px;border-radius:14px;background:#eefaf3;border:1px solid #cdebd8"><div style="font-weight:900;font-size:18px">📊 نتيجتك: ${score} / ${total}</div><div style="margin-top:6px;color:#555">التصحيح التلقائي: ${auto} من ${Number(result.autoTotal||0)}${manualTotal?` • الأسئلة اليدوية: ${manualCorrect}/${manualTotal}`:''}</div>${manualTotal&&!allManualDone?`<div style="margin-top:8px;color:#a66a00;font-weight:800">⏳ ما زال هناك ${Math.max(0,manualTotal-gradedCount)} سؤال يحتاج تصحيحًا يدويًا. سيتم تحديث النتيجة بعد تصحيح المشرف.</div>`:'<div style="margin-top:8px;color:#218838;font-weight:800">✅ اكتمل تصحيح الاختبار.</div>'}</div>`;
+            const score=Number(result.totalCorrect ?? (auto+manualCorrect));
+            const wrong=[];
+            const pending=[];
+
+            questions.forEach((q,qi)=>{
+                const key=String(qi), ans=answers[key];
+                const manual=q.manualReview || ['text','short','essay','other'].includes(q.type);
+                if(manual){
+                    if(Object.prototype.hasOwnProperty.call(grades,key)){
+                        if(grades[key]===false) wrong.push({q,qi,ans,manual:true});
+                    }else pending.push({q,qi});
+                    return;
+                }
+                if(q.type==='mcq' && ans!=null && String(ans)!=='' && Number(ans)!==Number(q.correct)) wrong.push({q,qi,ans});
+                else if(q.type==='truefalse' && ans!=null && String(ans)!==String(q.correct)) wrong.push({q,qi,ans});
+            });
+
+            const answerText=(q,ans)=>{
+                if(ans==null||ans==='') return '—';
+                if(q.type==='mcq') return q.options?.[Number(ans)] ?? String(ans);
+                if(q.type==='truefalse') return String(ans)==='true'?'صح':String(ans)==='false'?'خطأ':String(ans);
+                return String(ans);
+            };
+            const correctText=(q)=>{
+                if(q.type==='mcq') return q.options?.[Number(q.correct)] ?? 'غير محددة';
+                if(q.type==='truefalse') return String(q.correct)==='true'?'صح':String(q.correct)==='false'?'خطأ':'غير محددة';
+                return q.correctText || 'إجابة نموذجية/تصحيح المشرف';
+            };
+
+            let html=`<div style="margin-top:14px;padding:15px;border-radius:14px;background:#eefaf3;border:1px solid #cdebd8">
+                <div style="font-weight:900;font-size:19px">📊 نتيجتك: ${score} / ${total}</div>
+                <div style="margin-top:6px;color:#555">التصحيح التلقائي: ${auto} من ${Number(result.autoTotal||0)}${manualTotal?` • الأسئلة اليدوية: ${manualCorrect}/${manualTotal}`:''}</div>`;
+
+            if(manualTotal && !allManualDone) html+=`<div style="margin-top:8px;color:#a66a00;font-weight:800">⏳ ما زال هناك ${Math.max(0,manualTotal-gradedCount)} سؤال يحتاج تصحيحًا يدويًا. ستتحدث النتيجة والأخطاء بعد تصحيح المشرف.</div>`;
+            else html+=`<div style="margin-top:8px;color:#218838;font-weight:800">✅ اكتمل تصحيح الاختبار.</div>`;
+
+            if(wrong.length){
+                html+=`<div style="margin-top:16px;padding-top:14px;border-top:1px solid #cdebd8"><h4 style="margin:0 0 10px;color:#c0392b">❌ الأخطاء التي أخطأت فيها (${wrong.length})</h4>`;
+                wrong.forEach(({q,qi,ans})=>{
+                    html+=`<div style="margin:9px 0;padding:12px;border-radius:11px;background:#fff5f5;border:1px solid #f2caca">
+                        <div style="font-weight:800">${qi+1}. ${escCourse(q.text||'سؤال بصورة')}</div>
+                        ${q.imageUrl?`<img src="${escCourse(q.imageUrl)}" alt="صورة السؤال" style="display:block;max-width:100%;max-height:220px;object-fit:contain;margin:8px 0;border-radius:9px;background:#fff">`:''}
+                        <div style="margin-top:6px">إجابتك: <b>${escCourse(answerText(q,ans))}</b></div>
+                        <div style="margin-top:4px;color:#218838">الإجابة الصحيحة: <b>${escCourse(correctText(q))}</b></div>
+                    </div>`;
+                });
+                html+=`</div>`;
+            } else if(allManualDone) {
+                html+=`<div style="margin-top:14px;padding:10px;border-radius:10px;background:#eaf8ef;color:#218838;font-weight:800">🎉 لا توجد أخطاء في الأسئلة المصححة.</div>`;
+            }
+
+            if(pending.length){
+                html+=`<div style="margin-top:14px;padding:11px;border-radius:10px;background:#fff8e8;color:#8a6500">⏳ يوجد ${pending.length} سؤال يحتاج تصحيحًا يدويًا، ولن تظهر حالته النهائية حتى يصححه المشرف.</div>`;
+            }
+            html+=`</div>`;
+            return html;
         }
         window.openAttachedExam=async function(examId){
             try{
