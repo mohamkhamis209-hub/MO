@@ -2205,15 +2205,17 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                 const id=examId;
                 const attemptId=`${examId}__${studentCode}`.replace(/\//g,'_');
                 const attemptSnap=await getDoc(doc(db,'examAttempts',attemptId));
-                if(attemptSnap.exists() && attemptSnap.data().status==='submitted'){
+                if(attemptSnap.exists()){
+                    const attempt=attemptSnap.data()||{};
                     const rs=await getDocs(query(collection(db,'examAnswers'),where('examId','==',examId),where('studentCode','==',studentCode)));
                     const result=rs.empty?null:rs.docs[0].data();
-                    return alert('🔒 تم تسليم هذا الاختبار بالفعل.\n\n'+(result?`درجتك الحالية: ${Number(result.totalCorrect||result.autoCorrect||0)} / ${Number(result.totalQuestions||exam.questions?.length||0)}`:'لا توجد نتيجة محفوظة بعد.')+'\n\nإذا أردت الإعادة، اطلب من المشرف إعادة فتح الاختبار لك.');
+                    if(attempt.status==='submitted'){
+                        return alert('🔒 تم تسليم هذا الاختبار بالفعل.\n\n'+(result?`درجتك الحالية: ${Number(result.totalCorrect||result.autoCorrect||0)} / ${Number(result.totalQuestions||exam.questions?.length||0)}`:'لا توجد نتيجة محفوظة بعد.')+'\n\nإذا أردت الإعادة، اطلب من المشرف إعادة فتح الاختبار لك.');
+                    }
+                    return alert('🔒 هذه المحاولة مقفولة.\n\nلقد بدأت الاختبار من قبل ولم يتم تسليمه، لذلك لا يمكن فتحه مرة أخرى.\n\nإذا خرجت بالخطأ، اطلب من المشرف إعادة فتح الاختبار لك.');
                 }
-                if(!attemptSnap.exists()){
-                    const claim=await claimExamAttempt(examId);
-                    if(!claim.allowed) return alert('🔒 لا يمكنك دخول هذا الاختبار مرة أخرى.\n\nتم تسجيل دخولك للاختبار من قبل، والخروج من الاختبار يعتبر انتهاءً لمحاولتك.');
-                }
+                const claim=await claimExamAttempt(examId);
+                if(!claim.allowed) return alert('🔒 لا يمكنك دخول هذا الاختبار مرة أخرى.\n\nتم تسجيل دخولك للاختبار من قبل، والخروج من الاختبار يعتبر انتهاءً لمحاولتك.');
                 let container=document.getElementById('coursePlayerCard');
                 if(!container){container=document.getElementById('student-content');}
                 if(!container) return alert('تعذر فتح الاختبار');
@@ -2472,7 +2474,9 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                                 <p style="color:#777;">عدد الأسئلة: ${Array.isArray(data.questions)?data.questions.length:0}</p>
                                 ${submitted
                                   ? `<button class="btn-sm" style="background:#e5e7eb;color:#6b7280;cursor:not-allowed" disabled>🔒 تم تسليم الاختبار</button>${examResultHtml(data, previous)}`
-                                  : `<button class="btn-sm btn-green" type="button" onclick="window.openAttachedExam('${escCourse(item.id)}')">▶️ ابدأ الاختبار</button>`}
+                                  : attemptUsed
+                                    ? `<button class="btn-sm" style="background:#fff3cd;color:#8a6500;cursor:not-allowed" disabled>🔒 تم بدء الاختبار ولم يتم تسليمه</button><div style="margin-top:10px;padding:11px;border-radius:10px;background:#fff8e8;color:#8a6500;font-weight:700">⏳ لا توجد درجة حتى الآن لأن الاختبار لم يتم تسليمه. اطلب من المشرف إعادة فتحه إذا خرجت بالخطأ.</div>`
+                                    : `<button class="btn-sm btn-green" type="button" onclick="window.openAttachedExam('${escCourse(item.id)}')">▶️ ابدأ الاختبار</button>`}
                             </div>`;
                         }
                     }
