@@ -2454,20 +2454,24 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                     } else {
                         for (const item of examData) {
                             const data=item.data||{};
-                            let previous=false;
+                            let previous=null;
+                            let attemptUsed=false;
                             try {
                                 const old=await getDocs(query(collection(db,'examAttempts'),where('examId','==',item.id),where('studentCode','==',code)));
-                                previous=!old.empty;
-                                if(!previous){
-                                    const legacy=await getDocs(query(collection(db,'examAnswers'),where('examId','==',item.id),where('studentCode','==',code)));
-                                    previous=!legacy.empty;
+                                attemptUsed=!old.empty;
+                                if(attemptUsed){
+                                    const attempt=old.docs[0].data()||{};
+                                    if(attempt.status!=='submitted') attemptUsed=true;
                                 }
-                            } catch(e) {}
+                                const resultSnap=await getDocs(query(collection(db,'examAnswers'),where('examId','==',item.id),where('studentCode','==',code)));
+                                if(!resultSnap.empty) previous=resultSnap.docs[0].data()||null;
+                            } catch(e) { console.warn('تعذر تحميل نتيجة الاختبار:',e); }
+                            const submitted=!!previous || attemptUsed;
                             html += `<div style="border:1px solid #e0e0e0;padding:20px;margin:20px 0;border-radius:15px;background:white;box-shadow:0 2px 10px rgba(0,0,0,.04);">
                                 <h3 style="margin-top:0;">📝 ${escCourse(data.title||'اختبار')}</h3>
                                 <p style="color:#777;">عدد الأسئلة: ${Array.isArray(data.questions)?data.questions.length:0}</p>
-                                ${previous
-                                  ? `<button class="btn-sm" style="background:#e5e7eb;color:#6b7280;cursor:not-allowed" disabled>🔒 تم تسليم الاختبار</button>${(()=>{return examResultHtml(data, previous)})()}`
+                                ${submitted
+                                  ? `<button class="btn-sm" style="background:#e5e7eb;color:#6b7280;cursor:not-allowed" disabled>🔒 تم تسليم الاختبار</button>${examResultHtml(data, previous)}`
                                   : `<button class="btn-sm btn-green" type="button" onclick="window.openAttachedExam('${escCourse(item.id)}')">▶️ ابدأ الاختبار</button>`}
                             </div>`;
                         }
