@@ -1,0 +1,4647 @@
+[
+  {
+    "en": "hello",
+    "ar": "مرحبًا",
+    "level": "A1"
+  },
+  {
+    "en": "goodbye",
+    "ar": "إلى اللقاء",
+    "level": "A1"
+  },
+  {
+    "en": "please",
+    "ar": "من فضلك",
+    "level": "A1"
+  },
+  {
+    "en": "thanks",
+    "ar": "شكرًا",
+    "level": "A1"
+  },
+  {
+    "en": "sorry",
+    "ar": "آسف",
+    "level": "A1"
+  },
+  {
+    "en": "yes",
+    "ar": "نعم",
+    "level": "A1"
+  },
+  {
+    "en": "no",
+    "ar": "لا",
+    "level": "A1"
+  },
+  {
+    "en": "welcome",
+    "ar": "مرحبًا بك",
+    "level": "A1"
+  },
+  {
+    "en": "name",
+    "ar": "اسم",
+    "level": "A1"
+  },
+  {
+    "en": "age",
+    "ar": "عمر",
+    "level": "A1"
+  },
+  {
+    "en": "boy",
+    "ar": "ولد",
+    "level": "A1"
+  },
+  {
+    "en": "girl",
+    "ar": "بنت",
+    "level": "A1"
+  },
+  {
+    "en": "man",
+    "ar": "رجل",
+    "level": "A1"
+  },
+  {
+    "en": "woman",
+    "ar": "امرأة",
+    "level": "A1"
+  },
+  {
+    "en": "child",
+    "ar": "طفل",
+    "level": "A1"
+  },
+  {
+    "en": "baby",
+    "ar": "طفل رضيع",
+    "level": "A1"
+  },
+  {
+    "en": "family",
+    "ar": "عائلة",
+    "level": "A1"
+  },
+  {
+    "en": "father",
+    "ar": "أب",
+    "level": "A1"
+  },
+  {
+    "en": "mother",
+    "ar": "أم",
+    "level": "A1"
+  },
+  {
+    "en": "parent",
+    "ar": "والد",
+    "level": "A1"
+  },
+  {
+    "en": "son",
+    "ar": "ابن",
+    "level": "A1"
+  },
+  {
+    "en": "daughter",
+    "ar": "ابنة",
+    "level": "A1"
+  },
+  {
+    "en": "brother",
+    "ar": "أخ",
+    "level": "A1"
+  },
+  {
+    "en": "sister",
+    "ar": "أخت",
+    "level": "A1"
+  },
+  {
+    "en": "friend",
+    "ar": "صديق",
+    "level": "A1"
+  },
+  {
+    "en": "teacher",
+    "ar": "مدرس",
+    "level": "A1"
+  },
+  {
+    "en": "student",
+    "ar": "طالب",
+    "level": "A1"
+  },
+  {
+    "en": "doctor",
+    "ar": "طبيب",
+    "level": "A1"
+  },
+  {
+    "en": "nurse",
+    "ar": "ممرض",
+    "level": "A1"
+  },
+  {
+    "en": "driver",
+    "ar": "سائق",
+    "level": "A1"
+  },
+  {
+    "en": "house",
+    "ar": "منزل",
+    "level": "A1"
+  },
+  {
+    "en": "home",
+    "ar": "بيت",
+    "level": "A1"
+  },
+  {
+    "en": "room",
+    "ar": "غرفة",
+    "level": "A1"
+  },
+  {
+    "en": "bedroom",
+    "ar": "غرفة نوم",
+    "level": "A1"
+  },
+  {
+    "en": "bathroom",
+    "ar": "حمام",
+    "level": "A1"
+  },
+  {
+    "en": "kitchen",
+    "ar": "مطبخ",
+    "level": "A1"
+  },
+  {
+    "en": "door",
+    "ar": "باب",
+    "level": "A1"
+  },
+  {
+    "en": "window",
+    "ar": "نافذة",
+    "level": "A1"
+  },
+  {
+    "en": "wall",
+    "ar": "حائط",
+    "level": "A1"
+  },
+  {
+    "en": "floor",
+    "ar": "أرضية",
+    "level": "A1"
+  },
+  {
+    "en": "table",
+    "ar": "طاولة",
+    "level": "A1"
+  },
+  {
+    "en": "chair",
+    "ar": "كرسي",
+    "level": "A1"
+  },
+  {
+    "en": "bed",
+    "ar": "سرير",
+    "level": "A1"
+  },
+  {
+    "en": "desk",
+    "ar": "مكتب",
+    "level": "A1"
+  },
+  {
+    "en": "box",
+    "ar": "صندوق",
+    "level": "A1"
+  },
+  {
+    "en": "bag",
+    "ar": "حقيبة",
+    "level": "A1"
+  },
+  {
+    "en": "book",
+    "ar": "كتاب",
+    "level": "A1"
+  },
+  {
+    "en": "pen",
+    "ar": "قلم",
+    "level": "A1"
+  },
+  {
+    "en": "pencil",
+    "ar": "قلم رصاص",
+    "level": "A1"
+  },
+  {
+    "en": "paper",
+    "ar": "ورق",
+    "level": "A1"
+  },
+  {
+    "en": "school",
+    "ar": "مدرسة",
+    "level": "A1"
+  },
+  {
+    "en": "class",
+    "ar": "فصل",
+    "level": "A1"
+  },
+  {
+    "en": "lesson",
+    "ar": "درس",
+    "level": "A1"
+  },
+  {
+    "en": "question",
+    "ar": "سؤال",
+    "level": "A1"
+  },
+  {
+    "en": "answer",
+    "ar": "إجابة",
+    "level": "A1"
+  },
+  {
+    "en": "test",
+    "ar": "اختبار",
+    "level": "A1"
+  },
+  {
+    "en": "exam",
+    "ar": "امتحان",
+    "level": "A1"
+  },
+  {
+    "en": "word",
+    "ar": "كلمة",
+    "level": "A1"
+  },
+  {
+    "en": "sentence",
+    "ar": "جملة",
+    "level": "A1"
+  },
+  {
+    "en": "letter",
+    "ar": "حرف",
+    "level": "A1"
+  },
+  {
+    "en": "number",
+    "ar": "رقم",
+    "level": "A1"
+  },
+  {
+    "en": "page",
+    "ar": "صفحة",
+    "level": "A1"
+  },
+  {
+    "en": "bookshop",
+    "ar": "مكتبة كتب",
+    "level": "A1"
+  },
+  {
+    "en": "library",
+    "ar": "مكتبة",
+    "level": "A1"
+  },
+  {
+    "en": "computer",
+    "ar": "حاسوب",
+    "level": "A1"
+  },
+  {
+    "en": "phone",
+    "ar": "هاتف",
+    "level": "A1"
+  },
+  {
+    "en": "telephone",
+    "ar": "هاتف",
+    "level": "A1"
+  },
+  {
+    "en": "camera",
+    "ar": "كاميرا",
+    "level": "A1"
+  },
+  {
+    "en": "radio",
+    "ar": "راديو",
+    "level": "A1"
+  },
+  {
+    "en": "television",
+    "ar": "تلفاز",
+    "level": "A1"
+  },
+  {
+    "en": "internet",
+    "ar": "إنترنت",
+    "level": "A1"
+  },
+  {
+    "en": "website",
+    "ar": "موقع إلكتروني",
+    "level": "A1"
+  },
+  {
+    "en": "email",
+    "ar": "بريد إلكتروني",
+    "level": "A1"
+  },
+  {
+    "en": "message",
+    "ar": "رسالة",
+    "level": "A1"
+  },
+  {
+    "en": "photo",
+    "ar": "صورة",
+    "level": "A1"
+  },
+  {
+    "en": "picture",
+    "ar": "صورة",
+    "level": "A1"
+  },
+  {
+    "en": "music",
+    "ar": "موسيقى",
+    "level": "A1"
+  },
+  {
+    "en": "song",
+    "ar": "أغنية",
+    "level": "A1"
+  },
+  {
+    "en": "film",
+    "ar": "فيلم",
+    "level": "A1"
+  },
+  {
+    "en": "game",
+    "ar": "لعبة",
+    "level": "A1"
+  },
+  {
+    "en": "sport",
+    "ar": "رياضة",
+    "level": "A1"
+  },
+  {
+    "en": "football",
+    "ar": "كرة القدم",
+    "level": "A1"
+  },
+  {
+    "en": "tennis",
+    "ar": "تنس",
+    "level": "A1"
+  },
+  {
+    "en": "basketball",
+    "ar": "كرة السلة",
+    "level": "A1"
+  },
+  {
+    "en": "swimming",
+    "ar": "السباحة",
+    "level": "A1"
+  },
+  {
+    "en": "run",
+    "ar": "يركض",
+    "level": "A1"
+  },
+  {
+    "en": "walk",
+    "ar": "يمشي",
+    "level": "A1"
+  },
+  {
+    "en": "jump",
+    "ar": "يقفز",
+    "level": "A1"
+  },
+  {
+    "en": "dance",
+    "ar": "يرقص",
+    "level": "A1"
+  },
+  {
+    "en": "sing",
+    "ar": "يغني",
+    "level": "A1"
+  },
+  {
+    "en": "read",
+    "ar": "يقرأ",
+    "level": "A1"
+  },
+  {
+    "en": "write",
+    "ar": "يكتب",
+    "level": "A1"
+  },
+  {
+    "en": "listen",
+    "ar": "يستمع",
+    "level": "A1"
+  },
+  {
+    "en": "speak",
+    "ar": "يتحدث",
+    "level": "A1"
+  },
+  {
+    "en": "say",
+    "ar": "يقول",
+    "level": "A1"
+  },
+  {
+    "en": "tell",
+    "ar": "يخبر",
+    "level": "A1"
+  },
+  {
+    "en": "ask",
+    "ar": "يسأل",
+    "level": "A1"
+  },
+  {
+    "en": "answer",
+    "ar": "يجيب",
+    "level": "A1"
+  },
+  {
+    "en": "learn",
+    "ar": "يتعلم",
+    "level": "A1"
+  },
+  {
+    "en": "study",
+    "ar": "يدرس",
+    "level": "A1"
+  },
+  {
+    "en": "teach",
+    "ar": "يعلّم",
+    "level": "A1"
+  },
+  {
+    "en": "work",
+    "ar": "يعمل",
+    "level": "A1"
+  },
+  {
+    "en": "live",
+    "ar": "يعيش",
+    "level": "A1"
+  },
+  {
+    "en": "like",
+    "ar": "يحب",
+    "level": "A1"
+  },
+  {
+    "en": "love",
+    "ar": "يحب",
+    "level": "A1"
+  },
+  {
+    "en": "want",
+    "ar": "يريد",
+    "level": "A1"
+  },
+  {
+    "en": "need",
+    "ar": "يحتاج",
+    "level": "A1"
+  },
+  {
+    "en": "have",
+    "ar": "يمتلك",
+    "level": "A1"
+  },
+  {
+    "en": "get",
+    "ar": "يحصل على",
+    "level": "A1"
+  },
+  {
+    "en": "give",
+    "ar": "يعطي",
+    "level": "A1"
+  },
+  {
+    "en": "take",
+    "ar": "يأخذ",
+    "level": "A1"
+  },
+  {
+    "en": "make",
+    "ar": "يصنع",
+    "level": "A1"
+  },
+  {
+    "en": "do",
+    "ar": "يفعل",
+    "level": "A1"
+  },
+  {
+    "en": "go",
+    "ar": "يذهب",
+    "level": "A1"
+  },
+  {
+    "en": "come",
+    "ar": "يأتي",
+    "level": "A1"
+  },
+  {
+    "en": "see",
+    "ar": "يرى",
+    "level": "A1"
+  },
+  {
+    "en": "look",
+    "ar": "ينظر",
+    "level": "A1"
+  },
+  {
+    "en": "watch",
+    "ar": "يشاهد",
+    "level": "A1"
+  },
+  {
+    "en": "find",
+    "ar": "يجد",
+    "level": "A1"
+  },
+  {
+    "en": "know",
+    "ar": "يعرف",
+    "level": "A1"
+  },
+  {
+    "en": "think",
+    "ar": "يفكر",
+    "level": "A1"
+  },
+  {
+    "en": "understand",
+    "ar": "يفهم",
+    "level": "A1"
+  },
+  {
+    "en": "remember",
+    "ar": "يتذكر",
+    "level": "A1"
+  },
+  {
+    "en": "forget",
+    "ar": "ينسى",
+    "level": "A1"
+  },
+  {
+    "en": "help",
+    "ar": "يساعد",
+    "level": "A1"
+  },
+  {
+    "en": "use",
+    "ar": "يستخدم",
+    "level": "A1"
+  },
+  {
+    "en": "open",
+    "ar": "يفتح",
+    "level": "A1"
+  },
+  {
+    "en": "close",
+    "ar": "يغلق",
+    "level": "A1"
+  },
+  {
+    "en": "start",
+    "ar": "يبدأ",
+    "level": "A1"
+  },
+  {
+    "en": "stop",
+    "ar": "يتوقف",
+    "level": "A1"
+  },
+  {
+    "en": "finish",
+    "ar": "ينهي",
+    "level": "A1"
+  },
+  {
+    "en": "wait",
+    "ar": "ينتظر",
+    "level": "A1"
+  },
+  {
+    "en": "stay",
+    "ar": "يبقى",
+    "level": "A1"
+  },
+  {
+    "en": "leave",
+    "ar": "يغادر",
+    "level": "A1"
+  },
+  {
+    "en": "arrive",
+    "ar": "يصل",
+    "level": "A1"
+  },
+  {
+    "en": "meet",
+    "ar": "يقابل",
+    "level": "A1"
+  },
+  {
+    "en": "visit",
+    "ar": "يزور",
+    "level": "A1"
+  },
+  {
+    "en": "call",
+    "ar": "يتصل",
+    "level": "A1"
+  },
+  {
+    "en": "buy",
+    "ar": "يشتري",
+    "level": "A1"
+  },
+  {
+    "en": "sell",
+    "ar": "يبيع",
+    "level": "A1"
+  },
+  {
+    "en": "pay",
+    "ar": "يدفع",
+    "level": "A1"
+  },
+  {
+    "en": "cost",
+    "ar": "يكلف",
+    "level": "A1"
+  },
+  {
+    "en": "eat",
+    "ar": "يأكل",
+    "level": "A1"
+  },
+  {
+    "en": "drink",
+    "ar": "يشرب",
+    "level": "A1"
+  },
+  {
+    "en": "cook",
+    "ar": "يطبخ",
+    "level": "A1"
+  },
+  {
+    "en": "sleep",
+    "ar": "ينام",
+    "level": "A1"
+  },
+  {
+    "en": "wake",
+    "ar": "يستيقظ",
+    "level": "A1"
+  },
+  {
+    "en": "wash",
+    "ar": "يغسل",
+    "level": "A1"
+  },
+  {
+    "en": "clean",
+    "ar": "ينظف",
+    "level": "A1"
+  },
+  {
+    "en": "wear",
+    "ar": "يرتدي",
+    "level": "A1"
+  },
+  {
+    "en": "carry",
+    "ar": "يحمل",
+    "level": "A1"
+  },
+  {
+    "en": "bring",
+    "ar": "يحضر",
+    "level": "A1"
+  },
+  {
+    "en": "put",
+    "ar": "يضع",
+    "level": "A1"
+  },
+  {
+    "en": "keep",
+    "ar": "يحتفظ",
+    "level": "A1"
+  },
+  {
+    "en": "try",
+    "ar": "يحاول",
+    "level": "A1"
+  },
+  {
+    "en": "play",
+    "ar": "يلعب",
+    "level": "A1"
+  },
+  {
+    "en": "win",
+    "ar": "يفوز",
+    "level": "A1"
+  },
+  {
+    "en": "lose",
+    "ar": "يخسر",
+    "level": "A1"
+  },
+  {
+    "en": "drive",
+    "ar": "يقود",
+    "level": "A1"
+  },
+  {
+    "en": "ride",
+    "ar": "يركب",
+    "level": "A1"
+  },
+  {
+    "en": "fly",
+    "ar": "يطير",
+    "level": "A1"
+  },
+  {
+    "en": "travel",
+    "ar": "يسافر",
+    "level": "A1"
+  },
+  {
+    "en": "rain",
+    "ar": "تمطر",
+    "level": "A1"
+  },
+  {
+    "en": "snow",
+    "ar": "يتساقط الثلج",
+    "level": "A1"
+  },
+  {
+    "en": "sun",
+    "ar": "شمس",
+    "level": "A1"
+  },
+  {
+    "en": "moon",
+    "ar": "قمر",
+    "level": "A1"
+  },
+  {
+    "en": "star",
+    "ar": "نجمة",
+    "level": "A1"
+  },
+  {
+    "en": "sky",
+    "ar": "سماء",
+    "level": "A1"
+  },
+  {
+    "en": "cloud",
+    "ar": "سحابة",
+    "level": "A1"
+  },
+  {
+    "en": "weather",
+    "ar": "طقس",
+    "level": "A1"
+  },
+  {
+    "en": "hot",
+    "ar": "حار",
+    "level": "A1"
+  },
+  {
+    "en": "cold",
+    "ar": "بارد",
+    "level": "A1"
+  },
+  {
+    "en": "warm",
+    "ar": "دافئ",
+    "level": "A1"
+  },
+  {
+    "en": "cool",
+    "ar": "بارد / لطيف",
+    "level": "A1"
+  },
+  {
+    "en": "big",
+    "ar": "كبير",
+    "level": "A1"
+  },
+  {
+    "en": "small",
+    "ar": "صغير",
+    "level": "A1"
+  },
+  {
+    "en": "long",
+    "ar": "طويل",
+    "level": "A1"
+  },
+  {
+    "en": "short",
+    "ar": "قصير",
+    "level": "A1"
+  },
+  {
+    "en": "tall",
+    "ar": "طويل القامة",
+    "level": "A1"
+  },
+  {
+    "en": "old",
+    "ar": "قديم / كبير السن",
+    "level": "A1"
+  },
+  {
+    "en": "young",
+    "ar": "صغير السن",
+    "level": "A1"
+  },
+  {
+    "en": "new",
+    "ar": "جديد",
+    "level": "A1"
+  },
+  {
+    "en": "good",
+    "ar": "جيد",
+    "level": "A1"
+  },
+  {
+    "en": "bad",
+    "ar": "سيئ",
+    "level": "A1"
+  },
+  {
+    "en": "easy",
+    "ar": "سهل",
+    "level": "A1"
+  },
+  {
+    "en": "difficult",
+    "ar": "صعب",
+    "level": "A1"
+  },
+  {
+    "en": "fast",
+    "ar": "سريع",
+    "level": "A1"
+  },
+  {
+    "en": "slow",
+    "ar": "بطيء",
+    "level": "A1"
+  },
+  {
+    "en": "early",
+    "ar": "مبكر",
+    "level": "A1"
+  },
+  {
+    "en": "late",
+    "ar": "متأخر",
+    "level": "A1"
+  },
+  {
+    "en": "right",
+    "ar": "صحيح / يمين",
+    "level": "A1"
+  },
+  {
+    "en": "wrong",
+    "ar": "خطأ",
+    "level": "A1"
+  },
+  {
+    "en": "beautiful",
+    "ar": "جميل",
+    "level": "A1"
+  },
+  {
+    "en": "ugly",
+    "ar": "قبيح",
+    "level": "A1"
+  },
+  {
+    "en": "happy",
+    "ar": "سعيد",
+    "level": "A1"
+  },
+  {
+    "en": "sad",
+    "ar": "حزين",
+    "level": "A1"
+  },
+  {
+    "en": "angry",
+    "ar": "غاضب",
+    "level": "A1"
+  },
+  {
+    "en": "afraid",
+    "ar": "خائف",
+    "level": "A1"
+  },
+  {
+    "en": "tired",
+    "ar": "متعب",
+    "level": "A1"
+  },
+  {
+    "en": "hungry",
+    "ar": "جائع",
+    "level": "A1"
+  },
+  {
+    "en": "thirsty",
+    "ar": "عطشان",
+    "level": "A1"
+  },
+  {
+    "en": "sick",
+    "ar": "مريض",
+    "level": "A1"
+  },
+  {
+    "en": "well",
+    "ar": "بخير",
+    "level": "A1"
+  },
+  {
+    "en": "fine",
+    "ar": "بخير",
+    "level": "A1"
+  },
+  {
+    "en": "nice",
+    "ar": "لطيف",
+    "level": "A1"
+  },
+  {
+    "en": "kind",
+    "ar": "طيب",
+    "level": "A1"
+  },
+  {
+    "en": "funny",
+    "ar": "مضحك",
+    "level": "A1"
+  },
+  {
+    "en": "clever",
+    "ar": "ذكي",
+    "level": "A1"
+  },
+  {
+    "en": "strong",
+    "ar": "قوي",
+    "level": "A1"
+  },
+  {
+    "en": "weak",
+    "ar": "ضعيف",
+    "level": "A1"
+  },
+  {
+    "en": "rich",
+    "ar": "غني",
+    "level": "A1"
+  },
+  {
+    "en": "poor",
+    "ar": "فقير",
+    "level": "A1"
+  },
+  {
+    "en": "busy",
+    "ar": "مشغول",
+    "level": "A1"
+  },
+  {
+    "en": "free",
+    "ar": "حر / مجاني",
+    "level": "A1"
+  },
+  {
+    "en": "ready",
+    "ar": "جاهز",
+    "level": "A1"
+  },
+  {
+    "en": "favorite",
+    "ar": "مفضل",
+    "level": "A1"
+  },
+  {
+    "en": "important",
+    "ar": "مهم",
+    "level": "A1"
+  },
+  {
+    "en": "same",
+    "ar": "نفس",
+    "level": "A1"
+  },
+  {
+    "en": "different",
+    "ar": "مختلف",
+    "level": "A1"
+  },
+  {
+    "en": "first",
+    "ar": "الأول",
+    "level": "A1"
+  },
+  {
+    "en": "last",
+    "ar": "الأخير",
+    "level": "A1"
+  },
+  {
+    "en": "next",
+    "ar": "التالي",
+    "level": "A1"
+  },
+  {
+    "en": "only",
+    "ar": "فقط",
+    "level": "A1"
+  },
+  {
+    "en": "very",
+    "ar": "جدًا",
+    "level": "A1"
+  },
+  {
+    "en": "really",
+    "ar": "حقًا",
+    "level": "A1"
+  },
+  {
+    "en": "always",
+    "ar": "دائمًا",
+    "level": "A1"
+  },
+  {
+    "en": "usually",
+    "ar": "عادةً",
+    "level": "A1"
+  },
+  {
+    "en": "sometimes",
+    "ar": "أحيانًا",
+    "level": "A1"
+  },
+  {
+    "en": "never",
+    "ar": "أبدًا",
+    "level": "A1"
+  },
+  {
+    "en": "again",
+    "ar": "مرة أخرى",
+    "level": "A1"
+  },
+  {
+    "en": "here",
+    "ar": "هنا",
+    "level": "A1"
+  },
+  {
+    "en": "there",
+    "ar": "هناك",
+    "level": "A1"
+  },
+  {
+    "en": "now",
+    "ar": "الآن",
+    "level": "A1"
+  },
+  {
+    "en": "today",
+    "ar": "اليوم",
+    "level": "A1"
+  },
+  {
+    "en": "tomorrow",
+    "ar": "غدًا",
+    "level": "A1"
+  },
+  {
+    "en": "yesterday",
+    "ar": "أمس",
+    "level": "A1"
+  },
+  {
+    "en": "morning",
+    "ar": "صباح",
+    "level": "A1"
+  },
+  {
+    "en": "afternoon",
+    "ar": "بعد الظهر",
+    "level": "A1"
+  },
+  {
+    "en": "evening",
+    "ar": "مساء",
+    "level": "A1"
+  },
+  {
+    "en": "night",
+    "ar": "ليل",
+    "level": "A1"
+  },
+  {
+    "en": "day",
+    "ar": "يوم",
+    "level": "A1"
+  },
+  {
+    "en": "week",
+    "ar": "أسبوع",
+    "level": "A1"
+  },
+  {
+    "en": "month",
+    "ar": "شهر",
+    "level": "A1"
+  },
+  {
+    "en": "year",
+    "ar": "سنة",
+    "level": "A1"
+  },
+  {
+    "en": "time",
+    "ar": "وقت",
+    "level": "A1"
+  },
+  {
+    "en": "hour",
+    "ar": "ساعة",
+    "level": "A1"
+  },
+  {
+    "en": "minute",
+    "ar": "دقيقة",
+    "level": "A1"
+  },
+  {
+    "en": "Monday",
+    "ar": "الاثنين",
+    "level": "A1"
+  },
+  {
+    "en": "Tuesday",
+    "ar": "الثلاثاء",
+    "level": "A1"
+  },
+  {
+    "en": "Wednesday",
+    "ar": "الأربعاء",
+    "level": "A1"
+  },
+  {
+    "en": "Thursday",
+    "ar": "الخميس",
+    "level": "A1"
+  },
+  {
+    "en": "Friday",
+    "ar": "الجمعة",
+    "level": "A1"
+  },
+  {
+    "en": "Saturday",
+    "ar": "السبت",
+    "level": "A1"
+  },
+  {
+    "en": "Sunday",
+    "ar": "الأحد",
+    "level": "A1"
+  },
+  {
+    "en": "January",
+    "ar": "يناير",
+    "level": "A1"
+  },
+  {
+    "en": "February",
+    "ar": "فبراير",
+    "level": "A1"
+  },
+  {
+    "en": "March",
+    "ar": "مارس",
+    "level": "A1"
+  },
+  {
+    "en": "April",
+    "ar": "أبريل",
+    "level": "A1"
+  },
+  {
+    "en": "May",
+    "ar": "مايو",
+    "level": "A1"
+  },
+  {
+    "en": "June",
+    "ar": "يونيو",
+    "level": "A1"
+  },
+  {
+    "en": "July",
+    "ar": "يوليو",
+    "level": "A1"
+  },
+  {
+    "en": "August",
+    "ar": "أغسطس",
+    "level": "A1"
+  },
+  {
+    "en": "September",
+    "ar": "سبتمبر",
+    "level": "A1"
+  },
+  {
+    "en": "October",
+    "ar": "أكتوبر",
+    "level": "A1"
+  },
+  {
+    "en": "November",
+    "ar": "نوفمبر",
+    "level": "A1"
+  },
+  {
+    "en": "December",
+    "ar": "ديسمبر",
+    "level": "A1"
+  },
+  {
+    "en": "one",
+    "ar": "واحد",
+    "level": "A1"
+  },
+  {
+    "en": "two",
+    "ar": "اثنان",
+    "level": "A1"
+  },
+  {
+    "en": "three",
+    "ar": "ثلاثة",
+    "level": "A1"
+  },
+  {
+    "en": "four",
+    "ar": "أربعة",
+    "level": "A1"
+  },
+  {
+    "en": "five",
+    "ar": "خمسة",
+    "level": "A1"
+  },
+  {
+    "en": "six",
+    "ar": "ستة",
+    "level": "A1"
+  },
+  {
+    "en": "seven",
+    "ar": "سبعة",
+    "level": "A1"
+  },
+  {
+    "en": "eight",
+    "ar": "ثمانية",
+    "level": "A1"
+  },
+  {
+    "en": "nine",
+    "ar": "تسعة",
+    "level": "A1"
+  },
+  {
+    "en": "ten",
+    "ar": "عشرة",
+    "level": "A1"
+  },
+  {
+    "en": "red",
+    "ar": "أحمر",
+    "level": "A1"
+  },
+  {
+    "en": "blue",
+    "ar": "أزرق",
+    "level": "A1"
+  },
+  {
+    "en": "green",
+    "ar": "أخضر",
+    "level": "A1"
+  },
+  {
+    "en": "yellow",
+    "ar": "أصفر",
+    "level": "A1"
+  },
+  {
+    "en": "black",
+    "ar": "أسود",
+    "level": "A1"
+  },
+  {
+    "en": "white",
+    "ar": "أبيض",
+    "level": "A1"
+  },
+  {
+    "en": "brown",
+    "ar": "بني",
+    "level": "A1"
+  },
+  {
+    "en": "orange",
+    "ar": "برتقالي",
+    "level": "A1"
+  },
+  {
+    "en": "pink",
+    "ar": "وردي",
+    "level": "A1"
+  },
+  {
+    "en": "purple",
+    "ar": "بنفسجي",
+    "level": "A1"
+  },
+  {
+    "en": "ability",
+    "ar": "قدرة",
+    "level": "A2"
+  },
+  {
+    "en": "abroad",
+    "ar": "في الخارج",
+    "level": "A2"
+  },
+  {
+    "en": "accident",
+    "ar": "حادث",
+    "level": "A2"
+  },
+  {
+    "en": "active",
+    "ar": "نشيط",
+    "level": "A2"
+  },
+  {
+    "en": "actually",
+    "ar": "في الواقع",
+    "level": "A2"
+  },
+  {
+    "en": "adventure",
+    "ar": "مغامرة",
+    "level": "A2"
+  },
+  {
+    "en": "advice",
+    "ar": "نصيحة",
+    "level": "A2"
+  },
+  {
+    "en": "agree",
+    "ar": "يوافق",
+    "level": "A2"
+  },
+  {
+    "en": "allow",
+    "ar": "يسمح",
+    "level": "A2"
+  },
+  {
+    "en": "appear",
+    "ar": "يظهر",
+    "level": "A2"
+  },
+  {
+    "en": "arrange",
+    "ar": "يرتب",
+    "level": "A2"
+  },
+  {
+    "en": "article",
+    "ar": "مقال",
+    "level": "A2"
+  },
+  {
+    "en": "attend",
+    "ar": "يحضر",
+    "level": "A2"
+  },
+  {
+    "en": "average",
+    "ar": "متوسط",
+    "level": "A2"
+  },
+  {
+    "en": "avoid",
+    "ar": "يتجنب",
+    "level": "A2"
+  },
+  {
+    "en": "background",
+    "ar": "خلفية",
+    "level": "A2"
+  },
+  {
+    "en": "belong",
+    "ar": "ينتمي",
+    "level": "A2"
+  },
+  {
+    "en": "benefit",
+    "ar": "فائدة",
+    "level": "A2"
+  },
+  {
+    "en": "beside",
+    "ar": "بجانب",
+    "level": "A2"
+  },
+  {
+    "en": "borrow",
+    "ar": "يستعير",
+    "level": "A2"
+  },
+  {
+    "en": "business",
+    "ar": "عمل تجاري",
+    "level": "A2"
+  },
+  {
+    "en": "celebrate",
+    "ar": "يحتفل",
+    "level": "A2"
+  },
+  {
+    "en": "certain",
+    "ar": "معين / مؤكد",
+    "level": "A2"
+  },
+  {
+    "en": "communicate",
+    "ar": "يتواصل",
+    "level": "A2"
+  },
+  {
+    "en": "community",
+    "ar": "مجتمع",
+    "level": "A2"
+  },
+  {
+    "en": "competition",
+    "ar": "مسابقة",
+    "level": "A2"
+  },
+  {
+    "en": "complete",
+    "ar": "يكمل / كامل",
+    "level": "A2"
+  },
+  {
+    "en": "condition",
+    "ar": "حالة / شرط",
+    "level": "A2"
+  },
+  {
+    "en": "connection",
+    "ar": "اتصال",
+    "level": "A2"
+  },
+  {
+    "en": "consider",
+    "ar": "يعتبر / يفكر في",
+    "level": "A2"
+  },
+  {
+    "en": "correct",
+    "ar": "صحيح / يصحح",
+    "level": "A2"
+  },
+  {
+    "en": "customer",
+    "ar": "عميل",
+    "level": "A2"
+  },
+  {
+    "en": "decision",
+    "ar": "قرار",
+    "level": "A2"
+  },
+  {
+    "en": "develop",
+    "ar": "يطور",
+    "level": "A2"
+  },
+  {
+    "en": "difference",
+    "ar": "اختلاف",
+    "level": "A2"
+  },
+  {
+    "en": "direction",
+    "ar": "اتجاه",
+    "level": "A2"
+  },
+  {
+    "en": "discover",
+    "ar": "يكتشف",
+    "level": "A2"
+  },
+  {
+    "en": "distance",
+    "ar": "مسافة",
+    "level": "A2"
+  },
+  {
+    "en": "download",
+    "ar": "تنزيل",
+    "level": "A2"
+  },
+  {
+    "en": "education",
+    "ar": "تعليم",
+    "level": "A2"
+  },
+  {
+    "en": "employee",
+    "ar": "موظف",
+    "level": "A2"
+  },
+  {
+    "en": "employer",
+    "ar": "صاحب العمل",
+    "level": "A2"
+  },
+  {
+    "en": "entrance",
+    "ar": "مدخل",
+    "level": "A2"
+  },
+  {
+    "en": "environment",
+    "ar": "بيئة",
+    "level": "A2"
+  },
+  {
+    "en": "exactly",
+    "ar": "بالضبط",
+    "level": "A2"
+  },
+  {
+    "en": "experience",
+    "ar": "خبرة / تجربة",
+    "level": "A2"
+  },
+  {
+    "en": "factory",
+    "ar": "مصنع",
+    "level": "A2"
+  },
+  {
+    "en": "feeling",
+    "ar": "شعور",
+    "level": "A2"
+  },
+  {
+    "en": "government",
+    "ar": "حكومة",
+    "level": "A2"
+  },
+  {
+    "en": "habit",
+    "ar": "عادة",
+    "level": "A2"
+  },
+  {
+    "en": "imagine",
+    "ar": "يتخيل",
+    "level": "A2"
+  },
+  {
+    "en": "include",
+    "ar": "يشمل",
+    "level": "A2"
+  },
+  {
+    "en": "improve",
+    "ar": "يحسن",
+    "level": "A2"
+  },
+  {
+    "en": "introduce",
+    "ar": "يقدم / يعرف",
+    "level": "A2"
+  },
+  {
+    "en": "knowledge",
+    "ar": "معرفة",
+    "level": "A2"
+  },
+  {
+    "en": "location",
+    "ar": "موقع",
+    "level": "A2"
+  },
+  {
+    "en": "manage",
+    "ar": "يدير / يتمكن",
+    "level": "A2"
+  },
+  {
+    "en": "manager",
+    "ar": "مدير",
+    "level": "A2"
+  },
+  {
+    "en": "notice",
+    "ar": "يلاحظ",
+    "level": "A2"
+  },
+  {
+    "en": "opportunity",
+    "ar": "فرصة",
+    "level": "A2"
+  },
+  {
+    "en": "organize",
+    "ar": "ينظم",
+    "level": "A2"
+  },
+  {
+    "en": "permission",
+    "ar": "إذن",
+    "level": "A2"
+  },
+  {
+    "en": "personal",
+    "ar": "شخصي",
+    "level": "A2"
+  },
+  {
+    "en": "perhaps",
+    "ar": "ربما",
+    "level": "A2"
+  },
+  {
+    "en": "prepare",
+    "ar": "يستعد",
+    "level": "A2"
+  },
+  {
+    "en": "provide",
+    "ar": "يوفر",
+    "level": "A2"
+  },
+  {
+    "en": "recent",
+    "ar": "حديث",
+    "level": "A2"
+  },
+  {
+    "en": "responsible",
+    "ar": "مسؤول",
+    "level": "A2"
+  },
+  {
+    "en": "save",
+    "ar": "يدخر / ينقذ",
+    "level": "A2"
+  },
+  {
+    "en": "search",
+    "ar": "يبحث",
+    "level": "A2"
+  },
+  {
+    "en": "share",
+    "ar": "يشارك",
+    "level": "A2"
+  },
+  {
+    "en": "situation",
+    "ar": "موقف / حالة",
+    "level": "A2"
+  },
+  {
+    "en": "solution",
+    "ar": "حل",
+    "level": "A2"
+  },
+  {
+    "en": "successful",
+    "ar": "ناجح",
+    "level": "A2"
+  },
+  {
+    "en": "support",
+    "ar": "يدعم",
+    "level": "A2"
+  },
+  {
+    "en": "transport",
+    "ar": "مواصلات",
+    "level": "A2"
+  },
+  {
+    "en": "unusual",
+    "ar": "غير معتاد",
+    "level": "A2"
+  },
+  {
+    "en": "various",
+    "ar": "متنوع",
+    "level": "A2"
+  },
+  {
+    "en": "website",
+    "ar": "موقع إلكتروني",
+    "level": "A2"
+  },
+  {
+    "en": "appointment",
+    "ar": "موعد",
+    "level": "A2"
+  },
+  {
+    "en": "certificate",
+    "ar": "شهادة",
+    "level": "A2"
+  },
+  {
+    "en": "choice",
+    "ar": "اختيار",
+    "level": "A2"
+  },
+  {
+    "en": "coach",
+    "ar": "مدرب",
+    "level": "A2"
+  },
+  {
+    "en": "course",
+    "ar": "دورة / مقرر",
+    "level": "A2"
+  },
+  {
+    "en": "department",
+    "ar": "قسم",
+    "level": "A2"
+  },
+  {
+    "en": "document",
+    "ar": "مستند",
+    "level": "A2"
+  },
+  {
+    "en": "event",
+    "ar": "حدث",
+    "level": "A2"
+  },
+  {
+    "en": "flight",
+    "ar": "رحلة جوية",
+    "level": "A2"
+  },
+  {
+    "en": "guide",
+    "ar": "دليل",
+    "level": "A2"
+  },
+  {
+    "en": "interview",
+    "ar": "مقابلة",
+    "level": "A2"
+  },
+  {
+    "en": "journey",
+    "ar": "رحلة",
+    "level": "A2"
+  },
+  {
+    "en": "luggage",
+    "ar": "أمتعة",
+    "level": "A2"
+  },
+  {
+    "en": "package",
+    "ar": "طرد",
+    "level": "A2"
+  },
+  {
+    "en": "passenger",
+    "ar": "راكب",
+    "level": "A2"
+  },
+  {
+    "en": "platform",
+    "ar": "رصيف / منصة",
+    "level": "A2"
+  },
+  {
+    "en": "receipt",
+    "ar": "إيصال",
+    "level": "A2"
+  },
+  {
+    "en": "reservation",
+    "ar": "حجز",
+    "level": "A2"
+  },
+  {
+    "en": "route",
+    "ar": "مسار",
+    "level": "A2"
+  },
+  {
+    "en": "salary",
+    "ar": "راتب",
+    "level": "A2"
+  },
+  {
+    "en": "suitcase",
+    "ar": "حقيبة سفر",
+    "level": "A2"
+  },
+  {
+    "en": "tourist",
+    "ar": "سائح",
+    "level": "A2"
+  },
+  {
+    "en": "traffic",
+    "ar": "حركة المرور",
+    "level": "A2"
+  },
+  {
+    "en": "vacation",
+    "ar": "إجازة",
+    "level": "A2"
+  },
+  {
+    "en": "arrival",
+    "ar": "وصول",
+    "level": "A2"
+  },
+  {
+    "en": "departure",
+    "ar": "مغادرة",
+    "level": "A2"
+  },
+  {
+    "en": "local",
+    "ar": "محلي",
+    "level": "A2"
+  },
+  {
+    "en": "foreign",
+    "ar": "أجنبي",
+    "level": "A2"
+  },
+  {
+    "en": "crowded",
+    "ar": "مزدحم",
+    "level": "A2"
+  },
+  {
+    "en": "comfortable",
+    "ar": "مريح",
+    "level": "A2"
+  },
+  {
+    "en": "convenient",
+    "ar": "مناسب",
+    "level": "A2"
+  },
+  {
+    "en": "delicious",
+    "ar": "لذيذ",
+    "level": "A2"
+  },
+  {
+    "en": "disappointed",
+    "ar": "محبط",
+    "level": "A2"
+  },
+  {
+    "en": "excited",
+    "ar": "متحمس",
+    "level": "A2"
+  },
+  {
+    "en": "worried",
+    "ar": "قلق",
+    "level": "A2"
+  },
+  {
+    "en": "nervous",
+    "ar": "متوتر",
+    "level": "A2"
+  },
+  {
+    "en": "surprised",
+    "ar": "مندهش",
+    "level": "A2"
+  },
+  {
+    "en": "bored",
+    "ar": "يشعر بالملل",
+    "level": "A2"
+  },
+  {
+    "en": "relaxed",
+    "ar": "مسترخٍ",
+    "level": "A2"
+  },
+  {
+    "en": "proud",
+    "ar": "فخور",
+    "level": "A2"
+  },
+  {
+    "en": "interested",
+    "ar": "مهتم",
+    "level": "A2"
+  },
+  {
+    "en": "polite",
+    "ar": "مهذب",
+    "level": "A2"
+  },
+  {
+    "en": "honest",
+    "ar": "صادق",
+    "level": "A2"
+  },
+  {
+    "en": "serious",
+    "ar": "جاد",
+    "level": "A2"
+  },
+  {
+    "en": "wonderful",
+    "ar": "رائع",
+    "level": "A2"
+  },
+  {
+    "en": "amazing",
+    "ar": "مذهل",
+    "level": "A2"
+  },
+  {
+    "en": "terrible",
+    "ar": "فظيع",
+    "level": "A2"
+  },
+  {
+    "en": "excellent",
+    "ar": "ممتاز",
+    "level": "A2"
+  },
+  {
+    "en": "perfect",
+    "ar": "مثالي",
+    "level": "A2"
+  },
+  {
+    "en": "necessary",
+    "ar": "ضروري",
+    "level": "A2"
+  },
+  {
+    "en": "possible",
+    "ar": "ممكن",
+    "level": "A2"
+  },
+  {
+    "en": "impossible",
+    "ar": "مستحيل",
+    "level": "A2"
+  },
+  {
+    "en": "similar",
+    "ar": "متشابه",
+    "level": "A2"
+  },
+  {
+    "en": "popular",
+    "ar": "شائع",
+    "level": "A2"
+  },
+  {
+    "en": "famous",
+    "ar": "مشهور",
+    "level": "A2"
+  },
+  {
+    "en": "healthy",
+    "ar": "صحي",
+    "level": "A2"
+  },
+  {
+    "en": "unhealthy",
+    "ar": "غير صحي",
+    "level": "A2"
+  },
+  {
+    "en": "useful",
+    "ar": "مفيد",
+    "level": "A2"
+  },
+  {
+    "en": "careful",
+    "ar": "حذر",
+    "level": "A2"
+  },
+  {
+    "en": "helpful",
+    "ar": "متعاون",
+    "level": "A2"
+  },
+  {
+    "en": "accept",
+    "ar": "يقبل",
+    "level": "A2"
+  },
+  {
+    "en": "refuse",
+    "ar": "يرفض",
+    "level": "A2"
+  },
+  {
+    "en": "suggest",
+    "ar": "يقترح",
+    "level": "A2"
+  },
+  {
+    "en": "recommend",
+    "ar": "يوصي",
+    "level": "A2"
+  },
+  {
+    "en": "become",
+    "ar": "يصبح",
+    "level": "A2"
+  },
+  {
+    "en": "continue",
+    "ar": "يستمر",
+    "level": "A2"
+  },
+  {
+    "en": "collect",
+    "ar": "يجمع",
+    "level": "A2"
+  },
+  {
+    "en": "create",
+    "ar": "ينشئ",
+    "level": "A2"
+  },
+  {
+    "en": "follow",
+    "ar": "يتبع",
+    "level": "A2"
+  },
+  {
+    "en": "join",
+    "ar": "ينضم",
+    "level": "A2"
+  },
+  {
+    "en": "reach",
+    "ar": "يصل إلى",
+    "level": "A2"
+  },
+  {
+    "en": "build",
+    "ar": "يبني",
+    "level": "A2"
+  },
+  {
+    "en": "grow",
+    "ar": "ينمو",
+    "level": "A2"
+  },
+  {
+    "en": "lose",
+    "ar": "يخسر",
+    "level": "A2"
+  },
+  {
+    "en": "check",
+    "ar": "يفحص",
+    "level": "A2"
+  },
+  {
+    "en": "receive",
+    "ar": "يستلم",
+    "level": "A2"
+  },
+  {
+    "en": "repair",
+    "ar": "يصلح",
+    "level": "A2"
+  },
+  {
+    "en": "lend",
+    "ar": "يعير",
+    "level": "A2"
+  },
+  {
+    "en": "choose",
+    "ar": "يختار",
+    "level": "A2"
+  },
+  {
+    "en": "discuss",
+    "ar": "يناقش",
+    "level": "A2"
+  },
+  {
+    "en": "explain",
+    "ar": "يشرح",
+    "level": "A2"
+  },
+  {
+    "en": "describe",
+    "ar": "يصف",
+    "level": "A2"
+  },
+  {
+    "en": "invite",
+    "ar": "يدعو",
+    "level": "A2"
+  },
+  {
+    "en": "already",
+    "ar": "بالفعل",
+    "level": "A2"
+  },
+  {
+    "en": "still",
+    "ar": "ما زال",
+    "level": "A2"
+  },
+  {
+    "en": "yet",
+    "ar": "حتى الآن",
+    "level": "A2"
+  },
+  {
+    "en": "almost",
+    "ar": "تقريبًا",
+    "level": "A2"
+  },
+  {
+    "en": "rarely",
+    "ar": "نادرًا",
+    "level": "A2"
+  },
+  {
+    "en": "quickly",
+    "ar": "بسرعة",
+    "level": "A2"
+  },
+  {
+    "en": "slowly",
+    "ar": "ببطء",
+    "level": "A2"
+  },
+  {
+    "en": "carefully",
+    "ar": "بحذر",
+    "level": "A2"
+  },
+  {
+    "en": "easily",
+    "ar": "بسهولة",
+    "level": "A2"
+  },
+  {
+    "en": "everywhere",
+    "ar": "في كل مكان",
+    "level": "A2"
+  },
+  {
+    "en": "somewhere",
+    "ar": "في مكان ما",
+    "level": "A2"
+  },
+  {
+    "en": "nobody",
+    "ar": "لا أحد",
+    "level": "A2"
+  },
+  {
+    "en": "everything",
+    "ar": "كل شيء",
+    "level": "A2"
+  },
+  {
+    "en": "although",
+    "ar": "بالرغم من أن",
+    "level": "A2"
+  },
+  {
+    "en": "however",
+    "ar": "ومع ذلك",
+    "level": "A2"
+  },
+  {
+    "en": "probably",
+    "ar": "على الأرجح",
+    "level": "A2"
+  },
+  {
+    "en": "especially",
+    "ar": "خصوصًا",
+    "level": "A2"
+  },
+  {
+    "en": "finally",
+    "ar": "أخيرًا",
+    "level": "A2"
+  },
+  {
+    "en": "instead",
+    "ar": "بدلًا من ذلك",
+    "level": "A2"
+  },
+  {
+    "en": "activity",
+    "ar": "نشاط",
+    "level": "A2"
+  },
+  {
+    "en": "concert",
+    "ar": "حفلة موسيقية",
+    "level": "A2"
+  },
+  {
+    "en": "festival",
+    "ar": "مهرجان",
+    "level": "A2"
+  },
+  {
+    "en": "hobby",
+    "ar": "هواية",
+    "level": "A2"
+  },
+  {
+    "en": "interest",
+    "ar": "اهتمام",
+    "level": "A2"
+  },
+  {
+    "en": "program",
+    "ar": "برنامج",
+    "level": "A2"
+  },
+  {
+    "en": "screen",
+    "ar": "شاشة",
+    "level": "A2"
+  },
+  {
+    "en": "keyboard",
+    "ar": "لوحة مفاتيح",
+    "level": "A2"
+  },
+  {
+    "en": "password",
+    "ar": "كلمة مرور",
+    "level": "A2"
+  },
+  {
+    "en": "file",
+    "ar": "ملف",
+    "level": "A2"
+  },
+  {
+    "en": "news",
+    "ar": "أخبار",
+    "level": "A2"
+  },
+  {
+    "en": "health",
+    "ar": "صحة",
+    "level": "A2"
+  },
+  {
+    "en": "illness",
+    "ar": "مرض",
+    "level": "A2"
+  },
+  {
+    "en": "pain",
+    "ar": "ألم",
+    "level": "A2"
+  },
+  {
+    "en": "patient",
+    "ar": "مريض",
+    "level": "A2"
+  },
+  {
+    "en": "lawyer",
+    "ar": "محامٍ",
+    "level": "A2"
+  },
+  {
+    "en": "engineer",
+    "ar": "مهندس",
+    "level": "A2"
+  },
+  {
+    "en": "photographer",
+    "ar": "مصور",
+    "level": "A2"
+  },
+  {
+    "en": "pilot",
+    "ar": "طيار",
+    "level": "A2"
+  },
+  {
+    "en": "career",
+    "ar": "مسار مهني",
+    "level": "A2"
+  },
+  {
+    "en": "profession",
+    "ar": "مهنة",
+    "level": "A2"
+  },
+  {
+    "en": "workplace",
+    "ar": "مكان العمل",
+    "level": "A2"
+  },
+  {
+    "en": "achievement",
+    "ar": "إنجاز",
+    "level": "A2"
+  },
+  {
+    "en": "advantage",
+    "ar": "ميزة",
+    "level": "A2"
+  },
+  {
+    "en": "culture",
+    "ar": "ثقافة",
+    "level": "A2"
+  },
+  {
+    "en": "custom",
+    "ar": "عادة",
+    "level": "A2"
+  },
+  {
+    "en": "detail",
+    "ar": "تفصيل",
+    "level": "A2"
+  },
+  {
+    "en": "discussion",
+    "ar": "مناقشة",
+    "level": "A2"
+  },
+  {
+    "en": "effect",
+    "ar": "تأثير",
+    "level": "A2"
+  },
+  {
+    "en": "fact",
+    "ar": "حقيقة",
+    "level": "A2"
+  },
+  {
+    "en": "feature",
+    "ar": "ميزة",
+    "level": "A2"
+  },
+  {
+    "en": "form",
+    "ar": "شكل / نموذج",
+    "level": "A2"
+  },
+  {
+    "en": "idea",
+    "ar": "فكرة",
+    "level": "A2"
+  },
+  {
+    "en": "level",
+    "ar": "مستوى",
+    "level": "A2"
+  },
+  {
+    "en": "method",
+    "ar": "طريقة",
+    "level": "A2"
+  },
+  {
+    "en": "purpose",
+    "ar": "هدف",
+    "level": "A2"
+  },
+  {
+    "en": "quality",
+    "ar": "جودة",
+    "level": "A2"
+  },
+  {
+    "en": "service",
+    "ar": "خدمة",
+    "level": "A2"
+  },
+  {
+    "en": "skill",
+    "ar": "مهارة",
+    "level": "A2"
+  },
+  {
+    "en": "success",
+    "ar": "نجاح",
+    "level": "A2"
+  },
+  {
+    "en": "type",
+    "ar": "نوع",
+    "level": "A2"
+  },
+  {
+    "en": "value",
+    "ar": "قيمة",
+    "level": "A2"
+  },
+  {
+    "en": "view",
+    "ar": "رأي / منظر",
+    "level": "A2"
+  },
+  {
+    "en": "choice",
+    "ar": "اختيار",
+    "level": "A2"
+  },
+  {
+    "en": "reason",
+    "ar": "سبب",
+    "level": "A2"
+  },
+  {
+    "en": "result",
+    "ar": "نتيجة",
+    "level": "A2"
+  },
+  {
+    "en": "report",
+    "ar": "تقرير",
+    "level": "A2"
+  },
+  {
+    "en": "future",
+    "ar": "مستقبل",
+    "level": "A2"
+  },
+  {
+    "en": "goal",
+    "ar": "هدف",
+    "level": "A2"
+  },
+  {
+    "en": "plan",
+    "ar": "خطة",
+    "level": "A2"
+  },
+  {
+    "en": "mistake",
+    "ar": "خطأ",
+    "level": "A2"
+  },
+  {
+    "en": "message",
+    "ar": "رسالة",
+    "level": "A2"
+  },
+  {
+    "en": "meeting",
+    "ar": "اجتماع",
+    "level": "A2"
+  },
+  {
+    "en": "member",
+    "ar": "عضو",
+    "level": "A2"
+  },
+  {
+    "en": "organization",
+    "ar": "منظمة",
+    "level": "A2"
+  },
+  {
+    "en": "population",
+    "ar": "عدد السكان",
+    "level": "A2"
+  },
+  {
+    "en": "relationship",
+    "ar": "علاقة",
+    "level": "A2"
+  },
+  {
+    "en": "community",
+    "ar": "مجتمع",
+    "level": "A2"
+  },
+  {
+    "en": "conversation",
+    "ar": "محادثة",
+    "level": "A2"
+  },
+  {
+    "en": "opinion",
+    "ar": "رأي",
+    "level": "A2"
+  },
+  {
+    "en": "promise",
+    "ar": "وعد",
+    "level": "A2"
+  },
+  {
+    "en": "example",
+    "ar": "مثال",
+    "level": "A2"
+  },
+  {
+    "en": "explanation",
+    "ar": "شرح",
+    "level": "A2"
+  },
+  {
+    "en": "information",
+    "ar": "معلومات",
+    "level": "A2"
+  },
+  {
+    "en": "memory",
+    "ar": "ذاكرة",
+    "level": "A2"
+  },
+  {
+    "en": "dream",
+    "ar": "حلم",
+    "level": "A2"
+  },
+  {
+    "en": "past",
+    "ar": "الماضي",
+    "level": "A2"
+  },
+  {
+    "en": "present",
+    "ar": "الحاضر",
+    "level": "A2"
+  },
+  {
+    "en": "generation",
+    "ar": "جيل",
+    "level": "A2"
+  },
+  {
+    "en": "citizen",
+    "ar": "مواطن",
+    "level": "A2"
+  },
+  {
+    "en": "relative",
+    "ar": "قريب",
+    "level": "A2"
+  },
+  {
+    "en": "cousin",
+    "ar": "ابن العم / ابن الخال",
+    "level": "A2"
+  },
+  {
+    "en": "neighbor",
+    "ar": "جار",
+    "level": "A2"
+  },
+  {
+    "en": "colleague",
+    "ar": "زميل عمل",
+    "level": "A2"
+  },
+  {
+    "en": "classmate",
+    "ar": "زميل دراسة",
+    "level": "A2"
+  },
+  {
+    "en": "teammate",
+    "ar": "زميل فريق",
+    "level": "A2"
+  },
+  {
+    "en": "stranger",
+    "ar": "شخص غريب",
+    "level": "A2"
+  },
+  {
+    "en": "visitor",
+    "ar": "زائر",
+    "level": "A2"
+  },
+  {
+    "en": "owner",
+    "ar": "مالك",
+    "level": "A2"
+  },
+  {
+    "en": "leader",
+    "ar": "قائد",
+    "level": "A2"
+  },
+  {
+    "en": "partner",
+    "ar": "شريك",
+    "level": "A2"
+  },
+  {
+    "en": "employee",
+    "ar": "موظف",
+    "level": "A2"
+  },
+  {
+    "en": "customer",
+    "ar": "عميل",
+    "level": "A2"
+  },
+  {
+    "en": "factory",
+    "ar": "مصنع",
+    "level": "A2"
+  },
+  {
+    "en": "office",
+    "ar": "مكتب",
+    "level": "A2"
+  },
+  {
+    "en": "company",
+    "ar": "شركة",
+    "level": "A2"
+  },
+  {
+    "en": "industry",
+    "ar": "صناعة",
+    "level": "A2"
+  },
+  {
+    "en": "project",
+    "ar": "مشروع",
+    "level": "A2"
+  },
+  {
+    "en": "product",
+    "ar": "منتج",
+    "level": "A2"
+  },
+  {
+    "en": "price",
+    "ar": "سعر",
+    "level": "A2"
+  },
+  {
+    "en": "cost",
+    "ar": "تكلفة",
+    "level": "A2"
+  },
+  {
+    "en": "sale",
+    "ar": "بيع / تخفيض",
+    "level": "A2"
+  },
+  {
+    "en": "market",
+    "ar": "سوق",
+    "level": "A2"
+  },
+  {
+    "en": "bank",
+    "ar": "بنك",
+    "level": "A2"
+  },
+  {
+    "en": "money",
+    "ar": "مال",
+    "level": "A2"
+  },
+  {
+    "en": "account",
+    "ar": "حساب",
+    "level": "A2"
+  },
+  {
+    "en": "card",
+    "ar": "بطاقة",
+    "level": "A2"
+  },
+  {
+    "en": "cash",
+    "ar": "نقد",
+    "level": "A2"
+  },
+  {
+    "en": "bill",
+    "ar": "فاتورة",
+    "level": "A2"
+  },
+  {
+    "en": "tax",
+    "ar": "ضريبة",
+    "level": "A2"
+  },
+  {
+    "en": "shop",
+    "ar": "متجر",
+    "level": "A2"
+  },
+  {
+    "en": "store",
+    "ar": "متجر",
+    "level": "A2"
+  },
+  {
+    "en": "restaurant",
+    "ar": "مطعم",
+    "level": "A2"
+  },
+  {
+    "en": "hotel",
+    "ar": "فندق",
+    "level": "A2"
+  },
+  {
+    "en": "station",
+    "ar": "محطة",
+    "level": "A2"
+  },
+  {
+    "en": "airport",
+    "ar": "مطار",
+    "level": "A2"
+  },
+  {
+    "en": "ticket",
+    "ar": "تذكرة",
+    "level": "A2"
+  },
+  {
+    "en": "journey",
+    "ar": "رحلة",
+    "level": "A2"
+  },
+  {
+    "en": "travel",
+    "ar": "سفر",
+    "level": "A2"
+  },
+  {
+    "en": "holiday",
+    "ar": "عطلة",
+    "level": "A2"
+  },
+  {
+    "en": "trip",
+    "ar": "رحلة",
+    "level": "A2"
+  },
+  {
+    "en": "map",
+    "ar": "خريطة",
+    "level": "A2"
+  },
+  {
+    "en": "road",
+    "ar": "طريق",
+    "level": "A2"
+  },
+  {
+    "en": "bridge",
+    "ar": "جسر",
+    "level": "A2"
+  },
+  {
+    "en": "street",
+    "ar": "شارع",
+    "level": "A2"
+  },
+  {
+    "en": "building",
+    "ar": "مبنى",
+    "level": "A2"
+  },
+  {
+    "en": "floor",
+    "ar": "طابق",
+    "level": "A2"
+  },
+  {
+    "en": "lift",
+    "ar": "مصعد",
+    "level": "A2"
+  },
+  {
+    "en": "entrance",
+    "ar": "مدخل",
+    "level": "A2"
+  },
+  {
+    "en": "exit",
+    "ar": "مخرج",
+    "level": "A2"
+  },
+  {
+    "en": "address",
+    "ar": "عنوان",
+    "level": "A2"
+  },
+  {
+    "en": "area",
+    "ar": "منطقة",
+    "level": "A2"
+  },
+  {
+    "en": "center",
+    "ar": "مركز",
+    "level": "A2"
+  },
+  {
+    "en": "corner",
+    "ar": "زاوية",
+    "level": "A2"
+  },
+  {
+    "en": "side",
+    "ar": "جانب",
+    "level": "A2"
+  },
+  {
+    "en": "direction",
+    "ar": "اتجاه",
+    "level": "A2"
+  },
+  {
+    "en": "north",
+    "ar": "شمال",
+    "level": "A2"
+  },
+  {
+    "en": "south",
+    "ar": "جنوب",
+    "level": "A2"
+  },
+  {
+    "en": "east",
+    "ar": "شرق",
+    "level": "A2"
+  },
+  {
+    "en": "west",
+    "ar": "غرب",
+    "level": "A2"
+  },
+  {
+    "en": "temperature",
+    "ar": "درجة الحرارة",
+    "level": "A2"
+  },
+  {
+    "en": "degree",
+    "ar": "درجة",
+    "level": "A2"
+  },
+  {
+    "en": "weather",
+    "ar": "طقس",
+    "level": "A2"
+  },
+  {
+    "en": "storm",
+    "ar": "عاصفة",
+    "level": "A2"
+  },
+  {
+    "en": "wind",
+    "ar": "رياح",
+    "level": "A2"
+  },
+  {
+    "en": "cloud",
+    "ar": "سحابة",
+    "level": "A2"
+  },
+  {
+    "en": "sunshine",
+    "ar": "ضوء الشمس",
+    "level": "A2"
+  },
+  {
+    "en": "season",
+    "ar": "فصل من السنة",
+    "level": "A2"
+  },
+  {
+    "en": "spring",
+    "ar": "الربيع",
+    "level": "A2"
+  },
+  {
+    "en": "summer",
+    "ar": "الصيف",
+    "level": "A2"
+  },
+  {
+    "en": "autumn",
+    "ar": "الخريف",
+    "level": "A2"
+  },
+  {
+    "en": "winter",
+    "ar": "الشتاء",
+    "level": "A2"
+  },
+  {
+    "en": "forest",
+    "ar": "غابة",
+    "level": "A2"
+  },
+  {
+    "en": "field",
+    "ar": "حقل / ملعب",
+    "level": "A2"
+  },
+  {
+    "en": "island",
+    "ar": "جزيرة",
+    "level": "A2"
+  },
+  {
+    "en": "ocean",
+    "ar": "محيط",
+    "level": "A2"
+  },
+  {
+    "en": "coast",
+    "ar": "ساحل",
+    "level": "A2"
+  },
+  {
+    "en": "beach",
+    "ar": "شاطئ",
+    "level": "A2"
+  },
+  {
+    "en": "mountain",
+    "ar": "جبل",
+    "level": "A2"
+  },
+  {
+    "en": "river",
+    "ar": "نهر",
+    "level": "A2"
+  },
+  {
+    "en": "lake",
+    "ar": "بحيرة",
+    "level": "A2"
+  },
+  {
+    "en": "village",
+    "ar": "قرية",
+    "level": "A2"
+  },
+  {
+    "en": "town",
+    "ar": "بلدة",
+    "level": "A2"
+  },
+  {
+    "en": "capital",
+    "ar": "عاصمة",
+    "level": "A2"
+  },
+  {
+    "en": "country",
+    "ar": "دولة",
+    "level": "A2"
+  },
+  {
+    "en": "world",
+    "ar": "العالم",
+    "level": "A2"
+  },
+  {
+    "en": "population",
+    "ar": "عدد السكان",
+    "level": "A2"
+  },
+  {
+    "en": "animal",
+    "ar": "حيوان",
+    "level": "A2"
+  },
+  {
+    "en": "wild",
+    "ar": "بري",
+    "level": "A2"
+  },
+  {
+    "en": "dangerous",
+    "ar": "خطير",
+    "level": "A2"
+  },
+  {
+    "en": "protect",
+    "ar": "يحمي",
+    "level": "A2"
+  },
+  {
+    "en": "environment",
+    "ar": "بيئة",
+    "level": "A2"
+  },
+  {
+    "en": "pollution",
+    "ar": "تلوث",
+    "level": "A2"
+  },
+  {
+    "en": "recycle",
+    "ar": "يعيد التدوير",
+    "level": "A2"
+  },
+  {
+    "en": "energy",
+    "ar": "طاقة",
+    "level": "A2"
+  },
+  {
+    "en": "electricity",
+    "ar": "كهرباء",
+    "level": "A2"
+  },
+  {
+    "en": "machine",
+    "ar": "آلة",
+    "level": "A2"
+  },
+  {
+    "en": "technology",
+    "ar": "تكنولوجيا",
+    "level": "A2"
+  },
+  {
+    "en": "internet",
+    "ar": "إنترنت",
+    "level": "A2"
+  },
+  {
+    "en": "online",
+    "ar": "على الإنترنت",
+    "level": "A2"
+  },
+  {
+    "en": "website",
+    "ar": "موقع إلكتروني",
+    "level": "A2"
+  },
+  {
+    "en": "download",
+    "ar": "تنزيل",
+    "level": "A2"
+  },
+  {
+    "en": "upload",
+    "ar": "رفع",
+    "level": "A2"
+  },
+  {
+    "en": "screen",
+    "ar": "شاشة",
+    "level": "A2"
+  },
+  {
+    "en": "computer",
+    "ar": "حاسوب",
+    "level": "A2"
+  },
+  {
+    "en": "laptop",
+    "ar": "حاسوب محمول",
+    "level": "A2"
+  },
+  {
+    "en": "mobile",
+    "ar": "هاتف محمول",
+    "level": "A2"
+  },
+  {
+    "en": "message",
+    "ar": "رسالة",
+    "level": "A2"
+  },
+  {
+    "en": "email",
+    "ar": "بريد إلكتروني",
+    "level": "A2"
+  },
+  {
+    "en": "photo",
+    "ar": "صورة",
+    "level": "A2"
+  },
+  {
+    "en": "video",
+    "ar": "فيديو",
+    "level": "A2"
+  },
+  {
+    "en": "camera",
+    "ar": "كاميرا",
+    "level": "A2"
+  },
+  {
+    "en": "music",
+    "ar": "موسيقى",
+    "level": "A2"
+  },
+  {
+    "en": "movie",
+    "ar": "فيلم",
+    "level": "A2"
+  },
+  {
+    "en": "actor",
+    "ar": "ممثل",
+    "level": "A2"
+  },
+  {
+    "en": "artist",
+    "ar": "فنان",
+    "level": "A2"
+  },
+  {
+    "en": "writer",
+    "ar": "كاتب",
+    "level": "A2"
+  },
+  {
+    "en": "author",
+    "ar": "مؤلف",
+    "level": "A2"
+  },
+  {
+    "en": "book",
+    "ar": "كتاب",
+    "level": "A2"
+  },
+  {
+    "en": "novel",
+    "ar": "رواية",
+    "level": "A2"
+  },
+  {
+    "en": "story",
+    "ar": "قصة",
+    "level": "A2"
+  },
+  {
+    "en": "newspaper",
+    "ar": "جريدة",
+    "level": "A2"
+  },
+  {
+    "en": "magazine",
+    "ar": "مجلة",
+    "level": "A2"
+  },
+  {
+    "en": "article",
+    "ar": "مقال",
+    "level": "A2"
+  },
+  {
+    "en": "radio",
+    "ar": "راديو",
+    "level": "A2"
+  },
+  {
+    "en": "television",
+    "ar": "تلفاز",
+    "level": "A2"
+  },
+  {
+    "en": "channel",
+    "ar": "قناة",
+    "level": "A2"
+  },
+  {
+    "en": "sport",
+    "ar": "رياضة",
+    "level": "A2"
+  },
+  {
+    "en": "football",
+    "ar": "كرة القدم",
+    "level": "A2"
+  },
+  {
+    "en": "basketball",
+    "ar": "كرة السلة",
+    "level": "A2"
+  },
+  {
+    "en": "tennis",
+    "ar": "تنس",
+    "level": "A2"
+  },
+  {
+    "en": "match",
+    "ar": "مباراة",
+    "level": "A2"
+  },
+  {
+    "en": "competition",
+    "ar": "مسابقة",
+    "level": "A2"
+  },
+  {
+    "en": "race",
+    "ar": "سباق",
+    "level": "A2"
+  },
+  {
+    "en": "team",
+    "ar": "فريق",
+    "level": "A2"
+  },
+  {
+    "en": "player",
+    "ar": "لاعب",
+    "level": "A2"
+  },
+  {
+    "en": "winner",
+    "ar": "فائز",
+    "level": "A2"
+  },
+  {
+    "en": "training",
+    "ar": "تدريب",
+    "level": "A2"
+  },
+  {
+    "en": "exercise",
+    "ar": "تمرين",
+    "level": "A2"
+  },
+  {
+    "en": "health",
+    "ar": "صحة",
+    "level": "A2"
+  },
+  {
+    "en": "doctor",
+    "ar": "طبيب",
+    "level": "A2"
+  },
+  {
+    "en": "hospital",
+    "ar": "مستشفى",
+    "level": "A2"
+  },
+  {
+    "en": "medicine",
+    "ar": "دواء",
+    "level": "A2"
+  },
+  {
+    "en": "healthy",
+    "ar": "صحي",
+    "level": "A2"
+  },
+  {
+    "en": "sick",
+    "ar": "مريض",
+    "level": "A2"
+  },
+  {
+    "en": "problem",
+    "ar": "مشكلة",
+    "level": "A2"
+  },
+  {
+    "en": "accident",
+    "ar": "حادث",
+    "level": "A2"
+  },
+  {
+    "en": "emergency",
+    "ar": "حالة طارئة",
+    "level": "A2"
+  },
+  {
+    "en": "police",
+    "ar": "شرطة",
+    "level": "A2"
+  },
+  {
+    "en": "fire",
+    "ar": "حريق",
+    "level": "A2"
+  },
+  {
+    "en": "safe",
+    "ar": "آمن",
+    "level": "A2"
+  },
+  {
+    "en": "danger",
+    "ar": "خطر",
+    "level": "A2"
+  },
+  {
+    "en": "rule",
+    "ar": "قاعدة",
+    "level": "A2"
+  },
+  {
+    "en": "law",
+    "ar": "قانون",
+    "level": "A2"
+  },
+  {
+    "en": "permission",
+    "ar": "إذن",
+    "level": "A2"
+  },
+  {
+    "en": "reason",
+    "ar": "سبب",
+    "level": "A2"
+  },
+  {
+    "en": "chance",
+    "ar": "فرصة",
+    "level": "A2"
+  },
+  {
+    "en": "choice",
+    "ar": "اختيار",
+    "level": "A2"
+  },
+  {
+    "en": "decision",
+    "ar": "قرار",
+    "level": "A2"
+  },
+  {
+    "en": "plan",
+    "ar": "خطة",
+    "level": "A2"
+  },
+  {
+    "en": "future",
+    "ar": "مستقبل",
+    "level": "A2"
+  },
+  {
+    "en": "dream",
+    "ar": "حلم",
+    "level": "A2"
+  },
+  {
+    "en": "hope",
+    "ar": "أمل",
+    "level": "A2"
+  },
+  {
+    "en": "idea",
+    "ar": "فكرة",
+    "level": "A2"
+  },
+  {
+    "en": "thought",
+    "ar": "فكرة / تفكير",
+    "level": "A2"
+  },
+  {
+    "en": "feeling",
+    "ar": "شعور",
+    "level": "A2"
+  },
+  {
+    "en": "opinion",
+    "ar": "رأي",
+    "level": "A2"
+  },
+  {
+    "en": "advice",
+    "ar": "نصيحة",
+    "level": "A2"
+  },
+  {
+    "en": "question",
+    "ar": "سؤال",
+    "level": "A2"
+  },
+  {
+    "en": "answer",
+    "ar": "إجابة",
+    "level": "A2"
+  },
+  {
+    "en": "problem",
+    "ar": "مشكلة",
+    "level": "A2"
+  },
+  {
+    "en": "solution",
+    "ar": "حل",
+    "level": "A2"
+  },
+  {
+    "en": "mistake",
+    "ar": "خطأ",
+    "level": "A2"
+  },
+  {
+    "en": "success",
+    "ar": "نجاح",
+    "level": "A2"
+  },
+  {
+    "en": "failure",
+    "ar": "فشل",
+    "level": "A2"
+  },
+  {
+    "en": "change",
+    "ar": "تغيير",
+    "level": "A2"
+  },
+  {
+    "en": "difference",
+    "ar": "اختلاف",
+    "level": "A2"
+  },
+  {
+    "en": "example",
+    "ar": "مثال",
+    "level": "A2"
+  },
+  {
+    "en": "practice",
+    "ar": "ممارسة",
+    "level": "A2"
+  },
+  {
+    "en": "experience",
+    "ar": "خبرة",
+    "level": "A2"
+  },
+  {
+    "en": "knowledge",
+    "ar": "معرفة",
+    "level": "A2"
+  },
+  {
+    "en": "language",
+    "ar": "لغة",
+    "level": "A2"
+  },
+  {
+    "en": "education",
+    "ar": "تعليم",
+    "level": "A2"
+  },
+  {
+    "en": "school",
+    "ar": "مدرسة",
+    "level": "A2"
+  },
+  {
+    "en": "college",
+    "ar": "كلية",
+    "level": "A2"
+  },
+  {
+    "en": "university",
+    "ar": "جامعة",
+    "level": "A2"
+  },
+  {
+    "en": "course",
+    "ar": "دورة",
+    "level": "A2"
+  },
+  {
+    "en": "class",
+    "ar": "فصل",
+    "level": "A2"
+  },
+  {
+    "en": "lesson",
+    "ar": "درس",
+    "level": "A2"
+  },
+  {
+    "en": "subject",
+    "ar": "مادة",
+    "level": "A2"
+  },
+  {
+    "en": "exam",
+    "ar": "امتحان",
+    "level": "A2"
+  },
+  {
+    "en": "test",
+    "ar": "اختبار",
+    "level": "A2"
+  },
+  {
+    "en": "mark",
+    "ar": "درجة",
+    "level": "A2"
+  },
+  {
+    "en": "grade",
+    "ar": "درجة / صف",
+    "level": "A2"
+  },
+  {
+    "en": "homework",
+    "ar": "واجب منزلي",
+    "level": "A2"
+  },
+  {
+    "en": "project",
+    "ar": "مشروع",
+    "level": "A2"
+  },
+  {
+    "en": "library",
+    "ar": "مكتبة",
+    "level": "A2"
+  },
+  {
+    "en": "teacher",
+    "ar": "مدرس",
+    "level": "A2"
+  },
+  {
+    "en": "student",
+    "ar": "طالب",
+    "level": "A2"
+  },
+  {
+    "en": "learn",
+    "ar": "يتعلم",
+    "level": "A2"
+  },
+  {
+    "en": "study",
+    "ar": "يدرس",
+    "level": "A2"
+  },
+  {
+    "en": "improve",
+    "ar": "يحسن",
+    "level": "A2"
+  },
+  {
+    "en": "practice",
+    "ar": "يتدرب",
+    "level": "A2"
+  },
+  {
+    "en": "remember",
+    "ar": "يتذكر",
+    "level": "A2"
+  },
+  {
+    "en": "forget",
+    "ar": "ينسى",
+    "level": "A2"
+  },
+  {
+    "en": "understand",
+    "ar": "يفهم",
+    "level": "A2"
+  },
+  {
+    "en": "explain",
+    "ar": "يشرح",
+    "level": "A2"
+  },
+  {
+    "en": "describe",
+    "ar": "يصف",
+    "level": "A2"
+  },
+  {
+    "en": "compare",
+    "ar": "يقارن",
+    "level": "A2"
+  },
+  {
+    "en": "decide",
+    "ar": "يقرر",
+    "level": "A2"
+  },
+  {
+    "en": "prepare",
+    "ar": "يستعد",
+    "level": "A2"
+  },
+  {
+    "en": "organize",
+    "ar": "ينظم",
+    "level": "A2"
+  },
+  {
+    "en": "complete",
+    "ar": "يكمل",
+    "level": "A2"
+  },
+  {
+    "en": "continue",
+    "ar": "يستمر",
+    "level": "A2"
+  },
+  {
+    "en": "finish",
+    "ar": "ينهي",
+    "level": "A2"
+  },
+  {
+    "en": "start",
+    "ar": "يبدأ",
+    "level": "A2"
+  },
+  {
+    "en": "stop",
+    "ar": "يتوقف",
+    "level": "A2"
+  },
+  {
+    "en": "change",
+    "ar": "يغير",
+    "level": "A2"
+  },
+  {
+    "en": "develop",
+    "ar": "يطور",
+    "level": "A2"
+  },
+  {
+    "en": "create",
+    "ar": "ينشئ",
+    "level": "A2"
+  },
+  {
+    "en": "build",
+    "ar": "يبني",
+    "level": "A2"
+  },
+  {
+    "en": "repair",
+    "ar": "يصلح",
+    "level": "A2"
+  },
+  {
+    "en": "move",
+    "ar": "يتحرك",
+    "level": "A2"
+  },
+  {
+    "en": "carry",
+    "ar": "يحمل",
+    "level": "A2"
+  },
+  {
+    "en": "bring",
+    "ar": "يحضر",
+    "level": "A2"
+  },
+  {
+    "en": "send",
+    "ar": "يرسل",
+    "level": "A2"
+  },
+  {
+    "en": "receive",
+    "ar": "يستلم",
+    "level": "A2"
+  },
+  {
+    "en": "return",
+    "ar": "يعود",
+    "level": "A2"
+  },
+  {
+    "en": "arrive",
+    "ar": "يصل",
+    "level": "A2"
+  },
+  {
+    "en": "leave",
+    "ar": "يغادر",
+    "level": "A2"
+  },
+  {
+    "en": "follow",
+    "ar": "يتبع",
+    "level": "A2"
+  },
+  {
+    "en": "reach",
+    "ar": "يصل إلى",
+    "level": "A2"
+  },
+  {
+    "en": "cross",
+    "ar": "يعبر",
+    "level": "A2"
+  },
+  {
+    "en": "turn",
+    "ar": "ينعطف",
+    "level": "A2"
+  },
+  {
+    "en": "travel",
+    "ar": "يسافر",
+    "level": "A2"
+  },
+  {
+    "en": "visit",
+    "ar": "يزور",
+    "level": "A2"
+  },
+  {
+    "en": "invite",
+    "ar": "يدعو",
+    "level": "A2"
+  },
+  {
+    "en": "accept",
+    "ar": "يقبل",
+    "level": "A2"
+  },
+  {
+    "en": "refuse",
+    "ar": "يرفض",
+    "level": "A2"
+  },
+  {
+    "en": "agree",
+    "ar": "يوافق",
+    "level": "A2"
+  },
+  {
+    "en": "disagree",
+    "ar": "يختلف",
+    "level": "A2"
+  },
+  {
+    "en": "suggest",
+    "ar": "يقترح",
+    "level": "A2"
+  },
+  {
+    "en": "recommend",
+    "ar": "يوصي",
+    "level": "A2"
+  },
+  {
+    "en": "decide",
+    "ar": "يقرر",
+    "level": "A2"
+  },
+  {
+    "en": "choose",
+    "ar": "يختار",
+    "level": "A2"
+  },
+  {
+    "en": "offer",
+    "ar": "يعرض",
+    "level": "A2"
+  },
+  {
+    "en": "order",
+    "ar": "يطلب",
+    "level": "A2"
+  },
+  {
+    "en": "book",
+    "ar": "يحجز",
+    "level": "A2"
+  },
+  {
+    "en": "cancel",
+    "ar": "يلغي",
+    "level": "A2"
+  },
+  {
+    "en": "check",
+    "ar": "يفحص",
+    "level": "A2"
+  },
+  {
+    "en": "search",
+    "ar": "يبحث",
+    "level": "A2"
+  },
+  {
+    "en": "find",
+    "ar": "يجد",
+    "level": "A2"
+  },
+  {
+    "en": "lose",
+    "ar": "يفقد",
+    "level": "A2"
+  },
+  {
+    "en": "keep",
+    "ar": "يحتفظ",
+    "level": "A2"
+  },
+  {
+    "en": "share",
+    "ar": "يشارك",
+    "level": "A2"
+  },
+  {
+    "en": "save",
+    "ar": "يحفظ",
+    "level": "A2"
+  },
+  {
+    "en": "spend",
+    "ar": "ينفق",
+    "level": "A2"
+  },
+  {
+    "en": "earn",
+    "ar": "يكسب",
+    "level": "A2"
+  },
+  {
+    "en": "borrow",
+    "ar": "يستعير",
+    "level": "A2"
+  },
+  {
+    "en": "lend",
+    "ar": "يعير",
+    "level": "A2"
+  },
+  {
+    "en": "pay",
+    "ar": "يدفع",
+    "level": "A2"
+  },
+  {
+    "en": "cost",
+    "ar": "يكلف",
+    "level": "A2"
+  },
+  {
+    "en": "buy",
+    "ar": "يشتري",
+    "level": "A2"
+  },
+  {
+    "en": "sell",
+    "ar": "يبيع",
+    "level": "A2"
+  },
+  {
+    "en": "wear",
+    "ar": "يرتدي",
+    "level": "A2"
+  },
+  {
+    "en": "carry",
+    "ar": "يحمل",
+    "level": "A2"
+  },
+  {
+    "en": "clean",
+    "ar": "ينظف",
+    "level": "A2"
+  },
+  {
+    "en": "wash",
+    "ar": "يغسل",
+    "level": "A2"
+  },
+  {
+    "en": "cook",
+    "ar": "يطبخ",
+    "level": "A2"
+  },
+  {
+    "en": "prepare",
+    "ar": "يحضر",
+    "level": "A2"
+  },
+  {
+    "en": "taste",
+    "ar": "يتذوق",
+    "level": "A2"
+  },
+  {
+    "en": "smell",
+    "ar": "يشم / رائحة",
+    "level": "A2"
+  },
+  {
+    "en": "sound",
+    "ar": "صوت / يبدو",
+    "level": "A2"
+  },
+  {
+    "en": "look",
+    "ar": "يبدو / ينظر",
+    "level": "A2"
+  },
+  {
+    "en": "feel",
+    "ar": "يشعر",
+    "level": "A2"
+  },
+  {
+    "en": "seem",
+    "ar": "يبدو",
+    "level": "A2"
+  },
+  {
+    "en": "become",
+    "ar": "يصبح",
+    "level": "A2"
+  },
+  {
+    "en": "remain",
+    "ar": "يبقى",
+    "level": "A2"
+  },
+  {
+    "en": "happen",
+    "ar": "يحدث",
+    "level": "A2"
+  },
+  {
+    "en": "appear",
+    "ar": "يظهر",
+    "level": "A2"
+  },
+  {
+    "en": "include",
+    "ar": "يشمل",
+    "level": "A2"
+  },
+  {
+    "en": "provide",
+    "ar": "يوفر",
+    "level": "A2"
+  },
+  {
+    "en": "support",
+    "ar": "يدعم",
+    "level": "A2"
+  },
+  {
+    "en": "protect",
+    "ar": "يحمي",
+    "level": "A2"
+  },
+  {
+    "en": "avoid",
+    "ar": "يتجنب",
+    "level": "A2"
+  },
+  {
+    "en": "allow",
+    "ar": "يسمح",
+    "level": "A2"
+  },
+  {
+    "en": "offer",
+    "ar": "يعرض",
+    "level": "A2"
+  },
+  {
+    "en": "expect",
+    "ar": "يتوقع",
+    "level": "A2"
+  },
+  {
+    "en": "hope",
+    "ar": "يأمل",
+    "level": "A2"
+  },
+  {
+    "en": "plan",
+    "ar": "يخطط",
+    "level": "A2"
+  },
+  {
+    "en": "try",
+    "ar": "يحاول",
+    "level": "A2"
+  },
+  {
+    "en": "manage",
+    "ar": "يتمكن",
+    "level": "A2"
+  },
+  {
+    "en": "need",
+    "ar": "يحتاج",
+    "level": "A2"
+  },
+  {
+    "en": "prefer",
+    "ar": "يفضل",
+    "level": "A2"
+  },
+  {
+    "en": "enjoy",
+    "ar": "يستمتع",
+    "level": "A2"
+  },
+  {
+    "en": "hate",
+    "ar": "يكره",
+    "level": "A2"
+  },
+  {
+    "en": "love",
+    "ar": "يحب",
+    "level": "A2"
+  },
+  {
+    "en": "like",
+    "ar": "يحب",
+    "level": "A2"
+  },
+  {
+    "en": "believe",
+    "ar": "يعتقد",
+    "level": "A2"
+  },
+  {
+    "en": "think",
+    "ar": "يفكر",
+    "level": "A2"
+  },
+  {
+    "en": "know",
+    "ar": "يعرف",
+    "level": "A2"
+  },
+  {
+    "en": "understand",
+    "ar": "يفهم",
+    "level": "A2"
+  },
+  {
+    "en": "remember",
+    "ar": "يتذكر",
+    "level": "A2"
+  },
+  {
+    "en": "forget",
+    "ar": "ينسى",
+    "level": "A2"
+  },
+  {
+    "en": "mean",
+    "ar": "يعني",
+    "level": "A2"
+  },
+  {
+    "en": "explain",
+    "ar": "يشرح",
+    "level": "A2"
+  },
+  {
+    "en": "learn",
+    "ar": "يتعلم",
+    "level": "A2"
+  },
+  {
+    "en": "teach",
+    "ar": "يعلم",
+    "level": "A2"
+  },
+  {
+    "en": "read",
+    "ar": "يقرأ",
+    "level": "A2"
+  },
+  {
+    "en": "write",
+    "ar": "يكتب",
+    "level": "A2"
+  },
+  {
+    "en": "speak",
+    "ar": "يتحدث",
+    "level": "A2"
+  },
+  {
+    "en": "listen",
+    "ar": "يستمع",
+    "level": "A2"
+  },
+  {
+    "en": "watch",
+    "ar": "يشاهد",
+    "level": "A2"
+  },
+  {
+    "en": "answer",
+    "ar": "يجيب",
+    "level": "A2"
+  },
+  {
+    "en": "ask",
+    "ar": "يسأل",
+    "level": "A2"
+  },
+  {
+    "en": "talk",
+    "ar": "يتحدث",
+    "level": "A2"
+  },
+  {
+    "en": "discuss",
+    "ar": "يناقش",
+    "level": "A2"
+  },
+  {
+    "en": "communicate",
+    "ar": "يتواصل",
+    "level": "A2"
+  },
+  {
+    "en": "meet",
+    "ar": "يقابل",
+    "level": "A2"
+  },
+  {
+    "en": "help",
+    "ar": "يساعد",
+    "level": "A2"
+  },
+  {
+    "en": "work",
+    "ar": "يعمل",
+    "level": "A2"
+  },
+  {
+    "en": "live",
+    "ar": "يعيش",
+    "level": "A2"
+  },
+  {
+    "en": "move",
+    "ar": "ينتقل",
+    "level": "A2"
+  },
+  {
+    "en": "stay",
+    "ar": "يبقى",
+    "level": "A2"
+  },
+  {
+    "en": "wait",
+    "ar": "ينتظر",
+    "level": "A2"
+  },
+  {
+    "en": "hurry",
+    "ar": "يسرع",
+    "level": "A2"
+  },
+  {
+    "en": "relax",
+    "ar": "يسترخي",
+    "level": "A2"
+  },
+  {
+    "en": "enjoy",
+    "ar": "يستمتع",
+    "level": "A2"
+  },
+  {
+    "en": "celebrate",
+    "ar": "يحتفل",
+    "level": "A2"
+  },
+  {
+    "en": "remember",
+    "ar": "يتذكر",
+    "level": "A2"
+  },
+  {
+    "en": "hope",
+    "ar": "يأمل",
+    "level": "A2"
+  },
+  {
+    "en": "worry",
+    "ar": "يقلق",
+    "level": "A2"
+  },
+  {
+    "en": "surprise",
+    "ar": "يفاجئ",
+    "level": "A2"
+  },
+  {
+    "en": "excite",
+    "ar": "يثير الحماس",
+    "level": "A2"
+  },
+  {
+    "en": "interest",
+    "ar": "يثير الاهتمام",
+    "level": "A2"
+  },
+  {
+    "en": "prefer",
+    "ar": "يفضل",
+    "level": "A2"
+  },
+  {
+    "en": "decide",
+    "ar": "يقرر",
+    "level": "A2"
+  },
+  {
+    "en": "agree",
+    "ar": "يوافق",
+    "level": "A2"
+  },
+  {
+    "en": "believe",
+    "ar": "يعتقد",
+    "level": "A2"
+  },
+  {
+    "en": "understand",
+    "ar": "يفهم",
+    "level": "A2"
+  },
+  {
+    "en": "probably",
+    "ar": "على الأرجح",
+    "level": "A2"
+  },
+  {
+    "en": "usually",
+    "ar": "عادةً",
+    "level": "A2"
+  },
+  {
+    "en": "especially",
+    "ar": "خصوصًا",
+    "level": "A2"
+  },
+  {
+    "en": "finally",
+    "ar": "أخيرًا",
+    "level": "A2"
+  },
+  {
+    "en": "quickly",
+    "ar": "بسرعة",
+    "level": "A2"
+  },
+  {
+    "en": "slowly",
+    "ar": "ببطء",
+    "level": "A2"
+  },
+  {
+    "en": "carefully",
+    "ar": "بحذر",
+    "level": "A2"
+  },
+  {
+    "en": "easily",
+    "ar": "بسهولة",
+    "level": "A2"
+  },
+  {
+    "en": "actually",
+    "ar": "في الواقع",
+    "level": "A2"
+  },
+  {
+    "en": "really",
+    "ar": "حقًا",
+    "level": "A2"
+  },
+  {
+    "en": "almost",
+    "ar": "تقريبًا",
+    "level": "A2"
+  },
+  {
+    "en": "already",
+    "ar": "بالفعل",
+    "level": "A2"
+  },
+  {
+    "en": "still",
+    "ar": "ما زال",
+    "level": "A2"
+  },
+  {
+    "en": "yet",
+    "ar": "حتى الآن",
+    "level": "A2"
+  },
+  {
+    "en": "again",
+    "ar": "مرة أخرى",
+    "level": "A2"
+  },
+  {
+    "en": "together",
+    "ar": "معًا",
+    "level": "A2"
+  },
+  {
+    "en": "alone",
+    "ar": "وحده",
+    "level": "A2"
+  },
+  {
+    "en": "perhaps",
+    "ar": "ربما",
+    "level": "A2"
+  },
+  {
+    "en": "maybe",
+    "ar": "ربما",
+    "level": "A2"
+  },
+  {
+    "en": "however",
+    "ar": "ومع ذلك",
+    "level": "A2"
+  },
+  {
+    "en": "although",
+    "ar": "بالرغم من أن",
+    "level": "A2"
+  },
+  {
+    "en": "because",
+    "ar": "لأن",
+    "level": "A2"
+  },
+  {
+    "en": "therefore",
+    "ar": "لذلك",
+    "level": "A2"
+  },
+  {
+    "en": "instead",
+    "ar": "بدلًا من ذلك",
+    "level": "A2"
+  },
+  {
+    "en": "while",
+    "ar": "بينما",
+    "level": "A2"
+  },
+  {
+    "en": "during",
+    "ar": "أثناء",
+    "level": "A2"
+  },
+  {
+    "en": "before",
+    "ar": "قبل",
+    "level": "A2"
+  },
+  {
+    "en": "after",
+    "ar": "بعد",
+    "level": "A2"
+  },
+  {
+    "en": "until",
+    "ar": "حتى",
+    "level": "A2"
+  },
+  {
+    "en": "since",
+    "ar": "منذ",
+    "level": "A2"
+  },
+  {
+    "en": "through",
+    "ar": "من خلال",
+    "level": "A2"
+  },
+  {
+    "en": "around",
+    "ar": "حول",
+    "level": "A2"
+  },
+  {
+    "en": "towards",
+    "ar": "نحو",
+    "level": "A2"
+  },
+  {
+    "en": "against",
+    "ar": "ضد",
+    "level": "A2"
+  },
+  {
+    "en": "without",
+    "ar": "بدون",
+    "level": "A2"
+  },
+  {
+    "en": "within",
+    "ar": "داخل",
+    "level": "A2"
+  },
+  {
+    "en": "outside",
+    "ar": "خارج",
+    "level": "A2"
+  },
+  {
+    "en": "between",
+    "ar": "بين",
+    "level": "A2"
+  },
+  {
+    "en": "among",
+    "ar": "بين / وسط",
+    "level": "A2"
+  },
+  {
+    "en": "beside",
+    "ar": "بجانب",
+    "level": "A2"
+  },
+  {
+    "en": "nearby",
+    "ar": "بالقرب",
+    "level": "A2"
+  },
+  {
+    "en": "away",
+    "ar": "بعيدًا",
+    "level": "A2"
+  },
+  {
+    "en": "forward",
+    "ar": "إلى الأمام",
+    "level": "A2"
+  },
+  {
+    "en": "backward",
+    "ar": "إلى الخلف",
+    "level": "A2"
+  },
+  {
+    "en": "upstairs",
+    "ar": "في الطابق العلوي",
+    "level": "A2"
+  },
+  {
+    "en": "downstairs",
+    "ar": "في الطابق السفلي",
+    "level": "A2"
+  },
+  {
+    "en": "inside",
+    "ar": "في الداخل",
+    "level": "A2"
+  },
+  {
+    "en": "outside",
+    "ar": "في الخارج",
+    "level": "A2"
+  },
+  {
+    "en": "everywhere",
+    "ar": "في كل مكان",
+    "level": "A2"
+  },
+  {
+    "en": "somewhere",
+    "ar": "في مكان ما",
+    "level": "A2"
+  },
+  {
+    "en": "nowhere",
+    "ar": "لا مكان",
+    "level": "A2"
+  },
+  {
+    "en": "anywhere",
+    "ar": "في أي مكان",
+    "level": "A2"
+  }
+]

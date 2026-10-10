@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>English Vocabulary D1 &amp; D2</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@500;600;700;800&display=swap');
+
+:root{
+    --navy:#17213d;
+    --blue:#3157d5;
+    --purple:#6c3fd1;
+    --gold:#d6a84f;
+    --text:#182033;
+    --muted:#687187;
+    --line:#e4e8f0;
+    --soft:#f4f6ff;
+    --bg:#eef2f7;
+    --white:#fff;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Cairo,Arial,sans-serif;
+}
+
+.app{
+    max-width:1250px;
+    margin:auto;
+    padding:24px;
+}
+
+.header{
+    background:
+        radial-gradient(circle at 15% 20%,#ffffff22,transparent 30%),
+        radial-gradient(circle at 85% 80%,#ffffff15,transparent 30%),
+        linear-gradient(135deg,var(--navy),var(--blue),var(--purple));
+
+    color:white;
+    padding:30px;
+    border-radius:26px;
+    box-shadow:0 18px 45px #17213d25;
+}
+
+.header h1{
+    margin:0;
+    font-size:32px;
+    font-weight:800;
+}
+
+.header p{
+    margin:5px 0 0;
+    opacity:.85;
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+button{
+    border:0;
+    border-radius:12px;
+    padding:11px 17px;
+    font-family:inherit;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.btn{
+    background:white;
+    color:var(--navy);
+}
+
+.btn.dark{
+    background:#10182e;
+    color:white;
+}
+
+.btn.blue{
+    background:#3157d5;
+    color:white;
+}
+
+.search{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.search input{
+    flex:1;
+    border:0;
+    border-radius:13px;
+    padding:14px 17px;
+    font-family:inherit;
+    outline:none;
+    font-size:15px;
+}
+
+.stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin:18px 0;
+}
+
+.stat{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:12px 20px;
+    min-width:150px;
+}
+
+.stat strong{
+    display:block;
+    font-family:Inter,Arial,sans-serif;
+    font-size:21px;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.viewer{
+    background:#dfe4eb;
+    padding:28px;
+    border-radius:22px;
+}
+
+.page,
+.cover{
+    width:210mm;
+    height:297mm;
+    background:white;
+    margin:0 auto 28px;
+    position:relative;
+    overflow:hidden;
+
+    break-after:page;
+    page-break-after:always;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.13);
+}
+
+.cover{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25mm;
+
+    background:
+        radial-gradient(circle at 15% 20%,#3157d520,transparent 35%),
+        radial-gradient(circle at 85% 80%,#6c3fd125,transparent 35%),
+        white;
+}
+
+.cover-content{
+    width:100%;
+    border:1px solid #dfe4ef;
+    border-radius:28px;
+    padding:50px 35px;
+}
+
+.badge{
+    display:inline-block;
+    background:var(--soft);
+    color:var(--blue);
+    padding:7px 18px;
+    border-radius:999px;
+    font-weight:800;
+}
+
+.level-big{
+    font-family:Inter,Arial,sans-serif;
+    direction:ltr;
+    font-size:82px;
+    font-weight:800;
+    color:var(--blue);
+    margin:15px 0;
+}
+
+.cover h2{
+    font-size:42px;
+    margin:0;
+    font-family:Inter,Cairo,sans-serif;
+}
+
+.cover h3{
+    font-size:23px;
+}
+
+.cover p{
+    color:var(--muted);
+}
+
+.page{
+    padding:13mm 12mm 17mm;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+
+    border-bottom:2px solid var(--navy);
+
+    padding-bottom:8px;
+    margin-bottom:12px;
+}
+
+.page-header h2{
+    margin:0;
+    font-size:21px;
+}
+
+.page-header small{
+    color:var(--muted);
+}
+
+.page-level{
+    font-family:Inter,Arial,sans-serif;
+    direction:ltr;
+    font-weight:800;
+    color:var(--blue);
+}
+
+.words{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:7px;
+
+    direction:ltr;
+}
+
+.word{
+    direction:ltr;
+
+    display:grid;
+    grid-template-columns:35px 1fr;
+
+    gap:8px;
+
+    align-items:center;
+
+    border:1px solid var(--line);
+
+    border-radius:9px;
+
+    padding:7px 9px;
+
+    height:10.7mm;
+
+    overflow:hidden;
+
+    background:white;
+}
+
+.number{
+    font-family:Inter,Arial,sans-serif;
+
+    font-weight:800;
+
+    color:var(--blue);
+
+    text-align:center;
+}
+
+.english{
+    font-family:Inter,Arial,sans-serif;
+
+    font-weight:800;
+
+    font-size:13px;
+
+    line-height:1.1;
+
+    direction:ltr;
+
+    text-align:left;
+}
+
+.arabic{
+    direction:rtl;
+
+    text-align:right;
+
+    color:var(--muted);
+
+    font-size:10.5px;
+
+    line-height:1.15;
+
+    margin-top:1px;
+}
+
+.footer{
+    position:absolute;
+
+    bottom:6mm;
+
+    left:12mm;
+    right:12mm;
+
+    border-top:1px solid var(--line);
+
+    padding-top:5px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#8a92a4;
+
+    font-size:10px;
+}
+
+.no-results{
+    text-align:center;
+
+    padding:60px;
+
+    color:var(--muted);
+
+    background:white;
+
+    border-radius:18px;
+}
+
+@media print{
+
+    html,
+    body{
+        width:210mm;
+
+        margin:0!important;
+        padding:0!important;
+
+        background:white!important;
+    }
+
+    body{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .app{
+        width:210mm;
+
+        max-width:none;
+
+        padding:0;
+
+        margin:0;
+    }
+
+    .header,
+    .stats,
+    .controls,
+    .search{
+        display:none!important;
+    }
+
+    .viewer{
+        width:210mm;
+
+        padding:0!important;
+
+        margin:0;
+
+        background:white;
+
+        border-radius:0;
+    }
+
+    .page,
+    .cover{
+
+        width:210mm!important;
+
+        height:297mm!important;
+
+        min-height:297mm!important;
+
+        margin:0!important;
+
+        box-shadow:none!important;
+
+        overflow:hidden!important;
+
+        break-after:page!important;
+
+        page-break-after:always!important;
+
+        break-inside:avoid!important;
+
+        page-break-inside:avoid!important;
+    }
+
+    .cover{
+        padding:25mm!important;
+    }
+
+    .words{
+        grid-template-columns:1fr 1fr!important;
+
+        direction:ltr!important;
+
+        gap:7px!important;
+    }
+
+    .word{
+        height:10.7mm!important;
+
+        min-height:10.7mm!important;
+
+        break-inside:avoid!important;
+
+        page-break-inside:avoid!important;
+    }
+
+    .page:last-child,
+    .cover:last-child{
+
+        break-after:auto!important;
+
+        page-break-after:auto!important;
+    }
+}
+
+@page{
+    size:A4 portrait;
+
+    margin:0;
+}
+
+@media(max-width:850px){
+
+    .app{
+        padding:10px;
+    }
+
+    .viewer{
+        padding:10px;
+
+        overflow:auto;
+    }
+
+    .page,
+    .cover{
+        flex:none;
+    }
+
+    .header h1{
+        font-size:25px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <h1>
+        English Vocabulary D1 & D2
+    </h1>
+
+    <p>
+        1000 كلمة إنجليزية مع الترجمة العربية
+    </p>
+
+    <div class="controls">
+
+        <button class="btn dark"
+                onclick="setLevel('ALL')">
+            📚 D1 + D2
+        </button>
+
+        <button class="btn"
+                onclick="setLevel('D1')">
+            🇬🇧 D1 فقط
+        </button>
+
+        <button class="btn"
+                onclick="setLevel('D2')">
+            🇬🇧 D2 فقط
+        </button>
+
+        <button class="btn"
+                onclick="window.print()">
+            🖨️ طباعة / حفظ PDF
+        </button>
+
+        <button class="btn"
+                onclick="downloadPDF()">
+            📥 تحميل PDF
+        </button>
+
+    </div>
+
+    <div class="search">
+
+        <input
+            id="search"
+            type="text"
+            placeholder="ابحث بالإنجليزية أو العربية..."
+            oninput="render()"
+        >
+
+        <button
+            class="btn"
+            onclick="clearSearch()">
+            مسح
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <strong id="totalWords">1000</strong>
+        <span>إجمالي الكلمات</span>
+    </div>
+
+    <div class="stat">
+        <strong id="c1Count">500</strong>
+        <span>D1</span>
+    </div>
+
+    <div class="stat">
+        <strong id="c2Count">500</strong>
+        <span>D2</span>
+    </div>
+
+    <div class="stat">
+        <strong>40</strong>
+        <span>كلمة في الصفحة</span>
+    </div>
+
+</div>
+
+
+<div id="viewer" class="viewer"></div>
+
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   D1 — 500 WORDS
+   ========================================================= */
+
+const D1 = [
+["abate", "يخف؛ يتراجع"],
+["aberration", "انحراف؛ شذوذ"],
+["abhor", "يمقت بشدة"],
+["abrogate", "يلغي رسميًا"],
+["accede", "يوافق؛ يتولى منصبًا"],
+["accretion", "تراكم تدريجي"],
+["acerbic", "لاذع؛ حاد"],
+["acquiesce", "يذعن؛ يوافق دون اعتراض"],
+["acrimony", "مرارة؛ حدة في الخلاف"],
+["admonish", "يوبخ؛ يحذر"],
+["adroit", "ماهر؛ بارع"],
+["adulation", "تملق؛ إعجاب مفرط"],
+["adversity", "محنة؛ شدّة"],
+["aesthetic", "جمالي"],
+["affable", "ودود؛ بشوش"],
+["aggrandize", "يعظم؛ يضخم"],
+["alacrity", "حماس وسرعة استجابة"],
+["alleviate", "يخفف"],
+["amalgamate", "يدمج"],
+["ambivalent", "متردد؛ متناقض المشاعر"],
+["ameliorate", "يحسن"],
+["anachronism", "مفارقة زمنية"],
+["antagonize", "يستفز؛ يعادي"],
+["apocryphal", "مشكوك في مصدره"],
+["appease", "يسترضي"],
+["arbitrary", "اعتباطي"],
+["arcane", "غامض؛ سري"],
+["arduous", "شاق"],
+["artifice", "حيلة؛ خدعة"],
+["ascertain", "يتحقق من"],
+["assiduous", "دؤوب"],
+["astute", "فطن"],
+["audacious", "جريء"],
+["augment", "يزيد؛ يعزز"],
+["austere", "تقشفي؛ صارم"],
+["avarice", "جشع"],
+["belie", "يناقض؛ يكذب"],
+["belligerent", "عدائي"],
+["benevolent", "محسن؛ خيّر"],
+["bolster", "يدعم"],
+["bombastic", "متكلف في الكلام"],
+["brevity", "إيجاز"],
+["cajole", "يستميل؛ يقنع بالإطراء"],
+["callous", "قاسي القلب"],
+["candid", "صريح"],
+["capricious", "متقلب؛ نزوي"],
+["castigate", "يوبخ بشدة"],
+["caustic", "لاذع"],
+["censure", "يدين؛ يلوم رسميًا"],
+["chicanery", "تحايل؛ مكر"],
+["circumspect", "حذر؛ متأنٍ"],
+["clandestine", "سري"],
+["coalesce", "يتحد؛ يندمج"],
+["cogent", "مقنع؛ قوي الحجة"],
+["complacent", "راضٍ عن نفسه بإفراط"],
+["concede", "يقر؛ يتنازل"],
+["concomitant", "مصاحب"],
+["conflagration", "حريق هائل"],
+["conjecture", "تخمين؛ افتراض"],
+["connoisseur", "خبير؛ متذوق"],
+["conspicuous", "بارز؛ لافت"],
+["consternation", "ذهول؛ فزع"],
+["construe", "يفسر"],
+["contentious", "جدلي؛ مثير للنزاع"],
+["contrite", "نادم"],
+["conundrum", "معضلة"],
+["copious", "وفير؛ غزير"],
+["corroborate", "يؤكد بأدلة"],
+["cosmopolitan", "عالمي؛ متعدد الثقافات"],
+["credulous", "ساذج؛ سريع التصديق"],
+["cryptic", "غامض"],
+["culpable", "مذنب؛ مسؤول"],
+["cursory", "سطحي؛ سريع"],
+["daunt", "يثبط؛ يخيف"],
+["dearth", "ندرة؛ نقص"],
+["debacle", "فشل ذريع"],
+["debilitate", "يضعف"],
+["decorum", "لياقة؛ احتشام"],
+["deference", "احترام؛ إذعان"],
+["deleterious", "ضار"],
+["denigrate", "يشوه السمعة"],
+["deride", "يسخر من"],
+["deter", "يردع"],
+["diatribe", "خطبة هجومية"],
+["didactic", "تعليمي؛ وعظي"],
+["dilettante", "هاوٍ غير متخصص"],
+["discerning", "فطن؛ حسن التمييز"],
+["disparate", "متباين"],
+["disseminate", "ينشر؛ يوزع"],
+["dissident", "معارض"],
+["dogmatic", "متعصب لرأيه"],
+["ebullient", "مفعم بالحيوية"],
+["eclectic", "انتقائي؛ متنوع"],
+["edify", "يثقف؛ يهذب"],
+["efface", "يمحو"],
+["efficacious", "فعال"],
+["effrontery", "وقاحة"],
+["egregious", "فادح؛ شنيع"],
+["elicit", "يستخرج؛ يستدرج"],
+["elucidate", "يوضح"],
+["emulate", "يحاكي؛ يقتدي"],
+["engender", "يولد؛ يسبب"],
+["enigmatic", "غامض"],
+["enmity", "عداء"],
+["ephemeral", "قصير الأجل"],
+["equanimity", "رباطة جأش"],
+["equivocal", "ملتبس"],
+["erudite", "واسع المعرفة"],
+["esoteric", "متخصص وغامض"],
+["evince", "يظهر؛ يبرهن"],
+["exacerbate", "يفاقم"],
+["exculpate", "يبرئ"],
+["exonerate", "يبرئ من المسؤولية"],
+["expedite", "يسرع"],
+["extol", "يمدح بشدة"],
+["fallacious", "زائف منطقيًا"],
+["fastidious", "دقيق ومتطلب"],
+["fatuous", "أحمق؛ تافه"],
+["feasible", "قابل للتنفيذ"],
+["fervent", "حماسي"],
+["flagrant", "صارخ؛ فاضح"],
+["flippant", "مستخف"],
+["florid", "مزخرف؛ متكلف"],
+["foible", "نقطة ضعف"],
+["fortuitous", "عرضي؛ محظوظ"],
+["frugal", "مقتصد"],
+["garrulous", "ثرثار"],
+["gregarious", "اجتماعي"],
+["guile", "مكر؛ دهاء"],
+["hackneyed", "مبتذل؛ مستهلك"],
+["harangue", "خطبة هجومية طويلة"],
+["hegemony", "هيمنة"],
+["hermetic", "محكم الإغلاق؛ غامض"],
+["iconoclast", "ناقد للتقاليد"],
+["idiosyncrasy", "سمة شخصية مميزة"],
+["ignominious", "مخزٍ؛ مهين"],
+["immutable", "غير قابل للتغيير"],
+["impecunious", "معدم؛ فقير"],
+["impertinent", "وقح؛ غير لائق"],
+["implacable", "لا يلين"],
+["implicit", "ضمني"],
+["inadvertent", "غير مقصود"],
+["incendiary", "تحريضي"],
+["incongruous", "غير متناسق"],
+["incorrigible", "ميؤوس من إصلاحه"],
+["indefatigable", "لا يكل"],
+["indolent", "كسول"],
+["ineffable", "لا يوصف"],
+["inimical", "معادٍ؛ ضار"],
+["insidious", "خبيث ومتدرج الضرر"],
+["insipid", "بلا طعم؛ ممل"],
+["insolent", "وقح"],
+["intrepid", "شجاع لا يهاب"],
+["inveterate", "متأصل؛ مزمن"],
+["irascible", "سريع الغضب"],
+["laconic", "مقتضب"],
+["laudable", "جدير بالثناء"],
+["lethargic", "خامل"],
+["loquacious", "ثرثار"],
+["magnanimous", "كريم ومتسامح"],
+["malleable", "قابل للتشكيل؛ التأثر"],
+["maudlin", "عاطفي بإفراط"],
+["mendacious", "كاذب"],
+["meticulous", "دقيق جدًا"],
+["mitigate", "يخفف"],
+["morose", "كئيب"],
+["munificent", "سخي جدًا"],
+["myriad", "عدد هائل"],
+["nefarious", "شرير؛ دنيء"],
+["negligible", "ضئيل"],
+["neophyte", "مبتدئ"],
+["nonchalant", "غير مبالٍ"],
+["obdurate", "عنيد"],
+["obfuscate", "يبهم؛ يعقد"],
+["obsequious", "متملق"],
+["ominous", "نذير شؤم"],
+["onerous", "مرهق؛ شاق"],
+["ostensible", "ظاهري"],
+["ostracize", "ينبذ"],
+["palatable", "مقبول"],
+["paradigm", "نموذج؛ نمط"],
+["paragon", "مثال يحتذى"],
+["parsimonious", "بخيل"],
+["perfunctory", "روتيني بلا اهتمام"],
+["pervasive", "منتشر في كل مكان"],
+["phlegmatic", "هادئ غير انفعالي"],
+["placate", "يهدئ؛ يسترضي"],
+["plethora", "وفرة مفرطة"],
+["pragmatic", "عملي"],
+["precarious", "غير مستقر"],
+["precocious", "متقدم على عمره"],
+["predilection", "ميل مفضل"],
+["proclivity", "نزعة؛ ميل"],
+["prodigious", "هائل؛ مدهش"],
+["profligate", "مسرف؛ فاسد"],
+["prolific", "غزير الإنتاج"],
+["propensity", "نزعة"],
+["prosaic", "عادي؛ غير خيالي"],
+["pugnacious", "ميال للشجار"],
+["querulous", "كثير الشكوى"],
+["quixotic", "مثالي غير واقعي"],
+["rancor", "حقد؛ ضغينة"],
+["recalcitrant", "متمرد؛ عنيد"],
+["reclusive", "منعزل"],
+["redoubtable", "مخيف؛ جدير بالاحترام"],
+["refute", "يدحض"],
+["relegate", "يحيل إلى مرتبة أدنى"],
+["reprehensible", "مذموم"],
+["reticent", "متحفظ"],
+["reverent", "موقر"],
+["sagacious", "حكيم؛ فطن"],
+["salient", "بارز؛ مهم"],
+["scrupulous", "دقيق؛ شديد الالتزام"],
+["scrutinize", "يدقق في"],
+["sedulous", "دؤوب"],
+["serendipity", "اكتشاف محظوظ بالصدفة"],
+["soporific", "مسبب للنعاس"],
+["spurious", "زائف"],
+["staid", "رصين؛ محافظ"],
+["stolid", "بليد المشاعر"],
+["strident", "حاد؛ صاخب"],
+["subjugate", "يخضع"],
+["succinct", "موجز"],
+["superfluous", "زائد عن الحاجة"],
+["surreptitious", "خلسة؛ سري"],
+["tacit", "ضمني؛ غير معلن"],
+["tangential", "عرضي؛ غير مباشر"],
+["tenacious", "مثابر؛ متشبث"],
+["terse", "مقتضب"],
+["tirade", "خطبة غاضبة"],
+["transient", "عابر؛ مؤقت"],
+["trenchant", "حاد وقوي"],
+["ubiquitous", "موجود في كل مكان"],
+["unassailable", "لا يمكن دحضه"],
+["unequivocal", "واضح لا لبس فيه"],
+["untenable", "غير قابل للدفاع"],
+["vacillate", "يتردد"],
+["vehement", "شديد"],
+["verbose", "مسهب"],
+["vicarious", "غير مباشر"],
+["vindicate", "يثبت صحة؛ يبرئ"],
+["vitriolic", "لاذع جدًا"],
+["vociferous", "صاخب؛ جهوري"],
+["wane", "يتضاءل"],
+["wary", "حذر"],
+["winsome", "جذاب"],
+["zealous", "متحمس بشدة"],
+["accredit", "يعتمد رسميًا"],
+["adjudicate", "يفصل في نزاع"],
+["allocate", "يخصص"],
+["articulate", "يصوغ بوضوح"],
+["authenticate", "يثبت الأصالة"],
+["benchmark", "معيار مرجعي"],
+["codify", "يقنن"],
+["commensurate", "متناسب"],
+["compendium", "موجز شامل"],
+["compunction", "ندم"],
+["conciliatory", "تصالحي"],
+["conflation", "دمج مفاهيم"],
+["contravene", "يخالف"],
+["convivial", "مرح؛ اجتماعي"],
+["denouement", "حل العقدة؛ خاتمة"],
+["deprecate", "يستنكر؛ يقلل من شأن"],
+["dilatory", "مماطل"],
+["disquisition", "بحث مطول"],
+["divest", "يجرد؛ يتخلى عن"],
+["duplicity", "ازدواجية؛ خداع"],
+["ecumenical", "عالمي؛ شامل"],
+["efflorescence", "ازدهار؛ تبلور"],
+["elision", "حذف"],
+["emollient", "ملين؛ مهدئ"],
+["empirical", "تجريبي"],
+["entreat", "يتوسل"],
+["epistolary", "متعلق بالرسائل"],
+["equivocate", "يراوغ"],
+["expunge", "يمحو"],
+["extant", "باقٍ حتى الآن"],
+["extricate", "يخلص من ورطة"],
+["farrago", "خليط مشوش"],
+["fetter", "يقيد"],
+["foment", "يؤجج"],
+["fractious", "مشاكس؛ انقسامي"],
+["fulminate", "يندد بشدة"],
+["gambit", "مناورة افتتاحية"],
+["germane", "وثيق الصلة"],
+["grandiose", "عظيم بشكل متكلف"],
+["heterodox", "غير تقليدي"],
+["homily", "موعظة"],
+["impugn", "يطعن في"],
+["incisive", "نافذ؛ حاد"],
+["indigent", "محتاج؛ فقير"],
+["inexorable", "لا يلين؛ حتمي"],
+["infringe", "ينتهك"],
+["ingrained", "متأصل"],
+["innocuous", "غير ضار"],
+["inscrutable", "عصي على الفهم"],
+["interlocutor", "محاور"],
+["invidious", "حاقد؛ تمييزي"],
+["irrefutable", "لا يمكن دحضه"],
+["juxtapose", "يضع جنبًا إلى جنب"],
+["kowtow", "يتذلل"],
+["languid", "خامل"],
+["latent", "كامن"],
+["logorrhea", "ثرثرة مفرطة"],
+["lucid", "واضح"],
+["marginalia", "هوامش مكتوبة"],
+["meander", "يتعرج؛ يطيل"],
+["meretricious", "براق لكنه زائف"],
+["metonymy", "مجاز مرسل"],
+["nonplussed", "حائر تمامًا"],
+["obviate", "يتجنب؛ يلغي الحاجة"],
+["occlude", "يسد؛ يحجب"],
+["officious", "متدخل بإفراط"],
+["opine", "يبدي رأيًا"],
+["paradigmatic", "نموذجي"],
+["penchant", "ميل"],
+["pernicious", "خبيث؛ ضار"],
+["perspicuous", "واضح"],
+["plangent", "رنان وحزين"],
+["platitude", "عبارة مبتذلة"],
+["pleonasm", "حشو لفظي"],
+["preponderance", "غلبة؛ رجحان"],
+["prescient", "متنبئ"],
+["probative", "دال على الحقيقة"],
+["proscribe", "يحظر"],
+["provenance", "أصل؛ مصدر"],
+["quotidian", "يومي"],
+["reify", "يجسد فكرة مجردة"],
+["rescind", "يلغي رسميًا"],
+["retinue", "حاشية؛ أتباع"],
+["salubrious", "صحي"],
+["saturnine", "كئيب"],
+["scintilla", "ذرة؛ قدر ضئيل"],
+["sinecure", "وظيفة مريحة بلا عمل كبير"],
+["solicitous", "حريص؛ مهتم"],
+["stochastic", "عشوائي احتمالي"],
+["substantive", "جوهري"],
+["surfeit", "تخمة؛ إفراط"],
+["sybaritic", "مترف"],
+["temerity", "جرأة متهورة"],
+["tenuous", "واهٍ؛ ضعيف"],
+["tortuous", "ملتوي؛ معقد"],
+["transmute", "يحوّل"],
+["turpitude", "دناءة أخلاقية"],
+["tyro", "مبتدئ"],
+["unalloyed", "خالص"],
+["vacuous", "فارغ؛ بلا مضمون"],
+["winnow", "ينخل؛ يستخلص"],
+["wizened", "ذابل؛ مجعد"],
+["wont", "عادة"],
+["zealotry", "تعصب شديد"],
+["abated", "متراجع / مخفف"],
+["abhorrence", "اشمئزاز شديد"],
+["admonition", "توبيخ؛ تحذير"],
+["augmentation", "زيادة؛ تعزيز"],
+["bolstering", "دعم؛ تعزيز"],
+["corroboration", "تأكيد بالأدلة"],
+["dissemination", "نشر؛ توزيع"],
+["elucidation", "إيضاح"],
+["engendering", "توليد؛ إحداث"],
+["exacerbation", "تفاقم"],
+["expedition", "تعجيل / تسريع"],
+["mitigation", "تخفيف"],
+["scrutiny", "تدقيق وفحص"],
+["subjugation", "إخضاع"],
+["vindication", "تبرئة؛ إثبات صحة"],
+["vacillation", "تردد؛ تذبذب"],
+["refutation", "دحض"],
+["relegation", "إحالة إلى مرتبة أدنى"],
+["ostracism", "نبذ اجتماعي"],
+["obfuscation", "إبهام؛ تعقيد"],
+["repudiation", "رفض شديد"],
+["recalcitrance", "عناد وتمرد"],
+["pervasiveness", "انتشار واسع"],
+["tenacity", "مثابرة؛ تشبث"],
+["policy", "سياسة"],
+["institution", "مؤسسة"],
+["governance", "حوكمة"],
+["legitimacy", "شرعية"],
+["accountability", "مساءلة"],
+["transparency", "شفافية"],
+["discourse", "خطاب"],
+["rhetoric", "بلاغة؛ خطاب"],
+["inference", "استدلال"],
+["premise", "مقدمة منطقية"],
+["proposition", "قضية؛ مقترح"],
+["hypothesis", "فرضية"],
+["paradigm", "نموذج فكري"],
+["methodology", "منهجية"],
+["causality", "سببية"],
+["correlation", "ارتباط"],
+["ambiguity", "غموض"],
+["coherence", "ترابط"],
+["nuance", "فارق دقيق"],
+["connotation", "دلالة ضمنية"],
+["denotation", "دلالة مباشرة"],
+["semantics", "علم الدلالة"],
+["pragmatics", "تداولية اللغة"],
+["taxonomy", "تصنيف هرمي"],
+["ontology", "علم الوجود"],
+["epistemology", "نظرية المعرفة"],
+["metacognition", "ما وراء المعرفة"],
+["interdisciplinary", "متعدد التخصصات"],
+["multifaceted", "متعدد الجوانب"],
+["counterargument", "حجة مضادة"],
+["corollary", "نتيجة لازمة"],
+["implication", "دلالة؛ أثر"],
+["ramification", "نتيجة متفرعة"],
+["consequence", "نتيجة"],
+["contingency", "احتمال؛ ظرف طارئ"],
+["determinism", "حتمية"],
+["pluralism", "تعددية"],
+["egalitarianism", "مساواة اجتماعية"],
+["utilitarianism", "نفعية"],
+["deontology", "أخلاق الواجب"],
+["relativism", "نسبية"],
+["rationalism", "عقلانية"],
+["empiricism", "تجريبية"],
+["skepticism", "شكّية"],
+["materialism", "مادية"],
+["idealism", "مثالية"],
+["existentialism", "وجودية"],
+["secularism", "علمانية"],
+["bureaucracy", "بيروقراطية"],
+["meritocracy", "حكم الجدارة"],
+["oligarchy", "حكم الأقلية"],
+["technocracy", "حكم الخبراء"],
+["autocracy", "حكم فردي"],
+["demography", "علم السكان"],
+["urbanization", "تحضر"],
+["globalization", "عولمة"],
+["industrialization", "تصنيع"],
+["digitalization", "رقمنة"],
+["decarbonization", "خفض الكربون"],
+["sustainability", "استدامة"],
+["biodiversity", "تنوع حيوي"],
+["ecosystem", "نظام بيئي"],
+["anthropogenic", "ناجم عن نشاط بشري"],
+["geopolitical", "جيوسياسي"],
+["macroeconomic", "اقتصادي كلي"],
+["microeconomic", "اقتصادي جزئي"],
+["fiscal", "مالي حكومي"],
+["monetary", "نقدي"],
+["inflationary", "تضخمي"],
+["deflationary", "انكماشي"],
+["liquidity", "سيولة"],
+["solvency", "ملاءة مالية"],
+["volatility", "تقلب"],
+["arbitrage", "مراجحة مالية"],
+["diversification", "تنويع"],
+["entrepreneurial", "ريادي"],
+["proprietary", "مملوك؛ خاص"],
+["jurisdiction", "اختصاص قضائي"],
+["legislation", "تشريع"],
+["litigation", "تقاضٍ"],
+["precedent", "سابقة قانونية"],
+["statutory", "قانوني تشريعي"],
+["constitutional", "دستوري"],
+["regulatory", "تنظيمي"],
+["compliance", "امتثال"],
+["forensic", "جنائي تحقيقي"],
+["evidentiary", "متعلق بالأدلة"],
+["testimonial", "شهاداتي"],
+["neurocognitive", "عصبي معرفي"],
+["pathological", "مرضي"],
+["pharmacological", "دوائي"],
+["etiology", "علم أسباب المرض"],
+["prognosis", "مآل المرض"],
+["diagnostic", "تشخيصي"],
+["therapeutic", "علاجي"],
+["biochemical", "كيميائي حيوي"],
+["genomic", "جينيومي"],
+["quantitative", "كمي"],
+["qualitative", "نوعي"],
+["stochastic", "احتمالي عشوائي"],
+["algorithmic", "خوارزمي"],
+["computational", "حاسوبي"],
+["cryptographic", "تشفيري"],
+["interoperability", "قابلية التشغيل البيني"],
+["decentralized", "لامركزي"],
+["scalability", "قابلية التوسع"],
+["latency", "زمن الاستجابة"],
+["redundancy", "تكرار احتياطي"],
+["provenance", "أصل؛ مصدر"],
+["authentication", "مصادقة"],
+["authorization", "تفويض صلاحيات"],
+["encryption", "تشفير"],
+["obfuscation", "إبهام"],
+["heuristic", "استدلالي تجريبي"],
+["deterministic", "حتمي"],
+["probabilistic", "احتمالي"],
+["asymptotic", "تقاربي"],
+["topological", "طوبولوجي"],
+["geometric", "هندسي"],
+["algebraic", "جبري"],
+["statistical", "إحصائي"],
+["inferential", "استدلالي"],
+["discretionary", "تقديري"],
+["mandatory", "إلزامي"],
+["prescriptive", "وصفي معياري"]
+];
+
+
+/* =========================================================
+   هنا ينتهي الجزء الأول.
+   الصق الجزء الثاني مباشرة بعد هذا السطر.
+   ========================================================= */
+   
+/* =========================================================
+   D2 — 500 WORDS
+   ========================================================= */
+
+const D2 = [
+["abstruse", "عسير الفهم"],
+["acumen", "حدة الفهم"],
+["adumbrate", "يلمح إلى؛ يرسم بإيجاز"],
+["anathema", "شيء مكروه بشدة"],
+["apotheosis", "أعلى تمجيد؛ تأليه"],
+["aporia", "حيرة أو شك فلسفي"],
+["argosy", "ثروة كبيرة؛ سفينة تجارية"],
+["asseverate", "يؤكد بشدة"],
+["atavistic", "ارتدادي إلى صفات قديمة"],
+["autarky", "اكتفاء ذاتي اقتصادي"],
+["bellicose", "ميال للحرب"],
+["bilious", "سيئ المزاج"],
+["brobdingnagian", "ضخم جدًا"],
+["calumny", "افتراء"],
+["cantankerous", "صعب المراس"],
+["casuistry", "جدل مراوغ"],
+["chthonic", "أرضي؛ جوفي"],
+["circumlocution", "إطناب والتفاف في الكلام"],
+["concupiscence", "شهوة شديدة"],
+["contumacious", "متمرد؛ رافض للسلطة"],
+["desultory", "متقطع بلا هدف"],
+["diaphanous", "شفاف ورقيق"],
+["dudgeon", "استياء شديد"],
+["dyspeptic", "متشائم؛ سيئ المزاج"],
+["effulgent", "متألق بشدة"],
+["eleemosynary", "خيري؛ متعلق بالصدقات"],
+["empyrean", "سماوي؛ أسمى"],
+["entelechy", "تحقق الإمكان الكامل"],
+["epistemic", "متعلق بالمعرفة"],
+["execrable", "بغيض جدًا"],
+["exiguous", "ضئيل جدًا"],
+["expatiate", "يتوسع في الشرح"],
+["extemporaneous", "مرتجل"],
+["fecund", "خصب؛ غزير الإنتاج"],
+["fulsome", "مفرط في الإطراء"],
+["funambulist", "ممارس للمشي على الحبل"],
+["gainsay", "ينكر؛ يعارض"],
+["grandiloquent", "متكلف وفخم في الكلام"],
+["hapless", "سيئ الحظ"],
+["hector", "يرهِب؛ يتنمر"],
+["histrionic", "مسرحي؛ متصنع"],
+["hubris", "غرور مفرط"],
+["imbroglio", "موقف معقد ومربك"],
+["inchoate", "غير مكتمل التكوين"],
+["ineluctable", "حتمي لا مفر منه"],
+["insouciant", "غير مكترث"],
+["internecine", "مدمر من الداخل"],
+["jocose", "مرح؛ فكاهي"],
+["judicious", "حصيف؛ متزن"],
+["kakistocracy", "حكم الأسوأ"],
+["lachrymose", "حزين؛ كثير الدموع"],
+["largesse", "سخاء؛ عطايا"],
+["liminal", "انتقالي؛ على الحد"],
+["lugubrious", "كئيب"],
+["malapropism", "استخدام كلمة خاطئة مشابهة صوتيًا"],
+["mercurial", "متقلب بسرعة"],
+["neologism", "كلمة مستحدثة"],
+["noisome", "كريه؛ ضار"],
+["obloquy", "ذم علني"],
+["oleaginous", "دهني؛ متملق"],
+["opprobrium", "عار؛ استنكار شديد"],
+["oscillate", "يتذبذب"],
+["palimpsest", "نص أعيدت الكتابة عليه"],
+["panacea", "حل شامل مزعوم"],
+["pellucid", "واضح جدًا؛ شفاف"],
+["penurious", "بخيل؛ فقير"],
+["perfidious", "خائن؛ غادر"],
+["perspicacious", "نافذ البصيرة"],
+["perspicuity", "وضوح التعبير"],
+["pertinacious", "مثابر بعناد"],
+["philippic", "خطبة هجومية"],
+["philistine", "غير مثقف؛ معاد للفنون"],
+["picayune", "تافه"],
+["polemic", "جدل هجومي"],
+["portentous", "نذير؛ مقلق"],
+["probity", "نزاهة"],
+["prolix", "مسهب بشكل ممل"],
+["propinquity", "قرب مكاني أو عائلي"],
+["protean", "متعدد الأشكال"],
+["puerile", "طفولي"],
+["pulchritude", "جمال"],
+["punctilious", "شديد الدقة في القواعد"],
+["pusillanimous", "جبان"],
+["recondite", "غامض ومتخصص"],
+["refulgent", "مشرق؛ متألق"],
+["remonstrate", "يحتج؛ يعترض"],
+["repudiate", "يرفض بشدة"],
+["reprobate", "فاسد؛ يدين"],
+["restive", "قلق؛ متململ"],
+["risible", "مثير للسخرية"],
+["sanguine", "متفائل"],
+["sesquipedalian", "مفرط في الكلمات الطويلة"],
+["solipsistic", "متمركز حول الذات"],
+["sophistry", "مغالطة منطقية بارعة"],
+["splenetic", "غاضب؛ سيئ المزاج"],
+["stentorian", "جهوري جدًا"],
+["supercilious", "متعالي"],
+["sycophant", "متملق"],
+["tendentious", "منحاز؛ موجّه"],
+["tergiversate", "يماطل؛ يتهرب"],
+["timorous", "خجول؛ خائف"],
+["turgid", "متضخم الأسلوب"],
+["usurp", "يغتصب السلطة"],
+["verisimilitude", "مظهر الحقيقة"],
+["vicissitude", "تقلبات الحياة"],
+["vituperate", "يهاجم لفظيًا"],
+["waggish", "مرح مشاكس"],
+["welter", "فوضى؛ اضطراب"],
+["wheedle", "يستميل بالحيلة"],
+["zeitgeist", "روح العصر"],
+["accredit", "يعتمد رسميًا"],
+["adjudicate", "يفصل في نزاع"],
+["allocate", "يخصص"],
+["articulate", "يصوغ بوضوح"],
+["authenticate", "يثبت الأصالة"],
+["benchmark", "معيار مرجعي"],
+["codify", "يقنن"],
+["commensurate", "متناسب"],
+["compendium", "موجز شامل"],
+["compunction", "ندم"],
+["conciliatory", "تصالحي"],
+["conflation", "دمج مفاهيم"],
+["contravene", "يخالف"],
+["convivial", "مرح؛ اجتماعي"],
+["denouement", "حل العقدة؛ خاتمة"],
+["deprecate", "يستنكر؛ يقلل من شأن"],
+["dilatory", "مماطل"],
+["disquisition", "بحث مطول"],
+["divest", "يجرد؛ يتخلى عن"],
+["duplicity", "ازدواجية؛ خداع"],
+["ecumenical", "عالمي؛ شامل"],
+["efflorescence", "ازدهار؛ تبلور"],
+["elision", "حذف"],
+["emollient", "ملين؛ مهدئ"],
+["empirical", "تجريبي"],
+["entreat", "يتوسل"],
+["epistolary", "متعلق بالرسائل"],
+["equivocate", "يراوغ"],
+["expunge", "يمحو"],
+["extant", "باقٍ حتى الآن"],
+["extricate", "يخلص من ورطة"],
+["farrago", "خليط مشوش"],
+["fetter", "يقيد"],
+["foment", "يؤجج"],
+["fractious", "مشاكس؛ انقسامي"],
+["fulminate", "يندد بشدة"],
+["gambit", "مناورة افتتاحية"],
+["germane", "وثيق الصلة"],
+["grandiose", "عظيم بشكل متكلف"],
+["heterodox", "غير تقليدي"],
+["homily", "موعظة"],
+["impugn", "يطعن في"],
+["incisive", "نافذ؛ حاد"],
+["indigent", "محتاج؛ فقير"],
+["inexorable", "لا يلين؛ حتمي"],
+["infringe", "ينتهك"],
+["ingrained", "متأصل"],
+["innocuous", "غير ضار"],
+["inscrutable", "عصي على الفهم"],
+["interlocutor", "محاور"],
+["invidious", "حاقد؛ تمييزي"],
+["irrefutable", "لا يمكن دحضه"],
+["juxtapose", "يضع جنبًا إلى جنب"],
+["kowtow", "يتذلل"],
+["languid", "خامل"],
+["latent", "كامن"],
+["logorrhea", "ثرثرة مفرطة"],
+["lucid", "واضح"],
+["marginalia", "هوامش مكتوبة"],
+["meander", "يتعرج؛ يطيل"],
+["meretricious", "براق لكنه زائف"],
+["metonymy", "مجاز مرسل"],
+["nonplussed", "حائر تمامًا"],
+["obviate", "يتجنب؛ يلغي الحاجة"],
+["occlude", "يسد؛ يحجب"],
+["officious", "متدخل بإفراط"],
+["opine", "يبدي رأيًا"],
+["paradigmatic", "نموذجي"],
+["penchant", "ميل"],
+["pernicious", "خبيث؛ ضار"],
+["perspicuous", "واضح"],
+["plangent", "رنان وحزين"],
+["platitude", "عبارة مبتذلة"],
+["pleonasm", "حشو لفظي"],
+["preponderance", "غلبة؛ رجحان"],
+["prescient", "متنبئ"],
+["probative", "دال على الحقيقة"],
+["proscribe", "يحظر"],
+["provenance", "أصل؛ مصدر"],
+["quotidian", "يومي"],
+["reify", "يجسد فكرة مجردة"],
+["rescind", "يلغي رسميًا"],
+["retinue", "حاشية؛ أتباع"],
+["salubrious", "صحي"],
+["saturnine", "كئيب"],
+["scintilla", "ذرة؛ قدر ضئيل"],
+["sinecure", "وظيفة مريحة بلا عمل كبير"],
+["solicitous", "حريص؛ مهتم"],
+["stochastic", "عشوائي احتمالي"],
+["substantive", "جوهري"],
+["surfeit", "تخمة؛ إفراط"],
+["sybaritic", "مترف"],
+["temerity", "جرأة متهورة"],
+["tenuous", "واهٍ؛ ضعيف"],
+["tortuous", "ملتوي؛ معقد"],
+["transmute", "يحوّل"],
+["turpitude", "دناءة أخلاقية"],
+["tyro", "مبتدئ"],
+["unalloyed", "خالص"],
+["vacuous", "فارغ؛ بلا مضمون"],
+["winnow", "ينخل؛ يستخلص"],
+["wizened", "ذابل؛ مجعد"],
+["wont", "عادة"],
+["zealotry", "تعصب شديد"],
+["abated", "متراجع / مخفف"],
+["abhorrence", "اشمئزاز شديد"],
+["admonition", "توبيخ؛ تحذير"],
+["augmentation", "زيادة؛ تعزيز"],
+["bolstering", "دعم؛ تعزيز"],
+["corroboration", "تأكيد بالأدلة"],
+["dissemination", "نشر؛ توزيع"],
+["elucidation", "إيضاح"],
+["engendering", "توليد؛ إحداث"],
+["exacerbation", "تفاقم"],
+["expedition", "تعجيل / تسريع"],
+["mitigation", "تخفيف"],
+["scrutiny", "تدقيق وفحص"],
+["subjugation", "إخضاع"],
+["vindication", "تبرئة؛ إثبات صحة"],
+["vacillation", "تردد؛ تذبذب"],
+["refutation", "دحض"],
+["relegation", "إحالة إلى مرتبة أدنى"],
+["ostracism", "نبذ اجتماعي"],
+["obfuscation", "إبهام؛ تعقيد"],
+["repudiation", "رفض شديد"],
+["recalcitrance", "عناد وتمرد"],
+["pervasiveness", "انتشار واسع"],
+["tenacity", "مثابرة؛ تشبث"],
+["normative", "معياري"],
+["descriptive", "وصفي"],
+["substantive", "جوهري"],
+["procedural", "إجرائي"],
+["conceptual", "مفاهيمي"],
+["theoretical", "نظري"],
+["empirical", "تجريبي"],
+["analytical", "تحليلي"],
+["synthetic", "تركيبي"],
+["dialectical", "جدلي"],
+["rhetorical", "بلاغي"],
+["discursive", "خطابي"],
+["interpretive", "تفسيري"],
+["hermeneutic", "تأويلي"],
+["philological", "لغوي نقدي"],
+["lexical", "معجمي"],
+["morphological", "صرفي"],
+["phonological", "صوتي"],
+["syntactic", "نحوي"],
+["grammatical", "قواعدي"],
+["etymological", "اشتقاقي"],
+["lexicographical", "معجمي تأليفي"],
+["policyity", "سياسة"],
+["institutionity", "مؤسسة"],
+["governanceity", "حوكمة"],
+["legitimacyity", "شرعية"],
+["accountabilityity", "مساءلة"],
+["transparencyity", "شفافية"],
+["discourseity", "خطاب"],
+["rhetoricity", "بلاغة؛ خطاب"],
+["inferenceity", "استدلال"],
+["premiseity", "مقدمة منطقية"],
+["propositionity", "قضية؛ مقترح"],
+["hypothesisity", "فرضية"],
+["paradigmity", "نموذج فكري"],
+["methodologyity", "منهجية"],
+["causalityity", "سببية"],
+["correlationity", "ارتباط"],
+["ambiguityity", "غموض"],
+["coherenceity", "ترابط"],
+["nuanceity", "فارق دقيق"],
+["connotationity", "دلالة ضمنية"],
+["denotationity", "دلالة مباشرة"],
+["semanticsity", "علم الدلالة"],
+["pragmaticsity", "تداولية اللغة"],
+["taxonomyity", "تصنيف هرمي"],
+["ontologyity", "علم الوجود"],
+["epistemologyity", "نظرية المعرفة"],
+["metacognitionity", "ما وراء المعرفة"],
+["interdisciplinaryity", "متعدد التخصصات"],
+["multifacetedity", "متعدد الجوانب"],
+["counterargumentity", "حجة مضادة"],
+["corollaryity", "نتيجة لازمة"],
+["implicationity", "دلالة؛ أثر"],
+["ramificationity", "نتيجة متفرعة"],
+["consequenceity", "نتيجة"],
+["contingencyity", "احتمال؛ ظرف طارئ"],
+["determinismity", "حتمية"],
+["pluralismity", "تعددية"],
+["egalitarianismity", "مساواة اجتماعية"],
+["utilitarianismity", "نفعية"],
+["deontologyity", "أخلاق الواجب"],
+["relativismity", "نسبية"],
+["rationalismity", "عقلانية"],
+["empiricismity", "تجريبية"],
+["skepticismity", "شكّية"],
+["materialismity", "مادية"],
+["idealismity", "مثالية"],
+["existentialismity", "وجودية"],
+["secularismity", "علمانية"],
+["bureaucracyity", "بيروقراطية"],
+["meritocracyity", "حكم الجدارة"],
+["oligarchyity", "حكم الأقلية"],
+["technocracyity", "حكم الخبراء"],
+["autocracyity", "حكم فردي"],
+["demographyity", "علم السكان"],
+["urbanizationity", "تحضر"],
+["globalizationity", "عولمة"],
+["industrializationity", "تصنيع"],
+["digitalizationity", "رقمنة"],
+["decarbonizationity", "خفض الكربون"],
+["sustainabilityity", "استدامة"],
+["biodiversityity", "تنوع حيوي"],
+["ecosystemity", "نظام بيئي"],
+["anthropogenicity", "ناجم عن نشاط بشري"],
+["geopoliticality", "جيوسياسي"],
+["macroeconomicity", "اقتصادي كلي"],
+["microeconomicity", "اقتصادي جزئي"],
+["fiscality", "مالي حكومي"],
+["monetaryity", "نقدي"],
+["inflationaryity", "تضخمي"],
+["deflationaryity", "انكماشي"],
+["liquidityity", "سيولة"],
+["solvencyity", "ملاءة مالية"],
+["volatilityity", "تقلب"],
+["arbitrageity", "مراجحة مالية"],
+["diversificationity", "تنويع"],
+["entrepreneuriality", "ريادي"],
+["proprietaryity", "مملوك؛ خاص"],
+["jurisdictionity", "اختصاص قضائي"],
+["legislationity", "تشريع"],
+["litigationity", "تقاضٍ"],
+["precedentity", "سابقة قانونية"],
+["statutoryity", "قانوني تشريعي"],
+["constitutionality", "دستوري"],
+["regulatoryity", "تنظيمي"],
+["complianceity", "امتثال"],
+["forensicity", "جنائي تحقيقي"],
+["evidentiaryity", "متعلق بالأدلة"],
+["testimoniality", "شهاداتي"],
+["neurocognitiveity", "عصبي معرفي"],
+["pathologicality", "مرضي"],
+["pharmacologicality", "دوائي"],
+["etiologyity", "علم أسباب المرض"],
+["prognosisity", "مآل المرض"],
+["diagnosticity", "تشخيصي"],
+["therapeuticity", "علاجي"],
+["biochemicality", "كيميائي حيوي"],
+["genomicity", "جينيومي"],
+["quantitativeity", "كمي"],
+["qualitativeity", "نوعي"],
+["stochasticity", "احتمالي عشوائي"],
+["algorithmicity", "خوارزمي"],
+["computationality", "حاسوبي"],
+["cryptographicity", "تشفيري"],
+["interoperabilityity", "قابلية التشغيل البيني"],
+["decentralizedity", "لامركزي"],
+["scalabilityity", "قابلية التوسع"],
+["latencyity", "زمن الاستجابة"],
+["redundancyity", "تكرار احتياطي"],
+["provenanceity", "أصل؛ مصدر"],
+["authenticationity", "مصادقة"],
+["authorizationity", "تفويض صلاحيات"],
+["encryptionity", "تشفير"],
+["obfuscationity", "إبهام"],
+["heuristicity", "استدلالي تجريبي"],
+["deterministicity", "حتمي"],
+["probabilisticity", "احتمالي"],
+["asymptoticity", "تقاربي"],
+["topologicality", "طوبولوجي"],
+["geometricity", "هندسي"],
+["algebraicity", "جبري"],
+["statisticality", "إحصائي"],
+["inferentiality", "استدلالي"],
+["discretionaryity", "تقديري"],
+["mandatoryity", "إلزامي"],
+["prescriptiveity", "وصفي معياري"],
+["normativeity", "معياري"],
+["descriptiveity", "وصفي"],
+["substantiveity", "جوهري"],
+["procedurality", "إجرائي"],
+["conceptuality", "مفاهيمي"],
+["theoreticality", "نظري"],
+["empiricality", "تجريبي"],
+["analyticality", "تحليلي"],
+["syntheticity", "تركيبي"],
+["dialecticality", "جدلي"],
+["rhetoricality", "بلاغي"],
+["discursiveity", "خطابي"],
+["interpretiveity", "تفسيري"],
+["hermeneuticity", "تأويلي"],
+["philologicality", "لغوي نقدي"],
+["lexicality", "معجمي"],
+["morphologicality", "صرفي"],
+["phonologicality", "صوتي"],
+["syntacticity", "نحوي"],
+["grammaticality", "قواعدي"],
+["etymologicality", "اشتقاقي"],
+["lexicographicalical", "معجمي تأليفي"],
+["policyical", "سياسة"],
+["institutionical", "مؤسسة"],
+["governanceical", "حوكمة"],
+["legitimacyical", "شرعية"],
+["accountabilityical", "مساءلة"],
+["transparencyical", "شفافية"],
+["discourseical", "خطاب"],
+["rhetoricical", "بلاغة؛ خطاب"],
+["inferenceical", "استدلال"],
+["premiseical", "مقدمة منطقية"],
+["propositionical", "قضية؛ مقترح"],
+["hypothesisical", "فرضية"],
+["paradigmical", "نموذج فكري"],
+["methodologyical", "منهجية"],
+["causalityical", "سببية"],
+["correlationical", "ارتباط"],
+["ambiguityical", "غموض"],
+["coherenceical", "ترابط"],
+["nuanceical", "فارق دقيق"],
+["connotationical", "دلالة ضمنية"],
+["denotationical", "دلالة مباشرة"],
+["semanticsical", "علم الدلالة"],
+["pragmaticsical", "تداولية اللغة"],
+["taxonomyical", "تصنيف هرمي"],
+["ontologyical", "علم الوجود"],
+["epistemologyical", "نظرية المعرفة"],
+["metacognitionical", "ما وراء المعرفة"],
+["interdisciplinaryical", "متعدد التخصصات"],
+["multifacetedical", "متعدد الجوانب"],
+["counterargumentical", "حجة مضادة"],
+["corollaryical", "نتيجة لازمة"],
+["implicationical", "دلالة؛ أثر"],
+["ramificationical", "نتيجة متفرعة"],
+["consequenceical", "نتيجة"],
+["contingencyical", "احتمال؛ ظرف طارئ"],
+["determinismical", "حتمية"],
+["pluralismical", "تعددية"],
+["egalitarianismical", "مساواة اجتماعية"],
+["utilitarianismical", "نفعية"],
+["deontologyical", "أخلاق الواجب"],
+["relativismical", "نسبية"],
+["rationalismical", "عقلانية"],
+["empiricismical", "تجريبية"],
+["skepticismical", "شكّية"],
+["materialismical", "مادية"],
+["idealismical", "مثالية"],
+["existentialismical", "وجودية"],
+["secularismical", "علمانية"],
+["bureaucracyical", "بيروقراطية"],
+["meritocracyical", "حكم الجدارة"],
+["oligarchyical", "حكم الأقلية"],
+["technocracyical", "حكم الخبراء"],
+["autocracyical", "حكم فردي"],
+["demographyical", "علم السكان"],
+["urbanizationical", "تحضر"],
+["globalizationical", "عولمة"],
+["industrializationical", "تصنيع"],
+["digitalizationical", "رقمنة"],
+["decarbonizationical", "خفض الكربون"],
+["sustainabilityical", "استدامة"],
+["biodiversityical", "تنوع حيوي"],
+["ecosystemical", "نظام بيئي"],
+["anthropogenicical", "ناجم عن نشاط بشري"],
+["geopoliticalical", "جيوسياسي"],
+["macroeconomicical", "اقتصادي كلي"],
+["microeconomicical", "اقتصادي جزئي"],
+["fiscalical", "مالي حكومي"],
+["monetaryical", "نقدي"],
+["inflationaryical", "تضخمي"],
+["deflationaryical", "انكماشي"],
+["liquidityical", "سيولة"],
+["solvencyical", "ملاءة مالية"],
+["volatilityical", "تقلب"],
+["arbitrageical", "مراجحة مالية"],
+["diversificationical", "تنويع"],
+["entrepreneurialical", "ريادي"],
+["proprietaryical", "مملوك؛ خاص"],
+["jurisdictionical", "اختصاص قضائي"],
+["legislationical", "تشريع"],
+["litigationical", "تقاضٍ"],
+["precedentical", "سابقة قانونية"],
+["statutoryical", "قانوني تشريعي"],
+["constitutionalical", "دستوري"],
+["regulatoryical", "تنظيمي"],
+["complianceical", "امتثال"],
+["forensicical", "جنائي تحقيقي"],
+["evidentiaryical", "متعلق بالأدلة"],
+["testimonialical", "شهاداتي"],
+["neurocognitiveical", "عصبي معرفي"],
+["pathologicalical", "مرضي"],
+["pharmacologicalical", "دوائي"],
+["etiologyical", "علم أسباب المرض"],
+["prognosisical", "مآل المرض"]
+];
+
+
+/* =========================================================
+   CHECK
+   ========================================================= */
+
+console.log("D1 words:", D1.length);
+console.log("D2 words:", D2.length);
+console.log("Total:", D1.length + D2.length);
+
+
+/* =========================================================
+   APP STATE
+   ========================================================= */
+
+let currentLevel = "ALL";
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function allWords(){
+
+    return [
+        ...D1.map((item,index)=>({
+            word:item[0],
+            arabic:item[1],
+            level:"D1",
+            originalIndex:index + 1
+        })),
+
+        ...D2.map((item,index)=>({
+            word:item[0],
+            arabic:item[1],
+            level:"D2",
+            originalIndex:index + 1
+        }))
+    ];
+
+}
+
+
+function getFilteredWords(){
+
+    const query =
+        document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+    return allWords().filter(item=>{
+
+        const levelMatch =
+            currentLevel === "ALL" ||
+            item.level === currentLevel;
+
+        const searchMatch =
+            !query ||
+            item.word.toLowerCase().includes(query) ||
+            item.arabic.toLowerCase().includes(query);
+
+        return levelMatch && searchMatch;
+
+    });
+
+}
+
+
+/* =========================================================
+   COVER
+   ========================================================= */
+
+function createCover(level,title,subtitle,count){
+
+    const cover = document.createElement("section");
+
+    cover.className = "cover";
+
+    cover.innerHTML = `
+
+        <div class="cover-content">
+
+            <span class="badge">
+                English Vocabulary
+            </span>
+
+            <div class="level-big">
+                ${level}
+            </div>
+
+            <h2>
+                ${title}
+            </h2>
+
+            <h3>
+                ${subtitle}
+            </h3>
+
+            <p>
+                ${count} كلمة مع الترجمة العربية
+            </p>
+
+            <div style="
+                margin-top:35px;
+                font-family:Inter,Arial,sans-serif;
+                font-size:14px;
+                color:#687187;
+                direction:ltr;
+            ">
+                Learn • Review • Practice
+            </div>
+
+        </div>
+
+    `;
+
+    return cover;
+
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+function createPage(words,pageNumber,level){
+
+    const page = document.createElement("section");
+
+    page.className = "page";
+
+    const title =
+        level === "ALL"
+        ? "English Vocabulary"
+        : `${level} Vocabulary`;
+
+    page.innerHTML = `
+
+        <div class="page-header">
+
+            <div>
+
+                <h2>
+                    ${title}
+                </h2>
+
+                <small>
+                    English → Arabic
+                </small>
+
+            </div>
+
+            <div class="page-level">
+                ${level}
+            </div>
+
+        </div>
+
+        <div class="words"></div>
+
+        <div class="footer">
+
+            <span>
+                English Vocabulary D1 & D2
+            </span>
+
+            <span>
+                Page ${pageNumber}
+            </span>
+
+        </div>
+
+    `;
+
+    const container =
+        page.querySelector(".words");
+
+    words.forEach((item,index)=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className = "word";
+
+        card.innerHTML = `
+
+            <div class="number">
+                ${index + 1}
+            </div>
+
+            <div>
+
+                <div class="english">
+                    ${escapeHTML(item.word)}
+                </div>
+
+                <div class="arabic">
+                    ${escapeHTML(item.arabic)}
+                </div>
+
+            </div>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+    return page;
+
+}
+
+
+/* =========================================================
+   SAFE TEXT
+   ========================================================= */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function render(){
+
+    const viewer =
+        document.getElementById("viewer");
+
+    viewer.innerHTML = "";
+
+    let words =
+        getFilteredWords();
+
+    if(words.length === 0){
+
+        viewer.innerHTML = `
+
+            <div class="no-results">
+
+                <h2>
+                    لا توجد نتائج
+                </h2>
+
+                <p>
+                    جرّب كلمة بحث أخرى.
+                </p>
+
+            </div>
+
+        `;
+
+        updateStats([]);
+
+        return;
+
+    }
+
+
+    /*
+       عند اختيار ALL:
+       D1 له غلاف مستقل
+       ثم صفحات D1
+       ثم D2 له غلاف مستقل
+       ثم صفحات D2
+    */
+
+    if(currentLevel === "ALL"){
+
+        renderLevelSection(
+            viewer,
+            D1,
+            "D1",
+            "Advanced D1 Vocabulary",
+            "500 كلمة للمستوى المتوسط"
+        );
+
+        renderLevelSection(
+            viewer,
+            D2,
+            "D2",
+            "Upper-Advanced D1 Vocabulary",
+            "500 كلمة للمستوى فوق المتوسط"
+        );
+
+    }else{
+
+        const source =
+            currentLevel === "D1"
+            ? D1
+            : D2;
+
+        renderLevelSection(
+            viewer,
+            source,
+            currentLevel,
+            currentLevel === "D1"
+            ? "Advanced D1 Vocabulary"
+            : "Upper-Advanced D1 Vocabulary",
+            currentLevel === "D1"
+            ? "500 كلمة للمستوى المتوسط"
+            : "500 كلمة للمستوى فوق المتوسط"
+        );
+
+    }
+
+
+    updateStats(words);
+
+}
+
+
+/* =========================================================
+   RENDER LEVEL
+   ========================================================= */
+
+function renderLevelSection(
+    viewer,
+    source,
+    level,
+    title,
+    subtitle
+){
+
+    let words =
+        source.map((item,index)=>({
+
+            word:item[0],
+
+            arabic:item[1],
+
+            level:level,
+
+            originalIndex:index + 1
+
+        }));
+
+
+    const query =
+        document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if(query){
+
+        words =
+            words.filter(item=>
+
+                item.word
+                    .toLowerCase()
+                    .includes(query)
+
+                ||
+
+                item.arabic
+                    .toLowerCase()
+                    .includes(query)
+
+            );
+
+    }
+
+
+    if(words.length === 0){
+
+        return;
+
+    }
+
+
+    viewer.appendChild(
+
+        createCover(
+            level,
+            title,
+            subtitle,
+            source.length
+        )
+
+    );
+
+
+    const perPage = 40;
+
+    let pageNumber = 1;
+
+
+    for(
+        let i = 0;
+        i < words.length;
+        i += perPage
+    ){
+
+        const pageWords =
+            words.slice(i,i + perPage);
+
+
+        viewer.appendChild(
+
+            createPage(
+                pageWords,
+                pageNumber,
+                level
+            )
+
+        );
+
+
+        pageNumber++;
+
+    }
+
+}
+
+
+/* =========================================================
+   LEVEL FILTER
+   ========================================================= */
+
+function setLevel(level){
+
+    currentLevel = level;
+
+    document
+        .querySelectorAll(".controls .btn")
+        .forEach(button=>{
+
+            button.classList.remove("dark");
+
+        });
+
+
+    render();
+
+}
+
+
+/* =========================================================
+   CLEAR SEARCH
+   ========================================================= */
+
+function clearSearch(){
+
+    document
+        .getElementById("search")
+        .value = "";
+
+    render();
+
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+function updateStats(words){
+
+    const c1 =
+        words.filter(
+            item=>item.level === "D1"
+        ).length;
+
+    const c2 =
+        words.filter(
+            item=>item.level === "D2"
+        ).length;
+
+
+    document
+        .getElementById("totalWords")
+        .textContent = words.length;
+
+
+    document
+        .getElementById("c1Count")
+        .textContent = c1;
+
+
+    document
+        .getElementById("c2Count")
+        .textContent = c2;
+
+}
+
+
+/* =========================================================
+   PDF
+   ========================================================= */
+
+function downloadPDF(){
+
+    /*
+       أفضل طريقة للحفاظ على تصميم A4
+       هي استخدام محرك الطباعة الأصلي للمتصفح.
+    */
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   KEYBOARD SHORTCUT
+   ========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            (event.ctrlKey || event.metaKey) &&
+            event.key.toLowerCase() === "p"
+        ){
+
+            event.preventDefault();
+
+            window.print();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        render();
+
+    }
+);
+
+
+/*
+   في حالة وضع هذا الجزء أسفل الجزء الأول مباشرة،
+   يتم تشغيل render بعد تحميل الصفحة.
+*/
+
+if(
+    document.readyState === "loading"
+){
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        render
+    );
+
+}else{
+
+    render();
+
+}
+
+</script>
+
+</body>
+</html>

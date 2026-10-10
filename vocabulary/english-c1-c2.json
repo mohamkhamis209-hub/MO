@@ -1,0 +1,7357 @@
+[
+  {
+    "en": "ability",
+    "ar": "قدرة",
+    "level": "C1"
+  },
+  {
+    "en": "abroad",
+    "ar": "في الخارج",
+    "level": "C1"
+  },
+  {
+    "en": "accept",
+    "ar": "يقبل",
+    "level": "C1"
+  },
+  {
+    "en": "achieve",
+    "ar": "يحقق",
+    "level": "C1"
+  },
+  {
+    "en": "active",
+    "ar": "نشيط",
+    "level": "C1"
+  },
+  {
+    "en": "advantage",
+    "ar": "ميزة",
+    "level": "C1"
+  },
+  {
+    "en": "adventure",
+    "ar": "مغامرة",
+    "level": "C1"
+  },
+  {
+    "en": "advertise",
+    "ar": "يعلن",
+    "level": "C1"
+  },
+  {
+    "en": "afford",
+    "ar": "يستطيع تحمل التكلفة",
+    "level": "C1"
+  },
+  {
+    "en": "agree",
+    "ar": "يوافق",
+    "level": "C1"
+  },
+  {
+    "en": "aim",
+    "ar": "يهدف",
+    "level": "C1"
+  },
+  {
+    "en": "allow",
+    "ar": "يسمح",
+    "level": "C1"
+  },
+  {
+    "en": "announce",
+    "ar": "يعلن",
+    "level": "C1"
+  },
+  {
+    "en": "anxious",
+    "ar": "قلق",
+    "level": "C1"
+  },
+  {
+    "en": "apologize",
+    "ar": "يعتذر",
+    "level": "C1"
+  },
+  {
+    "en": "appear",
+    "ar": "يظهر",
+    "level": "C1"
+  },
+  {
+    "en": "apply",
+    "ar": "يتقدم / يطبق",
+    "level": "C1"
+  },
+  {
+    "en": "argue",
+    "ar": "يجادل",
+    "level": "C1"
+  },
+  {
+    "en": "arrange",
+    "ar": "يرتب",
+    "level": "C1"
+  },
+  {
+    "en": "arrival",
+    "ar": "وصول",
+    "level": "C1"
+  },
+  {
+    "en": "article",
+    "ar": "مقال",
+    "level": "C1"
+  },
+  {
+    "en": "ashamed",
+    "ar": "خجلان",
+    "level": "C1"
+  },
+  {
+    "en": "assist",
+    "ar": "يساعد",
+    "level": "C1"
+  },
+  {
+    "en": "attention",
+    "ar": "انتباه",
+    "level": "C1"
+  },
+  {
+    "en": "attract",
+    "ar": "يجذب",
+    "level": "C1"
+  },
+  {
+    "en": "average",
+    "ar": "متوسط",
+    "level": "C1"
+  },
+  {
+    "en": "avoid",
+    "ar": "يتجنب",
+    "level": "C1"
+  },
+  {
+    "en": "background",
+    "ar": "خلفية",
+    "level": "C1"
+  },
+  {
+    "en": "balance",
+    "ar": "توازن",
+    "level": "C1"
+  },
+  {
+    "en": "behavior",
+    "ar": "سلوك",
+    "level": "C1"
+  },
+  {
+    "en": "belong",
+    "ar": "ينتمي",
+    "level": "C1"
+  },
+  {
+    "en": "benefit",
+    "ar": "فائدة",
+    "level": "C1"
+  },
+  {
+    "en": "blame",
+    "ar": "يلوم",
+    "level": "C1"
+  },
+  {
+    "en": "borrow",
+    "ar": "يستعير",
+    "level": "C1"
+  },
+  {
+    "en": "bother",
+    "ar": "يزعج",
+    "level": "C1"
+  },
+  {
+    "en": "brave",
+    "ar": "شجاع",
+    "level": "C1"
+  },
+  {
+    "en": "breath",
+    "ar": "نَفَس",
+    "level": "C1"
+  },
+  {
+    "en": "breathe",
+    "ar": "يتنفس",
+    "level": "C1"
+  },
+  {
+    "en": "calm",
+    "ar": "هادئ",
+    "level": "C1"
+  },
+  {
+    "en": "career",
+    "ar": "مهنة / مسار مهني",
+    "level": "C1"
+  },
+  {
+    "en": "cause",
+    "ar": "سبب / يسبب",
+    "level": "C1"
+  },
+  {
+    "en": "celebrate",
+    "ar": "يحتفل",
+    "level": "C1"
+  },
+  {
+    "en": "challenge",
+    "ar": "تحدٍ",
+    "level": "C1"
+  },
+  {
+    "en": "chance",
+    "ar": "فرصة",
+    "level": "C1"
+  },
+  {
+    "en": "choice",
+    "ar": "اختيار",
+    "level": "C1"
+  },
+  {
+    "en": "communicate",
+    "ar": "يتواصل",
+    "level": "C1"
+  },
+  {
+    "en": "community",
+    "ar": "مجتمع",
+    "level": "C1"
+  },
+  {
+    "en": "compare",
+    "ar": "يقارن",
+    "level": "C1"
+  },
+  {
+    "en": "complain",
+    "ar": "يشتكي",
+    "level": "C1"
+  },
+  {
+    "en": "complete",
+    "ar": "يكمل",
+    "level": "C1"
+  },
+  {
+    "en": "concentrate",
+    "ar": "يركز",
+    "level": "C1"
+  },
+  {
+    "en": "condition",
+    "ar": "حالة / شرط",
+    "level": "C1"
+  },
+  {
+    "en": "confident",
+    "ar": "واثق",
+    "level": "C1"
+  },
+  {
+    "en": "connect",
+    "ar": "يربط",
+    "level": "C1"
+  },
+  {
+    "en": "consider",
+    "ar": "يعتبر / يفكر في",
+    "level": "C1"
+  },
+  {
+    "en": "contain",
+    "ar": "يحتوي",
+    "level": "C1"
+  },
+  {
+    "en": "continue",
+    "ar": "يستمر",
+    "level": "C1"
+  },
+  {
+    "en": "control",
+    "ar": "يسيطر / تحكم",
+    "level": "C1"
+  },
+  {
+    "en": "conversation",
+    "ar": "محادثة",
+    "level": "C1"
+  },
+  {
+    "en": "correct",
+    "ar": "صحيح / يصحح",
+    "level": "C1"
+  },
+  {
+    "en": "cost",
+    "ar": "تكلفة / يكلف",
+    "level": "C1"
+  },
+  {
+    "en": "couple",
+    "ar": "زوجان / اثنان",
+    "level": "C1"
+  },
+  {
+    "en": "create",
+    "ar": "ينشئ",
+    "level": "C1"
+  },
+  {
+    "en": "crowded",
+    "ar": "مزدحم",
+    "level": "C1"
+  },
+  {
+    "en": "culture",
+    "ar": "ثقافة",
+    "level": "C1"
+  },
+  {
+    "en": "curious",
+    "ar": "فضولي",
+    "level": "C1"
+  },
+  {
+    "en": "customer",
+    "ar": "عميل",
+    "level": "C1"
+  },
+  {
+    "en": "decision",
+    "ar": "قرار",
+    "level": "C1"
+  },
+  {
+    "en": "deep",
+    "ar": "عميق",
+    "level": "C1"
+  },
+  {
+    "en": "degree",
+    "ar": "درجة / شهادة",
+    "level": "C1"
+  },
+  {
+    "en": "depend",
+    "ar": "يعتمد",
+    "level": "C1"
+  },
+  {
+    "en": "describe",
+    "ar": "يصف",
+    "level": "C1"
+  },
+  {
+    "en": "design",
+    "ar": "يصمم / تصميم",
+    "level": "C1"
+  },
+  {
+    "en": "develop",
+    "ar": "يطور",
+    "level": "C1"
+  },
+  {
+    "en": "difference",
+    "ar": "اختلاف",
+    "level": "C1"
+  },
+  {
+    "en": "disappointed",
+    "ar": "محبط",
+    "level": "C1"
+  },
+  {
+    "en": "discover",
+    "ar": "يكتشف",
+    "level": "C1"
+  },
+  {
+    "en": "discussion",
+    "ar": "مناقشة",
+    "level": "C1"
+  },
+  {
+    "en": "distance",
+    "ar": "مسافة",
+    "level": "C1"
+  },
+  {
+    "en": "divide",
+    "ar": "يقسم",
+    "level": "C1"
+  },
+  {
+    "en": "education",
+    "ar": "تعليم",
+    "level": "C1"
+  },
+  {
+    "en": "effect",
+    "ar": "تأثير",
+    "level": "C1"
+  },
+  {
+    "en": "effort",
+    "ar": "مجهود",
+    "level": "C1"
+  },
+  {
+    "en": "encourage",
+    "ar": "يشجع",
+    "level": "C1"
+  },
+  {
+    "en": "environment",
+    "ar": "بيئة",
+    "level": "C1"
+  },
+  {
+    "en": "equipment",
+    "ar": "معدات",
+    "level": "C1"
+  },
+  {
+    "en": "escape",
+    "ar": "يهرب",
+    "level": "C1"
+  },
+  {
+    "en": "event",
+    "ar": "حدث",
+    "level": "C1"
+  },
+  {
+    "en": "examine",
+    "ar": "يفحص",
+    "level": "C1"
+  },
+  {
+    "en": "exchange",
+    "ar": "يتبادل",
+    "level": "C1"
+  },
+  {
+    "en": "experience",
+    "ar": "خبرة / تجربة",
+    "level": "C1"
+  },
+  {
+    "en": "explain",
+    "ar": "يشرح",
+    "level": "C1"
+  },
+  {
+    "en": "express",
+    "ar": "يعبر",
+    "level": "C1"
+  },
+  {
+    "en": "fail",
+    "ar": "يفشل",
+    "level": "C1"
+  },
+  {
+    "en": "familiar",
+    "ar": "مألوف",
+    "level": "C1"
+  },
+  {
+    "en": "fear",
+    "ar": "خوف / يخاف",
+    "level": "C1"
+  },
+  {
+    "en": "feature",
+    "ar": "ميزة",
+    "level": "C1"
+  },
+  {
+    "en": "feedback",
+    "ar": "ملاحظات",
+    "level": "C1"
+  },
+  {
+    "en": "field",
+    "ar": "مجال / حقل",
+    "level": "C1"
+  },
+  {
+    "en": "foreign",
+    "ar": "أجنبي",
+    "level": "C1"
+  },
+  {
+    "en": "formal",
+    "ar": "رسمي",
+    "level": "C1"
+  },
+  {
+    "en": "freedom",
+    "ar": "حرية",
+    "level": "C1"
+  },
+  {
+    "en": "friendship",
+    "ar": "صداقة",
+    "level": "C1"
+  },
+  {
+    "en": "future",
+    "ar": "مستقبل",
+    "level": "C1"
+  },
+  {
+    "en": "goal",
+    "ar": "هدف",
+    "level": "C1"
+  },
+  {
+    "en": "government",
+    "ar": "حكومة",
+    "level": "C1"
+  },
+  {
+    "en": "habit",
+    "ar": "عادة",
+    "level": "C1"
+  },
+  {
+    "en": "harm",
+    "ar": "ضرر / يضر",
+    "level": "C1"
+  },
+  {
+    "en": "healthy",
+    "ar": "صحي",
+    "level": "C1"
+  },
+  {
+    "en": "helpful",
+    "ar": "مفيد / متعاون",
+    "level": "C1"
+  },
+  {
+    "en": "honest",
+    "ar": "صادق",
+    "level": "C1"
+  },
+  {
+    "en": "imagine",
+    "ar": "يتخيل",
+    "level": "C1"
+  },
+  {
+    "en": "improve",
+    "ar": "يحسن",
+    "level": "C1"
+  },
+  {
+    "en": "include",
+    "ar": "يشمل",
+    "level": "C1"
+  },
+  {
+    "en": "increase",
+    "ar": "يزيد",
+    "level": "C1"
+  },
+  {
+    "en": "independent",
+    "ar": "مستقل",
+    "level": "C1"
+  },
+  {
+    "en": "individual",
+    "ar": "فرد",
+    "level": "C1"
+  },
+  {
+    "en": "influence",
+    "ar": "تأثير / يؤثر",
+    "level": "C1"
+  },
+  {
+    "en": "information",
+    "ar": "معلومات",
+    "level": "C1"
+  },
+  {
+    "en": "instead",
+    "ar": "بدلًا من ذلك",
+    "level": "C1"
+  },
+  {
+    "en": "intelligent",
+    "ar": "ذكي",
+    "level": "C1"
+  },
+  {
+    "en": "interested",
+    "ar": "مهتم",
+    "level": "C1"
+  },
+  {
+    "en": "international",
+    "ar": "دولي",
+    "level": "C1"
+  },
+  {
+    "en": "interview",
+    "ar": "مقابلة",
+    "level": "C1"
+  },
+  {
+    "en": "introduce",
+    "ar": "يقدم / يعرف",
+    "level": "C1"
+  },
+  {
+    "en": "invent",
+    "ar": "يخترع",
+    "level": "C1"
+  },
+  {
+    "en": "invite",
+    "ar": "يدعو",
+    "level": "C1"
+  },
+  {
+    "en": "involve",
+    "ar": "يشمل / يتضمن",
+    "level": "C1"
+  },
+  {
+    "en": "issue",
+    "ar": "مشكلة / قضية",
+    "level": "C1"
+  },
+  {
+    "en": "knowledge",
+    "ar": "معرفة",
+    "level": "C1"
+  },
+  {
+    "en": "lack",
+    "ar": "نقص / يفتقر",
+    "level": "C1"
+  },
+  {
+    "en": "likely",
+    "ar": "محتمل",
+    "level": "C1"
+  },
+  {
+    "en": "local",
+    "ar": "محلي",
+    "level": "C1"
+  },
+  {
+    "en": "manage",
+    "ar": "يدير / يتمكن",
+    "level": "C1"
+  },
+  {
+    "en": "method",
+    "ar": "طريقة",
+    "level": "C1"
+  },
+  {
+    "en": "modern",
+    "ar": "حديث",
+    "level": "C1"
+  },
+  {
+    "en": "necessary",
+    "ar": "ضروري",
+    "level": "C1"
+  },
+  {
+    "en": "notice",
+    "ar": "يلاحظ",
+    "level": "C1"
+  },
+  {
+    "en": "obvious",
+    "ar": "واضح",
+    "level": "C1"
+  },
+  {
+    "en": "opinion",
+    "ar": "رأي",
+    "level": "C1"
+  },
+  {
+    "en": "opportunity",
+    "ar": "فرصة",
+    "level": "C1"
+  },
+  {
+    "en": "ordinary",
+    "ar": "عادي",
+    "level": "C1"
+  },
+  {
+    "en": "organize",
+    "ar": "ينظم",
+    "level": "C1"
+  },
+  {
+    "en": "patient",
+    "ar": "صبور / مريض",
+    "level": "C1"
+  },
+  {
+    "en": "performance",
+    "ar": "أداء",
+    "level": "C1"
+  },
+  {
+    "en": "personal",
+    "ar": "شخصي",
+    "level": "C1"
+  },
+  {
+    "en": "polite",
+    "ar": "مهذب",
+    "level": "C1"
+  },
+  {
+    "en": "possible",
+    "ar": "ممكن",
+    "level": "C1"
+  },
+  {
+    "en": "prefer",
+    "ar": "يفضل",
+    "level": "C1"
+  },
+  {
+    "en": "prepare",
+    "ar": "يستعد / يحضر",
+    "level": "C1"
+  },
+  {
+    "en": "prevent",
+    "ar": "يمنع",
+    "level": "C1"
+  },
+  {
+    "en": "produce",
+    "ar": "ينتج",
+    "level": "C1"
+  },
+  {
+    "en": "professional",
+    "ar": "مهني",
+    "level": "C1"
+  },
+  {
+    "en": "progress",
+    "ar": "تقدم",
+    "level": "C1"
+  },
+  {
+    "en": "promise",
+    "ar": "وعد / يعد",
+    "level": "C1"
+  },
+  {
+    "en": "protect",
+    "ar": "يحمي",
+    "level": "C1"
+  },
+  {
+    "en": "provide",
+    "ar": "يوفر",
+    "level": "C1"
+  },
+  {
+    "en": "purpose",
+    "ar": "هدف / غرض",
+    "level": "C1"
+  },
+  {
+    "en": "quality",
+    "ar": "جودة",
+    "level": "C1"
+  },
+  {
+    "en": "realize",
+    "ar": "يدرك",
+    "level": "C1"
+  },
+  {
+    "en": "reason",
+    "ar": "سبب",
+    "level": "C1"
+  },
+  {
+    "en": "receive",
+    "ar": "يستلم",
+    "level": "C1"
+  },
+  {
+    "en": "recent",
+    "ar": "حديث",
+    "level": "C1"
+  },
+  {
+    "en": "recommend",
+    "ar": "يوصي",
+    "level": "C1"
+  },
+  {
+    "en": "reduce",
+    "ar": "يقلل",
+    "level": "C1"
+  },
+  {
+    "en": "relationship",
+    "ar": "علاقة",
+    "level": "C1"
+  },
+  {
+    "en": "remain",
+    "ar": "يبقى",
+    "level": "C1"
+  },
+  {
+    "en": "remember",
+    "ar": "يتذكر",
+    "level": "C1"
+  },
+  {
+    "en": "remove",
+    "ar": "يزيل",
+    "level": "C1"
+  },
+  {
+    "en": "repair",
+    "ar": "يصلح",
+    "level": "C1"
+  },
+  {
+    "en": "replace",
+    "ar": "يستبدل",
+    "level": "C1"
+  },
+  {
+    "en": "reply",
+    "ar": "يرد",
+    "level": "C1"
+  },
+  {
+    "en": "request",
+    "ar": "طلب / يطلب",
+    "level": "C1"
+  },
+  {
+    "en": "research",
+    "ar": "بحث",
+    "level": "C1"
+  },
+  {
+    "en": "responsible",
+    "ar": "مسؤول",
+    "level": "C1"
+  },
+  {
+    "en": "result",
+    "ar": "نتيجة",
+    "level": "C1"
+  },
+  {
+    "en": "return",
+    "ar": "يعود / يعيد",
+    "level": "C1"
+  },
+  {
+    "en": "risk",
+    "ar": "خطر / يخاطر",
+    "level": "C1"
+  },
+  {
+    "en": "safe",
+    "ar": "آمن",
+    "level": "C1"
+  },
+  {
+    "en": "save",
+    "ar": "يحفظ / يدخر",
+    "level": "C1"
+  },
+  {
+    "en": "schedule",
+    "ar": "جدول / يجدول",
+    "level": "C1"
+  },
+  {
+    "en": "search",
+    "ar": "يبحث",
+    "level": "C1"
+  },
+  {
+    "en": "serious",
+    "ar": "جاد",
+    "level": "C1"
+  },
+  {
+    "en": "share",
+    "ar": "يشارك",
+    "level": "C1"
+  },
+  {
+    "en": "similar",
+    "ar": "متشابه",
+    "level": "C1"
+  },
+  {
+    "en": "simple",
+    "ar": "بسيط",
+    "level": "C1"
+  },
+  {
+    "en": "situation",
+    "ar": "موقف / حالة",
+    "level": "C1"
+  },
+  {
+    "en": "solution",
+    "ar": "حل",
+    "level": "C1"
+  },
+  {
+    "en": "specific",
+    "ar": "محدد",
+    "level": "C1"
+  },
+  {
+    "en": "speech",
+    "ar": "خطاب / كلام",
+    "level": "C1"
+  },
+  {
+    "en": "suggest",
+    "ar": "يقترح",
+    "level": "C1"
+  },
+  {
+    "en": "support",
+    "ar": "يدعم / دعم",
+    "level": "C1"
+  },
+  {
+    "en": "successful",
+    "ar": "ناجح",
+    "level": "C1"
+  },
+  {
+    "en": "sudden",
+    "ar": "مفاجئ",
+    "level": "C1"
+  },
+  {
+    "en": "suggestion",
+    "ar": "اقتراح",
+    "level": "C1"
+  },
+  {
+    "en": "technology",
+    "ar": "تكنولوجيا",
+    "level": "C1"
+  },
+  {
+    "en": "traditional",
+    "ar": "تقليدي",
+    "level": "C1"
+  },
+  {
+    "en": "transport",
+    "ar": "مواصلات",
+    "level": "C1"
+  },
+  {
+    "en": "treat",
+    "ar": "يعالج / يعامل",
+    "level": "C1"
+  },
+  {
+    "en": "trust",
+    "ar": "يثق / ثقة",
+    "level": "C1"
+  },
+  {
+    "en": "usual",
+    "ar": "معتاد",
+    "level": "C1"
+  },
+  {
+    "en": "value",
+    "ar": "قيمة",
+    "level": "C1"
+  },
+  {
+    "en": "variety",
+    "ar": "تنوع",
+    "level": "C1"
+  },
+  {
+    "en": "waste",
+    "ar": "نفايات / يهدر",
+    "level": "C1"
+  },
+  {
+    "en": "wealth",
+    "ar": "ثروة",
+    "level": "C1"
+  },
+  {
+    "en": "whether",
+    "ar": "ما إذا",
+    "level": "C1"
+  },
+  {
+    "en": "wonder",
+    "ar": "يتساءل / عجب",
+    "level": "C1"
+  },
+  {
+    "en": "achieve",
+    "ar": "يحقق",
+    "level": "C1"
+  },
+  {
+    "en": "adapt",
+    "ar": "يتكيف",
+    "level": "C1"
+  },
+  {
+    "en": "admire",
+    "ar": "يعجب بـ",
+    "level": "C1"
+  },
+  {
+    "en": "admit",
+    "ar": "يعترف",
+    "level": "C1"
+  },
+  {
+    "en": "affect",
+    "ar": "يؤثر",
+    "level": "C1"
+  },
+  {
+    "en": "analyze",
+    "ar": "يحلل",
+    "level": "C1"
+  },
+  {
+    "en": "announce",
+    "ar": "يعلن",
+    "level": "C1"
+  },
+  {
+    "en": "attend",
+    "ar": "يحضر",
+    "level": "C1"
+  },
+  {
+    "en": "attract",
+    "ar": "يجذب",
+    "level": "C1"
+  },
+  {
+    "en": "behave",
+    "ar": "يتصرف",
+    "level": "C1"
+  },
+  {
+    "en": "cancel",
+    "ar": "يلغي",
+    "level": "C1"
+  },
+  {
+    "en": "collect",
+    "ar": "يجمع",
+    "level": "C1"
+  },
+  {
+    "en": "combine",
+    "ar": "يجمع",
+    "level": "C1"
+  },
+  {
+    "en": "communicate",
+    "ar": "يتواصل",
+    "level": "C1"
+  },
+  {
+    "en": "compete",
+    "ar": "ينافس",
+    "level": "C1"
+  },
+  {
+    "en": "complain",
+    "ar": "يشتكي",
+    "level": "C1"
+  },
+  {
+    "en": "confirm",
+    "ar": "يؤكد",
+    "level": "C1"
+  },
+  {
+    "en": "consist",
+    "ar": "يتكون",
+    "level": "C1"
+  },
+  {
+    "en": "contact",
+    "ar": "يتصل / اتصال",
+    "level": "C1"
+  },
+  {
+    "en": "contribute",
+    "ar": "يساهم",
+    "level": "C1"
+  },
+  {
+    "en": "convince",
+    "ar": "يقنع",
+    "level": "C1"
+  },
+  {
+    "en": "cope",
+    "ar": "يتعامل مع",
+    "level": "C1"
+  },
+  {
+    "en": "correctly",
+    "ar": "بشكل صحيح",
+    "level": "C1"
+  },
+  {
+    "en": "create",
+    "ar": "ينشئ",
+    "level": "C1"
+  },
+  {
+    "en": "decide",
+    "ar": "يقرر",
+    "level": "C1"
+  },
+  {
+    "en": "deliver",
+    "ar": "يسلم",
+    "level": "C1"
+  },
+  {
+    "en": "demand",
+    "ar": "يطلب / طلب",
+    "level": "C1"
+  },
+  {
+    "en": "destroy",
+    "ar": "يدمر",
+    "level": "C1"
+  },
+  {
+    "en": "discuss",
+    "ar": "يناقش",
+    "level": "C1"
+  },
+  {
+    "en": "download",
+    "ar": "ينزل",
+    "level": "C1"
+  },
+  {
+    "en": "earn",
+    "ar": "يكسب",
+    "level": "C1"
+  },
+  {
+    "en": "encourage",
+    "ar": "يشجع",
+    "level": "C1"
+  },
+  {
+    "en": "enter",
+    "ar": "يدخل",
+    "level": "C1"
+  },
+  {
+    "en": "exist",
+    "ar": "يوجد",
+    "level": "C1"
+  },
+  {
+    "en": "expect",
+    "ar": "يتوقع",
+    "level": "C1"
+  },
+  {
+    "en": "experience",
+    "ar": "يختبر / خبرة",
+    "level": "C1"
+  },
+  {
+    "en": "explain",
+    "ar": "يشرح",
+    "level": "C1"
+  },
+  {
+    "en": "explore",
+    "ar": "يستكشف",
+    "level": "C1"
+  },
+  {
+    "en": "focus",
+    "ar": "يركز",
+    "level": "C1"
+  },
+  {
+    "en": "graduate",
+    "ar": "يتخرج",
+    "level": "C1"
+  },
+  {
+    "en": "handle",
+    "ar": "يتعامل مع",
+    "level": "C1"
+  },
+  {
+    "en": "identify",
+    "ar": "يحدد",
+    "level": "C1"
+  },
+  {
+    "en": "imagine",
+    "ar": "يتخيل",
+    "level": "C1"
+  },
+  {
+    "en": "improve",
+    "ar": "يحسن",
+    "level": "C1"
+  },
+  {
+    "en": "introduce",
+    "ar": "يقدم",
+    "level": "C1"
+  },
+  {
+    "en": "join",
+    "ar": "ينضم",
+    "level": "C1"
+  },
+  {
+    "en": "judge",
+    "ar": "يحكم / قاضٍ",
+    "level": "C1"
+  },
+  {
+    "en": "maintain",
+    "ar": "يحافظ على",
+    "level": "C1"
+  },
+  {
+    "en": "mention",
+    "ar": "يذكر",
+    "level": "C1"
+  },
+  {
+    "en": "occur",
+    "ar": "يحدث",
+    "level": "C1"
+  },
+  {
+    "en": "participate",
+    "ar": "يشارك",
+    "level": "C1"
+  },
+  {
+    "en": "perform",
+    "ar": "يؤدي",
+    "level": "C1"
+  },
+  {
+    "en": "predict",
+    "ar": "يتنبأ",
+    "level": "C1"
+  },
+  {
+    "en": "prevent",
+    "ar": "يمنع",
+    "level": "C1"
+  },
+  {
+    "en": "publish",
+    "ar": "ينشر",
+    "level": "C1"
+  },
+  {
+    "en": "recognize",
+    "ar": "يتعرف على",
+    "level": "C1"
+  },
+  {
+    "en": "recommend",
+    "ar": "يوصي",
+    "level": "C1"
+  },
+  {
+    "en": "reflect",
+    "ar": "يعكس / يتأمل",
+    "level": "C1"
+  },
+  {
+    "en": "refuse",
+    "ar": "يرفض",
+    "level": "C1"
+  },
+  {
+    "en": "regret",
+    "ar": "يندم",
+    "level": "C1"
+  },
+  {
+    "en": "relax",
+    "ar": "يسترخي",
+    "level": "C1"
+  },
+  {
+    "en": "remind",
+    "ar": "يذكر",
+    "level": "C1"
+  },
+  {
+    "en": "represent",
+    "ar": "يمثل",
+    "level": "C1"
+  },
+  {
+    "en": "require",
+    "ar": "يتطلب",
+    "level": "C1"
+  },
+  {
+    "en": "respond",
+    "ar": "يستجيب",
+    "level": "C1"
+  },
+  {
+    "en": "review",
+    "ar": "يراجع",
+    "level": "C1"
+  },
+  {
+    "en": "select",
+    "ar": "يختار",
+    "level": "C1"
+  },
+  {
+    "en": "solve",
+    "ar": "يحل",
+    "level": "C1"
+  },
+  {
+    "en": "spread",
+    "ar": "ينشر / ينتشر",
+    "level": "C1"
+  },
+  {
+    "en": "succeed",
+    "ar": "ينجح",
+    "level": "C1"
+  },
+  {
+    "en": "suffer",
+    "ar": "يعاني",
+    "level": "C1"
+  },
+  {
+    "en": "survive",
+    "ar": "ينجو",
+    "level": "C1"
+  },
+  {
+    "en": "tend",
+    "ar": "يميل إلى",
+    "level": "C1"
+  },
+  {
+    "en": "throw",
+    "ar": "يرمي",
+    "level": "C1"
+  },
+  {
+    "en": "train",
+    "ar": "يدرب",
+    "level": "C1"
+  },
+  {
+    "en": "update",
+    "ar": "يحدث",
+    "level": "C1"
+  },
+  {
+    "en": "upload",
+    "ar": "يرفع",
+    "level": "C1"
+  },
+  {
+    "en": "volunteer",
+    "ar": "يتطوع",
+    "level": "C1"
+  },
+  {
+    "en": "warn",
+    "ar": "يحذر",
+    "level": "C1"
+  },
+  {
+    "en": "wonder",
+    "ar": "يتساءل",
+    "level": "C1"
+  },
+  {
+    "en": "worry",
+    "ar": "يقلق",
+    "level": "C1"
+  },
+  {
+    "en": "achievable",
+    "ar": "قابل للتحقيق",
+    "level": "C1"
+  },
+  {
+    "en": "additional",
+    "ar": "إضافي",
+    "level": "C1"
+  },
+  {
+    "en": "available",
+    "ar": "متاح",
+    "level": "C1"
+  },
+  {
+    "en": "aware",
+    "ar": "مدرك",
+    "level": "C1"
+  },
+  {
+    "en": "basic",
+    "ar": "أساسي",
+    "level": "C1"
+  },
+  {
+    "en": "comfortable",
+    "ar": "مريح",
+    "level": "C1"
+  },
+  {
+    "en": "convenient",
+    "ar": "مناسب",
+    "level": "C1"
+  },
+  {
+    "en": "creative",
+    "ar": "مبدع",
+    "level": "C1"
+  },
+  {
+    "en": "dangerous",
+    "ar": "خطير",
+    "level": "C1"
+  },
+  {
+    "en": "effective",
+    "ar": "فعال",
+    "level": "C1"
+  },
+  {
+    "en": "efficient",
+    "ar": "فعال / كفء",
+    "level": "C1"
+  },
+  {
+    "en": "equal",
+    "ar": "متساوٍ",
+    "level": "C1"
+  },
+  {
+    "en": "exact",
+    "ar": "دقيق",
+    "level": "C1"
+  },
+  {
+    "en": "excellent",
+    "ar": "ممتاز",
+    "level": "C1"
+  },
+  {
+    "en": "familiar",
+    "ar": "مألوف",
+    "level": "C1"
+  },
+  {
+    "en": "general",
+    "ar": "عام",
+    "level": "C1"
+  },
+  {
+    "en": "generous",
+    "ar": "كريم",
+    "level": "C1"
+  },
+  {
+    "en": "global",
+    "ar": "عالمي",
+    "level": "C1"
+  },
+  {
+    "en": "independent",
+    "ar": "مستقل",
+    "level": "C1"
+  },
+  {
+    "en": "legal",
+    "ar": "قانوني",
+    "level": "C1"
+  },
+  {
+    "en": "limited",
+    "ar": "محدود",
+    "level": "C1"
+  },
+  {
+    "en": "logical",
+    "ar": "منطقي",
+    "level": "C1"
+  },
+  {
+    "en": "negative",
+    "ar": "سلبي",
+    "level": "C1"
+  },
+  {
+    "en": "nervous",
+    "ar": "متوتر",
+    "level": "C1"
+  },
+  {
+    "en": "obvious",
+    "ar": "واضح",
+    "level": "C1"
+  },
+  {
+    "en": "ordinary",
+    "ar": "عادي",
+    "level": "C1"
+  },
+  {
+    "en": "positive",
+    "ar": "إيجابي",
+    "level": "C1"
+  },
+  {
+    "en": "private",
+    "ar": "خاص",
+    "level": "C1"
+  },
+  {
+    "en": "public",
+    "ar": "عام",
+    "level": "C1"
+  },
+  {
+    "en": "reasonable",
+    "ar": "معقول",
+    "level": "C1"
+  },
+  {
+    "en": "regular",
+    "ar": "منتظم",
+    "level": "C1"
+  },
+  {
+    "en": "reliable",
+    "ar": "موثوق",
+    "level": "C1"
+  },
+  {
+    "en": "responsible",
+    "ar": "مسؤول",
+    "level": "C1"
+  },
+  {
+    "en": "successful",
+    "ar": "ناجح",
+    "level": "C1"
+  },
+  {
+    "en": "temporary",
+    "ar": "مؤقت",
+    "level": "C1"
+  },
+  {
+    "en": "typical",
+    "ar": "نموذجي",
+    "level": "C1"
+  },
+  {
+    "en": "unusual",
+    "ar": "غير معتاد",
+    "level": "C1"
+  },
+  {
+    "en": "valuable",
+    "ar": "قيّم",
+    "level": "C1"
+  },
+  {
+    "en": "various",
+    "ar": "متنوع",
+    "level": "C1"
+  },
+  {
+    "en": "willing",
+    "ar": "مستعد",
+    "level": "C1"
+  },
+  {
+    "en": "actual",
+    "ar": "فعلي",
+    "level": "C1"
+  },
+  {
+    "en": "additional",
+    "ar": "إضافي",
+    "level": "C1"
+  },
+  {
+    "en": "annual",
+    "ar": "سنوي",
+    "level": "C1"
+  },
+  {
+    "en": "appropriate",
+    "ar": "مناسب",
+    "level": "C1"
+  },
+  {
+    "en": "attractive",
+    "ar": "جذاب",
+    "level": "C1"
+  },
+  {
+    "en": "central",
+    "ar": "مركزي",
+    "level": "C1"
+  },
+  {
+    "en": "certain",
+    "ar": "مؤكد",
+    "level": "C1"
+  },
+  {
+    "en": "classic",
+    "ar": "كلاسيكي",
+    "level": "C1"
+  },
+  {
+    "en": "clear",
+    "ar": "واضح",
+    "level": "C1"
+  },
+  {
+    "en": "complex",
+    "ar": "معقد",
+    "level": "C1"
+  },
+  {
+    "en": "current",
+    "ar": "حالي",
+    "level": "C1"
+  },
+  {
+    "en": "direct",
+    "ar": "مباشر",
+    "level": "C1"
+  },
+  {
+    "en": "dramatic",
+    "ar": "درامي",
+    "level": "C1"
+  },
+  {
+    "en": "educational",
+    "ar": "تعليمي",
+    "level": "C1"
+  },
+  {
+    "en": "emotional",
+    "ar": "عاطفي",
+    "level": "C1"
+  },
+  {
+    "en": "environmental",
+    "ar": "بيئي",
+    "level": "C1"
+  },
+  {
+    "en": "financial",
+    "ar": "مالي",
+    "level": "C1"
+  },
+  {
+    "en": "friendly",
+    "ar": "ودود",
+    "level": "C1"
+  },
+  {
+    "en": "historical",
+    "ar": "تاريخي",
+    "level": "C1"
+  },
+  {
+    "en": "human",
+    "ar": "بشري",
+    "level": "C1"
+  },
+  {
+    "en": "important",
+    "ar": "مهم",
+    "level": "C1"
+  },
+  {
+    "en": "individual",
+    "ar": "فردي",
+    "level": "C1"
+  },
+  {
+    "en": "international",
+    "ar": "دولي",
+    "level": "C1"
+  },
+  {
+    "en": "medical",
+    "ar": "طبي",
+    "level": "C1"
+  },
+  {
+    "en": "mental",
+    "ar": "ذهني",
+    "level": "C1"
+  },
+  {
+    "en": "natural",
+    "ar": "طبيعي",
+    "level": "C1"
+  },
+  {
+    "en": "official",
+    "ar": "رسمي",
+    "level": "C1"
+  },
+  {
+    "en": "physical",
+    "ar": "جسدي",
+    "level": "C1"
+  },
+  {
+    "en": "political",
+    "ar": "سياسي",
+    "level": "C1"
+  },
+  {
+    "en": "popular",
+    "ar": "شائع",
+    "level": "C1"
+  },
+  {
+    "en": "practical",
+    "ar": "عملي",
+    "level": "C1"
+  },
+  {
+    "en": "recent",
+    "ar": "حديث",
+    "level": "C1"
+  },
+  {
+    "en": "regional",
+    "ar": "إقليمي",
+    "level": "C1"
+  },
+  {
+    "en": "social",
+    "ar": "اجتماعي",
+    "level": "C1"
+  },
+  {
+    "en": "technical",
+    "ar": "تقني",
+    "level": "C1"
+  },
+  {
+    "en": "terrible",
+    "ar": "فظيع",
+    "level": "C1"
+  },
+  {
+    "en": "total",
+    "ar": "إجمالي",
+    "level": "C1"
+  },
+  {
+    "en": "urban",
+    "ar": "حضري",
+    "level": "C1"
+  },
+  {
+    "en": "wild",
+    "ar": "بري",
+    "level": "C1"
+  },
+  {
+    "en": "wonderful",
+    "ar": "رائع",
+    "level": "C1"
+  },
+  {
+    "en": "absolutely",
+    "ar": "بالتأكيد",
+    "level": "C1"
+  },
+  {
+    "en": "actually",
+    "ar": "في الواقع",
+    "level": "C1"
+  },
+  {
+    "en": "especially",
+    "ar": "خصوصًا",
+    "level": "C1"
+  },
+  {
+    "en": "eventually",
+    "ar": "في النهاية",
+    "level": "C1"
+  },
+  {
+    "en": "fortunately",
+    "ar": "لحسن الحظ",
+    "level": "C1"
+  },
+  {
+    "en": "generally",
+    "ar": "عمومًا",
+    "level": "C1"
+  },
+  {
+    "en": "immediately",
+    "ar": "فورًا",
+    "level": "C1"
+  },
+  {
+    "en": "mainly",
+    "ar": "بشكل رئيسي",
+    "level": "C1"
+  },
+  {
+    "en": "nearly",
+    "ar": "تقريبًا",
+    "level": "C1"
+  },
+  {
+    "en": "normally",
+    "ar": "عادةً",
+    "level": "C1"
+  },
+  {
+    "en": "probably",
+    "ar": "على الأرجح",
+    "level": "C1"
+  },
+  {
+    "en": "recently",
+    "ar": "مؤخرًا",
+    "level": "C1"
+  },
+  {
+    "en": "simply",
+    "ar": "ببساطة",
+    "level": "C1"
+  },
+  {
+    "en": "suddenly",
+    "ar": "فجأة",
+    "level": "C1"
+  },
+  {
+    "en": "usually",
+    "ar": "عادةً",
+    "level": "C1"
+  },
+  {
+    "en": "completely",
+    "ar": "تمامًا",
+    "level": "C1"
+  },
+  {
+    "en": "carefully",
+    "ar": "بحذر",
+    "level": "C1"
+  },
+  {
+    "en": "clearly",
+    "ar": "بوضوح",
+    "level": "C1"
+  },
+  {
+    "en": "directly",
+    "ar": "مباشرة",
+    "level": "C1"
+  },
+  {
+    "en": "easily",
+    "ar": "بسهولة",
+    "level": "C1"
+  },
+  {
+    "en": "exactly",
+    "ar": "بالضبط",
+    "level": "C1"
+  },
+  {
+    "en": "finally",
+    "ar": "أخيرًا",
+    "level": "C1"
+  },
+  {
+    "en": "frequently",
+    "ar": "بشكل متكرر",
+    "level": "C1"
+  },
+  {
+    "en": "gradually",
+    "ar": "تدريجيًا",
+    "level": "C1"
+  },
+  {
+    "en": "hardly",
+    "ar": "بالكاد",
+    "level": "C1"
+  },
+  {
+    "en": "mostly",
+    "ar": "في الغالب",
+    "level": "C1"
+  },
+  {
+    "en": "quickly",
+    "ar": "بسرعة",
+    "level": "C1"
+  },
+  {
+    "en": "quietly",
+    "ar": "بهدوء",
+    "level": "C1"
+  },
+  {
+    "en": "strongly",
+    "ar": "بقوة",
+    "level": "C1"
+  },
+  {
+    "en": "successfully",
+    "ar": "بنجاح",
+    "level": "C1"
+  },
+  {
+    "en": "totally",
+    "ar": "تمامًا",
+    "level": "C1"
+  },
+  {
+    "en": "widely",
+    "ar": "على نطاق واسع",
+    "level": "C1"
+  },
+  {
+    "en": "although",
+    "ar": "بالرغم من أن",
+    "level": "C1"
+  },
+  {
+    "en": "despite",
+    "ar": "بالرغم من",
+    "level": "C1"
+  },
+  {
+    "en": "however",
+    "ar": "ومع ذلك",
+    "level": "C1"
+  },
+  {
+    "en": "therefore",
+    "ar": "لذلك",
+    "level": "C1"
+  },
+  {
+    "en": "unless",
+    "ar": "إلا إذا",
+    "level": "C1"
+  },
+  {
+    "en": "while",
+    "ar": "بينما",
+    "level": "C1"
+  },
+  {
+    "en": "whereas",
+    "ar": "في حين أن",
+    "level": "C1"
+  },
+  {
+    "en": "otherwise",
+    "ar": "وإلا",
+    "level": "C1"
+  },
+  {
+    "en": "besides",
+    "ar": "بالإضافة إلى",
+    "level": "C1"
+  },
+  {
+    "en": "instead",
+    "ar": "بدلًا من ذلك",
+    "level": "C1"
+  },
+  {
+    "en": "meanwhile",
+    "ar": "في الوقت نفسه",
+    "level": "C1"
+  },
+  {
+    "en": "rather",
+    "ar": "إلى حد ما",
+    "level": "C1"
+  },
+  {
+    "en": "throughout",
+    "ar": "طوال",
+    "level": "C1"
+  },
+  {
+    "en": "within",
+    "ar": "داخل / خلال",
+    "level": "C1"
+  },
+  {
+    "en": "beyond",
+    "ar": "أبعد من",
+    "level": "C1"
+  },
+  {
+    "en": "towards",
+    "ar": "نحو",
+    "level": "C1"
+  },
+  {
+    "en": "against",
+    "ar": "ضد",
+    "level": "C1"
+  },
+  {
+    "en": "among",
+    "ar": "بين / وسط",
+    "level": "C1"
+  },
+  {
+    "en": "beneath",
+    "ar": "تحت",
+    "level": "C1"
+  },
+  {
+    "en": "beside",
+    "ar": "بجانب",
+    "level": "C1"
+  },
+  {
+    "en": "despite",
+    "ar": "رغم",
+    "level": "C1"
+  },
+  {
+    "en": "according",
+    "ar": "وفقًا",
+    "level": "C1"
+  },
+  {
+    "en": "experience",
+    "ar": "خبرة",
+    "level": "C1"
+  },
+  {
+    "en": "education",
+    "ar": "تعليم",
+    "level": "C1"
+  },
+  {
+    "en": "employment",
+    "ar": "توظيف",
+    "level": "C1"
+  },
+  {
+    "en": "environment",
+    "ar": "بيئة",
+    "level": "C1"
+  },
+  {
+    "en": "equipment",
+    "ar": "معدات",
+    "level": "C1"
+  },
+  {
+    "en": "government",
+    "ar": "حكومة",
+    "level": "C1"
+  },
+  {
+    "en": "industry",
+    "ar": "صناعة",
+    "level": "C1"
+  },
+  {
+    "en": "information",
+    "ar": "معلومات",
+    "level": "C1"
+  },
+  {
+    "en": "knowledge",
+    "ar": "معرفة",
+    "level": "C1"
+  },
+  {
+    "en": "language",
+    "ar": "لغة",
+    "level": "C1"
+  },
+  {
+    "en": "lifestyle",
+    "ar": "نمط حياة",
+    "level": "C1"
+  },
+  {
+    "en": "management",
+    "ar": "إدارة",
+    "level": "C1"
+  },
+  {
+    "en": "organization",
+    "ar": "منظمة",
+    "level": "C1"
+  },
+  {
+    "en": "population",
+    "ar": "سكان",
+    "level": "C1"
+  },
+  {
+    "en": "production",
+    "ar": "إنتاج",
+    "level": "C1"
+  },
+  {
+    "en": "relationship",
+    "ar": "علاقة",
+    "level": "C1"
+  },
+  {
+    "en": "research",
+    "ar": "بحث",
+    "level": "C1"
+  },
+  {
+    "en": "responsibility",
+    "ar": "مسؤولية",
+    "level": "C1"
+  },
+  {
+    "en": "service",
+    "ar": "خدمة",
+    "level": "C1"
+  },
+  {
+    "en": "society",
+    "ar": "مجتمع",
+    "level": "C1"
+  },
+  {
+    "en": "transportation",
+    "ar": "نقل",
+    "level": "C1"
+  },
+  {
+    "en": "communication",
+    "ar": "تواصل",
+    "level": "C1"
+  },
+  {
+    "en": "competition",
+    "ar": "منافسة",
+    "level": "C1"
+  },
+  {
+    "en": "development",
+    "ar": "تطوير",
+    "level": "C1"
+  },
+  {
+    "en": "difference",
+    "ar": "اختلاف",
+    "level": "C1"
+  },
+  {
+    "en": "direction",
+    "ar": "اتجاه",
+    "level": "C1"
+  },
+  {
+    "en": "discussion",
+    "ar": "مناقشة",
+    "level": "C1"
+  },
+  {
+    "en": "experience",
+    "ar": "تجربة",
+    "level": "C1"
+  },
+  {
+    "en": "importance",
+    "ar": "أهمية",
+    "level": "C1"
+  },
+  {
+    "en": "improvement",
+    "ar": "تحسين",
+    "level": "C1"
+  },
+  {
+    "en": "permission",
+    "ar": "إذن",
+    "level": "C1"
+  },
+  {
+    "en": "possibility",
+    "ar": "احتمال",
+    "level": "C1"
+  },
+  {
+    "en": "preparation",
+    "ar": "تحضير",
+    "level": "C1"
+  },
+  {
+    "en": "recommendation",
+    "ar": "توصية",
+    "level": "C1"
+  },
+  {
+    "en": "requirement",
+    "ar": "متطلب",
+    "level": "C1"
+  },
+  {
+    "en": "achievement",
+    "ar": "إنجاز",
+    "level": "C1"
+  },
+  {
+    "en": "agreement",
+    "ar": "اتفاق",
+    "level": "C1"
+  },
+  {
+    "en": "argument",
+    "ar": "حجة / جدال",
+    "level": "C1"
+  },
+  {
+    "en": "attention",
+    "ar": "انتباه",
+    "level": "C1"
+  },
+  {
+    "en": "behavior",
+    "ar": "سلوك",
+    "level": "C1"
+  },
+  {
+    "en": "decision",
+    "ar": "قرار",
+    "level": "C1"
+  },
+  {
+    "en": "description",
+    "ar": "وصف",
+    "level": "C1"
+  },
+  {
+    "en": "explanation",
+    "ar": "شرح",
+    "level": "C1"
+  },
+  {
+    "en": "invitation",
+    "ar": "دعوة",
+    "level": "C1"
+  },
+  {
+    "en": "movement",
+    "ar": "حركة",
+    "level": "C1"
+  },
+  {
+    "en": "performance",
+    "ar": "أداء",
+    "level": "C1"
+  },
+  {
+    "en": "practice",
+    "ar": "ممارسة",
+    "level": "C1"
+  },
+  {
+    "en": "problem",
+    "ar": "مشكلة",
+    "level": "C1"
+  },
+  {
+    "en": "process",
+    "ar": "عملية",
+    "level": "C1"
+  },
+  {
+    "en": "project",
+    "ar": "مشروع",
+    "level": "C1"
+  },
+  {
+    "en": "purpose",
+    "ar": "غرض",
+    "level": "C1"
+  },
+  {
+    "en": "question",
+    "ar": "سؤال",
+    "level": "C1"
+  },
+  {
+    "en": "reason",
+    "ar": "سبب",
+    "level": "C1"
+  },
+  {
+    "en": "result",
+    "ar": "نتيجة",
+    "level": "C1"
+  },
+  {
+    "en": "solution",
+    "ar": "حل",
+    "level": "C1"
+  },
+  {
+    "en": "success",
+    "ar": "نجاح",
+    "level": "C1"
+  },
+  {
+    "en": "support",
+    "ar": "دعم",
+    "level": "C1"
+  },
+  {
+    "en": "tradition",
+    "ar": "تقليد",
+    "level": "C1"
+  },
+  {
+    "en": "activity",
+    "ar": "نشاط",
+    "level": "C1"
+  },
+  {
+    "en": "choice",
+    "ar": "اختيار",
+    "level": "C1"
+  },
+  {
+    "en": "chance",
+    "ar": "فرصة",
+    "level": "C1"
+  },
+  {
+    "en": "change",
+    "ar": "تغيير",
+    "level": "C1"
+  },
+  {
+    "en": "connection",
+    "ar": "اتصال",
+    "level": "C1"
+  },
+  {
+    "en": "contact",
+    "ar": "اتصال",
+    "level": "C1"
+  },
+  {
+    "en": "conversation",
+    "ar": "محادثة",
+    "level": "C1"
+  },
+  {
+    "en": "course",
+    "ar": "دورة / مقرر",
+    "level": "C1"
+  },
+  {
+    "en": "culture",
+    "ar": "ثقافة",
+    "level": "C1"
+  },
+  {
+    "en": "customer",
+    "ar": "عميل",
+    "level": "C1"
+  },
+  {
+    "en": "event",
+    "ar": "حدث",
+    "level": "C1"
+  },
+  {
+    "en": "goal",
+    "ar": "هدف",
+    "level": "C1"
+  },
+  {
+    "en": "habit",
+    "ar": "عادة",
+    "level": "C1"
+  },
+  {
+    "en": "hobby",
+    "ar": "هواية",
+    "level": "C1"
+  },
+  {
+    "en": "interest",
+    "ar": "اهتمام",
+    "level": "C1"
+  },
+  {
+    "en": "meeting",
+    "ar": "اجتماع",
+    "level": "C1"
+  },
+  {
+    "en": "member",
+    "ar": "عضو",
+    "level": "C1"
+  },
+  {
+    "en": "opinion",
+    "ar": "رأي",
+    "level": "C1"
+  },
+  {
+    "en": "plan",
+    "ar": "خطة",
+    "level": "C1"
+  },
+  {
+    "en": "point",
+    "ar": "نقطة",
+    "level": "C1"
+  },
+  {
+    "en": "program",
+    "ar": "برنامج",
+    "level": "C1"
+  },
+  {
+    "en": "schedule",
+    "ar": "جدول",
+    "level": "C1"
+  },
+  {
+    "en": "skill",
+    "ar": "مهارة",
+    "level": "C1"
+  },
+  {
+    "en": "subject",
+    "ar": "موضوع / مادة",
+    "level": "C1"
+  },
+  {
+    "en": "teamwork",
+    "ar": "عمل جماعي",
+    "level": "C1"
+  },
+  {
+    "en": "training",
+    "ar": "تدريب",
+    "level": "C1"
+  },
+  {
+    "en": "trip",
+    "ar": "رحلة",
+    "level": "C1"
+  },
+  {
+    "en": "vacation",
+    "ar": "إجازة",
+    "level": "C1"
+  },
+  {
+    "en": "view",
+    "ar": "منظر / رأي",
+    "level": "C1"
+  },
+  {
+    "en": "visit",
+    "ar": "زيارة",
+    "level": "C1"
+  },
+  {
+    "en": "waste",
+    "ar": "نفايات",
+    "level": "C1"
+  },
+  {
+    "en": "workplace",
+    "ar": "مكان العمل",
+    "level": "C1"
+  },
+  {
+    "en": "achievement",
+    "ar": "إنجاز",
+    "level": "C1"
+  },
+  {
+    "en": "application",
+    "ar": "طلب / تطبيق",
+    "level": "C1"
+  },
+  {
+    "en": "appointment",
+    "ar": "موعد",
+    "level": "C1"
+  },
+  {
+    "en": "certificate",
+    "ar": "شهادة",
+    "level": "C1"
+  },
+  {
+    "en": "document",
+    "ar": "مستند",
+    "level": "C1"
+  },
+  {
+    "en": "entrance",
+    "ar": "مدخل",
+    "level": "C1"
+  },
+  {
+    "en": "exit",
+    "ar": "مخرج",
+    "level": "C1"
+  },
+  {
+    "en": "flight",
+    "ar": "رحلة جوية",
+    "level": "C1"
+  },
+  {
+    "en": "guide",
+    "ar": "دليل",
+    "level": "C1"
+  },
+  {
+    "en": "journey",
+    "ar": "رحلة",
+    "level": "C1"
+  },
+  {
+    "en": "luggage",
+    "ar": "أمتعة",
+    "level": "C1"
+  },
+  {
+    "en": "passenger",
+    "ar": "راكب",
+    "level": "C1"
+  },
+  {
+    "en": "platform",
+    "ar": "رصيف / منصة",
+    "level": "C1"
+  },
+  {
+    "en": "reservation",
+    "ar": "حجز",
+    "level": "C1"
+  },
+  {
+    "en": "route",
+    "ar": "مسار",
+    "level": "C1"
+  },
+  {
+    "en": "station",
+    "ar": "محطة",
+    "level": "C1"
+  },
+  {
+    "en": "ticket",
+    "ar": "تذكرة",
+    "level": "C1"
+  },
+  {
+    "en": "tourist",
+    "ar": "سائح",
+    "level": "C1"
+  },
+  {
+    "en": "traffic",
+    "ar": "مرور",
+    "level": "C1"
+  },
+  {
+    "en": "vehicle",
+    "ar": "مركبة",
+    "level": "C1"
+  },
+  {
+    "en": "airport",
+    "ar": "مطار",
+    "level": "C1"
+  },
+  {
+    "en": "hotel",
+    "ar": "فندق",
+    "level": "C1"
+  },
+  {
+    "en": "restaurant",
+    "ar": "مطعم",
+    "level": "C1"
+  },
+  {
+    "en": "bank",
+    "ar": "بنك",
+    "level": "C1"
+  },
+  {
+    "en": "company",
+    "ar": "شركة",
+    "level": "C1"
+  },
+  {
+    "en": "factory",
+    "ar": "مصنع",
+    "level": "C1"
+  },
+  {
+    "en": "office",
+    "ar": "مكتب",
+    "level": "C1"
+  },
+  {
+    "en": "shopkeeper",
+    "ar": "صاحب متجر",
+    "level": "C1"
+  },
+  {
+    "en": "employee",
+    "ar": "موظف",
+    "level": "C1"
+  },
+  {
+    "en": "employer",
+    "ar": "صاحب العمل",
+    "level": "C1"
+  },
+  {
+    "en": "manager",
+    "ar": "مدير",
+    "level": "C1"
+  },
+  {
+    "en": "salary",
+    "ar": "راتب",
+    "level": "C1"
+  },
+  {
+    "en": "career",
+    "ar": "مهنة",
+    "level": "C1"
+  },
+  {
+    "en": "profession",
+    "ar": "مهنة",
+    "level": "C1"
+  },
+  {
+    "en": "business",
+    "ar": "عمل تجاري",
+    "level": "C1"
+  },
+  {
+    "en": "product",
+    "ar": "منتج",
+    "level": "C1"
+  },
+  {
+    "en": "service",
+    "ar": "خدمة",
+    "level": "C1"
+  },
+  {
+    "en": "customer",
+    "ar": "عميل",
+    "level": "C1"
+  },
+  {
+    "en": "price",
+    "ar": "سعر",
+    "level": "C1"
+  },
+  {
+    "en": "cost",
+    "ar": "تكلفة",
+    "level": "C1"
+  },
+  {
+    "en": "payment",
+    "ar": "دفع",
+    "level": "C1"
+  },
+  {
+    "en": "account",
+    "ar": "حساب",
+    "level": "C1"
+  },
+  {
+    "en": "budget",
+    "ar": "ميزانية",
+    "level": "C1"
+  },
+  {
+    "en": "cash",
+    "ar": "نقد",
+    "level": "C1"
+  },
+  {
+    "en": "credit",
+    "ar": "ائتمان",
+    "level": "C1"
+  },
+  {
+    "en": "debt",
+    "ar": "دين",
+    "level": "C1"
+  },
+  {
+    "en": "income",
+    "ar": "دخل",
+    "level": "C1"
+  },
+  {
+    "en": "tax",
+    "ar": "ضريبة",
+    "level": "C1"
+  },
+  {
+    "en": "economy",
+    "ar": "اقتصاد",
+    "level": "C1"
+  },
+  {
+    "en": "market",
+    "ar": "سوق",
+    "level": "C1"
+  },
+  {
+    "en": "trade",
+    "ar": "تجارة",
+    "level": "C1"
+  },
+  {
+    "en": "company",
+    "ar": "شركة",
+    "level": "C1"
+  },
+  {
+    "en": "project",
+    "ar": "مشروع",
+    "level": "C1"
+  },
+  {
+    "en": "meeting",
+    "ar": "اجتماع",
+    "level": "C1"
+  },
+  {
+    "en": "office",
+    "ar": "مكتب",
+    "level": "C1"
+  },
+  {
+    "en": "job",
+    "ar": "وظيفة",
+    "level": "C1"
+  },
+  {
+    "en": "work",
+    "ar": "عمل",
+    "level": "C1"
+  },
+  {
+    "en": "worker",
+    "ar": "عامل",
+    "level": "C1"
+  },
+  {
+    "en": "boss",
+    "ar": "رئيس العمل",
+    "level": "C1"
+  },
+  {
+    "en": "colleague",
+    "ar": "زميل",
+    "level": "C1"
+  },
+  {
+    "en": "partner",
+    "ar": "شريك",
+    "level": "C1"
+  },
+  {
+    "en": "customer",
+    "ar": "عميل",
+    "level": "C1"
+  },
+  {
+    "en": "client",
+    "ar": "عميل",
+    "level": "C1"
+  },
+  {
+    "en": "team",
+    "ar": "فريق",
+    "level": "C1"
+  },
+  {
+    "en": "leader",
+    "ar": "قائد",
+    "level": "C1"
+  },
+  {
+    "en": "member",
+    "ar": "عضو",
+    "level": "C1"
+  },
+  {
+    "en": "public",
+    "ar": "عام",
+    "level": "C1"
+  },
+  {
+    "en": "private",
+    "ar": "خاص",
+    "level": "C1"
+  },
+  {
+    "en": "local",
+    "ar": "محلي",
+    "level": "C1"
+  },
+  {
+    "en": "national",
+    "ar": "وطني",
+    "level": "C1"
+  },
+  {
+    "en": "international",
+    "ar": "دولي",
+    "level": "C1"
+  },
+  {
+    "en": "social",
+    "ar": "اجتماعي",
+    "level": "C1"
+  },
+  {
+    "en": "personal",
+    "ar": "شخصي",
+    "level": "C1"
+  },
+  {
+    "en": "professional",
+    "ar": "مهني",
+    "level": "C1"
+  },
+  {
+    "en": "official",
+    "ar": "رسمي",
+    "level": "C1"
+  },
+  {
+    "en": "traditional",
+    "ar": "تقليدي",
+    "level": "C1"
+  },
+  {
+    "en": "modern",
+    "ar": "حديث",
+    "level": "C1"
+  },
+  {
+    "en": "future",
+    "ar": "مستقبل",
+    "level": "C1"
+  },
+  {
+    "en": "history",
+    "ar": "تاريخ",
+    "level": "C1"
+  },
+  {
+    "en": "culture",
+    "ar": "ثقافة",
+    "level": "C1"
+  },
+  {
+    "en": "society",
+    "ar": "مجتمع",
+    "level": "C1"
+  },
+  {
+    "en": "nature",
+    "ar": "طبيعة",
+    "level": "C1"
+  },
+  {
+    "en": "environment",
+    "ar": "بيئة",
+    "level": "C1"
+  },
+  {
+    "en": "energy",
+    "ar": "طاقة",
+    "level": "C1"
+  },
+  {
+    "en": "pollution",
+    "ar": "تلوث",
+    "level": "C1"
+  },
+  {
+    "en": "climate",
+    "ar": "مناخ",
+    "level": "C1"
+  },
+  {
+    "en": "weather",
+    "ar": "طقس",
+    "level": "C1"
+  },
+  {
+    "en": "temperature",
+    "ar": "درجة الحرارة",
+    "level": "C1"
+  },
+  {
+    "en": "storm",
+    "ar": "عاصفة",
+    "level": "C1"
+  },
+  {
+    "en": "flood",
+    "ar": "فيضان",
+    "level": "C1"
+  },
+  {
+    "en": "forest",
+    "ar": "غابة",
+    "level": "C1"
+  },
+  {
+    "en": "desert",
+    "ar": "صحراء",
+    "level": "C1"
+  },
+  {
+    "en": "coast",
+    "ar": "ساحل",
+    "level": "C1"
+  },
+  {
+    "en": "island",
+    "ar": "جزيرة",
+    "level": "C1"
+  },
+  {
+    "en": "ocean",
+    "ar": "محيط",
+    "level": "C1"
+  },
+  {
+    "en": "mountain",
+    "ar": "جبل",
+    "level": "C1"
+  },
+  {
+    "en": "river",
+    "ar": "نهر",
+    "level": "C1"
+  },
+  {
+    "en": "lake",
+    "ar": "بحيرة",
+    "level": "C1"
+  },
+  {
+    "en": "earth",
+    "ar": "الأرض",
+    "level": "C1"
+  },
+  {
+    "en": "planet",
+    "ar": "كوكب",
+    "level": "C1"
+  },
+  {
+    "en": "space",
+    "ar": "فضاء",
+    "level": "C1"
+  },
+  {
+    "en": "science",
+    "ar": "علوم",
+    "level": "C1"
+  },
+  {
+    "en": "technology",
+    "ar": "تكنولوجيا",
+    "level": "C1"
+  },
+  {
+    "en": "computer",
+    "ar": "حاسوب",
+    "level": "C1"
+  },
+  {
+    "en": "internet",
+    "ar": "إنترنت",
+    "level": "C1"
+  },
+  {
+    "en": "website",
+    "ar": "موقع إلكتروني",
+    "level": "C1"
+  },
+  {
+    "en": "screen",
+    "ar": "شاشة",
+    "level": "C1"
+  },
+  {
+    "en": "keyboard",
+    "ar": "لوحة مفاتيح",
+    "level": "C1"
+  },
+  {
+    "en": "password",
+    "ar": "كلمة مرور",
+    "level": "C1"
+  },
+  {
+    "en": "message",
+    "ar": "رسالة",
+    "level": "C1"
+  },
+  {
+    "en": "email",
+    "ar": "بريد إلكتروني",
+    "level": "C1"
+  },
+  {
+    "en": "video",
+    "ar": "فيديو",
+    "level": "C1"
+  },
+  {
+    "en": "camera",
+    "ar": "كاميرا",
+    "level": "C1"
+  },
+  {
+    "en": "photo",
+    "ar": "صورة",
+    "level": "C1"
+  },
+  {
+    "en": "program",
+    "ar": "برنامج",
+    "level": "C1"
+  },
+  {
+    "en": "software",
+    "ar": "برمجيات",
+    "level": "C1"
+  },
+  {
+    "en": "machine",
+    "ar": "آلة",
+    "level": "C1"
+  },
+  {
+    "en": "device",
+    "ar": "جهاز",
+    "level": "C1"
+  },
+  {
+    "en": "online",
+    "ar": "على الإنترنت",
+    "level": "C1"
+  },
+  {
+    "en": "digital",
+    "ar": "رقمي",
+    "level": "C1"
+  },
+  {
+    "en": "modern",
+    "ar": "حديث",
+    "level": "C1"
+  },
+  {
+    "en": "medical",
+    "ar": "طبي",
+    "level": "C1"
+  },
+  {
+    "en": "health",
+    "ar": "صحة",
+    "level": "C1"
+  },
+  {
+    "en": "illness",
+    "ar": "مرض",
+    "level": "C1"
+  },
+  {
+    "en": "disease",
+    "ar": "مرض",
+    "level": "C1"
+  },
+  {
+    "en": "medicine",
+    "ar": "دواء",
+    "level": "C1"
+  },
+  {
+    "en": "treatment",
+    "ar": "علاج",
+    "level": "C1"
+  },
+  {
+    "en": "doctor",
+    "ar": "طبيب",
+    "level": "C1"
+  },
+  {
+    "en": "patient",
+    "ar": "مريض",
+    "level": "C1"
+  },
+  {
+    "en": "hospital",
+    "ar": "مستشفى",
+    "level": "C1"
+  },
+  {
+    "en": "exercise",
+    "ar": "تمرين",
+    "level": "C1"
+  },
+  {
+    "en": "diet",
+    "ar": "نظام غذائي",
+    "level": "C1"
+  },
+  {
+    "en": "stress",
+    "ar": "ضغط نفسي",
+    "level": "C1"
+  },
+  {
+    "en": "sleep",
+    "ar": "نوم",
+    "level": "C1"
+  },
+  {
+    "en": "pain",
+    "ar": "ألم",
+    "level": "C1"
+  },
+  {
+    "en": "accident",
+    "ar": "حادث",
+    "level": "C1"
+  },
+  {
+    "en": "danger",
+    "ar": "خطر",
+    "level": "C1"
+  },
+  {
+    "en": "emergency",
+    "ar": "حالة طارئة",
+    "level": "C1"
+  },
+  {
+    "en": "police",
+    "ar": "شرطة",
+    "level": "C1"
+  },
+  {
+    "en": "law",
+    "ar": "قانون",
+    "level": "C1"
+  },
+  {
+    "en": "rule",
+    "ar": "قاعدة",
+    "level": "C1"
+  },
+  {
+    "en": "crime",
+    "ar": "جريمة",
+    "level": "C1"
+  },
+  {
+    "en": "prison",
+    "ar": "سجن",
+    "level": "C1"
+  },
+  {
+    "en": "court",
+    "ar": "محكمة",
+    "level": "C1"
+  },
+  {
+    "en": "judge",
+    "ar": "قاضٍ",
+    "level": "C1"
+  },
+  {
+    "en": "lawyer",
+    "ar": "محامٍ",
+    "level": "C1"
+  },
+  {
+    "en": "citizen",
+    "ar": "مواطن",
+    "level": "C1"
+  },
+  {
+    "en": "government",
+    "ar": "حكومة",
+    "level": "C1"
+  },
+  {
+    "en": "president",
+    "ar": "رئيس",
+    "level": "C1"
+  },
+  {
+    "en": "election",
+    "ar": "انتخابات",
+    "level": "C1"
+  },
+  {
+    "en": "politics",
+    "ar": "سياسة",
+    "level": "C1"
+  },
+  {
+    "en": "community",
+    "ar": "مجتمع",
+    "level": "C1"
+  },
+  {
+    "en": "neighbor",
+    "ar": "جار",
+    "level": "C1"
+  },
+  {
+    "en": "relative",
+    "ar": "قريب",
+    "level": "C1"
+  },
+  {
+    "en": "relationship",
+    "ar": "علاقة",
+    "level": "C1"
+  },
+  {
+    "en": "friendship",
+    "ar": "صداقة",
+    "level": "C1"
+  },
+  {
+    "en": "marriage",
+    "ar": "زواج",
+    "level": "C1"
+  },
+  {
+    "en": "couple",
+    "ar": "زوجان",
+    "level": "C1"
+  },
+  {
+    "en": "parent",
+    "ar": "والد",
+    "level": "C1"
+  },
+  {
+    "en": "adult",
+    "ar": "شخص بالغ",
+    "level": "C1"
+  },
+  {
+    "en": "teenager",
+    "ar": "مراهق",
+    "level": "C1"
+  },
+  {
+    "en": "childhood",
+    "ar": "طفولة",
+    "level": "C1"
+  },
+  {
+    "en": "generation",
+    "ar": "جيل",
+    "level": "C1"
+  },
+  {
+    "en": "memory",
+    "ar": "ذاكرة",
+    "level": "C1"
+  },
+  {
+    "en": "dream",
+    "ar": "حلم",
+    "level": "C1"
+  },
+  {
+    "en": "future",
+    "ar": "مستقبل",
+    "level": "C1"
+  },
+  {
+    "en": "past",
+    "ar": "الماضي",
+    "level": "C1"
+  },
+  {
+    "en": "present",
+    "ar": "الحاضر",
+    "level": "C1"
+  },
+  {
+    "en": "experience",
+    "ar": "تجربة",
+    "level": "C1"
+  },
+  {
+    "en": "story",
+    "ar": "قصة",
+    "level": "C1"
+  },
+  {
+    "en": "news",
+    "ar": "أخبار",
+    "level": "C1"
+  },
+  {
+    "en": "article",
+    "ar": "مقال",
+    "level": "C1"
+  },
+  {
+    "en": "report",
+    "ar": "تقرير",
+    "level": "C1"
+  },
+  {
+    "en": "magazine",
+    "ar": "مجلة",
+    "level": "C1"
+  },
+  {
+    "en": "newspaper",
+    "ar": "جريدة",
+    "level": "C1"
+  },
+  {
+    "en": "book",
+    "ar": "كتاب",
+    "level": "C1"
+  },
+  {
+    "en": "novel",
+    "ar": "رواية",
+    "level": "C1"
+  },
+  {
+    "en": "author",
+    "ar": "مؤلف",
+    "level": "C1"
+  },
+  {
+    "en": "writer",
+    "ar": "كاتب",
+    "level": "C1"
+  },
+  {
+    "en": "reader",
+    "ar": "قارئ",
+    "level": "C1"
+  },
+  {
+    "en": "film",
+    "ar": "فيلم",
+    "level": "C1"
+  },
+  {
+    "en": "movie",
+    "ar": "فيلم",
+    "level": "C1"
+  },
+  {
+    "en": "actor",
+    "ar": "ممثل",
+    "level": "C1"
+  },
+  {
+    "en": "actress",
+    "ar": "ممثلة",
+    "level": "C1"
+  },
+  {
+    "en": "director",
+    "ar": "مخرج",
+    "level": "C1"
+  },
+  {
+    "en": "music",
+    "ar": "موسيقى",
+    "level": "C1"
+  },
+  {
+    "en": "song",
+    "ar": "أغنية",
+    "level": "C1"
+  },
+  {
+    "en": "concert",
+    "ar": "حفلة موسيقية",
+    "level": "C1"
+  },
+  {
+    "en": "artist",
+    "ar": "فنان",
+    "level": "C1"
+  },
+  {
+    "en": "painting",
+    "ar": "لوحة",
+    "level": "C1"
+  },
+  {
+    "en": "photography",
+    "ar": "تصوير فوتوغرافي",
+    "level": "C1"
+  },
+  {
+    "en": "sport",
+    "ar": "رياضة",
+    "level": "C1"
+  },
+  {
+    "en": "football",
+    "ar": "كرة القدم",
+    "level": "C1"
+  },
+  {
+    "en": "basketball",
+    "ar": "كرة السلة",
+    "level": "C1"
+  },
+  {
+    "en": "tennis",
+    "ar": "تنس",
+    "level": "C1"
+  },
+  {
+    "en": "competition",
+    "ar": "مسابقة",
+    "level": "C1"
+  },
+  {
+    "en": "match",
+    "ar": "مباراة",
+    "level": "C1"
+  },
+  {
+    "en": "player",
+    "ar": "لاعب",
+    "level": "C1"
+  },
+  {
+    "en": "coach",
+    "ar": "مدرب",
+    "level": "C1"
+  },
+  {
+    "en": "team",
+    "ar": "فريق",
+    "level": "C1"
+  },
+  {
+    "en": "winner",
+    "ar": "فائز",
+    "level": "C1"
+  },
+  {
+    "en": "training",
+    "ar": "تدريب",
+    "level": "C1"
+  },
+  {
+    "en": "exercise",
+    "ar": "تمرين",
+    "level": "C1"
+  },
+  {
+    "en": "activity",
+    "ar": "نشاط",
+    "level": "C1"
+  },
+  {
+    "en": "hobby",
+    "ar": "هواية",
+    "level": "C1"
+  },
+  {
+    "en": "game",
+    "ar": "لعبة",
+    "level": "C1"
+  },
+  {
+    "en": "party",
+    "ar": "حفلة",
+    "level": "C1"
+  },
+  {
+    "en": "festival",
+    "ar": "مهرجان",
+    "level": "C1"
+  },
+  {
+    "en": "celebration",
+    "ar": "احتفال",
+    "level": "C1"
+  },
+  {
+    "en": "gift",
+    "ar": "هدية",
+    "level": "C1"
+  },
+  {
+    "en": "birthday",
+    "ar": "عيد ميلاد",
+    "level": "C1"
+  },
+  {
+    "en": "holiday",
+    "ar": "عطلة",
+    "level": "C1"
+  },
+  {
+    "en": "weekend",
+    "ar": "نهاية الأسبوع",
+    "level": "C1"
+  },
+  {
+    "en": "adventure",
+    "ar": "مغامرة",
+    "level": "C1"
+  },
+  {
+    "en": "journey",
+    "ar": "رحلة",
+    "level": "C1"
+  },
+  {
+    "en": "trip",
+    "ar": "رحلة",
+    "level": "C1"
+  },
+  {
+    "en": "travel",
+    "ar": "سفر",
+    "level": "C1"
+  },
+  {
+    "en": "tourist",
+    "ar": "سائح",
+    "level": "C1"
+  },
+  {
+    "en": "country",
+    "ar": "دولة",
+    "level": "C1"
+  },
+  {
+    "en": "capital",
+    "ar": "عاصمة",
+    "level": "C1"
+  },
+  {
+    "en": "city",
+    "ar": "مدينة",
+    "level": "C1"
+  },
+  {
+    "en": "town",
+    "ar": "بلدة",
+    "level": "C1"
+  },
+  {
+    "en": "village",
+    "ar": "قرية",
+    "level": "C1"
+  },
+  {
+    "en": "building",
+    "ar": "مبنى",
+    "level": "C1"
+  },
+  {
+    "en": "area",
+    "ar": "منطقة",
+    "level": "C1"
+  },
+  {
+    "en": "neighborhood",
+    "ar": "حي",
+    "level": "C1"
+  },
+  {
+    "en": "street",
+    "ar": "شارع",
+    "level": "C1"
+  },
+  {
+    "en": "road",
+    "ar": "طريق",
+    "level": "C1"
+  },
+  {
+    "en": "bridge",
+    "ar": "جسر",
+    "level": "C1"
+  },
+  {
+    "en": "square",
+    "ar": "ميدان",
+    "level": "C1"
+  },
+  {
+    "en": "park",
+    "ar": "حديقة عامة",
+    "level": "C1"
+  },
+  {
+    "en": "garden",
+    "ar": "حديقة",
+    "level": "C1"
+  },
+  {
+    "en": "entrance",
+    "ar": "مدخل",
+    "level": "C1"
+  },
+  {
+    "en": "exit",
+    "ar": "مخرج",
+    "level": "C1"
+  },
+  {
+    "en": "direction",
+    "ar": "اتجاه",
+    "level": "C1"
+  },
+  {
+    "en": "north",
+    "ar": "شمال",
+    "level": "C1"
+  },
+  {
+    "en": "south",
+    "ar": "جنوب",
+    "level": "C1"
+  },
+  {
+    "en": "east",
+    "ar": "شرق",
+    "level": "C1"
+  },
+  {
+    "en": "west",
+    "ar": "غرب",
+    "level": "C1"
+  },
+  {
+    "en": "abandon",
+    "ar": "يتخلى عن",
+    "level": "C2"
+  },
+  {
+    "en": "abolish",
+    "ar": "يلغي",
+    "level": "C2"
+  },
+  {
+    "en": "absorb",
+    "ar": "يمتص",
+    "level": "C2"
+  },
+  {
+    "en": "abstract",
+    "ar": "مجرد / ملخص",
+    "level": "C2"
+  },
+  {
+    "en": "accelerate",
+    "ar": "يسرّع",
+    "level": "C2"
+  },
+  {
+    "en": "accommodate",
+    "ar": "يستوعب / يوفر مكانًا",
+    "level": "C2"
+  },
+  {
+    "en": "accomplish",
+    "ar": "ينجز",
+    "level": "C2"
+  },
+  {
+    "en": "accumulate",
+    "ar": "يتراكم / يجمع",
+    "level": "C2"
+  },
+  {
+    "en": "accurate",
+    "ar": "دقيق",
+    "level": "C2"
+  },
+  {
+    "en": "acknowledge",
+    "ar": "يعترف بـ",
+    "level": "C2"
+  },
+  {
+    "en": "acquire",
+    "ar": "يكتسب",
+    "level": "C2"
+  },
+  {
+    "en": "adaptation",
+    "ar": "تكيف",
+    "level": "C2"
+  },
+  {
+    "en": "adequate",
+    "ar": "كافٍ / مناسب",
+    "level": "C2"
+  },
+  {
+    "en": "adjacent",
+    "ar": "مجاور",
+    "level": "C2"
+  },
+  {
+    "en": "adjust",
+    "ar": "يعدل",
+    "level": "C2"
+  },
+  {
+    "en": "administration",
+    "ar": "إدارة",
+    "level": "C2"
+  },
+  {
+    "en": "advocate",
+    "ar": "يدافع عن / مؤيد",
+    "level": "C2"
+  },
+  {
+    "en": "allocate",
+    "ar": "يخصص",
+    "level": "C2"
+  },
+  {
+    "en": "alternative",
+    "ar": "بديل",
+    "level": "C2"
+  },
+  {
+    "en": "ambitious",
+    "ar": "طموح",
+    "level": "C2"
+  },
+  {
+    "en": "amend",
+    "ar": "يعدل",
+    "level": "C2"
+  },
+  {
+    "en": "anticipate",
+    "ar": "يتوقع",
+    "level": "C2"
+  },
+  {
+    "en": "apparent",
+    "ar": "واضح / ظاهري",
+    "level": "C2"
+  },
+  {
+    "en": "appeal",
+    "ar": "جاذبية / يستأنف",
+    "level": "C2"
+  },
+  {
+    "en": "appreciate",
+    "ar": "يقدر",
+    "level": "C2"
+  },
+  {
+    "en": "arbitrary",
+    "ar": "عشوائي / اعتباطي",
+    "level": "C2"
+  },
+  {
+    "en": "artificial",
+    "ar": "اصطناعي",
+    "level": "C2"
+  },
+  {
+    "en": "assess",
+    "ar": "يقيّم",
+    "level": "C2"
+  },
+  {
+    "en": "assign",
+    "ar": "يعيّن / يكلف",
+    "level": "C2"
+  },
+  {
+    "en": "assumption",
+    "ar": "افتراض",
+    "level": "C2"
+  },
+  {
+    "en": "assure",
+    "ar": "يؤكد / يطمئن",
+    "level": "C2"
+  },
+  {
+    "en": "attain",
+    "ar": "يحقق",
+    "level": "C2"
+  },
+  {
+    "en": "attribute",
+    "ar": "ينسب / صفة",
+    "level": "C2"
+  },
+  {
+    "en": "authentic",
+    "ar": "أصيل / حقيقي",
+    "level": "C2"
+  },
+  {
+    "en": "automatically",
+    "ar": "تلقائيًا",
+    "level": "C2"
+  },
+  {
+    "en": "bias",
+    "ar": "تحيز",
+    "level": "C2"
+  },
+  {
+    "en": "boundary",
+    "ar": "حدود",
+    "level": "C2"
+  },
+  {
+    "en": "brief",
+    "ar": "موجز",
+    "level": "C2"
+  },
+  {
+    "en": "capable",
+    "ar": "قادر",
+    "level": "C2"
+  },
+  {
+    "en": "capacity",
+    "ar": "قدرة / سعة",
+    "level": "C2"
+  },
+  {
+    "en": "cease",
+    "ar": "يتوقف",
+    "level": "C2"
+  },
+  {
+    "en": "clarify",
+    "ar": "يوضح",
+    "level": "C2"
+  },
+  {
+    "en": "coherent",
+    "ar": "مترابط",
+    "level": "C2"
+  },
+  {
+    "en": "collapse",
+    "ar": "ينهار / انهيار",
+    "level": "C2"
+  },
+  {
+    "en": "colleague",
+    "ar": "زميل",
+    "level": "C2"
+  },
+  {
+    "en": "compelling",
+    "ar": "مقنع جدًا",
+    "level": "C2"
+  },
+  {
+    "en": "comprehensive",
+    "ar": "شامل",
+    "level": "C2"
+  },
+  {
+    "en": "comprise",
+    "ar": "يتكون من",
+    "level": "C2"
+  },
+  {
+    "en": "conceive",
+    "ar": "يتصور",
+    "level": "C2"
+  },
+  {
+    "en": "concentrate",
+    "ar": "يركز",
+    "level": "C2"
+  },
+  {
+    "en": "contemporary",
+    "ar": "معاصر",
+    "level": "C2"
+  },
+  {
+    "en": "contradict",
+    "ar": "يناقض",
+    "level": "C2"
+  },
+  {
+    "en": "controversial",
+    "ar": "مثير للجدل",
+    "level": "C2"
+  },
+  {
+    "en": "cooperate",
+    "ar": "يتعاون",
+    "level": "C2"
+  },
+  {
+    "en": "coordinate",
+    "ar": "ينسق",
+    "level": "C2"
+  },
+  {
+    "en": "core",
+    "ar": "جوهر / أساسي",
+    "level": "C2"
+  },
+  {
+    "en": "corporate",
+    "ar": "خاص بالشركات",
+    "level": "C2"
+  },
+  {
+    "en": "crucial",
+    "ar": "حاسم",
+    "level": "C2"
+  },
+  {
+    "en": "decline",
+    "ar": "ينخفض / انخفاض",
+    "level": "C2"
+  },
+  {
+    "en": "deduce",
+    "ar": "يستنتج",
+    "level": "C2"
+  },
+  {
+    "en": "demonstrate",
+    "ar": "يثبت / يوضح",
+    "level": "C2"
+  },
+  {
+    "en": "denote",
+    "ar": "يدل على",
+    "level": "C2"
+  },
+  {
+    "en": "derive",
+    "ar": "يستمد",
+    "level": "C2"
+  },
+  {
+    "en": "detect",
+    "ar": "يكتشف",
+    "level": "C2"
+  },
+  {
+    "en": "diminish",
+    "ar": "يقلل / يتضاءل",
+    "level": "C2"
+  },
+  {
+    "en": "discriminate",
+    "ar": "يميز / يفرق",
+    "level": "C2"
+  },
+  {
+    "en": "distinguish",
+    "ar": "يميز بين",
+    "level": "C2"
+  },
+  {
+    "en": "diverse",
+    "ar": "متنوع",
+    "level": "C2"
+  },
+  {
+    "en": "dominate",
+    "ar": "يهيمن",
+    "level": "C2"
+  },
+  {
+    "en": "elaborate",
+    "ar": "مفصل / يشرح بالتفصيل",
+    "level": "C2"
+  },
+  {
+    "en": "eliminate",
+    "ar": "يقضي على",
+    "level": "C2"
+  },
+  {
+    "en": "emerge",
+    "ar": "يظهر / يبرز",
+    "level": "C2"
+  },
+  {
+    "en": "empirical",
+    "ar": "تجريبي",
+    "level": "C2"
+  },
+  {
+    "en": "enhance",
+    "ar": "يعزز / يحسن",
+    "level": "C2"
+  },
+  {
+    "en": "ensure",
+    "ar": "يضمن",
+    "level": "C2"
+  },
+  {
+    "en": "equivalent",
+    "ar": "مكافئ / مساوٍ",
+    "level": "C2"
+  },
+  {
+    "en": "exceed",
+    "ar": "يتجاوز",
+    "level": "C2"
+  },
+  {
+    "en": "exclude",
+    "ar": "يستبعد",
+    "level": "C2"
+  },
+  {
+    "en": "explicit",
+    "ar": "صريح / واضح",
+    "level": "C2"
+  },
+  {
+    "en": "exploit",
+    "ar": "يستغل",
+    "level": "C2"
+  },
+  {
+    "en": "facilitate",
+    "ar": "يسهل",
+    "level": "C2"
+  },
+  {
+    "en": "fluctuate",
+    "ar": "يتذبذب",
+    "level": "C2"
+  },
+  {
+    "en": "framework",
+    "ar": "إطار",
+    "level": "C2"
+  },
+  {
+    "en": "fundamental",
+    "ar": "أساسي",
+    "level": "C2"
+  },
+  {
+    "en": "generate",
+    "ar": "يولد / ينتج",
+    "level": "C2"
+  },
+  {
+    "en": "genuine",
+    "ar": "حقيقي / صادق",
+    "level": "C2"
+  },
+  {
+    "en": "highlight",
+    "ar": "يسلط الضوء على",
+    "level": "C2"
+  },
+  {
+    "en": "hypothesis",
+    "ar": "فرضية",
+    "level": "C2"
+  },
+  {
+    "en": "implicit",
+    "ar": "ضمني",
+    "level": "C2"
+  },
+  {
+    "en": "inevitable",
+    "ar": "حتمي",
+    "level": "C2"
+  },
+  {
+    "en": "infer",
+    "ar": "يستنتج",
+    "level": "C2"
+  },
+  {
+    "en": "inhibit",
+    "ar": "يعيق / يمنع",
+    "level": "C2"
+  },
+  {
+    "en": "innovative",
+    "ar": "مبتكر",
+    "level": "C2"
+  },
+  {
+    "en": "integrate",
+    "ar": "يدمج",
+    "level": "C2"
+  },
+  {
+    "en": "intervene",
+    "ar": "يتدخل",
+    "level": "C2"
+  },
+  {
+    "en": "justify",
+    "ar": "يبرر",
+    "level": "C2"
+  },
+  {
+    "en": "legitimate",
+    "ar": "شرعي / مشروع",
+    "level": "C2"
+  },
+  {
+    "en": "likewise",
+    "ar": "بالمثل",
+    "level": "C2"
+  },
+  {
+    "en": "minimal",
+    "ar": "ضئيل",
+    "level": "C2"
+  },
+  {
+    "en": "modify",
+    "ar": "يعدل",
+    "level": "C2"
+  },
+  {
+    "en": "mutual",
+    "ar": "متبادل",
+    "level": "C2"
+  },
+  {
+    "en": "nevertheless",
+    "ar": "مع ذلك",
+    "level": "C2"
+  },
+  {
+    "en": "notion",
+    "ar": "مفهوم / فكرة",
+    "level": "C2"
+  },
+  {
+    "en": "obtain",
+    "ar": "يحصل على",
+    "level": "C2"
+  },
+  {
+    "en": "overlap",
+    "ar": "يتداخل",
+    "level": "C2"
+  },
+  {
+    "en": "perceive",
+    "ar": "يدرك",
+    "level": "C2"
+  },
+  {
+    "en": "persistent",
+    "ar": "مستمر / مثابر",
+    "level": "C2"
+  },
+  {
+    "en": "precise",
+    "ar": "دقيق",
+    "level": "C2"
+  },
+  {
+    "en": "predominantly",
+    "ar": "في الغالب",
+    "level": "C2"
+  },
+  {
+    "en": "preliminary",
+    "ar": "أولي",
+    "level": "C2"
+  },
+  {
+    "en": "presume",
+    "ar": "يفترض",
+    "level": "C2"
+  },
+  {
+    "en": "prohibit",
+    "ar": "يمنع",
+    "level": "C2"
+  },
+  {
+    "en": "prominent",
+    "ar": "بارز",
+    "level": "C2"
+  },
+  {
+    "en": "pursue",
+    "ar": "يسعى إلى",
+    "level": "C2"
+  },
+  {
+    "en": "retain",
+    "ar": "يحتفظ بـ",
+    "level": "C2"
+  },
+  {
+    "en": "rigid",
+    "ar": "صارم / جامد",
+    "level": "C2"
+  },
+  {
+    "en": "scarce",
+    "ar": "نادر / شحيح",
+    "level": "C2"
+  },
+  {
+    "en": "shift",
+    "ar": "تحول / يغير",
+    "level": "C2"
+  },
+  {
+    "en": "simultaneously",
+    "ar": "في الوقت نفسه",
+    "level": "C2"
+  },
+  {
+    "en": "sophisticated",
+    "ar": "متطور",
+    "level": "C2"
+  },
+  {
+    "en": "subsequent",
+    "ar": "لاحق",
+    "level": "C2"
+  },
+  {
+    "en": "substantial",
+    "ar": "كبير / جوهري",
+    "level": "C2"
+  },
+  {
+    "en": "substitute",
+    "ar": "بديل / يستبدل",
+    "level": "C2"
+  },
+  {
+    "en": "sufficient",
+    "ar": "كافٍ",
+    "level": "C2"
+  },
+  {
+    "en": "sustain",
+    "ar": "يحافظ على",
+    "level": "C2"
+  },
+  {
+    "en": "temporary",
+    "ar": "مؤقت",
+    "level": "C2"
+  },
+  {
+    "en": "undergo",
+    "ar": "يخضع لـ",
+    "level": "C2"
+  },
+  {
+    "en": "undermine",
+    "ar": "يقوض",
+    "level": "C2"
+  },
+  {
+    "en": "unprecedented",
+    "ar": "غير مسبوق",
+    "level": "C2"
+  },
+  {
+    "en": "utilize",
+    "ar": "يستخدم",
+    "level": "C2"
+  },
+  {
+    "en": "valid",
+    "ar": "صالح / صحيح",
+    "level": "C2"
+  },
+  {
+    "en": "viable",
+    "ar": "قابل للتطبيق",
+    "level": "C2"
+  },
+  {
+    "en": "whereby",
+    "ar": "بموجبه",
+    "level": "C2"
+  },
+  {
+    "en": "widespread",
+    "ar": "واسع الانتشار",
+    "level": "C2"
+  },
+  {
+    "en": "accidental",
+    "ar": "عرضي",
+    "level": "C2"
+  },
+  {
+    "en": "accommodate",
+    "ar": "يستوعب",
+    "level": "C2"
+  },
+  {
+    "en": "accordingly",
+    "ar": "وفقًا لذلك",
+    "level": "C2"
+  },
+  {
+    "en": "accusation",
+    "ar": "اتهام",
+    "level": "C2"
+  },
+  {
+    "en": "adjacent",
+    "ar": "مجاور",
+    "level": "C2"
+  },
+  {
+    "en": "administrative",
+    "ar": "إداري",
+    "level": "C2"
+  },
+  {
+    "en": "affordable",
+    "ar": "ميسور التكلفة",
+    "level": "C2"
+  },
+  {
+    "en": "agricultural",
+    "ar": "زراعي",
+    "level": "C2"
+  },
+  {
+    "en": "alert",
+    "ar": "يقظ / تنبيه",
+    "level": "C2"
+  },
+  {
+    "en": "ambiguous",
+    "ar": "غامض",
+    "level": "C2"
+  },
+  {
+    "en": "analogy",
+    "ar": "تشبيه / قياس",
+    "level": "C2"
+  },
+  {
+    "en": "anonymous",
+    "ar": "مجهول",
+    "level": "C2"
+  },
+  {
+    "en": "applicable",
+    "ar": "قابل للتطبيق",
+    "level": "C2"
+  },
+  {
+    "en": "applicant",
+    "ar": "متقدم / طالب",
+    "level": "C2"
+  },
+  {
+    "en": "architectural",
+    "ar": "معماري",
+    "level": "C2"
+  },
+  {
+    "en": "assembly",
+    "ar": "تجميع / اجتماع",
+    "level": "C2"
+  },
+  {
+    "en": "assurance",
+    "ar": "ضمان / تأكيد",
+    "level": "C2"
+  },
+  {
+    "en": "autonomous",
+    "ar": "مستقل ذاتيًا",
+    "level": "C2"
+  },
+  {
+    "en": "beneficial",
+    "ar": "مفيد",
+    "level": "C2"
+  },
+  {
+    "en": "biological",
+    "ar": "بيولوجي",
+    "level": "C2"
+  },
+  {
+    "en": "broaden",
+    "ar": "يوسع",
+    "level": "C2"
+  },
+  {
+    "en": "bulk",
+    "ar": "الجزء الأكبر",
+    "level": "C2"
+  },
+  {
+    "en": "bureaucracy",
+    "ar": "بيروقراطية",
+    "level": "C2"
+  },
+  {
+    "en": "capability",
+    "ar": "قدرة",
+    "level": "C2"
+  },
+  {
+    "en": "categorize",
+    "ar": "يصنف",
+    "level": "C2"
+  },
+  {
+    "en": "coincide",
+    "ar": "يتزامن",
+    "level": "C2"
+  },
+  {
+    "en": "commodity",
+    "ar": "سلعة",
+    "level": "C2"
+  },
+  {
+    "en": "compatible",
+    "ar": "متوافق",
+    "level": "C2"
+  },
+  {
+    "en": "compensate",
+    "ar": "يعوض",
+    "level": "C2"
+  },
+  {
+    "en": "competence",
+    "ar": "كفاءة",
+    "level": "C2"
+  },
+  {
+    "en": "complement",
+    "ar": "يكمل",
+    "level": "C2"
+  },
+  {
+    "en": "complexity",
+    "ar": "تعقيد",
+    "level": "C2"
+  },
+  {
+    "en": "compliance",
+    "ar": "امتثال",
+    "level": "C2"
+  },
+  {
+    "en": "consecutive",
+    "ar": "متتالي",
+    "level": "C2"
+  },
+  {
+    "en": "consensus",
+    "ar": "إجماع",
+    "level": "C2"
+  },
+  {
+    "en": "constitute",
+    "ar": "يشكل",
+    "level": "C2"
+  },
+  {
+    "en": "constraint",
+    "ar": "قيد",
+    "level": "C2"
+  },
+  {
+    "en": "consult",
+    "ar": "يستشير",
+    "level": "C2"
+  },
+  {
+    "en": "contemporary",
+    "ar": "معاصر",
+    "level": "C2"
+  },
+  {
+    "en": "contrary",
+    "ar": "عكس / مخالف",
+    "level": "C2"
+  },
+  {
+    "en": "conversion",
+    "ar": "تحويل",
+    "level": "C2"
+  },
+  {
+    "en": "conviction",
+    "ar": "قناعة / إدانة",
+    "level": "C2"
+  },
+  {
+    "en": "correspond",
+    "ar": "يتوافق / يتراسل",
+    "level": "C2"
+  },
+  {
+    "en": "criteria",
+    "ar": "معايير",
+    "level": "C2"
+  },
+  {
+    "en": "cultivate",
+    "ar": "يزرع / ينمي",
+    "level": "C2"
+  },
+  {
+    "en": "deficiency",
+    "ar": "نقص",
+    "level": "C2"
+  },
+  {
+    "en": "depict",
+    "ar": "يصور",
+    "level": "C2"
+  },
+  {
+    "en": "designate",
+    "ar": "يعين / يحدد",
+    "level": "C2"
+  },
+  {
+    "en": "devastate",
+    "ar": "يدمر بشدة",
+    "level": "C2"
+  },
+  {
+    "en": "differentiate",
+    "ar": "يميز",
+    "level": "C2"
+  },
+  {
+    "en": "dilemma",
+    "ar": "معضلة",
+    "level": "C2"
+  },
+  {
+    "en": "discrete",
+    "ar": "منفصل",
+    "level": "C2"
+  },
+  {
+    "en": "dispose",
+    "ar": "يتخلص من",
+    "level": "C2"
+  },
+  {
+    "en": "distort",
+    "ar": "يشوه",
+    "level": "C2"
+  },
+  {
+    "en": "drastic",
+    "ar": "جذري",
+    "level": "C2"
+  },
+  {
+    "en": "duration",
+    "ar": "مدة",
+    "level": "C2"
+  },
+  {
+    "en": "dynamic",
+    "ar": "ديناميكي",
+    "level": "C2"
+  },
+  {
+    "en": "economically",
+    "ar": "اقتصاديًا",
+    "level": "C2"
+  },
+  {
+    "en": "eligible",
+    "ar": "مؤهل",
+    "level": "C2"
+  },
+  {
+    "en": "embed",
+    "ar": "يدمج / يثبت",
+    "level": "C2"
+  },
+  {
+    "en": "encounter",
+    "ar": "يواجه / مواجهة",
+    "level": "C2"
+  },
+  {
+    "en": "enforce",
+    "ar": "يفرض",
+    "level": "C2"
+  },
+  {
+    "en": "enterprise",
+    "ar": "مؤسسة / مشروع",
+    "level": "C2"
+  },
+  {
+    "en": "equation",
+    "ar": "معادلة",
+    "level": "C2"
+  },
+  {
+    "en": "erosion",
+    "ar": "تآكل",
+    "level": "C2"
+  },
+  {
+    "en": "ethical",
+    "ar": "أخلاقي",
+    "level": "C2"
+  },
+  {
+    "en": "evaluate",
+    "ar": "يقيّم",
+    "level": "C2"
+  },
+  {
+    "en": "exaggerate",
+    "ar": "يبالغ",
+    "level": "C2"
+  },
+  {
+    "en": "exceptional",
+    "ar": "استثنائي",
+    "level": "C2"
+  },
+  {
+    "en": "excessive",
+    "ar": "مفرط",
+    "level": "C2"
+  },
+  {
+    "en": "exclusive",
+    "ar": "حصري",
+    "level": "C2"
+  },
+  {
+    "en": "exposure",
+    "ar": "تعرض",
+    "level": "C2"
+  },
+  {
+    "en": "external",
+    "ar": "خارجي",
+    "level": "C2"
+  },
+  {
+    "en": "extract",
+    "ar": "يستخرج",
+    "level": "C2"
+  },
+  {
+    "en": "feasible",
+    "ar": "قابل للتنفيذ",
+    "level": "C2"
+  },
+  {
+    "en": "flexible",
+    "ar": "مرن",
+    "level": "C2"
+  },
+  {
+    "en": "forthcoming",
+    "ar": "قادم",
+    "level": "C2"
+  },
+  {
+    "en": "frustrate",
+    "ar": "يحبط",
+    "level": "C2"
+  },
+  {
+    "en": "funding",
+    "ar": "تمويل",
+    "level": "C2"
+  },
+  {
+    "en": "hierarchy",
+    "ar": "تدرج هرمي",
+    "level": "C2"
+  },
+  {
+    "en": "identical",
+    "ar": "متطابق",
+    "level": "C2"
+  },
+  {
+    "en": "ideological",
+    "ar": "أيديولوجي / فكري",
+    "level": "C2"
+  },
+  {
+    "en": "incentive",
+    "ar": "حافز",
+    "level": "C2"
+  },
+  {
+    "en": "incorporate",
+    "ar": "يدمج",
+    "level": "C2"
+  },
+  {
+    "en": "increasingly",
+    "ar": "بشكل متزايد",
+    "level": "C2"
+  },
+  {
+    "en": "induce",
+    "ar": "يحفز / يسبب",
+    "level": "C2"
+  },
+  {
+    "en": "inequality",
+    "ar": "عدم مساواة",
+    "level": "C2"
+  },
+  {
+    "en": "infrastructure",
+    "ar": "بنية تحتية",
+    "level": "C2"
+  },
+  {
+    "en": "inherent",
+    "ar": "متأصل",
+    "level": "C2"
+  },
+  {
+    "en": "innovate",
+    "ar": "يبتكر",
+    "level": "C2"
+  },
+  {
+    "en": "inspection",
+    "ar": "تفتيش",
+    "level": "C2"
+  },
+  {
+    "en": "integral",
+    "ar": "أساسي",
+    "level": "C2"
+  },
+  {
+    "en": "intense",
+    "ar": "شديد",
+    "level": "C2"
+  },
+  {
+    "en": "interior",
+    "ar": "داخلي",
+    "level": "C2"
+  },
+  {
+    "en": "isolate",
+    "ar": "يعزل",
+    "level": "C2"
+  },
+  {
+    "en": "ongoing",
+    "ar": "مستمر",
+    "level": "C2"
+  },
+  {
+    "en": "panel",
+    "ar": "لجنة / لوحة",
+    "level": "C2"
+  },
+  {
+    "en": "paradigm",
+    "ar": "نموذج / نمط",
+    "level": "C2"
+  },
+  {
+    "en": "persist",
+    "ar": "يستمر",
+    "level": "C2"
+  },
+  {
+    "en": "plausible",
+    "ar": "معقول / محتمل",
+    "level": "C2"
+  },
+  {
+    "en": "precise",
+    "ar": "دقيق",
+    "level": "C2"
+  },
+  {
+    "en": "priority",
+    "ar": "أولوية",
+    "level": "C2"
+  },
+  {
+    "en": "profound",
+    "ar": "عميق",
+    "level": "C2"
+  },
+  {
+    "en": "promote",
+    "ar": "يعزز / يرقّي",
+    "level": "C2"
+  },
+  {
+    "en": "protocol",
+    "ar": "بروتوكول",
+    "level": "C2"
+  },
+  {
+    "en": "radical",
+    "ar": "جذري",
+    "level": "C2"
+  },
+  {
+    "en": "refine",
+    "ar": "يطور / ينقي",
+    "level": "C2"
+  },
+  {
+    "en": "regulate",
+    "ar": "ينظم",
+    "level": "C2"
+  },
+  {
+    "en": "reinforce",
+    "ar": "يعزز",
+    "level": "C2"
+  },
+  {
+    "en": "reluctant",
+    "ar": "متردد",
+    "level": "C2"
+  },
+  {
+    "en": "respective",
+    "ar": "الخاص بكل",
+    "level": "C2"
+  },
+  {
+    "en": "restore",
+    "ar": "يستعيد / يرمم",
+    "level": "C2"
+  },
+  {
+    "en": "restrain",
+    "ar": "يكبح",
+    "level": "C2"
+  },
+  {
+    "en": "reveal",
+    "ar": "يكشف",
+    "level": "C2"
+  },
+  {
+    "en": "revolutionary",
+    "ar": "ثوري",
+    "level": "C2"
+  },
+  {
+    "en": "scenario",
+    "ar": "سيناريو / احتمال",
+    "level": "C2"
+  },
+  {
+    "en": "sceptical",
+    "ar": "متشكك",
+    "level": "C2"
+  },
+  {
+    "en": "specify",
+    "ar": "يحدد",
+    "level": "C2"
+  },
+  {
+    "en": "sphere",
+    "ar": "مجال / كرة",
+    "level": "C2"
+  },
+  {
+    "en": "stabilize",
+    "ar": "يثبت",
+    "level": "C2"
+  },
+  {
+    "en": "straightforward",
+    "ar": "مباشر / بسيط",
+    "level": "C2"
+  },
+  {
+    "en": "submit",
+    "ar": "يقدم / يخضع",
+    "level": "C2"
+  },
+  {
+    "en": "successive",
+    "ar": "متتابع",
+    "level": "C2"
+  },
+  {
+    "en": "supplement",
+    "ar": "مكمل",
+    "level": "C2"
+  },
+  {
+    "en": "suppress",
+    "ar": "يقمع",
+    "level": "C2"
+  },
+  {
+    "en": "trigger",
+    "ar": "يحفز / يسبب",
+    "level": "C2"
+  },
+  {
+    "en": "underlying",
+    "ar": "كامن / أساسي",
+    "level": "C2"
+  },
+  {
+    "en": "unify",
+    "ar": "يوحد",
+    "level": "C2"
+  },
+  {
+    "en": "universal",
+    "ar": "عالمي / شامل",
+    "level": "C2"
+  },
+  {
+    "en": "upgrade",
+    "ar": "يطور / ترقية",
+    "level": "C2"
+  },
+  {
+    "en": "verify",
+    "ar": "يتحقق من",
+    "level": "C2"
+  },
+  {
+    "en": "vulnerable",
+    "ar": "عرضة للخطر",
+    "level": "C2"
+  },
+  {
+    "en": "welfare",
+    "ar": "رفاهية",
+    "level": "C2"
+  },
+  {
+    "en": "acquisition",
+    "ar": "اكتساب",
+    "level": "C2"
+  },
+  {
+    "en": "adaptable",
+    "ar": "قابل للتكيف",
+    "level": "C2"
+  },
+  {
+    "en": "administrative",
+    "ar": "إداري",
+    "level": "C2"
+  },
+  {
+    "en": "advocate",
+    "ar": "مؤيد",
+    "level": "C2"
+  },
+  {
+    "en": "aggregate",
+    "ar": "إجمالي / يجمع",
+    "level": "C2"
+  },
+  {
+    "en": "albeit",
+    "ar": "رغم أن",
+    "level": "C2"
+  },
+  {
+    "en": "allocate",
+    "ar": "يخصص",
+    "level": "C2"
+  },
+  {
+    "en": "alter",
+    "ar": "يغير",
+    "level": "C2"
+  },
+  {
+    "en": "anticipation",
+    "ar": "توقع",
+    "level": "C2"
+  },
+  {
+    "en": "appreciation",
+    "ar": "تقدير",
+    "level": "C2"
+  },
+  {
+    "en": "articulate",
+    "ar": "يعبر بوضوح",
+    "level": "C2"
+  },
+  {
+    "en": "aspiration",
+    "ar": "طموح",
+    "level": "C2"
+  },
+  {
+    "en": "assert",
+    "ar": "يؤكد",
+    "level": "C2"
+  },
+  {
+    "en": "assessable",
+    "ar": "قابل للتقييم",
+    "level": "C2"
+  },
+  {
+    "en": "attainment",
+    "ar": "تحقيق / إنجاز",
+    "level": "C2"
+  },
+  {
+    "en": "authenticity",
+    "ar": "أصالة",
+    "level": "C2"
+  },
+  {
+    "en": "awareness",
+    "ar": "وعي",
+    "level": "C2"
+  },
+  {
+    "en": "bias",
+    "ar": "تحيز",
+    "level": "C2"
+  },
+  {
+    "en": "breakthrough",
+    "ar": "اختراق / إنجاز كبير",
+    "level": "C2"
+  },
+  {
+    "en": "coherent",
+    "ar": "مترابط",
+    "level": "C2"
+  },
+  {
+    "en": "collaboration",
+    "ar": "تعاون",
+    "level": "C2"
+  },
+  {
+    "en": "commence",
+    "ar": "يبدأ",
+    "level": "C2"
+  },
+  {
+    "en": "compelling",
+    "ar": "مقنع",
+    "level": "C2"
+  },
+  {
+    "en": "conceivable",
+    "ar": "يمكن تصوره",
+    "level": "C2"
+  },
+  {
+    "en": "concession",
+    "ar": "تنازل",
+    "level": "C2"
+  },
+  {
+    "en": "concurrent",
+    "ar": "متزامن",
+    "level": "C2"
+  },
+  {
+    "en": "confine",
+    "ar": "يحصر",
+    "level": "C2"
+  },
+  {
+    "en": "conform",
+    "ar": "يتوافق",
+    "level": "C2"
+  },
+  {
+    "en": "confront",
+    "ar": "يواجه",
+    "level": "C2"
+  },
+  {
+    "en": "connotation",
+    "ar": "دلالة ضمنية",
+    "level": "C2"
+  },
+  {
+    "en": "consent",
+    "ar": "موافقة",
+    "level": "C2"
+  },
+  {
+    "en": "consolidate",
+    "ar": "يدمج / يعزز",
+    "level": "C2"
+  },
+  {
+    "en": "contemplate",
+    "ar": "يتأمل",
+    "level": "C2"
+  },
+  {
+    "en": "contradiction",
+    "ar": "تناقض",
+    "level": "C2"
+  },
+  {
+    "en": "controversy",
+    "ar": "جدل",
+    "level": "C2"
+  },
+  {
+    "en": "correlation",
+    "ar": "ارتباط",
+    "level": "C2"
+  },
+  {
+    "en": "credible",
+    "ar": "موثوق",
+    "level": "C2"
+  },
+  {
+    "en": "criterion",
+    "ar": "معيار",
+    "level": "C2"
+  },
+  {
+    "en": "deem",
+    "ar": "يعتبر",
+    "level": "C2"
+  },
+  {
+    "en": "deliberate",
+    "ar": "متعمد / يتداول",
+    "level": "C2"
+  },
+  {
+    "en": "denial",
+    "ar": "إنكار",
+    "level": "C2"
+  },
+  {
+    "en": "depict",
+    "ar": "يصور",
+    "level": "C2"
+  },
+  {
+    "en": "deprive",
+    "ar": "يحرم",
+    "level": "C2"
+  },
+  {
+    "en": "designate",
+    "ar": "يحدد",
+    "level": "C2"
+  },
+  {
+    "en": "deteriorate",
+    "ar": "يتدهور",
+    "level": "C2"
+  },
+  {
+    "en": "devise",
+    "ar": "يبتكر / يضع خطة",
+    "level": "C2"
+  },
+  {
+    "en": "disclose",
+    "ar": "يكشف",
+    "level": "C2"
+  },
+  {
+    "en": "discourse",
+    "ar": "خطاب / نقاش",
+    "level": "C2"
+  },
+  {
+    "en": "displacement",
+    "ar": "إزاحة / نزوح",
+    "level": "C2"
+  },
+  {
+    "en": "distinct",
+    "ar": "مميز / مختلف",
+    "level": "C2"
+  },
+  {
+    "en": "diversity",
+    "ar": "تنوع",
+    "level": "C2"
+  },
+  {
+    "en": "dominant",
+    "ar": "مهيمن",
+    "level": "C2"
+  },
+  {
+    "en": "drastically",
+    "ar": "بشكل جذري",
+    "level": "C2"
+  },
+  {
+    "en": "duration",
+    "ar": "مدة",
+    "level": "C2"
+  },
+  {
+    "en": "elaborate",
+    "ar": "مفصل",
+    "level": "C2"
+  },
+  {
+    "en": "empower",
+    "ar": "يمكن / يمنح القوة",
+    "level": "C2"
+  },
+  {
+    "en": "encounter",
+    "ar": "مواجهة",
+    "level": "C2"
+  },
+  {
+    "en": "enrich",
+    "ar": "يثري",
+    "level": "C2"
+  },
+  {
+    "en": "entitle",
+    "ar": "يخول / يمنح الحق",
+    "level": "C2"
+  },
+  {
+    "en": "equivalent",
+    "ar": "مكافئ",
+    "level": "C2"
+  },
+  {
+    "en": "ethical",
+    "ar": "أخلاقي",
+    "level": "C2"
+  },
+  {
+    "en": "exaggeration",
+    "ar": "مبالغة",
+    "level": "C2"
+  },
+  {
+    "en": "exclusion",
+    "ar": "استبعاد",
+    "level": "C2"
+  },
+  {
+    "en": "exploitation",
+    "ar": "استغلال",
+    "level": "C2"
+  },
+  {
+    "en": "facilitation",
+    "ar": "تسهيل",
+    "level": "C2"
+  },
+  {
+    "en": "fluctuation",
+    "ar": "تقلب",
+    "level": "C2"
+  },
+  {
+    "en": "formulate",
+    "ar": "يصوغ",
+    "level": "C2"
+  },
+  {
+    "en": "foster",
+    "ar": "يعزز / يرعى",
+    "level": "C2"
+  },
+  {
+    "en": "fulfil",
+    "ar": "يحقق / يفي",
+    "level": "C2"
+  },
+  {
+    "en": "genuine",
+    "ar": "حقيقي",
+    "level": "C2"
+  },
+  {
+    "en": "grant",
+    "ar": "يمنح",
+    "level": "C2"
+  },
+  {
+    "en": "hence",
+    "ar": "ومن ثم",
+    "level": "C2"
+  },
+  {
+    "en": "highlight",
+    "ar": "يسلط الضوء",
+    "level": "C2"
+  },
+  {
+    "en": "illustrate",
+    "ar": "يوضح",
+    "level": "C2"
+  },
+  {
+    "en": "implication",
+    "ar": "دلالة / نتيجة",
+    "level": "C2"
+  },
+  {
+    "en": "incentivize",
+    "ar": "يحفز",
+    "level": "C2"
+  },
+  {
+    "en": "inclined",
+    "ar": "يميل إلى",
+    "level": "C2"
+  },
+  {
+    "en": "incompatible",
+    "ar": "غير متوافق",
+    "level": "C2"
+  },
+  {
+    "en": "incorporation",
+    "ar": "دمج",
+    "level": "C2"
+  },
+  {
+    "en": "indication",
+    "ar": "مؤشر / دلالة",
+    "level": "C2"
+  },
+  {
+    "en": "inevitable",
+    "ar": "حتمي",
+    "level": "C2"
+  },
+  {
+    "en": "infrastructure",
+    "ar": "بنية تحتية",
+    "level": "C2"
+  },
+  {
+    "en": "inherent",
+    "ar": "متأصل",
+    "level": "C2"
+  },
+  {
+    "en": "insight",
+    "ar": "فهم عميق",
+    "level": "C2"
+  },
+  {
+    "en": "integrity",
+    "ar": "نزاهة",
+    "level": "C2"
+  },
+  {
+    "en": "intensity",
+    "ar": "شدة",
+    "level": "C2"
+  },
+  {
+    "en": "interfere",
+    "ar": "يتدخل / يتعارض",
+    "level": "C2"
+  },
+  {
+    "en": "intrinsic",
+    "ar": "متأصل / جوهري",
+    "level": "C2"
+  },
+  {
+    "en": "invoke",
+    "ar": "يستدعي",
+    "level": "C2"
+  },
+  {
+    "en": "isolation",
+    "ar": "عزلة",
+    "level": "C2"
+  },
+  {
+    "en": "legislation",
+    "ar": "تشريع",
+    "level": "C2"
+  },
+  {
+    "en": "likelihood",
+    "ar": "احتمال",
+    "level": "C2"
+  },
+  {
+    "en": "magnitude",
+    "ar": "حجم / مقدار",
+    "level": "C2"
+  },
+  {
+    "en": "mature",
+    "ar": "ناضج",
+    "level": "C2"
+  },
+  {
+    "en": "mediate",
+    "ar": "يتوسط",
+    "level": "C2"
+  },
+  {
+    "en": "migration",
+    "ar": "هجرة",
+    "level": "C2"
+  },
+  {
+    "en": "moderate",
+    "ar": "معتدل",
+    "level": "C2"
+  },
+  {
+    "en": "negligible",
+    "ar": "ضئيل جدًا",
+    "level": "C2"
+  },
+  {
+    "en": "nevertheless",
+    "ar": "مع ذلك",
+    "level": "C2"
+  },
+  {
+    "en": "notwithstanding",
+    "ar": "على الرغم من",
+    "level": "C2"
+  },
+  {
+    "en": "offset",
+    "ar": "يعوض",
+    "level": "C2"
+  },
+  {
+    "en": "paradox",
+    "ar": "مفارقة",
+    "level": "C2"
+  },
+  {
+    "en": "perpetual",
+    "ar": "دائم",
+    "level": "C2"
+  },
+  {
+    "en": "perspective",
+    "ar": "منظور",
+    "level": "C2"
+  },
+  {
+    "en": "precede",
+    "ar": "يسبق",
+    "level": "C2"
+  },
+  {
+    "en": "precise",
+    "ar": "دقيق",
+    "level": "C2"
+  },
+  {
+    "en": "prevalent",
+    "ar": "شائع",
+    "level": "C2"
+  },
+  {
+    "en": "prohibit",
+    "ar": "يحظر",
+    "level": "C2"
+  },
+  {
+    "en": "prominent",
+    "ar": "بارز",
+    "level": "C2"
+  },
+  {
+    "en": "proportion",
+    "ar": "نسبة",
+    "level": "C2"
+  },
+  {
+    "en": "prospect",
+    "ar": "احتمال / آفاق",
+    "level": "C2"
+  },
+  {
+    "en": "qualitative",
+    "ar": "نوعي",
+    "level": "C2"
+  },
+  {
+    "en": "quantitative",
+    "ar": "كمي",
+    "level": "C2"
+  },
+  {
+    "en": "radically",
+    "ar": "بشكل جذري",
+    "level": "C2"
+  },
+  {
+    "en": "reassess",
+    "ar": "يعيد التقييم",
+    "level": "C2"
+  },
+  {
+    "en": "recession",
+    "ar": "ركود اقتصادي",
+    "level": "C2"
+  },
+  {
+    "en": "reconcile",
+    "ar": "يوفق",
+    "level": "C2"
+  },
+  {
+    "en": "refute",
+    "ar": "يدحض",
+    "level": "C2"
+  },
+  {
+    "en": "regulatory",
+    "ar": "تنظيمي",
+    "level": "C2"
+  },
+  {
+    "en": "reluctance",
+    "ar": "تردد",
+    "level": "C2"
+  },
+  {
+    "en": "resilience",
+    "ar": "مرونة / قدرة على التعافي",
+    "level": "C2"
+  },
+  {
+    "en": "respective",
+    "ar": "الخاص بكل",
+    "level": "C2"
+  },
+  {
+    "en": "restraint",
+    "ar": "ضبط / تقييد",
+    "level": "C2"
+  },
+  {
+    "en": "retention",
+    "ar": "احتفاظ",
+    "level": "C2"
+  },
+  {
+    "en": "rigorous",
+    "ar": "صارم / دقيق",
+    "level": "C2"
+  },
+  {
+    "en": "scarcity",
+    "ar": "ندرة",
+    "level": "C2"
+  },
+  {
+    "en": "scrutiny",
+    "ar": "تدقيق",
+    "level": "C2"
+  },
+  {
+    "en": "simultaneous",
+    "ar": "متزامن",
+    "level": "C2"
+  },
+  {
+    "en": "sophisticated",
+    "ar": "متطور",
+    "level": "C2"
+  },
+  {
+    "en": "specification",
+    "ar": "مواصفة",
+    "level": "C2"
+  },
+  {
+    "en": "stability",
+    "ar": "استقرار",
+    "level": "C2"
+  },
+  {
+    "en": "subordinate",
+    "ar": "تابع / أدنى",
+    "level": "C2"
+  },
+  {
+    "en": "subsequently",
+    "ar": "لاحقًا",
+    "level": "C2"
+  },
+  {
+    "en": "subtle",
+    "ar": "دقيق / خفي",
+    "level": "C2"
+  },
+  {
+    "en": "sustainable",
+    "ar": "مستدام",
+    "level": "C2"
+  },
+  {
+    "en": "tangible",
+    "ar": "ملموس",
+    "level": "C2"
+  },
+  {
+    "en": "transformation",
+    "ar": "تحول",
+    "level": "C2"
+  },
+  {
+    "en": "transmit",
+    "ar": "ينقل",
+    "level": "C2"
+  },
+  {
+    "en": "transparent",
+    "ar": "شفاف",
+    "level": "C2"
+  },
+  {
+    "en": "undermine",
+    "ar": "يقوض",
+    "level": "C2"
+  },
+  {
+    "en": "unify",
+    "ar": "يوحد",
+    "level": "C2"
+  },
+  {
+    "en": "unprecedented",
+    "ar": "غير مسبوق",
+    "level": "C2"
+  },
+  {
+    "en": "validity",
+    "ar": "صلاحية / صحة",
+    "level": "C2"
+  },
+  {
+    "en": "variation",
+    "ar": "اختلاف / تنوع",
+    "level": "C2"
+  },
+  {
+    "en": "versatile",
+    "ar": "متعدد الاستخدامات",
+    "level": "C2"
+  },
+  {
+    "en": "virtually",
+    "ar": "تقريبًا",
+    "level": "C2"
+  },
+  {
+    "en": "widespread",
+    "ar": "واسع الانتشار",
+    "level": "C2"
+  },
+  {
+    "en": "academic",
+    "ar": "أكاديمي",
+    "level": "C2"
+  },
+  {
+    "en": "accessibility",
+    "ar": "سهولة الوصول",
+    "level": "C2"
+  },
+  {
+    "en": "accountability",
+    "ar": "مساءلة",
+    "level": "C2"
+  },
+  {
+    "en": "accumulate",
+    "ar": "يتراكم",
+    "level": "C2"
+  },
+  {
+    "en": "accuracy",
+    "ar": "دقة",
+    "level": "C2"
+  },
+  {
+    "en": "adverse",
+    "ar": "ضار / سلبي",
+    "level": "C2"
+  },
+  {
+    "en": "aggregate",
+    "ar": "إجمالي",
+    "level": "C2"
+  },
+  {
+    "en": "allegedly",
+    "ar": "يزعم",
+    "level": "C2"
+  },
+  {
+    "en": "ambition",
+    "ar": "طموح",
+    "level": "C2"
+  },
+  {
+    "en": "amendment",
+    "ar": "تعديل",
+    "level": "C2"
+  },
+  {
+    "en": "analytical",
+    "ar": "تحليلي",
+    "level": "C2"
+  },
+  {
+    "en": "analyze",
+    "ar": "يحلل",
+    "level": "C2"
+  },
+  {
+    "en": "annual",
+    "ar": "سنوي",
+    "level": "C2"
+  },
+  {
+    "en": "applicable",
+    "ar": "قابل للتطبيق",
+    "level": "C2"
+  },
+  {
+    "en": "arise",
+    "ar": "ينشأ",
+    "level": "C2"
+  },
+  {
+    "en": "artificially",
+    "ar": "بشكل اصطناعي",
+    "level": "C2"
+  },
+  {
+    "en": "assumption",
+    "ar": "افتراض",
+    "level": "C2"
+  },
+  {
+    "en": "attitude",
+    "ar": "موقف / اتجاه",
+    "level": "C2"
+  },
+  {
+    "en": "authentic",
+    "ar": "أصيل",
+    "level": "C2"
+  },
+  {
+    "en": "autonomy",
+    "ar": "استقلالية",
+    "level": "C2"
+  },
+  {
+    "en": "beneficiary",
+    "ar": "مستفيد",
+    "level": "C2"
+  },
+  {
+    "en": "capacity",
+    "ar": "سعة / قدرة",
+    "level": "C2"
+  },
+  {
+    "en": "certainty",
+    "ar": "يقين",
+    "level": "C2"
+  },
+  {
+    "en": "civilian",
+    "ar": "مدني",
+    "level": "C2"
+  },
+  {
+    "en": "clarification",
+    "ar": "توضيح",
+    "level": "C2"
+  },
+  {
+    "en": "coincidence",
+    "ar": "مصادفة",
+    "level": "C2"
+  },
+  {
+    "en": "collective",
+    "ar": "جماعي",
+    "level": "C2"
+  },
+  {
+    "en": "commodity",
+    "ar": "سلعة",
+    "level": "C2"
+  },
+  {
+    "en": "comparative",
+    "ar": "مقارن",
+    "level": "C2"
+  },
+  {
+    "en": "compensate",
+    "ar": "يعوض",
+    "level": "C2"
+  },
+  {
+    "en": "competent",
+    "ar": "كفء",
+    "level": "C2"
+  },
+  {
+    "en": "compile",
+    "ar": "يجمع / يؤلف",
+    "level": "C2"
+  },
+  {
+    "en": "conceal",
+    "ar": "يخفي",
+    "level": "C2"
+  },
+  {
+    "en": "concession",
+    "ar": "تنازل",
+    "level": "C2"
+  },
+  {
+    "en": "conclusive",
+    "ar": "حاسم",
+    "level": "C2"
+  },
+  {
+    "en": "conduct",
+    "ar": "يجري / سلوك",
+    "level": "C2"
+  },
+  {
+    "en": "confine",
+    "ar": "يحصر",
+    "level": "C2"
+  },
+  {
+    "en": "consensus",
+    "ar": "إجماع",
+    "level": "C2"
+  },
+  {
+    "en": "constrain",
+    "ar": "يقيد",
+    "level": "C2"
+  },
+  {
+    "en": "consultation",
+    "ar": "استشارة",
+    "level": "C2"
+  },
+  {
+    "en": "consumption",
+    "ar": "استهلاك",
+    "level": "C2"
+  },
+  {
+    "en": "contemporary",
+    "ar": "معاصر",
+    "level": "C2"
+  },
+  {
+    "en": "controversial",
+    "ar": "مثير للجدل",
+    "level": "C2"
+  },
+  {
+    "en": "conventional",
+    "ar": "تقليدي",
+    "level": "C2"
+  },
+  {
+    "en": "convey",
+    "ar": "ينقل / يوصل",
+    "level": "C2"
+  },
+  {
+    "en": "convincing",
+    "ar": "مقنع",
+    "level": "C2"
+  },
+  {
+    "en": "cooperate",
+    "ar": "يتعاون",
+    "level": "C2"
+  },
+  {
+    "en": "corporation",
+    "ar": "شركة",
+    "level": "C2"
+  },
+  {
+    "en": "correspondence",
+    "ar": "مراسلات / تطابق",
+    "level": "C2"
+  },
+  {
+    "en": "credible",
+    "ar": "موثوق",
+    "level": "C2"
+  },
+  {
+    "en": "deduction",
+    "ar": "استنتاج",
+    "level": "C2"
+  },
+  {
+    "en": "definite",
+    "ar": "محدد / مؤكد",
+    "level": "C2"
+  },
+  {
+    "en": "demographic",
+    "ar": "سكاني",
+    "level": "C2"
+  },
+  {
+    "en": "denote",
+    "ar": "يدل على",
+    "level": "C2"
+  },
+  {
+    "en": "depletion",
+    "ar": "استنزاف",
+    "level": "C2"
+  },
+  {
+    "en": "designate",
+    "ar": "يحدد",
+    "level": "C2"
+  },
+  {
+    "en": "deterioration",
+    "ar": "تدهور",
+    "level": "C2"
+  },
+  {
+    "en": "differentiation",
+    "ar": "تمييز",
+    "level": "C2"
+  },
+  {
+    "en": "discretion",
+    "ar": "حرية التصرف",
+    "level": "C2"
+  },
+  {
+    "en": "dismiss",
+    "ar": "يرفض / يصرف",
+    "level": "C2"
+  },
+  {
+    "en": "distinction",
+    "ar": "تمييز / فرق",
+    "level": "C2"
+  },
+  {
+    "en": "distort",
+    "ar": "يشوه",
+    "level": "C2"
+  },
+  {
+    "en": "diverse",
+    "ar": "متنوع",
+    "level": "C2"
+  },
+  {
+    "en": "dominance",
+    "ar": "هيمنة",
+    "level": "C2"
+  },
+  {
+    "en": "dynamic",
+    "ar": "ديناميكي",
+    "level": "C2"
+  },
+  {
+    "en": "empirical",
+    "ar": "تجريبي",
+    "level": "C2"
+  },
+  {
+    "en": "enable",
+    "ar": "يمكن",
+    "level": "C2"
+  },
+  {
+    "en": "encounter",
+    "ar": "يواجه",
+    "level": "C2"
+  },
+  {
+    "en": "enhancement",
+    "ar": "تحسين",
+    "level": "C2"
+  },
+  {
+    "en": "ensure",
+    "ar": "يضمن",
+    "level": "C2"
+  },
+  {
+    "en": "entail",
+    "ar": "يستلزم",
+    "level": "C2"
+  },
+  {
+    "en": "equilibrium",
+    "ar": "توازن",
+    "level": "C2"
+  },
+  {
+    "en": "exploitation",
+    "ar": "استغلال",
+    "level": "C2"
+  },
+  {
+    "en": "explicitly",
+    "ar": "بوضوح",
+    "level": "C2"
+  },
+  {
+    "en": "facilitate",
+    "ar": "يسهل",
+    "level": "C2"
+  },
+  {
+    "en": "feasibility",
+    "ar": "إمكانية التنفيذ",
+    "level": "C2"
+  },
+  {
+    "en": "fluctuate",
+    "ar": "يتذبذب",
+    "level": "C2"
+  },
+  {
+    "en": "formulation",
+    "ar": "صياغة",
+    "level": "C2"
+  },
+  {
+    "en": "framework",
+    "ar": "إطار",
+    "level": "C2"
+  },
+  {
+    "en": "fundamentally",
+    "ar": "بشكل أساسي",
+    "level": "C2"
+  },
+  {
+    "en": "generate",
+    "ar": "يولد",
+    "level": "C2"
+  },
+  {
+    "en": "hierarchical",
+    "ar": "هرمي",
+    "level": "C2"
+  },
+  {
+    "en": "identification",
+    "ar": "تحديد / تعريف",
+    "level": "C2"
+  },
+  {
+    "en": "ideology",
+    "ar": "أيديولوجيا",
+    "level": "C2"
+  },
+  {
+    "en": "implementation",
+    "ar": "تنفيذ",
+    "level": "C2"
+  },
+  {
+    "en": "implicit",
+    "ar": "ضمني",
+    "level": "C2"
+  },
+  {
+    "en": "inadequate",
+    "ar": "غير كافٍ",
+    "level": "C2"
+  },
+  {
+    "en": "incidence",
+    "ar": "حدوث / معدل",
+    "level": "C2"
+  },
+  {
+    "en": "inclination",
+    "ar": "ميل",
+    "level": "C2"
+  },
+  {
+    "en": "incorporate",
+    "ar": "يدمج",
+    "level": "C2"
+  },
+  {
+    "en": "inequality",
+    "ar": "عدم مساواة",
+    "level": "C2"
+  },
+  {
+    "en": "inhibit",
+    "ar": "يعيق",
+    "level": "C2"
+  },
+  {
+    "en": "innovation",
+    "ar": "ابتكار",
+    "level": "C2"
+  },
+  {
+    "en": "inspection",
+    "ar": "تفتيش",
+    "level": "C2"
+  },
+  {
+    "en": "integrate",
+    "ar": "يدمج",
+    "level": "C2"
+  },
+  {
+    "en": "intermediate",
+    "ar": "متوسط / وسيط",
+    "level": "C2"
+  },
+  {
+    "en": "interpret",
+    "ar": "يفسر",
+    "level": "C2"
+  },
+  {
+    "en": "intervention",
+    "ar": "تدخل",
+    "level": "C2"
+  },
+  {
+    "en": "justify",
+    "ar": "يبرر",
+    "level": "C2"
+  },
+  {
+    "en": "legitimate",
+    "ar": "مشروع",
+    "level": "C2"
+  },
+  {
+    "en": "mechanism",
+    "ar": "آلية",
+    "level": "C2"
+  },
+  {
+    "en": "methodology",
+    "ar": "منهجية",
+    "level": "C2"
+  },
+  {
+    "en": "monitor",
+    "ar": "يراقب",
+    "level": "C2"
+  },
+  {
+    "en": "negligible",
+    "ar": "ضئيل",
+    "level": "C2"
+  },
+  {
+    "en": "objective",
+    "ar": "موضوعي / هدف",
+    "level": "C2"
+  },
+  {
+    "en": "obligation",
+    "ar": "التزام",
+    "level": "C2"
+  },
+  {
+    "en": "ongoing",
+    "ar": "مستمر",
+    "level": "C2"
+  },
+  {
+    "en": "orientation",
+    "ar": "توجه",
+    "level": "C2"
+  },
+  {
+    "en": "parameter",
+    "ar": "معيار / معامل",
+    "level": "C2"
+  },
+  {
+    "en": "perceive",
+    "ar": "يدرك",
+    "level": "C2"
+  },
+  {
+    "en": "persistent",
+    "ar": "مستمر",
+    "level": "C2"
+  },
+  {
+    "en": "persuasive",
+    "ar": "مقنع",
+    "level": "C2"
+  },
+  {
+    "en": "phenomenon",
+    "ar": "ظاهرة",
+    "level": "C2"
+  },
+  {
+    "en": "priority",
+    "ar": "أولوية",
+    "level": "C2"
+  },
+  {
+    "en": "proportionate",
+    "ar": "متناسب",
+    "level": "C2"
+  },
+  {
+    "en": "prospective",
+    "ar": "مستقبلي / محتمل",
+    "level": "C2"
+  },
+  {
+    "en": "qualify",
+    "ar": "يؤهل",
+    "level": "C2"
+  },
+  {
+    "en": "rational",
+    "ar": "عقلاني",
+    "level": "C2"
+  },
+  {
+    "en": "refine",
+    "ar": "يصقل / يحسن",
+    "level": "C2"
+  },
+  {
+    "en": "regardless",
+    "ar": "بغض النظر",
+    "level": "C2"
+  },
+  {
+    "en": "reinforce",
+    "ar": "يعزز",
+    "level": "C2"
+  },
+  {
+    "en": "relevant",
+    "ar": "ذو صلة",
+    "level": "C2"
+  },
+  {
+    "en": "reliable",
+    "ar": "موثوق",
+    "level": "C2"
+  },
+  {
+    "en": "reside",
+    "ar": "يقيم",
+    "level": "C2"
+  },
+  {
+    "en": "resolve",
+    "ar": "يحل",
+    "level": "C2"
+  },
+  {
+    "en": "retain",
+    "ar": "يحتفظ",
+    "level": "C2"
+  },
+  {
+    "en": "revenue",
+    "ar": "إيرادات",
+    "level": "C2"
+  },
+  {
+    "en": "rigid",
+    "ar": "صارم",
+    "level": "C2"
+  },
+  {
+    "en": "scenario",
+    "ar": "سيناريو",
+    "level": "C2"
+  },
+  {
+    "en": "scrutinize",
+    "ar": "يدقق في",
+    "level": "C2"
+  },
+  {
+    "en": "sequence",
+    "ar": "تسلسل",
+    "level": "C2"
+  },
+  {
+    "en": "solely",
+    "ar": "فقط",
+    "level": "C2"
+  },
+  {
+    "en": "stereotype",
+    "ar": "صورة نمطية",
+    "level": "C2"
+  },
+  {
+    "en": "substantial",
+    "ar": "كبير",
+    "level": "C2"
+  },
+  {
+    "en": "substitute",
+    "ar": "يستبدل",
+    "level": "C2"
+  },
+  {
+    "en": "sufficiently",
+    "ar": "بشكل كافٍ",
+    "level": "C2"
+  },
+  {
+    "en": "suppress",
+    "ar": "يقمع",
+    "level": "C2"
+  },
+  {
+    "en": "surpass",
+    "ar": "يتفوق على",
+    "level": "C2"
+  },
+  {
+    "en": "sustainable",
+    "ar": "مستدام",
+    "level": "C2"
+  },
+  {
+    "en": "tendency",
+    "ar": "ميل / اتجاه",
+    "level": "C2"
+  },
+  {
+    "en": "terminate",
+    "ar": "ينهي",
+    "level": "C2"
+  },
+  {
+    "en": "transformation",
+    "ar": "تحول",
+    "level": "C2"
+  },
+  {
+    "en": "transparency",
+    "ar": "شفافية",
+    "level": "C2"
+  },
+  {
+    "en": "undergo",
+    "ar": "يخضع لـ",
+    "level": "C2"
+  },
+  {
+    "en": "validate",
+    "ar": "يتحقق من",
+    "level": "C2"
+  },
+  {
+    "en": "variable",
+    "ar": "متغير",
+    "level": "C2"
+  },
+  {
+    "en": "viable",
+    "ar": "قابل للتطبيق",
+    "level": "C2"
+  },
+  {
+    "en": "voluntary",
+    "ar": "طوعي",
+    "level": "C2"
+  },
+  {
+    "en": "whereas",
+    "ar": "في حين أن",
+    "level": "C2"
+  },
+  {
+    "en": "withdraw",
+    "ar": "ينسحب",
+    "level": "C2"
+  },
+  {
+    "en": "accumulate",
+    "ar": "يجمع / يتراكم",
+    "level": "C2"
+  },
+  {
+    "en": "adverse",
+    "ar": "معاكس / ضار",
+    "level": "C2"
+  },
+  {
+    "en": "advocate",
+    "ar": "يدافع عن",
+    "level": "C2"
+  },
+  {
+    "en": "ambiguous",
+    "ar": "غامض",
+    "level": "C2"
+  },
+  {
+    "en": "analogy",
+    "ar": "قياس / تشبيه",
+    "level": "C2"
+  },
+  {
+    "en": "anticipate",
+    "ar": "يتوقع",
+    "level": "C2"
+  },
+  {
+    "en": "apprehensive",
+    "ar": "قلق / متخوف",
+    "level": "C2"
+  },
+  {
+    "en": "arbitrary",
+    "ar": "اعتباطي",
+    "level": "C2"
+  },
+  {
+    "en": "assertion",
+    "ar": "تأكيد / ادعاء",
+    "level": "C2"
+  },
+  {
+    "en": "attain",
+    "ar": "يحقق",
+    "level": "C2"
+  },
+  {
+    "en": "attribute",
+    "ar": "صفة / ينسب",
+    "level": "C2"
+  },
+  {
+    "en": "authenticity",
+    "ar": "أصالة",
+    "level": "C2"
+  },
+  {
+    "en": "autonomous",
+    "ar": "مستقل",
+    "level": "C2"
+  },
+  {
+    "en": "biases",
+    "ar": "تحيزات",
+    "level": "C2"
+  },
+  {
+    "en": "coherent",
+    "ar": "مترابط",
+    "level": "C2"
+  },
+  {
+    "en": "compelling",
+    "ar": "قوي الإقناع",
+    "level": "C2"
+  },
+  {
+    "en": "comprehensive",
+    "ar": "شامل",
+    "level": "C2"
+  },
+  {
+    "en": "consecutive",
+    "ar": "متتالٍ",
+    "level": "C2"
+  },
+  {
+    "en": "constrain",
+    "ar": "يقيد",
+    "level": "C2"
+  },
+  {
+    "en": "contemplate",
+    "ar": "يتأمل",
+    "level": "C2"
+  },
+  {
+    "en": "contradictory",
+    "ar": "متناقض",
+    "level": "C2"
+  },
+  {
+    "en": "corresponding",
+    "ar": "المقابل / المطابق",
+    "level": "C2"
+  },
+  {
+    "en": "cumulative",
+    "ar": "تراكمي",
+    "level": "C2"
+  },
+  {
+    "en": "deprive",
+    "ar": "يحرم",
+    "level": "C2"
+  },
+  {
+    "en": "desirable",
+    "ar": "مرغوب",
+    "level": "C2"
+  },
+  {
+    "en": "deteriorate",
+    "ar": "يتدهور",
+    "level": "C2"
+  },
+  {
+    "en": "diminish",
+    "ar": "يتضاءل",
+    "level": "C2"
+  },
+  {
+    "en": "disrupt",
+    "ar": "يعطل",
+    "level": "C2"
+  },
+  {
+    "en": "distinctive",
+    "ar": "مميز",
+    "level": "C2"
+  },
+  {
+    "en": "diversify",
+    "ar": "ينوع",
+    "level": "C2"
+  },
+  {
+    "en": "elaborate",
+    "ar": "يفصل",
+    "level": "C2"
+  },
+  {
+    "en": "emerging",
+    "ar": "ناشئ",
+    "level": "C2"
+  },
+  {
+    "en": "empowerment",
+    "ar": "تمكين",
+    "level": "C2"
+  },
+  {
+    "en": "exceedingly",
+    "ar": "بشكل كبير جدًا",
+    "level": "C2"
+  },
+  {
+    "en": "exclusively",
+    "ar": "حصريًا",
+    "level": "C2"
+  },
+  {
+    "en": "forthcoming",
+    "ar": "قادم",
+    "level": "C2"
+  },
+  {
+    "en": "fragile",
+    "ar": "هش",
+    "level": "C2"
+  },
+  {
+    "en": "incompatible",
+    "ar": "غير متوافق",
+    "level": "C2"
+  },
+  {
+    "en": "inefficient",
+    "ar": "غير كفء",
+    "level": "C2"
+  },
+  {
+    "en": "infrastructure",
+    "ar": "بنية تحتية",
+    "level": "C2"
+  },
+  {
+    "en": "innovation",
+    "ar": "ابتكار",
+    "level": "C2"
+  },
+  {
+    "en": "intrinsic",
+    "ar": "جوهري",
+    "level": "C2"
+  },
+  {
+    "en": "legislative",
+    "ar": "تشريعي",
+    "level": "C2"
+  },
+  {
+    "en": "mandatory",
+    "ar": "إلزامي",
+    "level": "C2"
+  },
+  {
+    "en": "manipulate",
+    "ar": "يتلاعب بـ",
+    "level": "C2"
+  },
+  {
+    "en": "marginal",
+    "ar": "هامشي",
+    "level": "C2"
+  },
+  {
+    "en": "moderately",
+    "ar": "باعتدال",
+    "level": "C2"
+  },
+  {
+    "en": "mutually",
+    "ar": "بشكل متبادل",
+    "level": "C2"
+  },
+  {
+    "en": "notion",
+    "ar": "فكرة / مفهوم",
+    "level": "C2"
+  },
+  {
+    "en": "obscure",
+    "ar": "غامض / غير معروف",
+    "level": "C2"
+  },
+  {
+    "en": "offset",
+    "ar": "يعوض",
+    "level": "C2"
+  },
+  {
+    "en": "persistent",
+    "ar": "مثابر / مستمر",
+    "level": "C2"
+  },
+  {
+    "en": "precedent",
+    "ar": "سابقة",
+    "level": "C2"
+  },
+  {
+    "en": "predominant",
+    "ar": "سائد",
+    "level": "C2"
+  },
+  {
+    "en": "profoundly",
+    "ar": "بعمق",
+    "level": "C2"
+  },
+  {
+    "en": "prohibit",
+    "ar": "يحظر",
+    "level": "C2"
+  },
+  {
+    "en": "prominence",
+    "ar": "بروز / أهمية",
+    "level": "C2"
+  },
+  {
+    "en": "rationality",
+    "ar": "عقلانية",
+    "level": "C2"
+  },
+  {
+    "en": "reassess",
+    "ar": "يعيد التقييم",
+    "level": "C2"
+  },
+  {
+    "en": "refinement",
+    "ar": "تحسين / تنقيح",
+    "level": "C2"
+  },
+  {
+    "en": "relevance",
+    "ar": "أهمية / صلة",
+    "level": "C2"
+  },
+  {
+    "en": "residential",
+    "ar": "سكني",
+    "level": "C2"
+  },
+  {
+    "en": "respective",
+    "ar": "المتعلق بكل",
+    "level": "C2"
+  },
+  {
+    "en": "restoration",
+    "ar": "ترميم / استعادة",
+    "level": "C2"
+  },
+  {
+    "en": "restrict",
+    "ar": "يقيد",
+    "level": "C2"
+  },
+  {
+    "en": "rigorously",
+    "ar": "بصرامة",
+    "level": "C2"
+  },
+  {
+    "en": "scarce",
+    "ar": "نادر",
+    "level": "C2"
+  },
+  {
+    "en": "simultaneously",
+    "ar": "في الوقت نفسه",
+    "level": "C2"
+  },
+  {
+    "en": "specialized",
+    "ar": "متخصص",
+    "level": "C2"
+  },
+  {
+    "en": "subsequent",
+    "ar": "لاحق",
+    "level": "C2"
+  },
+  {
+    "en": "substitute",
+    "ar": "بديل",
+    "level": "C2"
+  },
+  {
+    "en": "sustainable",
+    "ar": "مستدام",
+    "level": "C2"
+  },
+  {
+    "en": "thorough",
+    "ar": "شامل / دقيق",
+    "level": "C2"
+  },
+  {
+    "en": "unify",
+    "ar": "يوحد",
+    "level": "C2"
+  },
+  {
+    "en": "unpredictable",
+    "ar": "غير متوقع",
+    "level": "C2"
+  },
+  {
+    "en": "versatility",
+    "ar": "تعدد الاستخدامات",
+    "level": "C2"
+  },
+  {
+    "en": "vulnerable",
+    "ar": "معرض للخطر",
+    "level": "C2"
+  },
+  {
+    "en": "widespread",
+    "ar": "واسع الانتشار",
+    "level": "C2"
+  },
+  {
+    "en": "withdrawal",
+    "ar": "انسحاب",
+    "level": "C2"
+  },
+  {
+    "en": "yield",
+    "ar": "ينتج / محصول",
+    "level": "C2"
+  },
+  {
+    "en": "absurd",
+    "ar": "سخيف / غير منطقي",
+    "level": "C2"
+  },
+  {
+    "en": "acute",
+    "ar": "حاد / شديد",
+    "level": "C2"
+  },
+  {
+    "en": "allegation",
+    "ar": "ادعاء / اتهام",
+    "level": "C2"
+  },
+  {
+    "en": "apparatus",
+    "ar": "جهاز / معدات",
+    "level": "C2"
+  },
+  {
+    "en": "arbitrary",
+    "ar": "عشوائي",
+    "level": "C2"
+  },
+  {
+    "en": "assert",
+    "ar": "يؤكد",
+    "level": "C2"
+  },
+  {
+    "en": "bias",
+    "ar": "تحيز",
+    "level": "C2"
+  },
+  {
+    "en": "cease",
+    "ar": "يتوقف",
+    "level": "C2"
+  },
+  {
+    "en": "clarity",
+    "ar": "وضوح",
+    "level": "C2"
+  },
+  {
+    "en": "coincide",
+    "ar": "يتزامن",
+    "level": "C2"
+  },
+  {
+    "en": "compliance",
+    "ar": "امتثال",
+    "level": "C2"
+  },
+  {
+    "en": "conceive",
+    "ar": "يتصور",
+    "level": "C2"
+  },
+  {
+    "en": "concession",
+    "ar": "تنازل",
+    "level": "C2"
+  },
+  {
+    "en": "constrain",
+    "ar": "يقيد",
+    "level": "C2"
+  },
+  {
+    "en": "controversy",
+    "ar": "جدل",
+    "level": "C2"
+  },
+  {
+    "en": "deficiency",
+    "ar": "نقص",
+    "level": "C2"
+  },
+  {
+    "en": "depict",
+    "ar": "يصور",
+    "level": "C2"
+  },
+  {
+    "en": "deviation",
+    "ar": "انحراف",
+    "level": "C2"
+  },
+  {
+    "en": "discrete",
+    "ar": "منفصل",
+    "level": "C2"
+  },
+  {
+    "en": "distinction",
+    "ar": "تمييز",
+    "level": "C2"
+  },
+  {
+    "en": "elaborate",
+    "ar": "مفصل",
+    "level": "C2"
+  },
+  {
+    "en": "empower",
+    "ar": "يمكن / يمكّن",
+    "level": "C2"
+  },
+  {
+    "en": "endeavour",
+    "ar": "مسعى / يسعى",
+    "level": "C2"
+  },
+  {
+    "en": "enhance",
+    "ar": "يعزز",
+    "level": "C2"
+  },
+  {
+    "en": "enormous",
+    "ar": "هائل",
+    "level": "C2"
+  },
+  {
+    "en": "equivalent",
+    "ar": "مكافئ",
+    "level": "C2"
+  },
+  {
+    "en": "exceed",
+    "ar": "يتجاوز",
+    "level": "C2"
+  },
+  {
+    "en": "exhibit",
+    "ar": "يعرض / يظهر",
+    "level": "C2"
+  },
+  {
+    "en": "explicit",
+    "ar": "صريح",
+    "level": "C2"
+  },
+  {
+    "en": "facilitate",
+    "ar": "يسهل",
+    "level": "C2"
+  },
+  {
+    "en": "feasible",
+    "ar": "ممكن التنفيذ",
+    "level": "C2"
+  },
+  {
+    "en": "fluctuation",
+    "ar": "تقلب",
+    "level": "C2"
+  },
+  {
+    "en": "formulate",
+    "ar": "يصوغ",
+    "level": "C2"
+  },
+  {
+    "en": "incentive",
+    "ar": "حافز",
+    "level": "C2"
+  },
+  {
+    "en": "incorporate",
+    "ar": "يدمج",
+    "level": "C2"
+  },
+  {
+    "en": "inevitable",
+    "ar": "حتمي",
+    "level": "C2"
+  },
+  {
+    "en": "inherent",
+    "ar": "متأصل",
+    "level": "C2"
+  },
+  {
+    "en": "inspect",
+    "ar": "يفتش",
+    "level": "C2"
+  },
+  {
+    "en": "integrity",
+    "ar": "نزاهة",
+    "level": "C2"
+  },
+  {
+    "en": "intervene",
+    "ar": "يتدخل",
+    "level": "C2"
+  },
+  {
+    "en": "isolate",
+    "ar": "يعزل",
+    "level": "C2"
+  },
+  {
+    "en": "justify",
+    "ar": "يبرر",
+    "level": "C2"
+  },
+  {
+    "en": "magnitude",
+    "ar": "حجم",
+    "level": "C2"
+  },
+  {
+    "en": "modify",
+    "ar": "يعدل",
+    "level": "C2"
+  },
+  {
+    "en": "objective",
+    "ar": "موضوعي",
+    "level": "C2"
+  },
+  {
+    "en": "obtain",
+    "ar": "يحصل على",
+    "level": "C2"
+  },
+  {
+    "en": "overlap",
+    "ar": "يتداخل",
+    "level": "C2"
+  },
+  {
+    "en": "parameter",
+    "ar": "معيار",
+    "level": "C2"
+  },
+  {
+    "en": "persistent",
+    "ar": "مستمر",
+    "level": "C2"
+  },
+  {
+    "en": "plausible",
+    "ar": "محتمل / معقول",
+    "level": "C2"
+  },
+  {
+    "en": "precede",
+    "ar": "يسبق",
+    "level": "C2"
+  },
+  {
+    "en": "preliminary",
+    "ar": "أولي",
+    "level": "C2"
+  },
+  {
+    "en": "profound",
+    "ar": "عميق",
+    "level": "C2"
+  },
+  {
+    "en": "proportion",
+    "ar": "نسبة",
+    "level": "C2"
+  },
+  {
+    "en": "pursuit",
+    "ar": "سعي",
+    "level": "C2"
+  },
+  {
+    "en": "radical",
+    "ar": "جذري",
+    "level": "C2"
+  },
+  {
+    "en": "refute",
+    "ar": "يدحض",
+    "level": "C2"
+  },
+  {
+    "en": "regulate",
+    "ar": "ينظم",
+    "level": "C2"
+  },
+  {
+    "en": "reinforcement",
+    "ar": "تعزيز",
+    "level": "C2"
+  },
+  {
+    "en": "resilience",
+    "ar": "مرونة",
+    "level": "C2"
+  },
+  {
+    "en": "restraint",
+    "ar": "تقييد",
+    "level": "C2"
+  },
+  {
+    "en": "scrutiny",
+    "ar": "تدقيق",
+    "level": "C2"
+  },
+  {
+    "en": "simultaneous",
+    "ar": "متزامن",
+    "level": "C2"
+  },
+  {
+    "en": "specify",
+    "ar": "يحدد",
+    "level": "C2"
+  },
+  {
+    "en": "stability",
+    "ar": "استقرار",
+    "level": "C2"
+  },
+  {
+    "en": "substantial",
+    "ar": "جوهري / كبير",
+    "level": "C2"
+  },
+  {
+    "en": "suppress",
+    "ar": "يقمع",
+    "level": "C2"
+  },
+  {
+    "en": "tangible",
+    "ar": "ملموس",
+    "level": "C2"
+  },
+  {
+    "en": "underlying",
+    "ar": "أساسي / كامن",
+    "level": "C2"
+  },
+  {
+    "en": "unprecedented",
+    "ar": "غير مسبوق",
+    "level": "C2"
+  },
+  {
+    "en": "validity",
+    "ar": "صلاحية",
+    "level": "C2"
+  },
+  {
+    "en": "versatile",
+    "ar": "متعدد الاستخدامات",
+    "level": "C2"
+  },
+  {
+    "en": "virtually",
+    "ar": "تقريبًا",
+    "level": "C2"
+  },
+  {
+    "en": "vulnerable",
+    "ar": "ضعيف / معرض للخطر",
+    "level": "C2"
+  },
+  {
+    "en": "welfare",
+    "ar": "رفاهية",
+    "level": "C2"
+  },
+  {
+    "en": "widespread",
+    "ar": "منتشر على نطاق واسع",
+    "level": "C2"
+  }
+]

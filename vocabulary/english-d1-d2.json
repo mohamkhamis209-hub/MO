@@ -1,0 +1,5002 @@
+[
+  {
+    "en": "abate",
+    "ar": "يخف؛ يتراجع",
+    "level": "D1"
+  },
+  {
+    "en": "aberration",
+    "ar": "انحراف؛ شذوذ",
+    "level": "D1"
+  },
+  {
+    "en": "abhor",
+    "ar": "يمقت بشدة",
+    "level": "D1"
+  },
+  {
+    "en": "abrogate",
+    "ar": "يلغي رسميًا",
+    "level": "D1"
+  },
+  {
+    "en": "accede",
+    "ar": "يوافق؛ يتولى منصبًا",
+    "level": "D1"
+  },
+  {
+    "en": "accretion",
+    "ar": "تراكم تدريجي",
+    "level": "D1"
+  },
+  {
+    "en": "acerbic",
+    "ar": "لاذع؛ حاد",
+    "level": "D1"
+  },
+  {
+    "en": "acquiesce",
+    "ar": "يذعن؛ يوافق دون اعتراض",
+    "level": "D1"
+  },
+  {
+    "en": "acrimony",
+    "ar": "مرارة؛ حدة في الخلاف",
+    "level": "D1"
+  },
+  {
+    "en": "admonish",
+    "ar": "يوبخ؛ يحذر",
+    "level": "D1"
+  },
+  {
+    "en": "adroit",
+    "ar": "ماهر؛ بارع",
+    "level": "D1"
+  },
+  {
+    "en": "adulation",
+    "ar": "تملق؛ إعجاب مفرط",
+    "level": "D1"
+  },
+  {
+    "en": "adversity",
+    "ar": "محنة؛ شدّة",
+    "level": "D1"
+  },
+  {
+    "en": "aesthetic",
+    "ar": "جمالي",
+    "level": "D1"
+  },
+  {
+    "en": "affable",
+    "ar": "ودود؛ بشوش",
+    "level": "D1"
+  },
+  {
+    "en": "aggrandize",
+    "ar": "يعظم؛ يضخم",
+    "level": "D1"
+  },
+  {
+    "en": "alacrity",
+    "ar": "حماس وسرعة استجابة",
+    "level": "D1"
+  },
+  {
+    "en": "alleviate",
+    "ar": "يخفف",
+    "level": "D1"
+  },
+  {
+    "en": "amalgamate",
+    "ar": "يدمج",
+    "level": "D1"
+  },
+  {
+    "en": "ambivalent",
+    "ar": "متردد؛ متناقض المشاعر",
+    "level": "D1"
+  },
+  {
+    "en": "ameliorate",
+    "ar": "يحسن",
+    "level": "D1"
+  },
+  {
+    "en": "anachronism",
+    "ar": "مفارقة زمنية",
+    "level": "D1"
+  },
+  {
+    "en": "antagonize",
+    "ar": "يستفز؛ يعادي",
+    "level": "D1"
+  },
+  {
+    "en": "apocryphal",
+    "ar": "مشكوك في مصدره",
+    "level": "D1"
+  },
+  {
+    "en": "appease",
+    "ar": "يسترضي",
+    "level": "D1"
+  },
+  {
+    "en": "arbitrary",
+    "ar": "اعتباطي",
+    "level": "D1"
+  },
+  {
+    "en": "arcane",
+    "ar": "غامض؛ سري",
+    "level": "D1"
+  },
+  {
+    "en": "arduous",
+    "ar": "شاق",
+    "level": "D1"
+  },
+  {
+    "en": "artifice",
+    "ar": "حيلة؛ خدعة",
+    "level": "D1"
+  },
+  {
+    "en": "ascertain",
+    "ar": "يتحقق من",
+    "level": "D1"
+  },
+  {
+    "en": "assiduous",
+    "ar": "دؤوب",
+    "level": "D1"
+  },
+  {
+    "en": "astute",
+    "ar": "فطن",
+    "level": "D1"
+  },
+  {
+    "en": "audacious",
+    "ar": "جريء",
+    "level": "D1"
+  },
+  {
+    "en": "augment",
+    "ar": "يزيد؛ يعزز",
+    "level": "D1"
+  },
+  {
+    "en": "austere",
+    "ar": "تقشفي؛ صارم",
+    "level": "D1"
+  },
+  {
+    "en": "avarice",
+    "ar": "جشع",
+    "level": "D1"
+  },
+  {
+    "en": "belie",
+    "ar": "يناقض؛ يكذب",
+    "level": "D1"
+  },
+  {
+    "en": "belligerent",
+    "ar": "عدائي",
+    "level": "D1"
+  },
+  {
+    "en": "benevolent",
+    "ar": "محسن؛ خيّر",
+    "level": "D1"
+  },
+  {
+    "en": "bolster",
+    "ar": "يدعم",
+    "level": "D1"
+  },
+  {
+    "en": "bombastic",
+    "ar": "متكلف في الكلام",
+    "level": "D1"
+  },
+  {
+    "en": "brevity",
+    "ar": "إيجاز",
+    "level": "D1"
+  },
+  {
+    "en": "cajole",
+    "ar": "يستميل؛ يقنع بالإطراء",
+    "level": "D1"
+  },
+  {
+    "en": "callous",
+    "ar": "قاسي القلب",
+    "level": "D1"
+  },
+  {
+    "en": "candid",
+    "ar": "صريح",
+    "level": "D1"
+  },
+  {
+    "en": "capricious",
+    "ar": "متقلب؛ نزوي",
+    "level": "D1"
+  },
+  {
+    "en": "castigate",
+    "ar": "يوبخ بشدة",
+    "level": "D1"
+  },
+  {
+    "en": "caustic",
+    "ar": "لاذع",
+    "level": "D1"
+  },
+  {
+    "en": "censure",
+    "ar": "يدين؛ يلوم رسميًا",
+    "level": "D1"
+  },
+  {
+    "en": "chicanery",
+    "ar": "تحايل؛ مكر",
+    "level": "D1"
+  },
+  {
+    "en": "circumspect",
+    "ar": "حذر؛ متأنٍ",
+    "level": "D1"
+  },
+  {
+    "en": "clandestine",
+    "ar": "سري",
+    "level": "D1"
+  },
+  {
+    "en": "coalesce",
+    "ar": "يتحد؛ يندمج",
+    "level": "D1"
+  },
+  {
+    "en": "cogent",
+    "ar": "مقنع؛ قوي الحجة",
+    "level": "D1"
+  },
+  {
+    "en": "complacent",
+    "ar": "راضٍ عن نفسه بإفراط",
+    "level": "D1"
+  },
+  {
+    "en": "concede",
+    "ar": "يقر؛ يتنازل",
+    "level": "D1"
+  },
+  {
+    "en": "concomitant",
+    "ar": "مصاحب",
+    "level": "D1"
+  },
+  {
+    "en": "conflagration",
+    "ar": "حريق هائل",
+    "level": "D1"
+  },
+  {
+    "en": "conjecture",
+    "ar": "تخمين؛ افتراض",
+    "level": "D1"
+  },
+  {
+    "en": "connoisseur",
+    "ar": "خبير؛ متذوق",
+    "level": "D1"
+  },
+  {
+    "en": "conspicuous",
+    "ar": "بارز؛ لافت",
+    "level": "D1"
+  },
+  {
+    "en": "consternation",
+    "ar": "ذهول؛ فزع",
+    "level": "D1"
+  },
+  {
+    "en": "construe",
+    "ar": "يفسر",
+    "level": "D1"
+  },
+  {
+    "en": "contentious",
+    "ar": "جدلي؛ مثير للنزاع",
+    "level": "D1"
+  },
+  {
+    "en": "contrite",
+    "ar": "نادم",
+    "level": "D1"
+  },
+  {
+    "en": "conundrum",
+    "ar": "معضلة",
+    "level": "D1"
+  },
+  {
+    "en": "copious",
+    "ar": "وفير؛ غزير",
+    "level": "D1"
+  },
+  {
+    "en": "corroborate",
+    "ar": "يؤكد بأدلة",
+    "level": "D1"
+  },
+  {
+    "en": "cosmopolitan",
+    "ar": "عالمي؛ متعدد الثقافات",
+    "level": "D1"
+  },
+  {
+    "en": "credulous",
+    "ar": "ساذج؛ سريع التصديق",
+    "level": "D1"
+  },
+  {
+    "en": "cryptic",
+    "ar": "غامض",
+    "level": "D1"
+  },
+  {
+    "en": "culpable",
+    "ar": "مذنب؛ مسؤول",
+    "level": "D1"
+  },
+  {
+    "en": "cursory",
+    "ar": "سطحي؛ سريع",
+    "level": "D1"
+  },
+  {
+    "en": "daunt",
+    "ar": "يثبط؛ يخيف",
+    "level": "D1"
+  },
+  {
+    "en": "dearth",
+    "ar": "ندرة؛ نقص",
+    "level": "D1"
+  },
+  {
+    "en": "debacle",
+    "ar": "فشل ذريع",
+    "level": "D1"
+  },
+  {
+    "en": "debilitate",
+    "ar": "يضعف",
+    "level": "D1"
+  },
+  {
+    "en": "decorum",
+    "ar": "لياقة؛ احتشام",
+    "level": "D1"
+  },
+  {
+    "en": "deference",
+    "ar": "احترام؛ إذعان",
+    "level": "D1"
+  },
+  {
+    "en": "deleterious",
+    "ar": "ضار",
+    "level": "D1"
+  },
+  {
+    "en": "denigrate",
+    "ar": "يشوه السمعة",
+    "level": "D1"
+  },
+  {
+    "en": "deride",
+    "ar": "يسخر من",
+    "level": "D1"
+  },
+  {
+    "en": "deter",
+    "ar": "يردع",
+    "level": "D1"
+  },
+  {
+    "en": "diatribe",
+    "ar": "خطبة هجومية",
+    "level": "D1"
+  },
+  {
+    "en": "didactic",
+    "ar": "تعليمي؛ وعظي",
+    "level": "D1"
+  },
+  {
+    "en": "dilettante",
+    "ar": "هاوٍ غير متخصص",
+    "level": "D1"
+  },
+  {
+    "en": "discerning",
+    "ar": "فطن؛ حسن التمييز",
+    "level": "D1"
+  },
+  {
+    "en": "disparate",
+    "ar": "متباين",
+    "level": "D1"
+  },
+  {
+    "en": "disseminate",
+    "ar": "ينشر؛ يوزع",
+    "level": "D1"
+  },
+  {
+    "en": "dissident",
+    "ar": "معارض",
+    "level": "D1"
+  },
+  {
+    "en": "dogmatic",
+    "ar": "متعصب لرأيه",
+    "level": "D1"
+  },
+  {
+    "en": "ebullient",
+    "ar": "مفعم بالحيوية",
+    "level": "D1"
+  },
+  {
+    "en": "eclectic",
+    "ar": "انتقائي؛ متنوع",
+    "level": "D1"
+  },
+  {
+    "en": "edify",
+    "ar": "يثقف؛ يهذب",
+    "level": "D1"
+  },
+  {
+    "en": "efface",
+    "ar": "يمحو",
+    "level": "D1"
+  },
+  {
+    "en": "efficacious",
+    "ar": "فعال",
+    "level": "D1"
+  },
+  {
+    "en": "effrontery",
+    "ar": "وقاحة",
+    "level": "D1"
+  },
+  {
+    "en": "egregious",
+    "ar": "فادح؛ شنيع",
+    "level": "D1"
+  },
+  {
+    "en": "elicit",
+    "ar": "يستخرج؛ يستدرج",
+    "level": "D1"
+  },
+  {
+    "en": "elucidate",
+    "ar": "يوضح",
+    "level": "D1"
+  },
+  {
+    "en": "emulate",
+    "ar": "يحاكي؛ يقتدي",
+    "level": "D1"
+  },
+  {
+    "en": "engender",
+    "ar": "يولد؛ يسبب",
+    "level": "D1"
+  },
+  {
+    "en": "enigmatic",
+    "ar": "غامض",
+    "level": "D1"
+  },
+  {
+    "en": "enmity",
+    "ar": "عداء",
+    "level": "D1"
+  },
+  {
+    "en": "ephemeral",
+    "ar": "قصير الأجل",
+    "level": "D1"
+  },
+  {
+    "en": "equanimity",
+    "ar": "رباطة جأش",
+    "level": "D1"
+  },
+  {
+    "en": "equivocal",
+    "ar": "ملتبس",
+    "level": "D1"
+  },
+  {
+    "en": "erudite",
+    "ar": "واسع المعرفة",
+    "level": "D1"
+  },
+  {
+    "en": "esoteric",
+    "ar": "متخصص وغامض",
+    "level": "D1"
+  },
+  {
+    "en": "evince",
+    "ar": "يظهر؛ يبرهن",
+    "level": "D1"
+  },
+  {
+    "en": "exacerbate",
+    "ar": "يفاقم",
+    "level": "D1"
+  },
+  {
+    "en": "exculpate",
+    "ar": "يبرئ",
+    "level": "D1"
+  },
+  {
+    "en": "exonerate",
+    "ar": "يبرئ من المسؤولية",
+    "level": "D1"
+  },
+  {
+    "en": "expedite",
+    "ar": "يسرع",
+    "level": "D1"
+  },
+  {
+    "en": "extol",
+    "ar": "يمدح بشدة",
+    "level": "D1"
+  },
+  {
+    "en": "fallacious",
+    "ar": "زائف منطقيًا",
+    "level": "D1"
+  },
+  {
+    "en": "fastidious",
+    "ar": "دقيق ومتطلب",
+    "level": "D1"
+  },
+  {
+    "en": "fatuous",
+    "ar": "أحمق؛ تافه",
+    "level": "D1"
+  },
+  {
+    "en": "feasible",
+    "ar": "قابل للتنفيذ",
+    "level": "D1"
+  },
+  {
+    "en": "fervent",
+    "ar": "حماسي",
+    "level": "D1"
+  },
+  {
+    "en": "flagrant",
+    "ar": "صارخ؛ فاضح",
+    "level": "D1"
+  },
+  {
+    "en": "flippant",
+    "ar": "مستخف",
+    "level": "D1"
+  },
+  {
+    "en": "florid",
+    "ar": "مزخرف؛ متكلف",
+    "level": "D1"
+  },
+  {
+    "en": "foible",
+    "ar": "نقطة ضعف",
+    "level": "D1"
+  },
+  {
+    "en": "fortuitous",
+    "ar": "عرضي؛ محظوظ",
+    "level": "D1"
+  },
+  {
+    "en": "frugal",
+    "ar": "مقتصد",
+    "level": "D1"
+  },
+  {
+    "en": "garrulous",
+    "ar": "ثرثار",
+    "level": "D1"
+  },
+  {
+    "en": "gregarious",
+    "ar": "اجتماعي",
+    "level": "D1"
+  },
+  {
+    "en": "guile",
+    "ar": "مكر؛ دهاء",
+    "level": "D1"
+  },
+  {
+    "en": "hackneyed",
+    "ar": "مبتذل؛ مستهلك",
+    "level": "D1"
+  },
+  {
+    "en": "harangue",
+    "ar": "خطبة هجومية طويلة",
+    "level": "D1"
+  },
+  {
+    "en": "hegemony",
+    "ar": "هيمنة",
+    "level": "D1"
+  },
+  {
+    "en": "hermetic",
+    "ar": "محكم الإغلاق؛ غامض",
+    "level": "D1"
+  },
+  {
+    "en": "iconoclast",
+    "ar": "ناقد للتقاليد",
+    "level": "D1"
+  },
+  {
+    "en": "idiosyncrasy",
+    "ar": "سمة شخصية مميزة",
+    "level": "D1"
+  },
+  {
+    "en": "ignominious",
+    "ar": "مخزٍ؛ مهين",
+    "level": "D1"
+  },
+  {
+    "en": "immutable",
+    "ar": "غير قابل للتغيير",
+    "level": "D1"
+  },
+  {
+    "en": "impecunious",
+    "ar": "معدم؛ فقير",
+    "level": "D1"
+  },
+  {
+    "en": "impertinent",
+    "ar": "وقح؛ غير لائق",
+    "level": "D1"
+  },
+  {
+    "en": "implacable",
+    "ar": "لا يلين",
+    "level": "D1"
+  },
+  {
+    "en": "implicit",
+    "ar": "ضمني",
+    "level": "D1"
+  },
+  {
+    "en": "inadvertent",
+    "ar": "غير مقصود",
+    "level": "D1"
+  },
+  {
+    "en": "incendiary",
+    "ar": "تحريضي",
+    "level": "D1"
+  },
+  {
+    "en": "incongruous",
+    "ar": "غير متناسق",
+    "level": "D1"
+  },
+  {
+    "en": "incorrigible",
+    "ar": "ميؤوس من إصلاحه",
+    "level": "D1"
+  },
+  {
+    "en": "indefatigable",
+    "ar": "لا يكل",
+    "level": "D1"
+  },
+  {
+    "en": "indolent",
+    "ar": "كسول",
+    "level": "D1"
+  },
+  {
+    "en": "ineffable",
+    "ar": "لا يوصف",
+    "level": "D1"
+  },
+  {
+    "en": "inimical",
+    "ar": "معادٍ؛ ضار",
+    "level": "D1"
+  },
+  {
+    "en": "insidious",
+    "ar": "خبيث ومتدرج الضرر",
+    "level": "D1"
+  },
+  {
+    "en": "insipid",
+    "ar": "بلا طعم؛ ممل",
+    "level": "D1"
+  },
+  {
+    "en": "insolent",
+    "ar": "وقح",
+    "level": "D1"
+  },
+  {
+    "en": "intrepid",
+    "ar": "شجاع لا يهاب",
+    "level": "D1"
+  },
+  {
+    "en": "inveterate",
+    "ar": "متأصل؛ مزمن",
+    "level": "D1"
+  },
+  {
+    "en": "irascible",
+    "ar": "سريع الغضب",
+    "level": "D1"
+  },
+  {
+    "en": "laconic",
+    "ar": "مقتضب",
+    "level": "D1"
+  },
+  {
+    "en": "laudable",
+    "ar": "جدير بالثناء",
+    "level": "D1"
+  },
+  {
+    "en": "lethargic",
+    "ar": "خامل",
+    "level": "D1"
+  },
+  {
+    "en": "loquacious",
+    "ar": "ثرثار",
+    "level": "D1"
+  },
+  {
+    "en": "magnanimous",
+    "ar": "كريم ومتسامح",
+    "level": "D1"
+  },
+  {
+    "en": "malleable",
+    "ar": "قابل للتشكيل؛ التأثر",
+    "level": "D1"
+  },
+  {
+    "en": "maudlin",
+    "ar": "عاطفي بإفراط",
+    "level": "D1"
+  },
+  {
+    "en": "mendacious",
+    "ar": "كاذب",
+    "level": "D1"
+  },
+  {
+    "en": "meticulous",
+    "ar": "دقيق جدًا",
+    "level": "D1"
+  },
+  {
+    "en": "mitigate",
+    "ar": "يخفف",
+    "level": "D1"
+  },
+  {
+    "en": "morose",
+    "ar": "كئيب",
+    "level": "D1"
+  },
+  {
+    "en": "munificent",
+    "ar": "سخي جدًا",
+    "level": "D1"
+  },
+  {
+    "en": "myriad",
+    "ar": "عدد هائل",
+    "level": "D1"
+  },
+  {
+    "en": "nefarious",
+    "ar": "شرير؛ دنيء",
+    "level": "D1"
+  },
+  {
+    "en": "negligible",
+    "ar": "ضئيل",
+    "level": "D1"
+  },
+  {
+    "en": "neophyte",
+    "ar": "مبتدئ",
+    "level": "D1"
+  },
+  {
+    "en": "nonchalant",
+    "ar": "غير مبالٍ",
+    "level": "D1"
+  },
+  {
+    "en": "obdurate",
+    "ar": "عنيد",
+    "level": "D1"
+  },
+  {
+    "en": "obfuscate",
+    "ar": "يبهم؛ يعقد",
+    "level": "D1"
+  },
+  {
+    "en": "obsequious",
+    "ar": "متملق",
+    "level": "D1"
+  },
+  {
+    "en": "ominous",
+    "ar": "نذير شؤم",
+    "level": "D1"
+  },
+  {
+    "en": "onerous",
+    "ar": "مرهق؛ شاق",
+    "level": "D1"
+  },
+  {
+    "en": "ostensible",
+    "ar": "ظاهري",
+    "level": "D1"
+  },
+  {
+    "en": "ostracize",
+    "ar": "ينبذ",
+    "level": "D1"
+  },
+  {
+    "en": "palatable",
+    "ar": "مقبول",
+    "level": "D1"
+  },
+  {
+    "en": "paradigm",
+    "ar": "نموذج؛ نمط",
+    "level": "D1"
+  },
+  {
+    "en": "paragon",
+    "ar": "مثال يحتذى",
+    "level": "D1"
+  },
+  {
+    "en": "parsimonious",
+    "ar": "بخيل",
+    "level": "D1"
+  },
+  {
+    "en": "perfunctory",
+    "ar": "روتيني بلا اهتمام",
+    "level": "D1"
+  },
+  {
+    "en": "pervasive",
+    "ar": "منتشر في كل مكان",
+    "level": "D1"
+  },
+  {
+    "en": "phlegmatic",
+    "ar": "هادئ غير انفعالي",
+    "level": "D1"
+  },
+  {
+    "en": "placate",
+    "ar": "يهدئ؛ يسترضي",
+    "level": "D1"
+  },
+  {
+    "en": "plethora",
+    "ar": "وفرة مفرطة",
+    "level": "D1"
+  },
+  {
+    "en": "pragmatic",
+    "ar": "عملي",
+    "level": "D1"
+  },
+  {
+    "en": "precarious",
+    "ar": "غير مستقر",
+    "level": "D1"
+  },
+  {
+    "en": "precocious",
+    "ar": "متقدم على عمره",
+    "level": "D1"
+  },
+  {
+    "en": "predilection",
+    "ar": "ميل مفضل",
+    "level": "D1"
+  },
+  {
+    "en": "proclivity",
+    "ar": "نزعة؛ ميل",
+    "level": "D1"
+  },
+  {
+    "en": "prodigious",
+    "ar": "هائل؛ مدهش",
+    "level": "D1"
+  },
+  {
+    "en": "profligate",
+    "ar": "مسرف؛ فاسد",
+    "level": "D1"
+  },
+  {
+    "en": "prolific",
+    "ar": "غزير الإنتاج",
+    "level": "D1"
+  },
+  {
+    "en": "propensity",
+    "ar": "نزعة",
+    "level": "D1"
+  },
+  {
+    "en": "prosaic",
+    "ar": "عادي؛ غير خيالي",
+    "level": "D1"
+  },
+  {
+    "en": "pugnacious",
+    "ar": "ميال للشجار",
+    "level": "D1"
+  },
+  {
+    "en": "querulous",
+    "ar": "كثير الشكوى",
+    "level": "D1"
+  },
+  {
+    "en": "quixotic",
+    "ar": "مثالي غير واقعي",
+    "level": "D1"
+  },
+  {
+    "en": "rancor",
+    "ar": "حقد؛ ضغينة",
+    "level": "D1"
+  },
+  {
+    "en": "recalcitrant",
+    "ar": "متمرد؛ عنيد",
+    "level": "D1"
+  },
+  {
+    "en": "reclusive",
+    "ar": "منعزل",
+    "level": "D1"
+  },
+  {
+    "en": "redoubtable",
+    "ar": "مخيف؛ جدير بالاحترام",
+    "level": "D1"
+  },
+  {
+    "en": "refute",
+    "ar": "يدحض",
+    "level": "D1"
+  },
+  {
+    "en": "relegate",
+    "ar": "يحيل إلى مرتبة أدنى",
+    "level": "D1"
+  },
+  {
+    "en": "reprehensible",
+    "ar": "مذموم",
+    "level": "D1"
+  },
+  {
+    "en": "reticent",
+    "ar": "متحفظ",
+    "level": "D1"
+  },
+  {
+    "en": "reverent",
+    "ar": "موقر",
+    "level": "D1"
+  },
+  {
+    "en": "sagacious",
+    "ar": "حكيم؛ فطن",
+    "level": "D1"
+  },
+  {
+    "en": "salient",
+    "ar": "بارز؛ مهم",
+    "level": "D1"
+  },
+  {
+    "en": "scrupulous",
+    "ar": "دقيق؛ شديد الالتزام",
+    "level": "D1"
+  },
+  {
+    "en": "scrutinize",
+    "ar": "يدقق في",
+    "level": "D1"
+  },
+  {
+    "en": "sedulous",
+    "ar": "دؤوب",
+    "level": "D1"
+  },
+  {
+    "en": "serendipity",
+    "ar": "اكتشاف محظوظ بالصدفة",
+    "level": "D1"
+  },
+  {
+    "en": "soporific",
+    "ar": "مسبب للنعاس",
+    "level": "D1"
+  },
+  {
+    "en": "spurious",
+    "ar": "زائف",
+    "level": "D1"
+  },
+  {
+    "en": "staid",
+    "ar": "رصين؛ محافظ",
+    "level": "D1"
+  },
+  {
+    "en": "stolid",
+    "ar": "بليد المشاعر",
+    "level": "D1"
+  },
+  {
+    "en": "strident",
+    "ar": "حاد؛ صاخب",
+    "level": "D1"
+  },
+  {
+    "en": "subjugate",
+    "ar": "يخضع",
+    "level": "D1"
+  },
+  {
+    "en": "succinct",
+    "ar": "موجز",
+    "level": "D1"
+  },
+  {
+    "en": "superfluous",
+    "ar": "زائد عن الحاجة",
+    "level": "D1"
+  },
+  {
+    "en": "surreptitious",
+    "ar": "خلسة؛ سري",
+    "level": "D1"
+  },
+  {
+    "en": "tacit",
+    "ar": "ضمني؛ غير معلن",
+    "level": "D1"
+  },
+  {
+    "en": "tangential",
+    "ar": "عرضي؛ غير مباشر",
+    "level": "D1"
+  },
+  {
+    "en": "tenacious",
+    "ar": "مثابر؛ متشبث",
+    "level": "D1"
+  },
+  {
+    "en": "terse",
+    "ar": "مقتضب",
+    "level": "D1"
+  },
+  {
+    "en": "tirade",
+    "ar": "خطبة غاضبة",
+    "level": "D1"
+  },
+  {
+    "en": "transient",
+    "ar": "عابر؛ مؤقت",
+    "level": "D1"
+  },
+  {
+    "en": "trenchant",
+    "ar": "حاد وقوي",
+    "level": "D1"
+  },
+  {
+    "en": "ubiquitous",
+    "ar": "موجود في كل مكان",
+    "level": "D1"
+  },
+  {
+    "en": "unassailable",
+    "ar": "لا يمكن دحضه",
+    "level": "D1"
+  },
+  {
+    "en": "unequivocal",
+    "ar": "واضح لا لبس فيه",
+    "level": "D1"
+  },
+  {
+    "en": "untenable",
+    "ar": "غير قابل للدفاع",
+    "level": "D1"
+  },
+  {
+    "en": "vacillate",
+    "ar": "يتردد",
+    "level": "D1"
+  },
+  {
+    "en": "vehement",
+    "ar": "شديد",
+    "level": "D1"
+  },
+  {
+    "en": "verbose",
+    "ar": "مسهب",
+    "level": "D1"
+  },
+  {
+    "en": "vicarious",
+    "ar": "غير مباشر",
+    "level": "D1"
+  },
+  {
+    "en": "vindicate",
+    "ar": "يثبت صحة؛ يبرئ",
+    "level": "D1"
+  },
+  {
+    "en": "vitriolic",
+    "ar": "لاذع جدًا",
+    "level": "D1"
+  },
+  {
+    "en": "vociferous",
+    "ar": "صاخب؛ جهوري",
+    "level": "D1"
+  },
+  {
+    "en": "wane",
+    "ar": "يتضاءل",
+    "level": "D1"
+  },
+  {
+    "en": "wary",
+    "ar": "حذر",
+    "level": "D1"
+  },
+  {
+    "en": "winsome",
+    "ar": "جذاب",
+    "level": "D1"
+  },
+  {
+    "en": "zealous",
+    "ar": "متحمس بشدة",
+    "level": "D1"
+  },
+  {
+    "en": "accredit",
+    "ar": "يعتمد رسميًا",
+    "level": "D1"
+  },
+  {
+    "en": "adjudicate",
+    "ar": "يفصل في نزاع",
+    "level": "D1"
+  },
+  {
+    "en": "allocate",
+    "ar": "يخصص",
+    "level": "D1"
+  },
+  {
+    "en": "articulate",
+    "ar": "يصوغ بوضوح",
+    "level": "D1"
+  },
+  {
+    "en": "authenticate",
+    "ar": "يثبت الأصالة",
+    "level": "D1"
+  },
+  {
+    "en": "benchmark",
+    "ar": "معيار مرجعي",
+    "level": "D1"
+  },
+  {
+    "en": "codify",
+    "ar": "يقنن",
+    "level": "D1"
+  },
+  {
+    "en": "commensurate",
+    "ar": "متناسب",
+    "level": "D1"
+  },
+  {
+    "en": "compendium",
+    "ar": "موجز شامل",
+    "level": "D1"
+  },
+  {
+    "en": "compunction",
+    "ar": "ندم",
+    "level": "D1"
+  },
+  {
+    "en": "conciliatory",
+    "ar": "تصالحي",
+    "level": "D1"
+  },
+  {
+    "en": "conflation",
+    "ar": "دمج مفاهيم",
+    "level": "D1"
+  },
+  {
+    "en": "contravene",
+    "ar": "يخالف",
+    "level": "D1"
+  },
+  {
+    "en": "convivial",
+    "ar": "مرح؛ اجتماعي",
+    "level": "D1"
+  },
+  {
+    "en": "denouement",
+    "ar": "حل العقدة؛ خاتمة",
+    "level": "D1"
+  },
+  {
+    "en": "deprecate",
+    "ar": "يستنكر؛ يقلل من شأن",
+    "level": "D1"
+  },
+  {
+    "en": "dilatory",
+    "ar": "مماطل",
+    "level": "D1"
+  },
+  {
+    "en": "disquisition",
+    "ar": "بحث مطول",
+    "level": "D1"
+  },
+  {
+    "en": "divest",
+    "ar": "يجرد؛ يتخلى عن",
+    "level": "D1"
+  },
+  {
+    "en": "duplicity",
+    "ar": "ازدواجية؛ خداع",
+    "level": "D1"
+  },
+  {
+    "en": "ecumenical",
+    "ar": "عالمي؛ شامل",
+    "level": "D1"
+  },
+  {
+    "en": "efflorescence",
+    "ar": "ازدهار؛ تبلور",
+    "level": "D1"
+  },
+  {
+    "en": "elision",
+    "ar": "حذف",
+    "level": "D1"
+  },
+  {
+    "en": "emollient",
+    "ar": "ملين؛ مهدئ",
+    "level": "D1"
+  },
+  {
+    "en": "empirical",
+    "ar": "تجريبي",
+    "level": "D1"
+  },
+  {
+    "en": "entreat",
+    "ar": "يتوسل",
+    "level": "D1"
+  },
+  {
+    "en": "epistolary",
+    "ar": "متعلق بالرسائل",
+    "level": "D1"
+  },
+  {
+    "en": "equivocate",
+    "ar": "يراوغ",
+    "level": "D1"
+  },
+  {
+    "en": "expunge",
+    "ar": "يمحو",
+    "level": "D1"
+  },
+  {
+    "en": "extant",
+    "ar": "باقٍ حتى الآن",
+    "level": "D1"
+  },
+  {
+    "en": "extricate",
+    "ar": "يخلص من ورطة",
+    "level": "D1"
+  },
+  {
+    "en": "farrago",
+    "ar": "خليط مشوش",
+    "level": "D1"
+  },
+  {
+    "en": "fetter",
+    "ar": "يقيد",
+    "level": "D1"
+  },
+  {
+    "en": "foment",
+    "ar": "يؤجج",
+    "level": "D1"
+  },
+  {
+    "en": "fractious",
+    "ar": "مشاكس؛ انقسامي",
+    "level": "D1"
+  },
+  {
+    "en": "fulminate",
+    "ar": "يندد بشدة",
+    "level": "D1"
+  },
+  {
+    "en": "gambit",
+    "ar": "مناورة افتتاحية",
+    "level": "D1"
+  },
+  {
+    "en": "germane",
+    "ar": "وثيق الصلة",
+    "level": "D1"
+  },
+  {
+    "en": "grandiose",
+    "ar": "عظيم بشكل متكلف",
+    "level": "D1"
+  },
+  {
+    "en": "heterodox",
+    "ar": "غير تقليدي",
+    "level": "D1"
+  },
+  {
+    "en": "homily",
+    "ar": "موعظة",
+    "level": "D1"
+  },
+  {
+    "en": "impugn",
+    "ar": "يطعن في",
+    "level": "D1"
+  },
+  {
+    "en": "incisive",
+    "ar": "نافذ؛ حاد",
+    "level": "D1"
+  },
+  {
+    "en": "indigent",
+    "ar": "محتاج؛ فقير",
+    "level": "D1"
+  },
+  {
+    "en": "inexorable",
+    "ar": "لا يلين؛ حتمي",
+    "level": "D1"
+  },
+  {
+    "en": "infringe",
+    "ar": "ينتهك",
+    "level": "D1"
+  },
+  {
+    "en": "ingrained",
+    "ar": "متأصل",
+    "level": "D1"
+  },
+  {
+    "en": "innocuous",
+    "ar": "غير ضار",
+    "level": "D1"
+  },
+  {
+    "en": "inscrutable",
+    "ar": "عصي على الفهم",
+    "level": "D1"
+  },
+  {
+    "en": "interlocutor",
+    "ar": "محاور",
+    "level": "D1"
+  },
+  {
+    "en": "invidious",
+    "ar": "حاقد؛ تمييزي",
+    "level": "D1"
+  },
+  {
+    "en": "irrefutable",
+    "ar": "لا يمكن دحضه",
+    "level": "D1"
+  },
+  {
+    "en": "juxtapose",
+    "ar": "يضع جنبًا إلى جنب",
+    "level": "D1"
+  },
+  {
+    "en": "kowtow",
+    "ar": "يتذلل",
+    "level": "D1"
+  },
+  {
+    "en": "languid",
+    "ar": "خامل",
+    "level": "D1"
+  },
+  {
+    "en": "latent",
+    "ar": "كامن",
+    "level": "D1"
+  },
+  {
+    "en": "logorrhea",
+    "ar": "ثرثرة مفرطة",
+    "level": "D1"
+  },
+  {
+    "en": "lucid",
+    "ar": "واضح",
+    "level": "D1"
+  },
+  {
+    "en": "marginalia",
+    "ar": "هوامش مكتوبة",
+    "level": "D1"
+  },
+  {
+    "en": "meander",
+    "ar": "يتعرج؛ يطيل",
+    "level": "D1"
+  },
+  {
+    "en": "meretricious",
+    "ar": "براق لكنه زائف",
+    "level": "D1"
+  },
+  {
+    "en": "metonymy",
+    "ar": "مجاز مرسل",
+    "level": "D1"
+  },
+  {
+    "en": "nonplussed",
+    "ar": "حائر تمامًا",
+    "level": "D1"
+  },
+  {
+    "en": "obviate",
+    "ar": "يتجنب؛ يلغي الحاجة",
+    "level": "D1"
+  },
+  {
+    "en": "occlude",
+    "ar": "يسد؛ يحجب",
+    "level": "D1"
+  },
+  {
+    "en": "officious",
+    "ar": "متدخل بإفراط",
+    "level": "D1"
+  },
+  {
+    "en": "opine",
+    "ar": "يبدي رأيًا",
+    "level": "D1"
+  },
+  {
+    "en": "paradigmatic",
+    "ar": "نموذجي",
+    "level": "D1"
+  },
+  {
+    "en": "penchant",
+    "ar": "ميل",
+    "level": "D1"
+  },
+  {
+    "en": "pernicious",
+    "ar": "خبيث؛ ضار",
+    "level": "D1"
+  },
+  {
+    "en": "perspicuous",
+    "ar": "واضح",
+    "level": "D1"
+  },
+  {
+    "en": "plangent",
+    "ar": "رنان وحزين",
+    "level": "D1"
+  },
+  {
+    "en": "platitude",
+    "ar": "عبارة مبتذلة",
+    "level": "D1"
+  },
+  {
+    "en": "pleonasm",
+    "ar": "حشو لفظي",
+    "level": "D1"
+  },
+  {
+    "en": "preponderance",
+    "ar": "غلبة؛ رجحان",
+    "level": "D1"
+  },
+  {
+    "en": "prescient",
+    "ar": "متنبئ",
+    "level": "D1"
+  },
+  {
+    "en": "probative",
+    "ar": "دال على الحقيقة",
+    "level": "D1"
+  },
+  {
+    "en": "proscribe",
+    "ar": "يحظر",
+    "level": "D1"
+  },
+  {
+    "en": "provenance",
+    "ar": "أصل؛ مصدر",
+    "level": "D1"
+  },
+  {
+    "en": "quotidian",
+    "ar": "يومي",
+    "level": "D1"
+  },
+  {
+    "en": "reify",
+    "ar": "يجسد فكرة مجردة",
+    "level": "D1"
+  },
+  {
+    "en": "rescind",
+    "ar": "يلغي رسميًا",
+    "level": "D1"
+  },
+  {
+    "en": "retinue",
+    "ar": "حاشية؛ أتباع",
+    "level": "D1"
+  },
+  {
+    "en": "salubrious",
+    "ar": "صحي",
+    "level": "D1"
+  },
+  {
+    "en": "saturnine",
+    "ar": "كئيب",
+    "level": "D1"
+  },
+  {
+    "en": "scintilla",
+    "ar": "ذرة؛ قدر ضئيل",
+    "level": "D1"
+  },
+  {
+    "en": "sinecure",
+    "ar": "وظيفة مريحة بلا عمل كبير",
+    "level": "D1"
+  },
+  {
+    "en": "solicitous",
+    "ar": "حريص؛ مهتم",
+    "level": "D1"
+  },
+  {
+    "en": "stochastic",
+    "ar": "عشوائي احتمالي",
+    "level": "D1"
+  },
+  {
+    "en": "substantive",
+    "ar": "جوهري",
+    "level": "D1"
+  },
+  {
+    "en": "surfeit",
+    "ar": "تخمة؛ إفراط",
+    "level": "D1"
+  },
+  {
+    "en": "sybaritic",
+    "ar": "مترف",
+    "level": "D1"
+  },
+  {
+    "en": "temerity",
+    "ar": "جرأة متهورة",
+    "level": "D1"
+  },
+  {
+    "en": "tenuous",
+    "ar": "واهٍ؛ ضعيف",
+    "level": "D1"
+  },
+  {
+    "en": "tortuous",
+    "ar": "ملتوي؛ معقد",
+    "level": "D1"
+  },
+  {
+    "en": "transmute",
+    "ar": "يحوّل",
+    "level": "D1"
+  },
+  {
+    "en": "turpitude",
+    "ar": "دناءة أخلاقية",
+    "level": "D1"
+  },
+  {
+    "en": "tyro",
+    "ar": "مبتدئ",
+    "level": "D1"
+  },
+  {
+    "en": "unalloyed",
+    "ar": "خالص",
+    "level": "D1"
+  },
+  {
+    "en": "vacuous",
+    "ar": "فارغ؛ بلا مضمون",
+    "level": "D1"
+  },
+  {
+    "en": "winnow",
+    "ar": "ينخل؛ يستخلص",
+    "level": "D1"
+  },
+  {
+    "en": "wizened",
+    "ar": "ذابل؛ مجعد",
+    "level": "D1"
+  },
+  {
+    "en": "wont",
+    "ar": "عادة",
+    "level": "D1"
+  },
+  {
+    "en": "zealotry",
+    "ar": "تعصب شديد",
+    "level": "D1"
+  },
+  {
+    "en": "abated",
+    "ar": "متراجع / مخفف",
+    "level": "D1"
+  },
+  {
+    "en": "abhorrence",
+    "ar": "اشمئزاز شديد",
+    "level": "D1"
+  },
+  {
+    "en": "admonition",
+    "ar": "توبيخ؛ تحذير",
+    "level": "D1"
+  },
+  {
+    "en": "augmentation",
+    "ar": "زيادة؛ تعزيز",
+    "level": "D1"
+  },
+  {
+    "en": "bolstering",
+    "ar": "دعم؛ تعزيز",
+    "level": "D1"
+  },
+  {
+    "en": "corroboration",
+    "ar": "تأكيد بالأدلة",
+    "level": "D1"
+  },
+  {
+    "en": "dissemination",
+    "ar": "نشر؛ توزيع",
+    "level": "D1"
+  },
+  {
+    "en": "elucidation",
+    "ar": "إيضاح",
+    "level": "D1"
+  },
+  {
+    "en": "engendering",
+    "ar": "توليد؛ إحداث",
+    "level": "D1"
+  },
+  {
+    "en": "exacerbation",
+    "ar": "تفاقم",
+    "level": "D1"
+  },
+  {
+    "en": "expedition",
+    "ar": "تعجيل / تسريع",
+    "level": "D1"
+  },
+  {
+    "en": "mitigation",
+    "ar": "تخفيف",
+    "level": "D1"
+  },
+  {
+    "en": "scrutiny",
+    "ar": "تدقيق وفحص",
+    "level": "D1"
+  },
+  {
+    "en": "subjugation",
+    "ar": "إخضاع",
+    "level": "D1"
+  },
+  {
+    "en": "vindication",
+    "ar": "تبرئة؛ إثبات صحة",
+    "level": "D1"
+  },
+  {
+    "en": "vacillation",
+    "ar": "تردد؛ تذبذب",
+    "level": "D1"
+  },
+  {
+    "en": "refutation",
+    "ar": "دحض",
+    "level": "D1"
+  },
+  {
+    "en": "relegation",
+    "ar": "إحالة إلى مرتبة أدنى",
+    "level": "D1"
+  },
+  {
+    "en": "ostracism",
+    "ar": "نبذ اجتماعي",
+    "level": "D1"
+  },
+  {
+    "en": "obfuscation",
+    "ar": "إبهام؛ تعقيد",
+    "level": "D1"
+  },
+  {
+    "en": "repudiation",
+    "ar": "رفض شديد",
+    "level": "D1"
+  },
+  {
+    "en": "recalcitrance",
+    "ar": "عناد وتمرد",
+    "level": "D1"
+  },
+  {
+    "en": "pervasiveness",
+    "ar": "انتشار واسع",
+    "level": "D1"
+  },
+  {
+    "en": "tenacity",
+    "ar": "مثابرة؛ تشبث",
+    "level": "D1"
+  },
+  {
+    "en": "policy",
+    "ar": "سياسة",
+    "level": "D1"
+  },
+  {
+    "en": "institution",
+    "ar": "مؤسسة",
+    "level": "D1"
+  },
+  {
+    "en": "governance",
+    "ar": "حوكمة",
+    "level": "D1"
+  },
+  {
+    "en": "legitimacy",
+    "ar": "شرعية",
+    "level": "D1"
+  },
+  {
+    "en": "accountability",
+    "ar": "مساءلة",
+    "level": "D1"
+  },
+  {
+    "en": "transparency",
+    "ar": "شفافية",
+    "level": "D1"
+  },
+  {
+    "en": "discourse",
+    "ar": "خطاب",
+    "level": "D1"
+  },
+  {
+    "en": "rhetoric",
+    "ar": "بلاغة؛ خطاب",
+    "level": "D1"
+  },
+  {
+    "en": "inference",
+    "ar": "استدلال",
+    "level": "D1"
+  },
+  {
+    "en": "premise",
+    "ar": "مقدمة منطقية",
+    "level": "D1"
+  },
+  {
+    "en": "proposition",
+    "ar": "قضية؛ مقترح",
+    "level": "D1"
+  },
+  {
+    "en": "hypothesis",
+    "ar": "فرضية",
+    "level": "D1"
+  },
+  {
+    "en": "paradigm",
+    "ar": "نموذج فكري",
+    "level": "D1"
+  },
+  {
+    "en": "methodology",
+    "ar": "منهجية",
+    "level": "D1"
+  },
+  {
+    "en": "causality",
+    "ar": "سببية",
+    "level": "D1"
+  },
+  {
+    "en": "correlation",
+    "ar": "ارتباط",
+    "level": "D1"
+  },
+  {
+    "en": "ambiguity",
+    "ar": "غموض",
+    "level": "D1"
+  },
+  {
+    "en": "coherence",
+    "ar": "ترابط",
+    "level": "D1"
+  },
+  {
+    "en": "nuance",
+    "ar": "فارق دقيق",
+    "level": "D1"
+  },
+  {
+    "en": "connotation",
+    "ar": "دلالة ضمنية",
+    "level": "D1"
+  },
+  {
+    "en": "denotation",
+    "ar": "دلالة مباشرة",
+    "level": "D1"
+  },
+  {
+    "en": "semantics",
+    "ar": "علم الدلالة",
+    "level": "D1"
+  },
+  {
+    "en": "pragmatics",
+    "ar": "تداولية اللغة",
+    "level": "D1"
+  },
+  {
+    "en": "taxonomy",
+    "ar": "تصنيف هرمي",
+    "level": "D1"
+  },
+  {
+    "en": "ontology",
+    "ar": "علم الوجود",
+    "level": "D1"
+  },
+  {
+    "en": "epistemology",
+    "ar": "نظرية المعرفة",
+    "level": "D1"
+  },
+  {
+    "en": "metacognition",
+    "ar": "ما وراء المعرفة",
+    "level": "D1"
+  },
+  {
+    "en": "interdisciplinary",
+    "ar": "متعدد التخصصات",
+    "level": "D1"
+  },
+  {
+    "en": "multifaceted",
+    "ar": "متعدد الجوانب",
+    "level": "D1"
+  },
+  {
+    "en": "counterargument",
+    "ar": "حجة مضادة",
+    "level": "D1"
+  },
+  {
+    "en": "corollary",
+    "ar": "نتيجة لازمة",
+    "level": "D1"
+  },
+  {
+    "en": "implication",
+    "ar": "دلالة؛ أثر",
+    "level": "D1"
+  },
+  {
+    "en": "ramification",
+    "ar": "نتيجة متفرعة",
+    "level": "D1"
+  },
+  {
+    "en": "consequence",
+    "ar": "نتيجة",
+    "level": "D1"
+  },
+  {
+    "en": "contingency",
+    "ar": "احتمال؛ ظرف طارئ",
+    "level": "D1"
+  },
+  {
+    "en": "determinism",
+    "ar": "حتمية",
+    "level": "D1"
+  },
+  {
+    "en": "pluralism",
+    "ar": "تعددية",
+    "level": "D1"
+  },
+  {
+    "en": "egalitarianism",
+    "ar": "مساواة اجتماعية",
+    "level": "D1"
+  },
+  {
+    "en": "utilitarianism",
+    "ar": "نفعية",
+    "level": "D1"
+  },
+  {
+    "en": "deontology",
+    "ar": "أخلاق الواجب",
+    "level": "D1"
+  },
+  {
+    "en": "relativism",
+    "ar": "نسبية",
+    "level": "D1"
+  },
+  {
+    "en": "rationalism",
+    "ar": "عقلانية",
+    "level": "D1"
+  },
+  {
+    "en": "empiricism",
+    "ar": "تجريبية",
+    "level": "D1"
+  },
+  {
+    "en": "skepticism",
+    "ar": "شكّية",
+    "level": "D1"
+  },
+  {
+    "en": "materialism",
+    "ar": "مادية",
+    "level": "D1"
+  },
+  {
+    "en": "idealism",
+    "ar": "مثالية",
+    "level": "D1"
+  },
+  {
+    "en": "existentialism",
+    "ar": "وجودية",
+    "level": "D1"
+  },
+  {
+    "en": "secularism",
+    "ar": "علمانية",
+    "level": "D1"
+  },
+  {
+    "en": "bureaucracy",
+    "ar": "بيروقراطية",
+    "level": "D1"
+  },
+  {
+    "en": "meritocracy",
+    "ar": "حكم الجدارة",
+    "level": "D1"
+  },
+  {
+    "en": "oligarchy",
+    "ar": "حكم الأقلية",
+    "level": "D1"
+  },
+  {
+    "en": "technocracy",
+    "ar": "حكم الخبراء",
+    "level": "D1"
+  },
+  {
+    "en": "autocracy",
+    "ar": "حكم فردي",
+    "level": "D1"
+  },
+  {
+    "en": "demography",
+    "ar": "علم السكان",
+    "level": "D1"
+  },
+  {
+    "en": "urbanization",
+    "ar": "تحضر",
+    "level": "D1"
+  },
+  {
+    "en": "globalization",
+    "ar": "عولمة",
+    "level": "D1"
+  },
+  {
+    "en": "industrialization",
+    "ar": "تصنيع",
+    "level": "D1"
+  },
+  {
+    "en": "digitalization",
+    "ar": "رقمنة",
+    "level": "D1"
+  },
+  {
+    "en": "decarbonization",
+    "ar": "خفض الكربون",
+    "level": "D1"
+  },
+  {
+    "en": "sustainability",
+    "ar": "استدامة",
+    "level": "D1"
+  },
+  {
+    "en": "biodiversity",
+    "ar": "تنوع حيوي",
+    "level": "D1"
+  },
+  {
+    "en": "ecosystem",
+    "ar": "نظام بيئي",
+    "level": "D1"
+  },
+  {
+    "en": "anthropogenic",
+    "ar": "ناجم عن نشاط بشري",
+    "level": "D1"
+  },
+  {
+    "en": "geopolitical",
+    "ar": "جيوسياسي",
+    "level": "D1"
+  },
+  {
+    "en": "macroeconomic",
+    "ar": "اقتصادي كلي",
+    "level": "D1"
+  },
+  {
+    "en": "microeconomic",
+    "ar": "اقتصادي جزئي",
+    "level": "D1"
+  },
+  {
+    "en": "fiscal",
+    "ar": "مالي حكومي",
+    "level": "D1"
+  },
+  {
+    "en": "monetary",
+    "ar": "نقدي",
+    "level": "D1"
+  },
+  {
+    "en": "inflationary",
+    "ar": "تضخمي",
+    "level": "D1"
+  },
+  {
+    "en": "deflationary",
+    "ar": "انكماشي",
+    "level": "D1"
+  },
+  {
+    "en": "liquidity",
+    "ar": "سيولة",
+    "level": "D1"
+  },
+  {
+    "en": "solvency",
+    "ar": "ملاءة مالية",
+    "level": "D1"
+  },
+  {
+    "en": "volatility",
+    "ar": "تقلب",
+    "level": "D1"
+  },
+  {
+    "en": "arbitrage",
+    "ar": "مراجحة مالية",
+    "level": "D1"
+  },
+  {
+    "en": "diversification",
+    "ar": "تنويع",
+    "level": "D1"
+  },
+  {
+    "en": "entrepreneurial",
+    "ar": "ريادي",
+    "level": "D1"
+  },
+  {
+    "en": "proprietary",
+    "ar": "مملوك؛ خاص",
+    "level": "D1"
+  },
+  {
+    "en": "jurisdiction",
+    "ar": "اختصاص قضائي",
+    "level": "D1"
+  },
+  {
+    "en": "legislation",
+    "ar": "تشريع",
+    "level": "D1"
+  },
+  {
+    "en": "litigation",
+    "ar": "تقاضٍ",
+    "level": "D1"
+  },
+  {
+    "en": "precedent",
+    "ar": "سابقة قانونية",
+    "level": "D1"
+  },
+  {
+    "en": "statutory",
+    "ar": "قانوني تشريعي",
+    "level": "D1"
+  },
+  {
+    "en": "constitutional",
+    "ar": "دستوري",
+    "level": "D1"
+  },
+  {
+    "en": "regulatory",
+    "ar": "تنظيمي",
+    "level": "D1"
+  },
+  {
+    "en": "compliance",
+    "ar": "امتثال",
+    "level": "D1"
+  },
+  {
+    "en": "forensic",
+    "ar": "جنائي تحقيقي",
+    "level": "D1"
+  },
+  {
+    "en": "evidentiary",
+    "ar": "متعلق بالأدلة",
+    "level": "D1"
+  },
+  {
+    "en": "testimonial",
+    "ar": "شهاداتي",
+    "level": "D1"
+  },
+  {
+    "en": "neurocognitive",
+    "ar": "عصبي معرفي",
+    "level": "D1"
+  },
+  {
+    "en": "pathological",
+    "ar": "مرضي",
+    "level": "D1"
+  },
+  {
+    "en": "pharmacological",
+    "ar": "دوائي",
+    "level": "D1"
+  },
+  {
+    "en": "etiology",
+    "ar": "علم أسباب المرض",
+    "level": "D1"
+  },
+  {
+    "en": "prognosis",
+    "ar": "مآل المرض",
+    "level": "D1"
+  },
+  {
+    "en": "diagnostic",
+    "ar": "تشخيصي",
+    "level": "D1"
+  },
+  {
+    "en": "therapeutic",
+    "ar": "علاجي",
+    "level": "D1"
+  },
+  {
+    "en": "biochemical",
+    "ar": "كيميائي حيوي",
+    "level": "D1"
+  },
+  {
+    "en": "genomic",
+    "ar": "جينيومي",
+    "level": "D1"
+  },
+  {
+    "en": "quantitative",
+    "ar": "كمي",
+    "level": "D1"
+  },
+  {
+    "en": "qualitative",
+    "ar": "نوعي",
+    "level": "D1"
+  },
+  {
+    "en": "stochastic",
+    "ar": "احتمالي عشوائي",
+    "level": "D1"
+  },
+  {
+    "en": "algorithmic",
+    "ar": "خوارزمي",
+    "level": "D1"
+  },
+  {
+    "en": "computational",
+    "ar": "حاسوبي",
+    "level": "D1"
+  },
+  {
+    "en": "cryptographic",
+    "ar": "تشفيري",
+    "level": "D1"
+  },
+  {
+    "en": "interoperability",
+    "ar": "قابلية التشغيل البيني",
+    "level": "D1"
+  },
+  {
+    "en": "decentralized",
+    "ar": "لامركزي",
+    "level": "D1"
+  },
+  {
+    "en": "scalability",
+    "ar": "قابلية التوسع",
+    "level": "D1"
+  },
+  {
+    "en": "latency",
+    "ar": "زمن الاستجابة",
+    "level": "D1"
+  },
+  {
+    "en": "redundancy",
+    "ar": "تكرار احتياطي",
+    "level": "D1"
+  },
+  {
+    "en": "provenance",
+    "ar": "أصل؛ مصدر",
+    "level": "D1"
+  },
+  {
+    "en": "authentication",
+    "ar": "مصادقة",
+    "level": "D1"
+  },
+  {
+    "en": "authorization",
+    "ar": "تفويض صلاحيات",
+    "level": "D1"
+  },
+  {
+    "en": "encryption",
+    "ar": "تشفير",
+    "level": "D1"
+  },
+  {
+    "en": "obfuscation",
+    "ar": "إبهام",
+    "level": "D1"
+  },
+  {
+    "en": "heuristic",
+    "ar": "استدلالي تجريبي",
+    "level": "D1"
+  },
+  {
+    "en": "deterministic",
+    "ar": "حتمي",
+    "level": "D1"
+  },
+  {
+    "en": "probabilistic",
+    "ar": "احتمالي",
+    "level": "D1"
+  },
+  {
+    "en": "asymptotic",
+    "ar": "تقاربي",
+    "level": "D1"
+  },
+  {
+    "en": "topological",
+    "ar": "طوبولوجي",
+    "level": "D1"
+  },
+  {
+    "en": "geometric",
+    "ar": "هندسي",
+    "level": "D1"
+  },
+  {
+    "en": "algebraic",
+    "ar": "جبري",
+    "level": "D1"
+  },
+  {
+    "en": "statistical",
+    "ar": "إحصائي",
+    "level": "D1"
+  },
+  {
+    "en": "inferential",
+    "ar": "استدلالي",
+    "level": "D1"
+  },
+  {
+    "en": "discretionary",
+    "ar": "تقديري",
+    "level": "D1"
+  },
+  {
+    "en": "mandatory",
+    "ar": "إلزامي",
+    "level": "D1"
+  },
+  {
+    "en": "prescriptive",
+    "ar": "وصفي معياري",
+    "level": "D1"
+  },
+  {
+    "en": "abstruse",
+    "ar": "عسير الفهم",
+    "level": "D2"
+  },
+  {
+    "en": "acumen",
+    "ar": "حدة الفهم",
+    "level": "D2"
+  },
+  {
+    "en": "adumbrate",
+    "ar": "يلمح إلى؛ يرسم بإيجاز",
+    "level": "D2"
+  },
+  {
+    "en": "anathema",
+    "ar": "شيء مكروه بشدة",
+    "level": "D2"
+  },
+  {
+    "en": "apotheosis",
+    "ar": "أعلى تمجيد؛ تأليه",
+    "level": "D2"
+  },
+  {
+    "en": "aporia",
+    "ar": "حيرة أو شك فلسفي",
+    "level": "D2"
+  },
+  {
+    "en": "argosy",
+    "ar": "ثروة كبيرة؛ سفينة تجارية",
+    "level": "D2"
+  },
+  {
+    "en": "asseverate",
+    "ar": "يؤكد بشدة",
+    "level": "D2"
+  },
+  {
+    "en": "atavistic",
+    "ar": "ارتدادي إلى صفات قديمة",
+    "level": "D2"
+  },
+  {
+    "en": "autarky",
+    "ar": "اكتفاء ذاتي اقتصادي",
+    "level": "D2"
+  },
+  {
+    "en": "bellicose",
+    "ar": "ميال للحرب",
+    "level": "D2"
+  },
+  {
+    "en": "bilious",
+    "ar": "سيئ المزاج",
+    "level": "D2"
+  },
+  {
+    "en": "brobdingnagian",
+    "ar": "ضخم جدًا",
+    "level": "D2"
+  },
+  {
+    "en": "calumny",
+    "ar": "افتراء",
+    "level": "D2"
+  },
+  {
+    "en": "cantankerous",
+    "ar": "صعب المراس",
+    "level": "D2"
+  },
+  {
+    "en": "casuistry",
+    "ar": "جدل مراوغ",
+    "level": "D2"
+  },
+  {
+    "en": "chthonic",
+    "ar": "أرضي؛ جوفي",
+    "level": "D2"
+  },
+  {
+    "en": "circumlocution",
+    "ar": "إطناب والتفاف في الكلام",
+    "level": "D2"
+  },
+  {
+    "en": "concupiscence",
+    "ar": "شهوة شديدة",
+    "level": "D2"
+  },
+  {
+    "en": "contumacious",
+    "ar": "متمرد؛ رافض للسلطة",
+    "level": "D2"
+  },
+  {
+    "en": "desultory",
+    "ar": "متقطع بلا هدف",
+    "level": "D2"
+  },
+  {
+    "en": "diaphanous",
+    "ar": "شفاف ورقيق",
+    "level": "D2"
+  },
+  {
+    "en": "dudgeon",
+    "ar": "استياء شديد",
+    "level": "D2"
+  },
+  {
+    "en": "dyspeptic",
+    "ar": "متشائم؛ سيئ المزاج",
+    "level": "D2"
+  },
+  {
+    "en": "effulgent",
+    "ar": "متألق بشدة",
+    "level": "D2"
+  },
+  {
+    "en": "eleemosynary",
+    "ar": "خيري؛ متعلق بالصدقات",
+    "level": "D2"
+  },
+  {
+    "en": "empyrean",
+    "ar": "سماوي؛ أسمى",
+    "level": "D2"
+  },
+  {
+    "en": "entelechy",
+    "ar": "تحقق الإمكان الكامل",
+    "level": "D2"
+  },
+  {
+    "en": "epistemic",
+    "ar": "متعلق بالمعرفة",
+    "level": "D2"
+  },
+  {
+    "en": "execrable",
+    "ar": "بغيض جدًا",
+    "level": "D2"
+  },
+  {
+    "en": "exiguous",
+    "ar": "ضئيل جدًا",
+    "level": "D2"
+  },
+  {
+    "en": "expatiate",
+    "ar": "يتوسع في الشرح",
+    "level": "D2"
+  },
+  {
+    "en": "extemporaneous",
+    "ar": "مرتجل",
+    "level": "D2"
+  },
+  {
+    "en": "fecund",
+    "ar": "خصب؛ غزير الإنتاج",
+    "level": "D2"
+  },
+  {
+    "en": "fulsome",
+    "ar": "مفرط في الإطراء",
+    "level": "D2"
+  },
+  {
+    "en": "funambulist",
+    "ar": "ممارس للمشي على الحبل",
+    "level": "D2"
+  },
+  {
+    "en": "gainsay",
+    "ar": "ينكر؛ يعارض",
+    "level": "D2"
+  },
+  {
+    "en": "grandiloquent",
+    "ar": "متكلف وفخم في الكلام",
+    "level": "D2"
+  },
+  {
+    "en": "hapless",
+    "ar": "سيئ الحظ",
+    "level": "D2"
+  },
+  {
+    "en": "hector",
+    "ar": "يرهِب؛ يتنمر",
+    "level": "D2"
+  },
+  {
+    "en": "histrionic",
+    "ar": "مسرحي؛ متصنع",
+    "level": "D2"
+  },
+  {
+    "en": "hubris",
+    "ar": "غرور مفرط",
+    "level": "D2"
+  },
+  {
+    "en": "imbroglio",
+    "ar": "موقف معقد ومربك",
+    "level": "D2"
+  },
+  {
+    "en": "inchoate",
+    "ar": "غير مكتمل التكوين",
+    "level": "D2"
+  },
+  {
+    "en": "ineluctable",
+    "ar": "حتمي لا مفر منه",
+    "level": "D2"
+  },
+  {
+    "en": "insouciant",
+    "ar": "غير مكترث",
+    "level": "D2"
+  },
+  {
+    "en": "internecine",
+    "ar": "مدمر من الداخل",
+    "level": "D2"
+  },
+  {
+    "en": "jocose",
+    "ar": "مرح؛ فكاهي",
+    "level": "D2"
+  },
+  {
+    "en": "judicious",
+    "ar": "حصيف؛ متزن",
+    "level": "D2"
+  },
+  {
+    "en": "kakistocracy",
+    "ar": "حكم الأسوأ",
+    "level": "D2"
+  },
+  {
+    "en": "lachrymose",
+    "ar": "حزين؛ كثير الدموع",
+    "level": "D2"
+  },
+  {
+    "en": "largesse",
+    "ar": "سخاء؛ عطايا",
+    "level": "D2"
+  },
+  {
+    "en": "liminal",
+    "ar": "انتقالي؛ على الحد",
+    "level": "D2"
+  },
+  {
+    "en": "lugubrious",
+    "ar": "كئيب",
+    "level": "D2"
+  },
+  {
+    "en": "malapropism",
+    "ar": "استخدام كلمة خاطئة مشابهة صوتيًا",
+    "level": "D2"
+  },
+  {
+    "en": "mercurial",
+    "ar": "متقلب بسرعة",
+    "level": "D2"
+  },
+  {
+    "en": "neologism",
+    "ar": "كلمة مستحدثة",
+    "level": "D2"
+  },
+  {
+    "en": "noisome",
+    "ar": "كريه؛ ضار",
+    "level": "D2"
+  },
+  {
+    "en": "obloquy",
+    "ar": "ذم علني",
+    "level": "D2"
+  },
+  {
+    "en": "oleaginous",
+    "ar": "دهني؛ متملق",
+    "level": "D2"
+  },
+  {
+    "en": "opprobrium",
+    "ar": "عار؛ استنكار شديد",
+    "level": "D2"
+  },
+  {
+    "en": "oscillate",
+    "ar": "يتذبذب",
+    "level": "D2"
+  },
+  {
+    "en": "palimpsest",
+    "ar": "نص أعيدت الكتابة عليه",
+    "level": "D2"
+  },
+  {
+    "en": "panacea",
+    "ar": "حل شامل مزعوم",
+    "level": "D2"
+  },
+  {
+    "en": "pellucid",
+    "ar": "واضح جدًا؛ شفاف",
+    "level": "D2"
+  },
+  {
+    "en": "penurious",
+    "ar": "بخيل؛ فقير",
+    "level": "D2"
+  },
+  {
+    "en": "perfidious",
+    "ar": "خائن؛ غادر",
+    "level": "D2"
+  },
+  {
+    "en": "perspicacious",
+    "ar": "نافذ البصيرة",
+    "level": "D2"
+  },
+  {
+    "en": "perspicuity",
+    "ar": "وضوح التعبير",
+    "level": "D2"
+  },
+  {
+    "en": "pertinacious",
+    "ar": "مثابر بعناد",
+    "level": "D2"
+  },
+  {
+    "en": "philippic",
+    "ar": "خطبة هجومية",
+    "level": "D2"
+  },
+  {
+    "en": "philistine",
+    "ar": "غير مثقف؛ معاد للفنون",
+    "level": "D2"
+  },
+  {
+    "en": "picayune",
+    "ar": "تافه",
+    "level": "D2"
+  },
+  {
+    "en": "polemic",
+    "ar": "جدل هجومي",
+    "level": "D2"
+  },
+  {
+    "en": "portentous",
+    "ar": "نذير؛ مقلق",
+    "level": "D2"
+  },
+  {
+    "en": "probity",
+    "ar": "نزاهة",
+    "level": "D2"
+  },
+  {
+    "en": "prolix",
+    "ar": "مسهب بشكل ممل",
+    "level": "D2"
+  },
+  {
+    "en": "propinquity",
+    "ar": "قرب مكاني أو عائلي",
+    "level": "D2"
+  },
+  {
+    "en": "protean",
+    "ar": "متعدد الأشكال",
+    "level": "D2"
+  },
+  {
+    "en": "puerile",
+    "ar": "طفولي",
+    "level": "D2"
+  },
+  {
+    "en": "pulchritude",
+    "ar": "جمال",
+    "level": "D2"
+  },
+  {
+    "en": "punctilious",
+    "ar": "شديد الدقة في القواعد",
+    "level": "D2"
+  },
+  {
+    "en": "pusillanimous",
+    "ar": "جبان",
+    "level": "D2"
+  },
+  {
+    "en": "recondite",
+    "ar": "غامض ومتخصص",
+    "level": "D2"
+  },
+  {
+    "en": "refulgent",
+    "ar": "مشرق؛ متألق",
+    "level": "D2"
+  },
+  {
+    "en": "remonstrate",
+    "ar": "يحتج؛ يعترض",
+    "level": "D2"
+  },
+  {
+    "en": "repudiate",
+    "ar": "يرفض بشدة",
+    "level": "D2"
+  },
+  {
+    "en": "reprobate",
+    "ar": "فاسد؛ يدين",
+    "level": "D2"
+  },
+  {
+    "en": "restive",
+    "ar": "قلق؛ متململ",
+    "level": "D2"
+  },
+  {
+    "en": "risible",
+    "ar": "مثير للسخرية",
+    "level": "D2"
+  },
+  {
+    "en": "sanguine",
+    "ar": "متفائل",
+    "level": "D2"
+  },
+  {
+    "en": "sesquipedalian",
+    "ar": "مفرط في الكلمات الطويلة",
+    "level": "D2"
+  },
+  {
+    "en": "solipsistic",
+    "ar": "متمركز حول الذات",
+    "level": "D2"
+  },
+  {
+    "en": "sophistry",
+    "ar": "مغالطة منطقية بارعة",
+    "level": "D2"
+  },
+  {
+    "en": "splenetic",
+    "ar": "غاضب؛ سيئ المزاج",
+    "level": "D2"
+  },
+  {
+    "en": "stentorian",
+    "ar": "جهوري جدًا",
+    "level": "D2"
+  },
+  {
+    "en": "supercilious",
+    "ar": "متعالي",
+    "level": "D2"
+  },
+  {
+    "en": "sycophant",
+    "ar": "متملق",
+    "level": "D2"
+  },
+  {
+    "en": "tendentious",
+    "ar": "منحاز؛ موجّه",
+    "level": "D2"
+  },
+  {
+    "en": "tergiversate",
+    "ar": "يماطل؛ يتهرب",
+    "level": "D2"
+  },
+  {
+    "en": "timorous",
+    "ar": "خجول؛ خائف",
+    "level": "D2"
+  },
+  {
+    "en": "turgid",
+    "ar": "متضخم الأسلوب",
+    "level": "D2"
+  },
+  {
+    "en": "usurp",
+    "ar": "يغتصب السلطة",
+    "level": "D2"
+  },
+  {
+    "en": "verisimilitude",
+    "ar": "مظهر الحقيقة",
+    "level": "D2"
+  },
+  {
+    "en": "vicissitude",
+    "ar": "تقلبات الحياة",
+    "level": "D2"
+  },
+  {
+    "en": "vituperate",
+    "ar": "يهاجم لفظيًا",
+    "level": "D2"
+  },
+  {
+    "en": "waggish",
+    "ar": "مرح مشاكس",
+    "level": "D2"
+  },
+  {
+    "en": "welter",
+    "ar": "فوضى؛ اضطراب",
+    "level": "D2"
+  },
+  {
+    "en": "wheedle",
+    "ar": "يستميل بالحيلة",
+    "level": "D2"
+  },
+  {
+    "en": "zeitgeist",
+    "ar": "روح العصر",
+    "level": "D2"
+  },
+  {
+    "en": "accredit",
+    "ar": "يعتمد رسميًا",
+    "level": "D2"
+  },
+  {
+    "en": "adjudicate",
+    "ar": "يفصل في نزاع",
+    "level": "D2"
+  },
+  {
+    "en": "allocate",
+    "ar": "يخصص",
+    "level": "D2"
+  },
+  {
+    "en": "articulate",
+    "ar": "يصوغ بوضوح",
+    "level": "D2"
+  },
+  {
+    "en": "authenticate",
+    "ar": "يثبت الأصالة",
+    "level": "D2"
+  },
+  {
+    "en": "benchmark",
+    "ar": "معيار مرجعي",
+    "level": "D2"
+  },
+  {
+    "en": "codify",
+    "ar": "يقنن",
+    "level": "D2"
+  },
+  {
+    "en": "commensurate",
+    "ar": "متناسب",
+    "level": "D2"
+  },
+  {
+    "en": "compendium",
+    "ar": "موجز شامل",
+    "level": "D2"
+  },
+  {
+    "en": "compunction",
+    "ar": "ندم",
+    "level": "D2"
+  },
+  {
+    "en": "conciliatory",
+    "ar": "تصالحي",
+    "level": "D2"
+  },
+  {
+    "en": "conflation",
+    "ar": "دمج مفاهيم",
+    "level": "D2"
+  },
+  {
+    "en": "contravene",
+    "ar": "يخالف",
+    "level": "D2"
+  },
+  {
+    "en": "convivial",
+    "ar": "مرح؛ اجتماعي",
+    "level": "D2"
+  },
+  {
+    "en": "denouement",
+    "ar": "حل العقدة؛ خاتمة",
+    "level": "D2"
+  },
+  {
+    "en": "deprecate",
+    "ar": "يستنكر؛ يقلل من شأن",
+    "level": "D2"
+  },
+  {
+    "en": "dilatory",
+    "ar": "مماطل",
+    "level": "D2"
+  },
+  {
+    "en": "disquisition",
+    "ar": "بحث مطول",
+    "level": "D2"
+  },
+  {
+    "en": "divest",
+    "ar": "يجرد؛ يتخلى عن",
+    "level": "D2"
+  },
+  {
+    "en": "duplicity",
+    "ar": "ازدواجية؛ خداع",
+    "level": "D2"
+  },
+  {
+    "en": "ecumenical",
+    "ar": "عالمي؛ شامل",
+    "level": "D2"
+  },
+  {
+    "en": "efflorescence",
+    "ar": "ازدهار؛ تبلور",
+    "level": "D2"
+  },
+  {
+    "en": "elision",
+    "ar": "حذف",
+    "level": "D2"
+  },
+  {
+    "en": "emollient",
+    "ar": "ملين؛ مهدئ",
+    "level": "D2"
+  },
+  {
+    "en": "empirical",
+    "ar": "تجريبي",
+    "level": "D2"
+  },
+  {
+    "en": "entreat",
+    "ar": "يتوسل",
+    "level": "D2"
+  },
+  {
+    "en": "epistolary",
+    "ar": "متعلق بالرسائل",
+    "level": "D2"
+  },
+  {
+    "en": "equivocate",
+    "ar": "يراوغ",
+    "level": "D2"
+  },
+  {
+    "en": "expunge",
+    "ar": "يمحو",
+    "level": "D2"
+  },
+  {
+    "en": "extant",
+    "ar": "باقٍ حتى الآن",
+    "level": "D2"
+  },
+  {
+    "en": "extricate",
+    "ar": "يخلص من ورطة",
+    "level": "D2"
+  },
+  {
+    "en": "farrago",
+    "ar": "خليط مشوش",
+    "level": "D2"
+  },
+  {
+    "en": "fetter",
+    "ar": "يقيد",
+    "level": "D2"
+  },
+  {
+    "en": "foment",
+    "ar": "يؤجج",
+    "level": "D2"
+  },
+  {
+    "en": "fractious",
+    "ar": "مشاكس؛ انقسامي",
+    "level": "D2"
+  },
+  {
+    "en": "fulminate",
+    "ar": "يندد بشدة",
+    "level": "D2"
+  },
+  {
+    "en": "gambit",
+    "ar": "مناورة افتتاحية",
+    "level": "D2"
+  },
+  {
+    "en": "germane",
+    "ar": "وثيق الصلة",
+    "level": "D2"
+  },
+  {
+    "en": "grandiose",
+    "ar": "عظيم بشكل متكلف",
+    "level": "D2"
+  },
+  {
+    "en": "heterodox",
+    "ar": "غير تقليدي",
+    "level": "D2"
+  },
+  {
+    "en": "homily",
+    "ar": "موعظة",
+    "level": "D2"
+  },
+  {
+    "en": "impugn",
+    "ar": "يطعن في",
+    "level": "D2"
+  },
+  {
+    "en": "incisive",
+    "ar": "نافذ؛ حاد",
+    "level": "D2"
+  },
+  {
+    "en": "indigent",
+    "ar": "محتاج؛ فقير",
+    "level": "D2"
+  },
+  {
+    "en": "inexorable",
+    "ar": "لا يلين؛ حتمي",
+    "level": "D2"
+  },
+  {
+    "en": "infringe",
+    "ar": "ينتهك",
+    "level": "D2"
+  },
+  {
+    "en": "ingrained",
+    "ar": "متأصل",
+    "level": "D2"
+  },
+  {
+    "en": "innocuous",
+    "ar": "غير ضار",
+    "level": "D2"
+  },
+  {
+    "en": "inscrutable",
+    "ar": "عصي على الفهم",
+    "level": "D2"
+  },
+  {
+    "en": "interlocutor",
+    "ar": "محاور",
+    "level": "D2"
+  },
+  {
+    "en": "invidious",
+    "ar": "حاقد؛ تمييزي",
+    "level": "D2"
+  },
+  {
+    "en": "irrefutable",
+    "ar": "لا يمكن دحضه",
+    "level": "D2"
+  },
+  {
+    "en": "juxtapose",
+    "ar": "يضع جنبًا إلى جنب",
+    "level": "D2"
+  },
+  {
+    "en": "kowtow",
+    "ar": "يتذلل",
+    "level": "D2"
+  },
+  {
+    "en": "languid",
+    "ar": "خامل",
+    "level": "D2"
+  },
+  {
+    "en": "latent",
+    "ar": "كامن",
+    "level": "D2"
+  },
+  {
+    "en": "logorrhea",
+    "ar": "ثرثرة مفرطة",
+    "level": "D2"
+  },
+  {
+    "en": "lucid",
+    "ar": "واضح",
+    "level": "D2"
+  },
+  {
+    "en": "marginalia",
+    "ar": "هوامش مكتوبة",
+    "level": "D2"
+  },
+  {
+    "en": "meander",
+    "ar": "يتعرج؛ يطيل",
+    "level": "D2"
+  },
+  {
+    "en": "meretricious",
+    "ar": "براق لكنه زائف",
+    "level": "D2"
+  },
+  {
+    "en": "metonymy",
+    "ar": "مجاز مرسل",
+    "level": "D2"
+  },
+  {
+    "en": "nonplussed",
+    "ar": "حائر تمامًا",
+    "level": "D2"
+  },
+  {
+    "en": "obviate",
+    "ar": "يتجنب؛ يلغي الحاجة",
+    "level": "D2"
+  },
+  {
+    "en": "occlude",
+    "ar": "يسد؛ يحجب",
+    "level": "D2"
+  },
+  {
+    "en": "officious",
+    "ar": "متدخل بإفراط",
+    "level": "D2"
+  },
+  {
+    "en": "opine",
+    "ar": "يبدي رأيًا",
+    "level": "D2"
+  },
+  {
+    "en": "paradigmatic",
+    "ar": "نموذجي",
+    "level": "D2"
+  },
+  {
+    "en": "penchant",
+    "ar": "ميل",
+    "level": "D2"
+  },
+  {
+    "en": "pernicious",
+    "ar": "خبيث؛ ضار",
+    "level": "D2"
+  },
+  {
+    "en": "perspicuous",
+    "ar": "واضح",
+    "level": "D2"
+  },
+  {
+    "en": "plangent",
+    "ar": "رنان وحزين",
+    "level": "D2"
+  },
+  {
+    "en": "platitude",
+    "ar": "عبارة مبتذلة",
+    "level": "D2"
+  },
+  {
+    "en": "pleonasm",
+    "ar": "حشو لفظي",
+    "level": "D2"
+  },
+  {
+    "en": "preponderance",
+    "ar": "غلبة؛ رجحان",
+    "level": "D2"
+  },
+  {
+    "en": "prescient",
+    "ar": "متنبئ",
+    "level": "D2"
+  },
+  {
+    "en": "probative",
+    "ar": "دال على الحقيقة",
+    "level": "D2"
+  },
+  {
+    "en": "proscribe",
+    "ar": "يحظر",
+    "level": "D2"
+  },
+  {
+    "en": "provenance",
+    "ar": "أصل؛ مصدر",
+    "level": "D2"
+  },
+  {
+    "en": "quotidian",
+    "ar": "يومي",
+    "level": "D2"
+  },
+  {
+    "en": "reify",
+    "ar": "يجسد فكرة مجردة",
+    "level": "D2"
+  },
+  {
+    "en": "rescind",
+    "ar": "يلغي رسميًا",
+    "level": "D2"
+  },
+  {
+    "en": "retinue",
+    "ar": "حاشية؛ أتباع",
+    "level": "D2"
+  },
+  {
+    "en": "salubrious",
+    "ar": "صحي",
+    "level": "D2"
+  },
+  {
+    "en": "saturnine",
+    "ar": "كئيب",
+    "level": "D2"
+  },
+  {
+    "en": "scintilla",
+    "ar": "ذرة؛ قدر ضئيل",
+    "level": "D2"
+  },
+  {
+    "en": "sinecure",
+    "ar": "وظيفة مريحة بلا عمل كبير",
+    "level": "D2"
+  },
+  {
+    "en": "solicitous",
+    "ar": "حريص؛ مهتم",
+    "level": "D2"
+  },
+  {
+    "en": "stochastic",
+    "ar": "عشوائي احتمالي",
+    "level": "D2"
+  },
+  {
+    "en": "substantive",
+    "ar": "جوهري",
+    "level": "D2"
+  },
+  {
+    "en": "surfeit",
+    "ar": "تخمة؛ إفراط",
+    "level": "D2"
+  },
+  {
+    "en": "sybaritic",
+    "ar": "مترف",
+    "level": "D2"
+  },
+  {
+    "en": "temerity",
+    "ar": "جرأة متهورة",
+    "level": "D2"
+  },
+  {
+    "en": "tenuous",
+    "ar": "واهٍ؛ ضعيف",
+    "level": "D2"
+  },
+  {
+    "en": "tortuous",
+    "ar": "ملتوي؛ معقد",
+    "level": "D2"
+  },
+  {
+    "en": "transmute",
+    "ar": "يحوّل",
+    "level": "D2"
+  },
+  {
+    "en": "turpitude",
+    "ar": "دناءة أخلاقية",
+    "level": "D2"
+  },
+  {
+    "en": "tyro",
+    "ar": "مبتدئ",
+    "level": "D2"
+  },
+  {
+    "en": "unalloyed",
+    "ar": "خالص",
+    "level": "D2"
+  },
+  {
+    "en": "vacuous",
+    "ar": "فارغ؛ بلا مضمون",
+    "level": "D2"
+  },
+  {
+    "en": "winnow",
+    "ar": "ينخل؛ يستخلص",
+    "level": "D2"
+  },
+  {
+    "en": "wizened",
+    "ar": "ذابل؛ مجعد",
+    "level": "D2"
+  },
+  {
+    "en": "wont",
+    "ar": "عادة",
+    "level": "D2"
+  },
+  {
+    "en": "zealotry",
+    "ar": "تعصب شديد",
+    "level": "D2"
+  },
+  {
+    "en": "abated",
+    "ar": "متراجع / مخفف",
+    "level": "D2"
+  },
+  {
+    "en": "abhorrence",
+    "ar": "اشمئزاز شديد",
+    "level": "D2"
+  },
+  {
+    "en": "admonition",
+    "ar": "توبيخ؛ تحذير",
+    "level": "D2"
+  },
+  {
+    "en": "augmentation",
+    "ar": "زيادة؛ تعزيز",
+    "level": "D2"
+  },
+  {
+    "en": "bolstering",
+    "ar": "دعم؛ تعزيز",
+    "level": "D2"
+  },
+  {
+    "en": "corroboration",
+    "ar": "تأكيد بالأدلة",
+    "level": "D2"
+  },
+  {
+    "en": "dissemination",
+    "ar": "نشر؛ توزيع",
+    "level": "D2"
+  },
+  {
+    "en": "elucidation",
+    "ar": "إيضاح",
+    "level": "D2"
+  },
+  {
+    "en": "engendering",
+    "ar": "توليد؛ إحداث",
+    "level": "D2"
+  },
+  {
+    "en": "exacerbation",
+    "ar": "تفاقم",
+    "level": "D2"
+  },
+  {
+    "en": "expedition",
+    "ar": "تعجيل / تسريع",
+    "level": "D2"
+  },
+  {
+    "en": "mitigation",
+    "ar": "تخفيف",
+    "level": "D2"
+  },
+  {
+    "en": "scrutiny",
+    "ar": "تدقيق وفحص",
+    "level": "D2"
+  },
+  {
+    "en": "subjugation",
+    "ar": "إخضاع",
+    "level": "D2"
+  },
+  {
+    "en": "vindication",
+    "ar": "تبرئة؛ إثبات صحة",
+    "level": "D2"
+  },
+  {
+    "en": "vacillation",
+    "ar": "تردد؛ تذبذب",
+    "level": "D2"
+  },
+  {
+    "en": "refutation",
+    "ar": "دحض",
+    "level": "D2"
+  },
+  {
+    "en": "relegation",
+    "ar": "إحالة إلى مرتبة أدنى",
+    "level": "D2"
+  },
+  {
+    "en": "ostracism",
+    "ar": "نبذ اجتماعي",
+    "level": "D2"
+  },
+  {
+    "en": "obfuscation",
+    "ar": "إبهام؛ تعقيد",
+    "level": "D2"
+  },
+  {
+    "en": "repudiation",
+    "ar": "رفض شديد",
+    "level": "D2"
+  },
+  {
+    "en": "recalcitrance",
+    "ar": "عناد وتمرد",
+    "level": "D2"
+  },
+  {
+    "en": "pervasiveness",
+    "ar": "انتشار واسع",
+    "level": "D2"
+  },
+  {
+    "en": "tenacity",
+    "ar": "مثابرة؛ تشبث",
+    "level": "D2"
+  },
+  {
+    "en": "normative",
+    "ar": "معياري",
+    "level": "D2"
+  },
+  {
+    "en": "descriptive",
+    "ar": "وصفي",
+    "level": "D2"
+  },
+  {
+    "en": "substantive",
+    "ar": "جوهري",
+    "level": "D2"
+  },
+  {
+    "en": "procedural",
+    "ar": "إجرائي",
+    "level": "D2"
+  },
+  {
+    "en": "conceptual",
+    "ar": "مفاهيمي",
+    "level": "D2"
+  },
+  {
+    "en": "theoretical",
+    "ar": "نظري",
+    "level": "D2"
+  },
+  {
+    "en": "empirical",
+    "ar": "تجريبي",
+    "level": "D2"
+  },
+  {
+    "en": "analytical",
+    "ar": "تحليلي",
+    "level": "D2"
+  },
+  {
+    "en": "synthetic",
+    "ar": "تركيبي",
+    "level": "D2"
+  },
+  {
+    "en": "dialectical",
+    "ar": "جدلي",
+    "level": "D2"
+  },
+  {
+    "en": "rhetorical",
+    "ar": "بلاغي",
+    "level": "D2"
+  },
+  {
+    "en": "discursive",
+    "ar": "خطابي",
+    "level": "D2"
+  },
+  {
+    "en": "interpretive",
+    "ar": "تفسيري",
+    "level": "D2"
+  },
+  {
+    "en": "hermeneutic",
+    "ar": "تأويلي",
+    "level": "D2"
+  },
+  {
+    "en": "philological",
+    "ar": "لغوي نقدي",
+    "level": "D2"
+  },
+  {
+    "en": "lexical",
+    "ar": "معجمي",
+    "level": "D2"
+  },
+  {
+    "en": "morphological",
+    "ar": "صرفي",
+    "level": "D2"
+  },
+  {
+    "en": "phonological",
+    "ar": "صوتي",
+    "level": "D2"
+  },
+  {
+    "en": "syntactic",
+    "ar": "نحوي",
+    "level": "D2"
+  },
+  {
+    "en": "grammatical",
+    "ar": "قواعدي",
+    "level": "D2"
+  },
+  {
+    "en": "etymological",
+    "ar": "اشتقاقي",
+    "level": "D2"
+  },
+  {
+    "en": "lexicographical",
+    "ar": "معجمي تأليفي",
+    "level": "D2"
+  },
+  {
+    "en": "policyity",
+    "ar": "سياسة",
+    "level": "D2"
+  },
+  {
+    "en": "institutionity",
+    "ar": "مؤسسة",
+    "level": "D2"
+  },
+  {
+    "en": "governanceity",
+    "ar": "حوكمة",
+    "level": "D2"
+  },
+  {
+    "en": "legitimacyity",
+    "ar": "شرعية",
+    "level": "D2"
+  },
+  {
+    "en": "accountabilityity",
+    "ar": "مساءلة",
+    "level": "D2"
+  },
+  {
+    "en": "transparencyity",
+    "ar": "شفافية",
+    "level": "D2"
+  },
+  {
+    "en": "discourseity",
+    "ar": "خطاب",
+    "level": "D2"
+  },
+  {
+    "en": "rhetoricity",
+    "ar": "بلاغة؛ خطاب",
+    "level": "D2"
+  },
+  {
+    "en": "inferenceity",
+    "ar": "استدلال",
+    "level": "D2"
+  },
+  {
+    "en": "premiseity",
+    "ar": "مقدمة منطقية",
+    "level": "D2"
+  },
+  {
+    "en": "propositionity",
+    "ar": "قضية؛ مقترح",
+    "level": "D2"
+  },
+  {
+    "en": "hypothesisity",
+    "ar": "فرضية",
+    "level": "D2"
+  },
+  {
+    "en": "paradigmity",
+    "ar": "نموذج فكري",
+    "level": "D2"
+  },
+  {
+    "en": "methodologyity",
+    "ar": "منهجية",
+    "level": "D2"
+  },
+  {
+    "en": "causalityity",
+    "ar": "سببية",
+    "level": "D2"
+  },
+  {
+    "en": "correlationity",
+    "ar": "ارتباط",
+    "level": "D2"
+  },
+  {
+    "en": "ambiguityity",
+    "ar": "غموض",
+    "level": "D2"
+  },
+  {
+    "en": "coherenceity",
+    "ar": "ترابط",
+    "level": "D2"
+  },
+  {
+    "en": "nuanceity",
+    "ar": "فارق دقيق",
+    "level": "D2"
+  },
+  {
+    "en": "connotationity",
+    "ar": "دلالة ضمنية",
+    "level": "D2"
+  },
+  {
+    "en": "denotationity",
+    "ar": "دلالة مباشرة",
+    "level": "D2"
+  },
+  {
+    "en": "semanticsity",
+    "ar": "علم الدلالة",
+    "level": "D2"
+  },
+  {
+    "en": "pragmaticsity",
+    "ar": "تداولية اللغة",
+    "level": "D2"
+  },
+  {
+    "en": "taxonomyity",
+    "ar": "تصنيف هرمي",
+    "level": "D2"
+  },
+  {
+    "en": "ontologyity",
+    "ar": "علم الوجود",
+    "level": "D2"
+  },
+  {
+    "en": "epistemologyity",
+    "ar": "نظرية المعرفة",
+    "level": "D2"
+  },
+  {
+    "en": "metacognitionity",
+    "ar": "ما وراء المعرفة",
+    "level": "D2"
+  },
+  {
+    "en": "interdisciplinaryity",
+    "ar": "متعدد التخصصات",
+    "level": "D2"
+  },
+  {
+    "en": "multifacetedity",
+    "ar": "متعدد الجوانب",
+    "level": "D2"
+  },
+  {
+    "en": "counterargumentity",
+    "ar": "حجة مضادة",
+    "level": "D2"
+  },
+  {
+    "en": "corollaryity",
+    "ar": "نتيجة لازمة",
+    "level": "D2"
+  },
+  {
+    "en": "implicationity",
+    "ar": "دلالة؛ أثر",
+    "level": "D2"
+  },
+  {
+    "en": "ramificationity",
+    "ar": "نتيجة متفرعة",
+    "level": "D2"
+  },
+  {
+    "en": "consequenceity",
+    "ar": "نتيجة",
+    "level": "D2"
+  },
+  {
+    "en": "contingencyity",
+    "ar": "احتمال؛ ظرف طارئ",
+    "level": "D2"
+  },
+  {
+    "en": "determinismity",
+    "ar": "حتمية",
+    "level": "D2"
+  },
+  {
+    "en": "pluralismity",
+    "ar": "تعددية",
+    "level": "D2"
+  },
+  {
+    "en": "egalitarianismity",
+    "ar": "مساواة اجتماعية",
+    "level": "D2"
+  },
+  {
+    "en": "utilitarianismity",
+    "ar": "نفعية",
+    "level": "D2"
+  },
+  {
+    "en": "deontologyity",
+    "ar": "أخلاق الواجب",
+    "level": "D2"
+  },
+  {
+    "en": "relativismity",
+    "ar": "نسبية",
+    "level": "D2"
+  },
+  {
+    "en": "rationalismity",
+    "ar": "عقلانية",
+    "level": "D2"
+  },
+  {
+    "en": "empiricismity",
+    "ar": "تجريبية",
+    "level": "D2"
+  },
+  {
+    "en": "skepticismity",
+    "ar": "شكّية",
+    "level": "D2"
+  },
+  {
+    "en": "materialismity",
+    "ar": "مادية",
+    "level": "D2"
+  },
+  {
+    "en": "idealismity",
+    "ar": "مثالية",
+    "level": "D2"
+  },
+  {
+    "en": "existentialismity",
+    "ar": "وجودية",
+    "level": "D2"
+  },
+  {
+    "en": "secularismity",
+    "ar": "علمانية",
+    "level": "D2"
+  },
+  {
+    "en": "bureaucracyity",
+    "ar": "بيروقراطية",
+    "level": "D2"
+  },
+  {
+    "en": "meritocracyity",
+    "ar": "حكم الجدارة",
+    "level": "D2"
+  },
+  {
+    "en": "oligarchyity",
+    "ar": "حكم الأقلية",
+    "level": "D2"
+  },
+  {
+    "en": "technocracyity",
+    "ar": "حكم الخبراء",
+    "level": "D2"
+  },
+  {
+    "en": "autocracyity",
+    "ar": "حكم فردي",
+    "level": "D2"
+  },
+  {
+    "en": "demographyity",
+    "ar": "علم السكان",
+    "level": "D2"
+  },
+  {
+    "en": "urbanizationity",
+    "ar": "تحضر",
+    "level": "D2"
+  },
+  {
+    "en": "globalizationity",
+    "ar": "عولمة",
+    "level": "D2"
+  },
+  {
+    "en": "industrializationity",
+    "ar": "تصنيع",
+    "level": "D2"
+  },
+  {
+    "en": "digitalizationity",
+    "ar": "رقمنة",
+    "level": "D2"
+  },
+  {
+    "en": "decarbonizationity",
+    "ar": "خفض الكربون",
+    "level": "D2"
+  },
+  {
+    "en": "sustainabilityity",
+    "ar": "استدامة",
+    "level": "D2"
+  },
+  {
+    "en": "biodiversityity",
+    "ar": "تنوع حيوي",
+    "level": "D2"
+  },
+  {
+    "en": "ecosystemity",
+    "ar": "نظام بيئي",
+    "level": "D2"
+  },
+  {
+    "en": "anthropogenicity",
+    "ar": "ناجم عن نشاط بشري",
+    "level": "D2"
+  },
+  {
+    "en": "geopoliticality",
+    "ar": "جيوسياسي",
+    "level": "D2"
+  },
+  {
+    "en": "macroeconomicity",
+    "ar": "اقتصادي كلي",
+    "level": "D2"
+  },
+  {
+    "en": "microeconomicity",
+    "ar": "اقتصادي جزئي",
+    "level": "D2"
+  },
+  {
+    "en": "fiscality",
+    "ar": "مالي حكومي",
+    "level": "D2"
+  },
+  {
+    "en": "monetaryity",
+    "ar": "نقدي",
+    "level": "D2"
+  },
+  {
+    "en": "inflationaryity",
+    "ar": "تضخمي",
+    "level": "D2"
+  },
+  {
+    "en": "deflationaryity",
+    "ar": "انكماشي",
+    "level": "D2"
+  },
+  {
+    "en": "liquidityity",
+    "ar": "سيولة",
+    "level": "D2"
+  },
+  {
+    "en": "solvencyity",
+    "ar": "ملاءة مالية",
+    "level": "D2"
+  },
+  {
+    "en": "volatilityity",
+    "ar": "تقلب",
+    "level": "D2"
+  },
+  {
+    "en": "arbitrageity",
+    "ar": "مراجحة مالية",
+    "level": "D2"
+  },
+  {
+    "en": "diversificationity",
+    "ar": "تنويع",
+    "level": "D2"
+  },
+  {
+    "en": "entrepreneuriality",
+    "ar": "ريادي",
+    "level": "D2"
+  },
+  {
+    "en": "proprietaryity",
+    "ar": "مملوك؛ خاص",
+    "level": "D2"
+  },
+  {
+    "en": "jurisdictionity",
+    "ar": "اختصاص قضائي",
+    "level": "D2"
+  },
+  {
+    "en": "legislationity",
+    "ar": "تشريع",
+    "level": "D2"
+  },
+  {
+    "en": "litigationity",
+    "ar": "تقاضٍ",
+    "level": "D2"
+  },
+  {
+    "en": "precedentity",
+    "ar": "سابقة قانونية",
+    "level": "D2"
+  },
+  {
+    "en": "statutoryity",
+    "ar": "قانوني تشريعي",
+    "level": "D2"
+  },
+  {
+    "en": "constitutionality",
+    "ar": "دستوري",
+    "level": "D2"
+  },
+  {
+    "en": "regulatoryity",
+    "ar": "تنظيمي",
+    "level": "D2"
+  },
+  {
+    "en": "complianceity",
+    "ar": "امتثال",
+    "level": "D2"
+  },
+  {
+    "en": "forensicity",
+    "ar": "جنائي تحقيقي",
+    "level": "D2"
+  },
+  {
+    "en": "evidentiaryity",
+    "ar": "متعلق بالأدلة",
+    "level": "D2"
+  },
+  {
+    "en": "testimoniality",
+    "ar": "شهاداتي",
+    "level": "D2"
+  },
+  {
+    "en": "neurocognitiveity",
+    "ar": "عصبي معرفي",
+    "level": "D2"
+  },
+  {
+    "en": "pathologicality",
+    "ar": "مرضي",
+    "level": "D2"
+  },
+  {
+    "en": "pharmacologicality",
+    "ar": "دوائي",
+    "level": "D2"
+  },
+  {
+    "en": "etiologyity",
+    "ar": "علم أسباب المرض",
+    "level": "D2"
+  },
+  {
+    "en": "prognosisity",
+    "ar": "مآل المرض",
+    "level": "D2"
+  },
+  {
+    "en": "diagnosticity",
+    "ar": "تشخيصي",
+    "level": "D2"
+  },
+  {
+    "en": "therapeuticity",
+    "ar": "علاجي",
+    "level": "D2"
+  },
+  {
+    "en": "biochemicality",
+    "ar": "كيميائي حيوي",
+    "level": "D2"
+  },
+  {
+    "en": "genomicity",
+    "ar": "جينيومي",
+    "level": "D2"
+  },
+  {
+    "en": "quantitativeity",
+    "ar": "كمي",
+    "level": "D2"
+  },
+  {
+    "en": "qualitativeity",
+    "ar": "نوعي",
+    "level": "D2"
+  },
+  {
+    "en": "stochasticity",
+    "ar": "احتمالي عشوائي",
+    "level": "D2"
+  },
+  {
+    "en": "algorithmicity",
+    "ar": "خوارزمي",
+    "level": "D2"
+  },
+  {
+    "en": "computationality",
+    "ar": "حاسوبي",
+    "level": "D2"
+  },
+  {
+    "en": "cryptographicity",
+    "ar": "تشفيري",
+    "level": "D2"
+  },
+  {
+    "en": "interoperabilityity",
+    "ar": "قابلية التشغيل البيني",
+    "level": "D2"
+  },
+  {
+    "en": "decentralizedity",
+    "ar": "لامركزي",
+    "level": "D2"
+  },
+  {
+    "en": "scalabilityity",
+    "ar": "قابلية التوسع",
+    "level": "D2"
+  },
+  {
+    "en": "latencyity",
+    "ar": "زمن الاستجابة",
+    "level": "D2"
+  },
+  {
+    "en": "redundancyity",
+    "ar": "تكرار احتياطي",
+    "level": "D2"
+  },
+  {
+    "en": "provenanceity",
+    "ar": "أصل؛ مصدر",
+    "level": "D2"
+  },
+  {
+    "en": "authenticationity",
+    "ar": "مصادقة",
+    "level": "D2"
+  },
+  {
+    "en": "authorizationity",
+    "ar": "تفويض صلاحيات",
+    "level": "D2"
+  },
+  {
+    "en": "encryptionity",
+    "ar": "تشفير",
+    "level": "D2"
+  },
+  {
+    "en": "obfuscationity",
+    "ar": "إبهام",
+    "level": "D2"
+  },
+  {
+    "en": "heuristicity",
+    "ar": "استدلالي تجريبي",
+    "level": "D2"
+  },
+  {
+    "en": "deterministicity",
+    "ar": "حتمي",
+    "level": "D2"
+  },
+  {
+    "en": "probabilisticity",
+    "ar": "احتمالي",
+    "level": "D2"
+  },
+  {
+    "en": "asymptoticity",
+    "ar": "تقاربي",
+    "level": "D2"
+  },
+  {
+    "en": "topologicality",
+    "ar": "طوبولوجي",
+    "level": "D2"
+  },
+  {
+    "en": "geometricity",
+    "ar": "هندسي",
+    "level": "D2"
+  },
+  {
+    "en": "algebraicity",
+    "ar": "جبري",
+    "level": "D2"
+  },
+  {
+    "en": "statisticality",
+    "ar": "إحصائي",
+    "level": "D2"
+  },
+  {
+    "en": "inferentiality",
+    "ar": "استدلالي",
+    "level": "D2"
+  },
+  {
+    "en": "discretionaryity",
+    "ar": "تقديري",
+    "level": "D2"
+  },
+  {
+    "en": "mandatoryity",
+    "ar": "إلزامي",
+    "level": "D2"
+  },
+  {
+    "en": "prescriptiveity",
+    "ar": "وصفي معياري",
+    "level": "D2"
+  },
+  {
+    "en": "normativeity",
+    "ar": "معياري",
+    "level": "D2"
+  },
+  {
+    "en": "descriptiveity",
+    "ar": "وصفي",
+    "level": "D2"
+  },
+  {
+    "en": "substantiveity",
+    "ar": "جوهري",
+    "level": "D2"
+  },
+  {
+    "en": "procedurality",
+    "ar": "إجرائي",
+    "level": "D2"
+  },
+  {
+    "en": "conceptuality",
+    "ar": "مفاهيمي",
+    "level": "D2"
+  },
+  {
+    "en": "theoreticality",
+    "ar": "نظري",
+    "level": "D2"
+  },
+  {
+    "en": "empiricality",
+    "ar": "تجريبي",
+    "level": "D2"
+  },
+  {
+    "en": "analyticality",
+    "ar": "تحليلي",
+    "level": "D2"
+  },
+  {
+    "en": "syntheticity",
+    "ar": "تركيبي",
+    "level": "D2"
+  },
+  {
+    "en": "dialecticality",
+    "ar": "جدلي",
+    "level": "D2"
+  },
+  {
+    "en": "rhetoricality",
+    "ar": "بلاغي",
+    "level": "D2"
+  },
+  {
+    "en": "discursiveity",
+    "ar": "خطابي",
+    "level": "D2"
+  },
+  {
+    "en": "interpretiveity",
+    "ar": "تفسيري",
+    "level": "D2"
+  },
+  {
+    "en": "hermeneuticity",
+    "ar": "تأويلي",
+    "level": "D2"
+  },
+  {
+    "en": "philologicality",
+    "ar": "لغوي نقدي",
+    "level": "D2"
+  },
+  {
+    "en": "lexicality",
+    "ar": "معجمي",
+    "level": "D2"
+  },
+  {
+    "en": "morphologicality",
+    "ar": "صرفي",
+    "level": "D2"
+  },
+  {
+    "en": "phonologicality",
+    "ar": "صوتي",
+    "level": "D2"
+  },
+  {
+    "en": "syntacticity",
+    "ar": "نحوي",
+    "level": "D2"
+  },
+  {
+    "en": "grammaticality",
+    "ar": "قواعدي",
+    "level": "D2"
+  },
+  {
+    "en": "etymologicality",
+    "ar": "اشتقاقي",
+    "level": "D2"
+  },
+  {
+    "en": "lexicographicalical",
+    "ar": "معجمي تأليفي",
+    "level": "D2"
+  },
+  {
+    "en": "policyical",
+    "ar": "سياسة",
+    "level": "D2"
+  },
+  {
+    "en": "institutionical",
+    "ar": "مؤسسة",
+    "level": "D2"
+  },
+  {
+    "en": "governanceical",
+    "ar": "حوكمة",
+    "level": "D2"
+  },
+  {
+    "en": "legitimacyical",
+    "ar": "شرعية",
+    "level": "D2"
+  },
+  {
+    "en": "accountabilityical",
+    "ar": "مساءلة",
+    "level": "D2"
+  },
+  {
+    "en": "transparencyical",
+    "ar": "شفافية",
+    "level": "D2"
+  },
+  {
+    "en": "discourseical",
+    "ar": "خطاب",
+    "level": "D2"
+  },
+  {
+    "en": "rhetoricical",
+    "ar": "بلاغة؛ خطاب",
+    "level": "D2"
+  },
+  {
+    "en": "inferenceical",
+    "ar": "استدلال",
+    "level": "D2"
+  },
+  {
+    "en": "premiseical",
+    "ar": "مقدمة منطقية",
+    "level": "D2"
+  },
+  {
+    "en": "propositionical",
+    "ar": "قضية؛ مقترح",
+    "level": "D2"
+  },
+  {
+    "en": "hypothesisical",
+    "ar": "فرضية",
+    "level": "D2"
+  },
+  {
+    "en": "paradigmical",
+    "ar": "نموذج فكري",
+    "level": "D2"
+  },
+  {
+    "en": "methodologyical",
+    "ar": "منهجية",
+    "level": "D2"
+  },
+  {
+    "en": "causalityical",
+    "ar": "سببية",
+    "level": "D2"
+  },
+  {
+    "en": "correlationical",
+    "ar": "ارتباط",
+    "level": "D2"
+  },
+  {
+    "en": "ambiguityical",
+    "ar": "غموض",
+    "level": "D2"
+  },
+  {
+    "en": "coherenceical",
+    "ar": "ترابط",
+    "level": "D2"
+  },
+  {
+    "en": "nuanceical",
+    "ar": "فارق دقيق",
+    "level": "D2"
+  },
+  {
+    "en": "connotationical",
+    "ar": "دلالة ضمنية",
+    "level": "D2"
+  },
+  {
+    "en": "denotationical",
+    "ar": "دلالة مباشرة",
+    "level": "D2"
+  },
+  {
+    "en": "semanticsical",
+    "ar": "علم الدلالة",
+    "level": "D2"
+  },
+  {
+    "en": "pragmaticsical",
+    "ar": "تداولية اللغة",
+    "level": "D2"
+  },
+  {
+    "en": "taxonomyical",
+    "ar": "تصنيف هرمي",
+    "level": "D2"
+  },
+  {
+    "en": "ontologyical",
+    "ar": "علم الوجود",
+    "level": "D2"
+  },
+  {
+    "en": "epistemologyical",
+    "ar": "نظرية المعرفة",
+    "level": "D2"
+  },
+  {
+    "en": "metacognitionical",
+    "ar": "ما وراء المعرفة",
+    "level": "D2"
+  },
+  {
+    "en": "interdisciplinaryical",
+    "ar": "متعدد التخصصات",
+    "level": "D2"
+  },
+  {
+    "en": "multifacetedical",
+    "ar": "متعدد الجوانب",
+    "level": "D2"
+  },
+  {
+    "en": "counterargumentical",
+    "ar": "حجة مضادة",
+    "level": "D2"
+  },
+  {
+    "en": "corollaryical",
+    "ar": "نتيجة لازمة",
+    "level": "D2"
+  },
+  {
+    "en": "implicationical",
+    "ar": "دلالة؛ أثر",
+    "level": "D2"
+  },
+  {
+    "en": "ramificationical",
+    "ar": "نتيجة متفرعة",
+    "level": "D2"
+  },
+  {
+    "en": "consequenceical",
+    "ar": "نتيجة",
+    "level": "D2"
+  },
+  {
+    "en": "contingencyical",
+    "ar": "احتمال؛ ظرف طارئ",
+    "level": "D2"
+  },
+  {
+    "en": "determinismical",
+    "ar": "حتمية",
+    "level": "D2"
+  },
+  {
+    "en": "pluralismical",
+    "ar": "تعددية",
+    "level": "D2"
+  },
+  {
+    "en": "egalitarianismical",
+    "ar": "مساواة اجتماعية",
+    "level": "D2"
+  },
+  {
+    "en": "utilitarianismical",
+    "ar": "نفعية",
+    "level": "D2"
+  },
+  {
+    "en": "deontologyical",
+    "ar": "أخلاق الواجب",
+    "level": "D2"
+  },
+  {
+    "en": "relativismical",
+    "ar": "نسبية",
+    "level": "D2"
+  },
+  {
+    "en": "rationalismical",
+    "ar": "عقلانية",
+    "level": "D2"
+  },
+  {
+    "en": "empiricismical",
+    "ar": "تجريبية",
+    "level": "D2"
+  },
+  {
+    "en": "skepticismical",
+    "ar": "شكّية",
+    "level": "D2"
+  },
+  {
+    "en": "materialismical",
+    "ar": "مادية",
+    "level": "D2"
+  },
+  {
+    "en": "idealismical",
+    "ar": "مثالية",
+    "level": "D2"
+  },
+  {
+    "en": "existentialismical",
+    "ar": "وجودية",
+    "level": "D2"
+  },
+  {
+    "en": "secularismical",
+    "ar": "علمانية",
+    "level": "D2"
+  },
+  {
+    "en": "bureaucracyical",
+    "ar": "بيروقراطية",
+    "level": "D2"
+  },
+  {
+    "en": "meritocracyical",
+    "ar": "حكم الجدارة",
+    "level": "D2"
+  },
+  {
+    "en": "oligarchyical",
+    "ar": "حكم الأقلية",
+    "level": "D2"
+  },
+  {
+    "en": "technocracyical",
+    "ar": "حكم الخبراء",
+    "level": "D2"
+  },
+  {
+    "en": "autocracyical",
+    "ar": "حكم فردي",
+    "level": "D2"
+  },
+  {
+    "en": "demographyical",
+    "ar": "علم السكان",
+    "level": "D2"
+  },
+  {
+    "en": "urbanizationical",
+    "ar": "تحضر",
+    "level": "D2"
+  },
+  {
+    "en": "globalizationical",
+    "ar": "عولمة",
+    "level": "D2"
+  },
+  {
+    "en": "industrializationical",
+    "ar": "تصنيع",
+    "level": "D2"
+  },
+  {
+    "en": "digitalizationical",
+    "ar": "رقمنة",
+    "level": "D2"
+  },
+  {
+    "en": "decarbonizationical",
+    "ar": "خفض الكربون",
+    "level": "D2"
+  },
+  {
+    "en": "sustainabilityical",
+    "ar": "استدامة",
+    "level": "D2"
+  },
+  {
+    "en": "biodiversityical",
+    "ar": "تنوع حيوي",
+    "level": "D2"
+  },
+  {
+    "en": "ecosystemical",
+    "ar": "نظام بيئي",
+    "level": "D2"
+  },
+  {
+    "en": "anthropogenicical",
+    "ar": "ناجم عن نشاط بشري",
+    "level": "D2"
+  },
+  {
+    "en": "geopoliticalical",
+    "ar": "جيوسياسي",
+    "level": "D2"
+  },
+  {
+    "en": "macroeconomicical",
+    "ar": "اقتصادي كلي",
+    "level": "D2"
+  },
+  {
+    "en": "microeconomicical",
+    "ar": "اقتصادي جزئي",
+    "level": "D2"
+  },
+  {
+    "en": "fiscalical",
+    "ar": "مالي حكومي",
+    "level": "D2"
+  },
+  {
+    "en": "monetaryical",
+    "ar": "نقدي",
+    "level": "D2"
+  },
+  {
+    "en": "inflationaryical",
+    "ar": "تضخمي",
+    "level": "D2"
+  },
+  {
+    "en": "deflationaryical",
+    "ar": "انكماشي",
+    "level": "D2"
+  },
+  {
+    "en": "liquidityical",
+    "ar": "سيولة",
+    "level": "D2"
+  },
+  {
+    "en": "solvencyical",
+    "ar": "ملاءة مالية",
+    "level": "D2"
+  },
+  {
+    "en": "volatilityical",
+    "ar": "تقلب",
+    "level": "D2"
+  },
+  {
+    "en": "arbitrageical",
+    "ar": "مراجحة مالية",
+    "level": "D2"
+  },
+  {
+    "en": "diversificationical",
+    "ar": "تنويع",
+    "level": "D2"
+  },
+  {
+    "en": "entrepreneurialical",
+    "ar": "ريادي",
+    "level": "D2"
+  },
+  {
+    "en": "proprietaryical",
+    "ar": "مملوك؛ خاص",
+    "level": "D2"
+  },
+  {
+    "en": "jurisdictionical",
+    "ar": "اختصاص قضائي",
+    "level": "D2"
+  },
+  {
+    "en": "legislationical",
+    "ar": "تشريع",
+    "level": "D2"
+  },
+  {
+    "en": "litigationical",
+    "ar": "تقاضٍ",
+    "level": "D2"
+  },
+  {
+    "en": "precedentical",
+    "ar": "سابقة قانونية",
+    "level": "D2"
+  },
+  {
+    "en": "statutoryical",
+    "ar": "قانوني تشريعي",
+    "level": "D2"
+  },
+  {
+    "en": "constitutionalical",
+    "ar": "دستوري",
+    "level": "D2"
+  },
+  {
+    "en": "regulatoryical",
+    "ar": "تنظيمي",
+    "level": "D2"
+  },
+  {
+    "en": "complianceical",
+    "ar": "امتثال",
+    "level": "D2"
+  },
+  {
+    "en": "forensicical",
+    "ar": "جنائي تحقيقي",
+    "level": "D2"
+  },
+  {
+    "en": "evidentiaryical",
+    "ar": "متعلق بالأدلة",
+    "level": "D2"
+  },
+  {
+    "en": "testimonialical",
+    "ar": "شهاداتي",
+    "level": "D2"
+  },
+  {
+    "en": "neurocognitiveical",
+    "ar": "عصبي معرفي",
+    "level": "D2"
+  },
+  {
+    "en": "pathologicalical",
+    "ar": "مرضي",
+    "level": "D2"
+  },
+  {
+    "en": "pharmacologicalical",
+    "ar": "دوائي",
+    "level": "D2"
+  },
+  {
+    "en": "etiologyical",
+    "ar": "علم أسباب المرض",
+    "level": "D2"
+  },
+  {
+    "en": "prognosisical",
+    "ar": "مآل المرض",
+    "level": "D2"
+  }
+]

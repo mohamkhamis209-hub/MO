@@ -526,6 +526,7 @@ body{margin:0;background:#f5f8fb!important}
             <li onclick="window.showSection('videos')" data-permission="videos">🎬 الفيديوهات</li>
             <li onclick="window.showSection('books')" data-permission="books">📚 الكتب</li>
             <li onclick="window.showSection('exams')" data-permission="exams">📝 الاختبارات</li>
+            <li onclick="window.showSection('vocabulary')" data-permission="vocabulary">🔤 تسميع الكلمات</li>
             <li onclick="window.open('question-importer.html','_blank')">📷 إضافة أسئلة من صورة</li>
             <li onclick="window.showSection('notifications')" data-permission="notifications">🔔 الإشعارات</li>
             
@@ -1390,7 +1391,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
 
         window.showSection = function(section) {
             const permissionMap = {
-                dashboard:'dashboard', students:'students', pendingRequests:'pendingRequests', privateQuestions:'privateQuestions', registrationRequests:'registrationRequests', courseRequests:'courseRequests', lessonQuestions:'lessonQuestions', courses:'courses', videos:'videos', books:'books', exams:'exams', notifications:'notifications', dangerZone:'dangerZone'
+                dashboard:'dashboard', students:'students', pendingRequests:'pendingRequests', privateQuestions:'privateQuestions', registrationRequests:'registrationRequests', courseRequests:'courseRequests', lessonQuestions:'lessonQuestions', courses:'courses', videos:'videos', books:'books', exams:'exams', vocabulary:'vocabulary', notifications:'notifications', dangerZone:'dangerZone'
             };
             if (section !== 'assistants' && !requirePermission(permissionMap[section] || section)) return;
             if (section === 'assistants' && !isPrimaryAdmin()) return alert('⛔ هذا القسم للمشرف الأساسي فقط');
@@ -1408,6 +1409,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 case 'videos': window.showVideos(); break;
                 case 'books': window.showBooks(); break;
                 case 'exams': window.showExams(); break;
+                case 'vocabulary': window.showVocabularyAdmin(); break;
                 case 'notifications': window.showNotifications(); break;
                 case 'devices': window.showPendingDevices(); break;
                 case 'progress': window.showAllProgress(); break;
@@ -1426,6 +1428,64 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 default: showDashboard();
             }
         };
+
+        // ================= قسم تسميع الكلمات =================
+        const vocabEsc = value => escapeHtml(value ?? '');
+        const bundledVocabularyDefaults = [
+            {id:'builtin_a1_a2',title:'كلمات A1 + A2',githubUrl:'./vocabulary/english-a1-a2.json',wordCount:929},
+            {id:'builtin_b1_b2',title:'كلمات B1 + B2',githubUrl:'./vocabulary/english-b1-b2.json',wordCount:1471},
+            {id:'builtin_c1_c2',title:'كلمات C1 + C2',githubUrl:'./vocabulary/english-c1-c2.json',wordCount:1471},
+            {id:'builtin_d1_d2',title:'كلمات D1 + D2',githubUrl:'./vocabulary/english-d1-d2.json',wordCount:1000}
+        ];
+        async function ensureBundledVocabularyDefaults(){
+            await ensureAnonymousAuth();
+            const marker=doc(db,'platformSettings','vocabularyDefaultsV1');
+            if((await getDoc(marker)).exists()) return;
+            for(const x of bundledVocabularyDefaults){
+                const ref=doc(db,'vocabularyAssignments',x.id);
+                if(!(await getDoc(ref)).exists()) await setDoc(ref,{
+                    title:x.title,githubUrl:x.githubUrl,grade:'all',courseId:'',courseName:'كل الصفوف',
+                    from:1,to:x.wordCount,dailyCount:20,active:true,wordCount:x.wordCount,
+                    direction:'random',avoidRepeats:true,bundled:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()
+                });
+            }
+            await setDoc(marker,{installed:true,version:1,updatedAt:serverTimestamp()});
+        }
+        window.showVocabularyAdmin = async function() {
+            const area=document.getElementById('content-area');
+            try {
+                await ensureBundledVocabularyDefaults();
+                const [assignSnap, coursesSnap, grades, attemptsSnap]=await Promise.all([getDocs(collection(db,'vocabularyAssignments')),getDocs(collection(db,'courses')),getGrades(),getDocs(collection(db,'vocabularyAttempts'))]);
+                const courses=[]; coursesSnap.forEach(d=>courses.push({id:d.id,...d.data()})); const vocabAttempts=[]; attemptsSnap.forEach(d=>vocabAttempts.push({id:d.id,...d.data()})); vocabAttempts.sort((a,b)=>String(b.dateKey||'').localeCompare(String(a.dateKey||''))); 
+                let html=`<h2>🔤 تسميع الكلمات</h2>
+                <div class="admin-section-card" style="margin:14px 0">
+                  <h3>➕ إعداد مجموعة تسميع جديدة</h3>
+                  <p style="color:#667;line-height:1.8">ملفات المستويات الأربعة موجودة داخل المشروع وتعمل تلقائيًا بعد رفع مجلد vocabulary إلى GitHub. ولإضافة ملف خاص بك يمكنك وضع رابط Raw هنا. يدعم الملف مصفوفة كلمات مثل: <code>[{"en":"apple","ar":"تفاحة"}]</code> أو كائنًا يحتوي على <code>words</code>. يجب أن تكون كل كلمة لها en و ar أو english و arabic.</p>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+                    <label>اسم مجموعة الكلمات<input id="vocabTitle" class="form-control" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px" placeholder="مثال: كلمات Unit 1"></label>
+                    <label>رابط ملف JSON من GitHub Raw<input id="vocabUrl" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px" placeholder="./vocabulary/english-a1-a2.json أو رابط GitHub Raw"></label>
+                    <label>الصف الدراسي<select id="vocabGrade" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px">${getGradeOptions('all')}</select></label>
+                    <label>الكورس<select id="vocabCourse" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px"><option value="">كل كورسات الصف</option>${courses.map(c=>`<option value="${vocabEsc(c.id)}">${vocabEsc(c.name||c.title||'كورس')} — ${vocabEsc(c.grade||'')}</option>`).join('')}</select></label>
+                    <label>من رقم كلمة<input id="vocabFrom" type="number" min="1" value="1" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px"></label>
+                    <label>إلى رقم كلمة<input id="vocabTo" type="number" min="1" value="100" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px"></label>
+                    <label>عدد الكلمات في اليوم<input id="vocabDaily" type="number" min="1" max="200" value="20" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px"></label>
+                  </div>
+                  <label style="display:flex;gap:8px;align-items:center;margin:12px 0"><input id="vocabActive" type="checkbox" checked> تفعيل التسميع للطلاب</label>
+                  <button class="btn-sm btn-success" onclick="window.saveVocabularyAssignment()">💾 حفظ إعدادات التسميع</button>
+                  <button class="btn-sm btn-secondary" onclick="window.testVocabularyUrl()">🔎 اختبار رابط الملف وعدد الكلمات</button>
+                  <div id="vocabAdminMessage" style="margin-top:12px"></div>
+                </div><h3>📚 مجموعات التسميع الحالية</h3>`;
+                if(assignSnap.empty) html+=`<div class="admin-section-card">لم تتم إضافة مجموعات بعد.</div>`;
+                assignSnap.forEach(d=>{const x=d.data();html+=`<div class="admin-section-card" style="margin:10px 0"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><h3 style="margin:0 0 8px">${vocabEsc(x.title||'مجموعة كلمات')}</h3><div>الصف: <b>${vocabEsc(x.grade||'—')}</b> · الكورس: <b>${vocabEsc(x.courseName||'كل كورسات الصف')}</b></div><div>النطاق: ${x.from||1}–${x.to||'؟'} · يوميًا: ${x.dailyCount||20} كلمة · <span style="color:${x.active?'#059669':'#dc2626'}">${x.active?'مفعّل':'متوقف'}</span></div><small style="word-break:break-all">${vocabEsc(x.githubUrl||'')}</small></div><div style="display:flex;gap:8px;align-items:start;flex-wrap:wrap"><button class="btn-sm btn-secondary" onclick="window.editVocabularyAssignment('${d.id}')">✏️ تعديل</button><button class="btn-sm btn-danger" onclick="window.deleteVocabularyAssignment('${d.id}')">🗑️ حذف</button></div></div></div>`;});
+                html+=`<h3 style="margin-top:24px">📈 أحدث نتائج الطلاب</h3>`; if(!vocabAttempts.length) html+=`<div class="admin-section-card">لا توجد محاولات تسميع حتى الآن.</div>`; vocabAttempts.slice(0,100).forEach(a=>{html+=`<div class="admin-section-card" style="margin:9px 0"><b>${vocabEsc(a.studentName||a.studentCode||'طالب')}</b> — ${vocabEsc(a.assignmentTitle||'تسميع الكلمات')}<div>الصف: ${vocabEsc(a.grade||'—')} · التاريخ: ${vocabEsc(a.dateKey||'—')} · الحالة: ${a.status==='submitted'?'تم التسليم':'بدأ ولم يسلّم'}</div>${a.status==='submitted'?`<div style="font-weight:900;color:#059669">النتيجة: ${Number(a.score)||0} / ${Number(a.total)||0}</div>`:''}</div>`;}); area.innerHTML=html;
+            } catch(e) { console.error(e); area.innerHTML='<div class="admin-section-card"><h2>تعذر تحميل قسم تسميع الكلمات</h2><p>تأكد من اتصال Firebase وصلاحيات Firestore.</p></div>'; }
+        };
+        window.testVocabularyUrl=async function(){const box=document.getElementById('vocabAdminMessage');try{const url=document.getElementById('vocabUrl').value.trim();if(!url)throw Error('اكتب رابط GitHub Raw أولًا');const words=await fetchVocabularyJson(url);box.innerHTML=`<div style="color:#059669;font-weight:800">✅ الرابط يعمل، وتم العثور على ${words.length} كلمة.</div>`;}catch(e){box.innerHTML=`<div style="color:#dc2626">❌ ${vocabEsc(e.message||'فشل قراءة الملف')}</div>`;}};
+        async function fetchVocabularyJson(url){const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw Error('تعذر فتح الملف ('+res.status+'). تأكد أن الرابط Raw والمستودع عام.');const data=await res.json();let arr=Array.isArray(data)?data:(data.words||data.vocabulary||data.items);if(!Array.isArray(arr))throw Error('تنسيق JSON غير صحيح: يجب أن يكون مصفوفة كلمات أو يحتوي على words.');const words=arr.map((w,i)=>({en:String(w.en??w.english??w.word??w.term??'').trim(),ar:String(w.ar??w.arabic??w.meaning??w.translation??'').trim(),index:i+1})).filter(w=>w.en&&w.ar);if(!words.length)throw Error('لم يتم العثور على كلمات لها معنى عربي وإنجليزي.');return words;}
+        window.saveVocabularyAssignment=async function(){const msg=document.getElementById('vocabAdminMessage');try{await ensureAnonymousAuth();const title=document.getElementById('vocabTitle').value.trim(),githubUrl=document.getElementById('vocabUrl').value.trim(),grade=document.getElementById('vocabGrade').value.trim(),courseId=document.getElementById('vocabCourse').value,from=Number(document.getElementById('vocabFrom').value),to=Number(document.getElementById('vocabTo').value),dailyCount=Number(document.getElementById('vocabDaily').value),active=document.getElementById('vocabActive').checked;if(!title||!githubUrl||!grade)throw Error('أكمل اسم المجموعة والرابط والصف.');if(!(/^https:\/\/raw\.githubusercontent\.com\//i.test(githubUrl)||/^\.?\/?vocabulary\//i.test(githubUrl)))throw Error('استخدم مسار ملف داخل مجلد vocabulary أو رابط GitHub Raw.');if(!Number.isInteger(from)||from<1||!Number.isInteger(to)||to<from)throw Error('نطاق الكلمات غير صحيح.');if(!Number.isInteger(dailyCount)||dailyCount<1||dailyCount>200)throw Error('عدد الكلمات اليومية يجب أن يكون من 1 إلى 200.');const words=await fetchVocabularyJson(githubUrl);if(from>words.length)throw Error('رقم البداية أكبر من عدد الكلمات في الملف ('+words.length+').');const course=courseId?(await getDoc(doc(db,'courses',courseId))).data():null;await addDoc(collection(db,'vocabularyAssignments'),{title,githubUrl,grade,courseId:courseId||'',courseName:course?.name||course?.title||'',from,to:Math.min(to,words.length),dailyCount,active,wordCount:words.length,direction:'random',avoidRepeats:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});msg.innerHTML='<div style="color:#059669;font-weight:800">✅ تم حفظ المجموعة بنجاح.</div>';await window.showVocabularyAdmin();}catch(e){console.error(e);if(msg)msg.innerHTML=`<div style="color:#dc2626">❌ ${vocabEsc(e.message||'حدث خطأ')}</div>`;}};
+        window.editVocabularyAssignment=async function(id){const r=await getDoc(doc(db,'vocabularyAssignments',id));if(!r.exists())return alert('المجموعة غير موجودة');const x=r.data();window.showSection('vocabulary');setTimeout(()=>{for(const [id2,val] of Object.entries({vocabTitle:x.title,vocabUrl:x.githubUrl,vocabGrade:x.grade,vocabCourse:x.courseId,vocabFrom:x.from,vocabTo:x.to,vocabDaily:x.dailyCount})) {const el=document.getElementById(id2);if(el)el.value=val??'';}const a=document.getElementById('vocabActive');if(a)a.checked=!!x.active;const btn=[...document.querySelectorAll('#content-area button')].find(b=>b.textContent.includes('حفظ إعدادات التسميع'));if(btn){btn.textContent='💾 حفظ التعديلات';btn.onclick=()=>window.updateVocabularyAssignment(id);}},350);};
+        window.updateVocabularyAssignment=async function(id){const msg=document.getElementById('vocabAdminMessage');try{const title=document.getElementById('vocabTitle').value.trim(),githubUrl=document.getElementById('vocabUrl').value.trim(),grade=document.getElementById('vocabGrade').value.trim(),courseId=document.getElementById('vocabCourse').value,from=Number(document.getElementById('vocabFrom').value),to=Number(document.getElementById('vocabTo').value),dailyCount=Number(document.getElementById('vocabDaily').value),active=document.getElementById('vocabActive').checked;const words=await fetchVocabularyJson(githubUrl);if(!title||!grade||from<1||to<from||dailyCount<1)throw Error('راجع الحقول المطلوبة.');const cr=courseId?await getDoc(doc(db,'courses',courseId)):null;await updateDoc(doc(db,'vocabularyAssignments',id),{title,githubUrl,grade,courseId,courseName:cr?.data()?.name||cr?.data()?.title||'',from,to:Math.min(to,words.length),dailyCount,active,wordCount:words.length,updatedAt:serverTimestamp()});await window.showVocabularyAdmin();}catch(e){if(msg)msg.innerHTML=`<div style="color:#dc2626">${vocabEsc(e.message)}</div>`;}};
+        window.deleteVocabularyAssignment=async function(id){if(!confirm('حذف مجموعة التسميع؟ لن تُحذف سجلات التسميع القديمة.'))return;await deleteDoc(doc(db,'vocabularyAssignments',id));await window.showVocabularyAdmin();};
 
         async function showDashboard() {
             const [studentsSnap, videosSnap, booksSnap, examsSnap, devicesSnap, regReqSnap, courseReqSnap] = await Promise

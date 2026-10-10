@@ -1,0 +1,2663 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>English Vocabulary B1 & B2</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@500;600;700;800&display=swap');
+
+:root{
+    --navy:#17213d;
+    --blue:#3157d5;
+    --purple:#6c3fd1;
+    --gold:#d6a84f;
+    --text:#182033;
+    --muted:#687187;
+    --line:#e4e8f0;
+    --soft:#f4f6ff;
+    --bg:#eef2f7;
+    --white:#fff;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Cairo,Arial,sans-serif;
+}
+
+.app{
+    max-width:1250px;
+    margin:auto;
+    padding:24px;
+}
+
+.header{
+    background:
+        radial-gradient(circle at 15% 20%,#ffffff22,transparent 30%),
+        radial-gradient(circle at 85% 80%,#ffffff15,transparent 30%),
+        linear-gradient(135deg,var(--navy),var(--blue),var(--purple));
+
+    color:white;
+    padding:30px;
+    border-radius:26px;
+    box-shadow:0 18px 45px #17213d25;
+}
+
+.header h1{
+    margin:0;
+    font-size:32px;
+    font-weight:800;
+}
+
+.header p{
+    margin:5px 0 0;
+    opacity:.85;
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+button{
+    border:0;
+    border-radius:12px;
+    padding:11px 17px;
+    font-family:inherit;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.btn{
+    background:white;
+    color:var(--navy);
+}
+
+.btn.dark{
+    background:#10182e;
+    color:white;
+}
+
+.btn.blue{
+    background:#3157d5;
+    color:white;
+}
+
+.search{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.search input{
+    flex:1;
+    border:0;
+    border-radius:13px;
+    padding:14px 17px;
+    font-family:inherit;
+    outline:none;
+    font-size:15px;
+}
+
+.stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin:18px 0;
+}
+
+.stat{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:12px 20px;
+    min-width:150px;
+}
+
+.stat strong{
+    display:block;
+    font-family:Inter,Arial,sans-serif;
+    font-size:21px;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.viewer{
+    background:#dfe4eb;
+    padding:28px;
+    border-radius:22px;
+}
+
+.page,
+.cover{
+    width:210mm;
+    height:297mm;
+    background:white;
+    margin:0 auto 28px;
+    position:relative;
+    overflow:hidden;
+
+    break-after:page;
+    page-break-after:always;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.13);
+}
+
+.cover{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25mm;
+
+    background:
+        radial-gradient(circle at 15% 20%,#3157d520,transparent 35%),
+        radial-gradient(circle at 85% 80%,#6c3fd125,transparent 35%),
+        white;
+}
+
+.cover-content{
+    width:100%;
+    border:1px solid #dfe4ef;
+    border-radius:28px;
+    padding:50px 35px;
+}
+
+.badge{
+    display:inline-block;
+    background:var(--soft);
+    color:var(--blue);
+    padding:7px 18px;
+    border-radius:999px;
+    font-weight:800;
+}
+
+.level-big{
+    font-family:Inter,Arial,sans-serif;
+    direction:ltr;
+    font-size:82px;
+    font-weight:800;
+    color:var(--blue);
+    margin:15px 0;
+}
+
+.cover h2{
+    font-size:42px;
+    margin:0;
+    font-family:Inter,Cairo,sans-serif;
+}
+
+.cover h3{
+    font-size:23px;
+}
+
+.cover p{
+    color:var(--muted);
+}
+
+.page{
+    padding:13mm 12mm 17mm;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+
+    border-bottom:2px solid var(--navy);
+
+    padding-bottom:8px;
+    margin-bottom:12px;
+}
+
+.page-header h2{
+    margin:0;
+    font-size:21px;
+}
+
+.page-header small{
+    color:var(--muted);
+}
+
+.page-level{
+    font-family:Inter,Arial,sans-serif;
+    direction:ltr;
+    font-weight:800;
+    color:var(--blue);
+}
+
+.words{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:7px;
+
+    direction:ltr;
+}
+
+.word{
+    direction:ltr;
+
+    display:grid;
+    grid-template-columns:35px 1fr;
+
+    gap:8px;
+
+    align-items:center;
+
+    border:1px solid var(--line);
+
+    border-radius:9px;
+
+    padding:7px 9px;
+
+    height:10.7mm;
+
+    overflow:hidden;
+
+    background:white;
+}
+
+.number{
+    font-family:Inter,Arial,sans-serif;
+
+    font-weight:800;
+
+    color:var(--blue);
+
+    text-align:center;
+}
+
+.english{
+    font-family:Inter,Arial,sans-serif;
+
+    font-weight:800;
+
+    font-size:13px;
+
+    line-height:1.1;
+
+    direction:ltr;
+
+    text-align:left;
+}
+
+.arabic{
+    direction:rtl;
+
+    text-align:right;
+
+    color:var(--muted);
+
+    font-size:10.5px;
+
+    line-height:1.15;
+
+    margin-top:1px;
+}
+
+.footer{
+    position:absolute;
+
+    bottom:6mm;
+
+    left:12mm;
+    right:12mm;
+
+    border-top:1px solid var(--line);
+
+    padding-top:5px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#8a92a4;
+
+    font-size:10px;
+}
+
+.no-results{
+    text-align:center;
+
+    padding:60px;
+
+    color:var(--muted);
+
+    background:white;
+
+    border-radius:18px;
+}
+
+@media print{
+
+    html,
+    body{
+        width:210mm;
+
+        margin:0!important;
+        padding:0!important;
+
+        background:white!important;
+    }
+
+    body{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .app{
+        width:210mm;
+
+        max-width:none;
+
+        padding:0;
+
+        margin:0;
+    }
+
+    .header,
+    .stats,
+    .controls,
+    .search{
+        display:none!important;
+    }
+
+    .viewer{
+        width:210mm;
+
+        padding:0!important;
+
+        margin:0;
+
+        background:white;
+
+        border-radius:0;
+    }
+
+    .page,
+    .cover{
+
+        width:210mm!important;
+
+        height:297mm!important;
+
+        min-height:297mm!important;
+
+        margin:0!important;
+
+        box-shadow:none!important;
+
+        overflow:hidden!important;
+
+        break-after:page!important;
+
+        page-break-after:always!important;
+
+        break-inside:avoid!important;
+
+        page-break-inside:avoid!important;
+    }
+
+    .cover{
+        padding:25mm!important;
+    }
+
+    .words{
+        grid-template-columns:1fr 1fr!important;
+
+        direction:ltr!important;
+
+        gap:7px!important;
+    }
+
+    .word{
+        height:10.7mm!important;
+
+        min-height:10.7mm!important;
+
+        break-inside:avoid!important;
+
+        page-break-inside:avoid!important;
+    }
+
+    .page:last-child,
+    .cover:last-child{
+
+        break-after:auto!important;
+
+        page-break-after:auto!important;
+    }
+}
+
+@page{
+    size:A4 portrait;
+
+    margin:0;
+}
+
+@media(max-width:850px){
+
+    .app{
+        padding:10px;
+    }
+
+    .viewer{
+        padding:10px;
+
+        overflow:auto;
+    }
+
+    .page,
+    .cover{
+        flex:none;
+    }
+
+    .header h1{
+        font-size:25px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <h1>
+        English Vocabulary B1 & B2
+    </h1>
+
+    <p>
+        1000 كلمة إنجليزية مع الترجمة العربية
+    </p>
+
+    <div class="controls">
+
+        <button class="btn dark"
+                onclick="setLevel('ALL')">
+            📚 B1 + B2
+        </button>
+
+        <button class="btn"
+                onclick="setLevel('B1')">
+            🇬🇧 B1 فقط
+        </button>
+
+        <button class="btn"
+                onclick="setLevel('B2')">
+            🇬🇧 B2 فقط
+        </button>
+
+        <button class="btn"
+                onclick="window.print()">
+            🖨️ طباعة / حفظ PDF
+        </button>
+
+        <button class="btn"
+                onclick="downloadPDF()">
+            📥 تحميل PDF
+        </button>
+
+    </div>
+
+    <div class="search">
+
+        <input
+            id="search"
+            type="text"
+            placeholder="ابحث بالإنجليزية أو العربية..."
+            oninput="render()"
+        >
+
+        <button
+            class="btn"
+            onclick="clearSearch()">
+            مسح
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <strong id="totalWords">1000</strong>
+        <span>إجمالي الكلمات</span>
+    </div>
+
+    <div class="stat">
+        <strong id="b1Count">500</strong>
+        <span>B1</span>
+    </div>
+
+    <div class="stat">
+        <strong id="b2Count">500</strong>
+        <span>B2</span>
+    </div>
+
+    <div class="stat">
+        <strong>40</strong>
+        <span>كلمة في الصفحة</span>
+    </div>
+
+</div>
+
+
+<div id="viewer" class="viewer"></div>
+
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   B1 — 500 WORDS
+   ========================================================= */
+
+const B1 = [
+
+["ability","قدرة"],
+["abroad","في الخارج"],
+["accept","يقبل"],
+["achieve","يحقق"],
+["active","نشيط"],
+["advantage","ميزة"],
+["adventure","مغامرة"],
+["advertise","يعلن"],
+["afford","يستطيع تحمل التكلفة"],
+["agree","يوافق"],
+["aim","يهدف"],
+["allow","يسمح"],
+["announce","يعلن"],
+["anxious","قلق"],
+["apologize","يعتذر"],
+["appear","يظهر"],
+["apply","يتقدم / يطبق"],
+["argue","يجادل"],
+["arrange","يرتب"],
+["arrival","وصول"],
+["article","مقال"],
+["ashamed","خجلان"],
+["assist","يساعد"],
+["attention","انتباه"],
+["attract","يجذب"],
+["average","متوسط"],
+["avoid","يتجنب"],
+["background","خلفية"],
+["balance","توازن"],
+["behavior","سلوك"],
+["belong","ينتمي"],
+["benefit","فائدة"],
+["blame","يلوم"],
+["borrow","يستعير"],
+["bother","يزعج"],
+["brave","شجاع"],
+["breath","نَفَس"],
+["breathe","يتنفس"],
+["calm","هادئ"],
+["career","مهنة / مسار مهني"],
+["cause","سبب / يسبب"],
+["celebrate","يحتفل"],
+["challenge","تحدٍ"],
+["chance","فرصة"],
+["choice","اختيار"],
+["communicate","يتواصل"],
+["community","مجتمع"],
+["compare","يقارن"],
+["complain","يشتكي"],
+["complete","يكمل"],
+["concentrate","يركز"],
+["condition","حالة / شرط"],
+["confident","واثق"],
+["connect","يربط"],
+["consider","يعتبر / يفكر في"],
+["contain","يحتوي"],
+["continue","يستمر"],
+["control","يسيطر / تحكم"],
+["conversation","محادثة"],
+["correct","صحيح / يصحح"],
+["cost","تكلفة / يكلف"],
+["couple","زوجان / اثنان"],
+["create","ينشئ"],
+["crowded","مزدحم"],
+["culture","ثقافة"],
+["curious","فضولي"],
+["customer","عميل"],
+["decision","قرار"],
+["deep","عميق"],
+["degree","درجة / شهادة"],
+["depend","يعتمد"],
+["describe","يصف"],
+["design","يصمم / تصميم"],
+["develop","يطور"],
+["difference","اختلاف"],
+["disappointed","محبط"],
+["discover","يكتشف"],
+["discussion","مناقشة"],
+["distance","مسافة"],
+["divide","يقسم"],
+["education","تعليم"],
+["effect","تأثير"],
+["effort","مجهود"],
+["encourage","يشجع"],
+["environment","بيئة"],
+["equipment","معدات"],
+["escape","يهرب"],
+["event","حدث"],
+["examine","يفحص"],
+["exchange","يتبادل"],
+["experience","خبرة / تجربة"],
+["explain","يشرح"],
+["express","يعبر"],
+["fail","يفشل"],
+["familiar","مألوف"],
+["fear","خوف / يخاف"],
+["feature","ميزة"],
+["feedback","ملاحظات"],
+["field","مجال / حقل"],
+["foreign","أجنبي"],
+["formal","رسمي"],
+["freedom","حرية"],
+["friendship","صداقة"],
+["future","مستقبل"],
+["goal","هدف"],
+["government","حكومة"],
+["habit","عادة"],
+["harm","ضرر / يضر"],
+["healthy","صحي"],
+["helpful","مفيد / متعاون"],
+["honest","صادق"],
+["imagine","يتخيل"],
+["improve","يحسن"],
+["include","يشمل"],
+["increase","يزيد"],
+["independent","مستقل"],
+["individual","فرد"],
+["influence","تأثير / يؤثر"],
+["information","معلومات"],
+["instead","بدلًا من ذلك"],
+["intelligent","ذكي"],
+["interested","مهتم"],
+["international","دولي"],
+["interview","مقابلة"],
+["introduce","يقدم / يعرف"],
+["invent","يخترع"],
+["invite","يدعو"],
+["involve","يشمل / يتضمن"],
+["issue","مشكلة / قضية"],
+["knowledge","معرفة"],
+["lack","نقص / يفتقر"],
+["likely","محتمل"],
+["local","محلي"],
+["manage","يدير / يتمكن"],
+["method","طريقة"],
+["modern","حديث"],
+["necessary","ضروري"],
+["notice","يلاحظ"],
+["obvious","واضح"],
+["opinion","رأي"],
+["opportunity","فرصة"],
+["ordinary","عادي"],
+["organize","ينظم"],
+["patient","صبور / مريض"],
+["performance","أداء"],
+["personal","شخصي"],
+["polite","مهذب"],
+["possible","ممكن"],
+["prefer","يفضل"],
+["prepare","يستعد / يحضر"],
+["prevent","يمنع"],
+["produce","ينتج"],
+["professional","مهني"],
+["progress","تقدم"],
+["promise","وعد / يعد"],
+["protect","يحمي"],
+["provide","يوفر"],
+["purpose","هدف / غرض"],
+["quality","جودة"],
+["realize","يدرك"],
+["reason","سبب"],
+["receive","يستلم"],
+["recent","حديث"],
+["recommend","يوصي"],
+["reduce","يقلل"],
+["relationship","علاقة"],
+["remain","يبقى"],
+["remember","يتذكر"],
+["remove","يزيل"],
+["repair","يصلح"],
+["replace","يستبدل"],
+["reply","يرد"],
+["request","طلب / يطلب"],
+["research","بحث"],
+["responsible","مسؤول"],
+["result","نتيجة"],
+["return","يعود / يعيد"],
+["risk","خطر / يخاطر"],
+["safe","آمن"],
+["save","يحفظ / يدخر"],
+["schedule","جدول / يجدول"],
+["search","يبحث"],
+["serious","جاد"],
+["share","يشارك"],
+["similar","متشابه"],
+["simple","بسيط"],
+["situation","موقف / حالة"],
+["solution","حل"],
+["specific","محدد"],
+["speech","خطاب / كلام"],
+["suggest","يقترح"],
+["support","يدعم / دعم"],
+["successful","ناجح"],
+["sudden","مفاجئ"],
+["suggestion","اقتراح"],
+["technology","تكنولوجيا"],
+["traditional","تقليدي"],
+["transport","مواصلات"],
+["treat","يعالج / يعامل"],
+["trust","يثق / ثقة"],
+["usual","معتاد"],
+["value","قيمة"],
+["variety","تنوع"],
+["waste","نفايات / يهدر"],
+["wealth","ثروة"],
+["whether","ما إذا"],
+["wonder","يتساءل / عجب"],
+["achieve","يحقق"],
+["adapt","يتكيف"],
+["admire","يعجب بـ"],
+["admit","يعترف"],
+["affect","يؤثر"],
+["analyze","يحلل"],
+["announce","يعلن"],
+["attend","يحضر"],
+["attract","يجذب"],
+["behave","يتصرف"],
+["cancel","يلغي"],
+["collect","يجمع"],
+["combine","يجمع"],
+["communicate","يتواصل"],
+["compete","ينافس"],
+["complain","يشتكي"],
+["confirm","يؤكد"],
+["consist","يتكون"],
+["contact","يتصل / اتصال"],
+["contribute","يساهم"],
+["convince","يقنع"],
+["cope","يتعامل مع"],
+["correctly","بشكل صحيح"],
+["create","ينشئ"],
+["decide","يقرر"],
+["deliver","يسلم"],
+["demand","يطلب / طلب"],
+["destroy","يدمر"],
+["discuss","يناقش"],
+["download","ينزل"],
+["earn","يكسب"],
+["encourage","يشجع"],
+["enter","يدخل"],
+["exist","يوجد"],
+["expect","يتوقع"],
+["experience","يختبر / خبرة"],
+["explain","يشرح"],
+["explore","يستكشف"],
+["focus","يركز"],
+["graduate","يتخرج"],
+["handle","يتعامل مع"],
+["identify","يحدد"],
+["imagine","يتخيل"],
+["improve","يحسن"],
+["introduce","يقدم"],
+["join","ينضم"],
+["judge","يحكم / قاضٍ"],
+["maintain","يحافظ على"],
+["mention","يذكر"],
+["occur","يحدث"],
+["participate","يشارك"],
+["perform","يؤدي"],
+["predict","يتنبأ"],
+["prevent","يمنع"],
+["publish","ينشر"],
+["recognize","يتعرف على"],
+["recommend","يوصي"],
+["reflect","يعكس / يتأمل"],
+["refuse","يرفض"],
+["regret","يندم"],
+["relax","يسترخي"],
+["remind","يذكر"],
+["represent","يمثل"],
+["require","يتطلب"],
+["respond","يستجيب"],
+["review","يراجع"],
+["select","يختار"],
+["solve","يحل"],
+["spread","ينشر / ينتشر"],
+["succeed","ينجح"],
+["suffer","يعاني"],
+["survive","ينجو"],
+["tend","يميل إلى"],
+["throw","يرمي"],
+["train","يدرب"],
+["update","يحدث"],
+["upload","يرفع"],
+["volunteer","يتطوع"],
+["warn","يحذر"],
+["wonder","يتساءل"],
+["worry","يقلق"],
+["achievable","قابل للتحقيق"],
+["additional","إضافي"],
+["available","متاح"],
+["aware","مدرك"],
+["basic","أساسي"],
+["comfortable","مريح"],
+["convenient","مناسب"],
+["creative","مبدع"],
+["dangerous","خطير"],
+["effective","فعال"],
+["efficient","فعال / كفء"],
+["equal","متساوٍ"],
+["exact","دقيق"],
+["excellent","ممتاز"],
+["familiar","مألوف"],
+["general","عام"],
+["generous","كريم"],
+["global","عالمي"],
+["independent","مستقل"],
+["legal","قانوني"],
+["limited","محدود"],
+["logical","منطقي"],
+["negative","سلبي"],
+["nervous","متوتر"],
+["obvious","واضح"],
+["ordinary","عادي"],
+["positive","إيجابي"],
+["private","خاص"],
+["public","عام"],
+["reasonable","معقول"],
+["regular","منتظم"],
+["reliable","موثوق"],
+["responsible","مسؤول"],
+["successful","ناجح"],
+["temporary","مؤقت"],
+["typical","نموذجي"],
+["unusual","غير معتاد"],
+["valuable","قيّم"],
+["various","متنوع"],
+["willing","مستعد"],
+["actual","فعلي"],
+["additional","إضافي"],
+["annual","سنوي"],
+["appropriate","مناسب"],
+["attractive","جذاب"],
+["central","مركزي"],
+["certain","مؤكد"],
+["classic","كلاسيكي"],
+["clear","واضح"],
+["complex","معقد"],
+["current","حالي"],
+["direct","مباشر"],
+["dramatic","درامي"],
+["educational","تعليمي"],
+["emotional","عاطفي"],
+["environmental","بيئي"],
+["financial","مالي"],
+["friendly","ودود"],
+["historical","تاريخي"],
+["human","بشري"],
+["important","مهم"],
+["individual","فردي"],
+["international","دولي"],
+["medical","طبي"],
+["mental","ذهني"],
+["natural","طبيعي"],
+["official","رسمي"],
+["physical","جسدي"],
+["political","سياسي"],
+["popular","شائع"],
+["practical","عملي"],
+["recent","حديث"],
+["regional","إقليمي"],
+["social","اجتماعي"],
+["technical","تقني"],
+["terrible","فظيع"],
+["total","إجمالي"],
+["urban","حضري"],
+["wild","بري"],
+["wonderful","رائع"],
+["absolutely","بالتأكيد"],
+["actually","في الواقع"],
+["especially","خصوصًا"],
+["eventually","في النهاية"],
+["fortunately","لحسن الحظ"],
+["generally","عمومًا"],
+["immediately","فورًا"],
+["mainly","بشكل رئيسي"],
+["nearly","تقريبًا"],
+["normally","عادةً"],
+["probably","على الأرجح"],
+["recently","مؤخرًا"],
+["simply","ببساطة"],
+["suddenly","فجأة"],
+["usually","عادةً"],
+["completely","تمامًا"],
+["carefully","بحذر"],
+["clearly","بوضوح"],
+["directly","مباشرة"],
+["easily","بسهولة"],
+["exactly","بالضبط"],
+["finally","أخيرًا"],
+["frequently","بشكل متكرر"],
+["gradually","تدريجيًا"],
+["hardly","بالكاد"],
+["mostly","في الغالب"],
+["quickly","بسرعة"],
+["quietly","بهدوء"],
+["strongly","بقوة"],
+["successfully","بنجاح"],
+["totally","تمامًا"],
+["widely","على نطاق واسع"],
+["although","بالرغم من أن"],
+["despite","بالرغم من"],
+["however","ومع ذلك"],
+["therefore","لذلك"],
+["unless","إلا إذا"],
+["while","بينما"],
+["whereas","في حين أن"],
+["otherwise","وإلا"],
+["besides","بالإضافة إلى"],
+["instead","بدلًا من ذلك"],
+["meanwhile","في الوقت نفسه"],
+["rather","إلى حد ما"],
+["throughout","طوال"],
+["within","داخل / خلال"],
+["beyond","أبعد من"],
+["towards","نحو"],
+["against","ضد"],
+["among","بين / وسط"],
+["beneath","تحت"],
+["beside","بجانب"],
+["despite","رغم"],
+["according","وفقًا"],
+["experience","خبرة"],
+["education","تعليم"],
+["employment","توظيف"],
+["environment","بيئة"],
+["equipment","معدات"],
+["government","حكومة"],
+["industry","صناعة"],
+["information","معلومات"],
+["knowledge","معرفة"],
+["language","لغة"],
+["lifestyle","نمط حياة"],
+["management","إدارة"],
+["organization","منظمة"],
+["population","سكان"],
+["production","إنتاج"],
+["relationship","علاقة"],
+["research","بحث"],
+["responsibility","مسؤولية"],
+["service","خدمة"],
+["society","مجتمع"],
+["transportation","نقل"],
+["communication","تواصل"],
+["competition","منافسة"],
+["development","تطوير"],
+["difference","اختلاف"],
+["direction","اتجاه"],
+["discussion","مناقشة"],
+["experience","تجربة"],
+["importance","أهمية"],
+["improvement","تحسين"],
+["permission","إذن"],
+["possibility","احتمال"],
+["preparation","تحضير"],
+["recommendation","توصية"],
+["requirement","متطلب"],
+["achievement","إنجاز"],
+["agreement","اتفاق"],
+["argument","حجة / جدال"],
+["attention","انتباه"],
+["behavior","سلوك"],
+["decision","قرار"],
+["description","وصف"],
+["explanation","شرح"],
+["invitation","دعوة"],
+["movement","حركة"],
+["performance","أداء"],
+["practice","ممارسة"],
+["problem","مشكلة"],
+["process","عملية"],
+["project","مشروع"],
+["purpose","غرض"],
+["question","سؤال"],
+["reason","سبب"],
+["result","نتيجة"],
+["solution","حل"],
+["success","نجاح"],
+["support","دعم"],
+["tradition","تقليد"],
+["activity","نشاط"],
+["choice","اختيار"],
+["chance","فرصة"],
+["change","تغيير"],
+["connection","اتصال"],
+["contact","اتصال"],
+["conversation","محادثة"],
+["course","دورة / مقرر"],
+["culture","ثقافة"],
+["customer","عميل"],
+["event","حدث"],
+["goal","هدف"],
+["habit","عادة"],
+["hobby","هواية"],
+["interest","اهتمام"],
+["meeting","اجتماع"],
+["member","عضو"],
+["opinion","رأي"],
+["plan","خطة"],
+["point","نقطة"],
+["program","برنامج"],
+["schedule","جدول"],
+["skill","مهارة"],
+["subject","موضوع / مادة"],
+["teamwork","عمل جماعي"],
+["training","تدريب"],
+["trip","رحلة"],
+["vacation","إجازة"],
+["view","منظر / رأي"],
+["visit","زيارة"],
+["waste","نفايات"],
+["workplace","مكان العمل"],
+["achievement","إنجاز"],
+["application","طلب / تطبيق"],
+["appointment","موعد"],
+["certificate","شهادة"],
+["document","مستند"],
+["entrance","مدخل"],
+["exit","مخرج"],
+["flight","رحلة جوية"],
+["guide","دليل"],
+["journey","رحلة"],
+["luggage","أمتعة"],
+["passenger","راكب"],
+["platform","رصيف / منصة"],
+["reservation","حجز"],
+["route","مسار"],
+["station","محطة"],
+["ticket","تذكرة"],
+["tourist","سائح"],
+["traffic","مرور"],
+["vehicle","مركبة"],
+["airport","مطار"],
+["hotel","فندق"],
+["restaurant","مطعم"],
+["bank","بنك"],
+["company","شركة"],
+["factory","مصنع"],
+["office","مكتب"],
+["shopkeeper","صاحب متجر"],
+["employee","موظف"],
+["employer","صاحب العمل"],
+["manager","مدير"],
+["salary","راتب"],
+["career","مهنة"],
+["profession","مهنة"],
+["business","عمل تجاري"],
+["product","منتج"],
+["service","خدمة"],
+["customer","عميل"],
+["price","سعر"],
+["cost","تكلفة"],
+["payment","دفع"],
+["account","حساب"],
+["budget","ميزانية"],
+["cash","نقد"],
+["credit","ائتمان"],
+["debt","دين"],
+["income","دخل"],
+["tax","ضريبة"],
+["economy","اقتصاد"],
+["market","سوق"],
+["trade","تجارة"],
+["company","شركة"],
+["project","مشروع"],
+["meeting","اجتماع"],
+["office","مكتب"],
+["job","وظيفة"],
+["work","عمل"],
+["worker","عامل"],
+["boss","رئيس العمل"],
+["colleague","زميل"],
+["partner","شريك"],
+["customer","عميل"],
+["client","عميل"],
+["team","فريق"],
+["leader","قائد"],
+["member","عضو"],
+["public","عام"],
+["private","خاص"],
+["local","محلي"],
+["national","وطني"],
+["international","دولي"],
+["social","اجتماعي"],
+["personal","شخصي"],
+["professional","مهني"],
+["official","رسمي"],
+["traditional","تقليدي"],
+["modern","حديث"],
+["future","مستقبل"],
+["history","تاريخ"],
+["culture","ثقافة"],
+["society","مجتمع"],
+["nature","طبيعة"],
+["environment","بيئة"],
+["energy","طاقة"],
+["pollution","تلوث"],
+["climate","مناخ"],
+["weather","طقس"],
+["temperature","درجة الحرارة"],
+["storm","عاصفة"],
+["flood","فيضان"],
+["forest","غابة"],
+["desert","صحراء"],
+["coast","ساحل"],
+["island","جزيرة"],
+["ocean","محيط"],
+["mountain","جبل"],
+["river","نهر"],
+["lake","بحيرة"],
+["earth","الأرض"],
+["planet","كوكب"],
+["space","فضاء"],
+["science","علوم"],
+["technology","تكنولوجيا"],
+["computer","حاسوب"],
+["internet","إنترنت"],
+["website","موقع إلكتروني"],
+["screen","شاشة"],
+["keyboard","لوحة مفاتيح"],
+["password","كلمة مرور"],
+["message","رسالة"],
+["email","بريد إلكتروني"],
+["video","فيديو"],
+["camera","كاميرا"],
+["photo","صورة"],
+["program","برنامج"],
+["software","برمجيات"],
+["machine","آلة"],
+["device","جهاز"],
+["online","على الإنترنت"],
+["digital","رقمي"],
+["modern","حديث"],
+["medical","طبي"],
+["health","صحة"],
+["illness","مرض"],
+["disease","مرض"],
+["medicine","دواء"],
+["treatment","علاج"],
+["doctor","طبيب"],
+["patient","مريض"],
+["hospital","مستشفى"],
+["exercise","تمرين"],
+["diet","نظام غذائي"],
+["stress","ضغط نفسي"],
+["sleep","نوم"],
+["pain","ألم"],
+["accident","حادث"],
+["danger","خطر"],
+["emergency","حالة طارئة"],
+["police","شرطة"],
+["law","قانون"],
+["rule","قاعدة"],
+["crime","جريمة"],
+["prison","سجن"],
+["court","محكمة"],
+["judge","قاضٍ"],
+["lawyer","محامٍ"],
+["citizen","مواطن"],
+["government","حكومة"],
+["president","رئيس"],
+["election","انتخابات"],
+["politics","سياسة"],
+["community","مجتمع"],
+["neighbor","جار"],
+["relative","قريب"],
+["relationship","علاقة"],
+["friendship","صداقة"],
+["marriage","زواج"],
+["couple","زوجان"],
+["parent","والد"],
+["adult","شخص بالغ"],
+["teenager","مراهق"],
+["childhood","طفولة"],
+["generation","جيل"],
+["memory","ذاكرة"],
+["dream","حلم"],
+["future","مستقبل"],
+["past","الماضي"],
+["present","الحاضر"],
+["experience","تجربة"],
+["story","قصة"],
+["news","أخبار"],
+["article","مقال"],
+["report","تقرير"],
+["magazine","مجلة"],
+["newspaper","جريدة"],
+["book","كتاب"],
+["novel","رواية"],
+["author","مؤلف"],
+["writer","كاتب"],
+["reader","قارئ"],
+["film","فيلم"],
+["movie","فيلم"],
+["actor","ممثل"],
+["actress","ممثلة"],
+["director","مخرج"],
+["music","موسيقى"],
+["song","أغنية"],
+["concert","حفلة موسيقية"],
+["artist","فنان"],
+["painting","لوحة"],
+["photography","تصوير فوتوغرافي"],
+["sport","رياضة"],
+["football","كرة القدم"],
+["basketball","كرة السلة"],
+["tennis","تنس"],
+["competition","مسابقة"],
+["match","مباراة"],
+["player","لاعب"],
+["coach","مدرب"],
+["team","فريق"],
+["winner","فائز"],
+["training","تدريب"],
+["exercise","تمرين"],
+["activity","نشاط"],
+["hobby","هواية"],
+["game","لعبة"],
+["party","حفلة"],
+["festival","مهرجان"],
+["celebration","احتفال"],
+["gift","هدية"],
+["birthday","عيد ميلاد"],
+["holiday","عطلة"],
+["weekend","نهاية الأسبوع"],
+["adventure","مغامرة"],
+["journey","رحلة"],
+["trip","رحلة"],
+["travel","سفر"],
+["tourist","سائح"],
+["country","دولة"],
+["capital","عاصمة"],
+["city","مدينة"],
+["town","بلدة"],
+["village","قرية"],
+["building","مبنى"],
+["area","منطقة"],
+["neighborhood","حي"],
+["street","شارع"],
+["road","طريق"],
+["bridge","جسر"],
+["square","ميدان"],
+["park","حديقة عامة"],
+["garden","حديقة"],
+["entrance","مدخل"],
+["exit","مخرج"],
+["direction","اتجاه"],
+["north","شمال"],
+["south","جنوب"],
+["east","شرق"],
+["west","غرب"]
+
+];
+
+
+/* =========================================================
+   هنا ينتهي الجزء الأول.
+   الصق الجزء الثاني مباشرة بعد هذا السطر.
+   ========================================================= */
+   
+/* =========================================================
+   B2 — 500 WORDS
+   ========================================================= */
+
+const B2 = [
+
+["abandon","يتخلى عن"],
+["abolish","يلغي"],
+["absorb","يمتص"],
+["abstract","مجرد / ملخص"],
+["accelerate","يسرّع"],
+["accommodate","يستوعب / يوفر مكانًا"],
+["accomplish","ينجز"],
+["accumulate","يتراكم / يجمع"],
+["accurate","دقيق"],
+["acknowledge","يعترف بـ"],
+["acquire","يكتسب"],
+["adaptation","تكيف"],
+["adequate","كافٍ / مناسب"],
+["adjacent","مجاور"],
+["adjust","يعدل"],
+["administration","إدارة"],
+["advocate","يدافع عن / مؤيد"],
+["allocate","يخصص"],
+["alternative","بديل"],
+["ambitious","طموح"],
+["amend","يعدل"],
+["anticipate","يتوقع"],
+["apparent","واضح / ظاهري"],
+["appeal","جاذبية / يستأنف"],
+["appreciate","يقدر"],
+["arbitrary","عشوائي / اعتباطي"],
+["artificial","اصطناعي"],
+["assess","يقيّم"],
+["assign","يعيّن / يكلف"],
+["assumption","افتراض"],
+["assure","يؤكد / يطمئن"],
+["attain","يحقق"],
+["attribute","ينسب / صفة"],
+["authentic","أصيل / حقيقي"],
+["automatically","تلقائيًا"],
+["bias","تحيز"],
+["boundary","حدود"],
+["brief","موجز"],
+["capable","قادر"],
+["capacity","قدرة / سعة"],
+["cease","يتوقف"],
+["clarify","يوضح"],
+["coherent","مترابط"],
+["collapse","ينهار / انهيار"],
+["colleague","زميل"],
+["compelling","مقنع جدًا"],
+["comprehensive","شامل"],
+["comprise","يتكون من"],
+["conceive","يتصور"],
+["concentrate","يركز"],
+["contemporary","معاصر"],
+["contradict","يناقض"],
+["controversial","مثير للجدل"],
+["cooperate","يتعاون"],
+["coordinate","ينسق"],
+["core","جوهر / أساسي"],
+["corporate","خاص بالشركات"],
+["crucial","حاسم"],
+["decline","ينخفض / انخفاض"],
+["deduce","يستنتج"],
+["demonstrate","يثبت / يوضح"],
+["denote","يدل على"],
+["derive","يستمد"],
+["detect","يكتشف"],
+["diminish","يقلل / يتضاءل"],
+["discriminate","يميز / يفرق"],
+["distinguish","يميز بين"],
+["diverse","متنوع"],
+["dominate","يهيمن"],
+["elaborate","مفصل / يشرح بالتفصيل"],
+["eliminate","يقضي على"],
+["emerge","يظهر / يبرز"],
+["empirical","تجريبي"],
+["enhance","يعزز / يحسن"],
+["ensure","يضمن"],
+["equivalent","مكافئ / مساوٍ"],
+["exceed","يتجاوز"],
+["exclude","يستبعد"],
+["explicit","صريح / واضح"],
+["exploit","يستغل"],
+["facilitate","يسهل"],
+["fluctuate","يتذبذب"],
+["framework","إطار"],
+["fundamental","أساسي"],
+["generate","يولد / ينتج"],
+["genuine","حقيقي / صادق"],
+["highlight","يسلط الضوء على"],
+["hypothesis","فرضية"],
+["implicit","ضمني"],
+["inevitable","حتمي"],
+["infer","يستنتج"],
+["inhibit","يعيق / يمنع"],
+["innovative","مبتكر"],
+["integrate","يدمج"],
+["intervene","يتدخل"],
+["justify","يبرر"],
+["legitimate","شرعي / مشروع"],
+["likewise","بالمثل"],
+["minimal","ضئيل"],
+["modify","يعدل"],
+["mutual","متبادل"],
+["nevertheless","مع ذلك"],
+["notion","مفهوم / فكرة"],
+["obtain","يحصل على"],
+["overlap","يتداخل"],
+["perceive","يدرك"],
+["persistent","مستمر / مثابر"],
+["precise","دقيق"],
+["predominantly","في الغالب"],
+["preliminary","أولي"],
+["presume","يفترض"],
+["prohibit","يمنع"],
+["prominent","بارز"],
+["pursue","يسعى إلى"],
+["retain","يحتفظ بـ"],
+["rigid","صارم / جامد"],
+["scarce","نادر / شحيح"],
+["shift","تحول / يغير"],
+["simultaneously","في الوقت نفسه"],
+["sophisticated","متطور"],
+["subsequent","لاحق"],
+["substantial","كبير / جوهري"],
+["substitute","بديل / يستبدل"],
+["sufficient","كافٍ"],
+["sustain","يحافظ على"],
+["temporary","مؤقت"],
+["undergo","يخضع لـ"],
+["undermine","يقوض"],
+["unprecedented","غير مسبوق"],
+["utilize","يستخدم"],
+["valid","صالح / صحيح"],
+["viable","قابل للتطبيق"],
+["whereby","بموجبه"],
+["widespread","واسع الانتشار"],
+
+["accidental","عرضي"],
+["accommodate","يستوعب"],
+["accordingly","وفقًا لذلك"],
+["accusation","اتهام"],
+["adjacent","مجاور"],
+["administrative","إداري"],
+["affordable","ميسور التكلفة"],
+["agricultural","زراعي"],
+["alert","يقظ / تنبيه"],
+["ambiguous","غامض"],
+["analogy","تشبيه / قياس"],
+["anonymous","مجهول"],
+["applicable","قابل للتطبيق"],
+["applicant","متقدم / طالب"],
+["architectural","معماري"],
+["assembly","تجميع / اجتماع"],
+["assurance","ضمان / تأكيد"],
+["autonomous","مستقل ذاتيًا"],
+["beneficial","مفيد"],
+["biological","بيولوجي"],
+["broaden","يوسع"],
+["bulk","الجزء الأكبر"],
+["bureaucracy","بيروقراطية"],
+["capability","قدرة"],
+["categorize","يصنف"],
+["coincide","يتزامن"],
+["commodity","سلعة"],
+["compatible","متوافق"],
+["compensate","يعوض"],
+["competence","كفاءة"],
+["complement","يكمل"],
+["complexity","تعقيد"],
+["compliance","امتثال"],
+["consecutive","متتالي"],
+["consensus","إجماع"],
+["constitute","يشكل"],
+["constraint","قيد"],
+["consult","يستشير"],
+["contemporary","معاصر"],
+["contrary","عكس / مخالف"],
+["conversion","تحويل"],
+["conviction","قناعة / إدانة"],
+["correspond","يتوافق / يتراسل"],
+["criteria","معايير"],
+["cultivate","يزرع / ينمي"],
+["deficiency","نقص"],
+["depict","يصور"],
+["designate","يعين / يحدد"],
+["devastate","يدمر بشدة"],
+["differentiate","يميز"],
+["dilemma","معضلة"],
+["discrete","منفصل"],
+["dispose","يتخلص من"],
+["distort","يشوه"],
+["drastic","جذري"],
+["duration","مدة"],
+["dynamic","ديناميكي"],
+["economically","اقتصاديًا"],
+["eligible","مؤهل"],
+["embed","يدمج / يثبت"],
+["encounter","يواجه / مواجهة"],
+["enforce","يفرض"],
+["enterprise","مؤسسة / مشروع"],
+["equation","معادلة"],
+["erosion","تآكل"],
+["ethical","أخلاقي"],
+["evaluate","يقيّم"],
+["exaggerate","يبالغ"],
+["exceptional","استثنائي"],
+["excessive","مفرط"],
+["exclusive","حصري"],
+["exposure","تعرض"],
+["external","خارجي"],
+["extract","يستخرج"],
+["feasible","قابل للتنفيذ"],
+["flexible","مرن"],
+["forthcoming","قادم"],
+["frustrate","يحبط"],
+["funding","تمويل"],
+["hierarchy","تدرج هرمي"],
+["identical","متطابق"],
+["ideological","أيديولوجي / فكري"],
+["incentive","حافز"],
+["incorporate","يدمج"],
+["increasingly","بشكل متزايد"],
+["induce","يحفز / يسبب"],
+["inequality","عدم مساواة"],
+["infrastructure","بنية تحتية"],
+["inherent","متأصل"],
+["innovate","يبتكر"],
+["inspection","تفتيش"],
+["integral","أساسي"],
+["intense","شديد"],
+["interior","داخلي"],
+["isolate","يعزل"],
+["ongoing","مستمر"],
+["panel","لجنة / لوحة"],
+["paradigm","نموذج / نمط"],
+["persist","يستمر"],
+["plausible","معقول / محتمل"],
+["precise","دقيق"],
+["priority","أولوية"],
+["profound","عميق"],
+["promote","يعزز / يرقّي"],
+["protocol","بروتوكول"],
+["radical","جذري"],
+["refine","يطور / ينقي"],
+["regulate","ينظم"],
+["reinforce","يعزز"],
+["reluctant","متردد"],
+["respective","الخاص بكل"],
+["restore","يستعيد / يرمم"],
+["restrain","يكبح"],
+["reveal","يكشف"],
+["revolutionary","ثوري"],
+["scenario","سيناريو / احتمال"],
+["sceptical","متشكك"],
+["specify","يحدد"],
+["sphere","مجال / كرة"],
+["stabilize","يثبت"],
+["straightforward","مباشر / بسيط"],
+["submit","يقدم / يخضع"],
+["successive","متتابع"],
+["supplement","مكمل"],
+["suppress","يقمع"],
+["trigger","يحفز / يسبب"],
+["underlying","كامن / أساسي"],
+["unify","يوحد"],
+["universal","عالمي / شامل"],
+["upgrade","يطور / ترقية"],
+["verify","يتحقق من"],
+["vulnerable","عرضة للخطر"],
+["welfare","رفاهية"],
+
+["acquisition","اكتساب"],
+["adaptable","قابل للتكيف"],
+["administrative","إداري"],
+["advocate","مؤيد"],
+["aggregate","إجمالي / يجمع"],
+["albeit","رغم أن"],
+["allocate","يخصص"],
+["alter","يغير"],
+["anticipation","توقع"],
+["appreciation","تقدير"],
+["articulate","يعبر بوضوح"],
+["aspiration","طموح"],
+["assert","يؤكد"],
+["assessable","قابل للتقييم"],
+["attainment","تحقيق / إنجاز"],
+["authenticity","أصالة"],
+["awareness","وعي"],
+["bias","تحيز"],
+["breakthrough","اختراق / إنجاز كبير"],
+["coherent","مترابط"],
+["collaboration","تعاون"],
+["commence","يبدأ"],
+["compelling","مقنع"],
+["conceivable","يمكن تصوره"],
+["concession","تنازل"],
+["concurrent","متزامن"],
+["confine","يحصر"],
+["conform","يتوافق"],
+["confront","يواجه"],
+["connotation","دلالة ضمنية"],
+["consent","موافقة"],
+["consolidate","يدمج / يعزز"],
+["contemplate","يتأمل"],
+["contradiction","تناقض"],
+["controversy","جدل"],
+["correlation","ارتباط"],
+["credible","موثوق"],
+["criterion","معيار"],
+["deem","يعتبر"],
+["deliberate","متعمد / يتداول"],
+["denial","إنكار"],
+["depict","يصور"],
+["deprive","يحرم"],
+["designate","يحدد"],
+["deteriorate","يتدهور"],
+["devise","يبتكر / يضع خطة"],
+["disclose","يكشف"],
+["discourse","خطاب / نقاش"],
+["displacement","إزاحة / نزوح"],
+["distinct","مميز / مختلف"],
+["diversity","تنوع"],
+["dominant","مهيمن"],
+["drastically","بشكل جذري"],
+["duration","مدة"],
+["elaborate","مفصل"],
+["empower","يمكن / يمنح القوة"],
+["encounter","مواجهة"],
+["enrich","يثري"],
+["entitle","يخول / يمنح الحق"],
+["equivalent","مكافئ"],
+["ethical","أخلاقي"],
+["exaggeration","مبالغة"],
+["exclusion","استبعاد"],
+["exploitation","استغلال"],
+["facilitation","تسهيل"],
+["fluctuation","تقلب"],
+["formulate","يصوغ"],
+["foster","يعزز / يرعى"],
+["fulfil","يحقق / يفي"],
+["genuine","حقيقي"],
+["grant","يمنح"],
+["hence","ومن ثم"],
+["highlight","يسلط الضوء"],
+["illustrate","يوضح"],
+["implication","دلالة / نتيجة"],
+["incentivize","يحفز"],
+["inclined","يميل إلى"],
+["incompatible","غير متوافق"],
+["incorporation","دمج"],
+["indication","مؤشر / دلالة"],
+["inevitable","حتمي"],
+["infrastructure","بنية تحتية"],
+["inherent","متأصل"],
+["insight","فهم عميق"],
+["integrity","نزاهة"],
+["intensity","شدة"],
+["interfere","يتدخل / يتعارض"],
+["intrinsic","متأصل / جوهري"],
+["invoke","يستدعي"],
+["isolation","عزلة"],
+["legislation","تشريع"],
+["likelihood","احتمال"],
+["magnitude","حجم / مقدار"],
+["mature","ناضج"],
+["mediate","يتوسط"],
+["migration","هجرة"],
+["moderate","معتدل"],
+["negligible","ضئيل جدًا"],
+["nevertheless","مع ذلك"],
+["notwithstanding","على الرغم من"],
+["offset","يعوض"],
+["paradox","مفارقة"],
+["perpetual","دائم"],
+["perspective","منظور"],
+["precede","يسبق"],
+["precise","دقيق"],
+["prevalent","شائع"],
+["prohibit","يحظر"],
+["prominent","بارز"],
+["proportion","نسبة"],
+["prospect","احتمال / آفاق"],
+["qualitative","نوعي"],
+["quantitative","كمي"],
+["radically","بشكل جذري"],
+["reassess","يعيد التقييم"],
+["recession","ركود اقتصادي"],
+["reconcile","يوفق"],
+["refute","يدحض"],
+["regulatory","تنظيمي"],
+["reluctance","تردد"],
+["resilience","مرونة / قدرة على التعافي"],
+["respective","الخاص بكل"],
+["restraint","ضبط / تقييد"],
+["retention","احتفاظ"],
+["rigorous","صارم / دقيق"],
+["scarcity","ندرة"],
+["scrutiny","تدقيق"],
+["simultaneous","متزامن"],
+["sophisticated","متطور"],
+["specification","مواصفة"],
+["stability","استقرار"],
+["subordinate","تابع / أدنى"],
+["subsequently","لاحقًا"],
+["subtle","دقيق / خفي"],
+["sustainable","مستدام"],
+["tangible","ملموس"],
+["transformation","تحول"],
+["transmit","ينقل"],
+["transparent","شفاف"],
+["undermine","يقوض"],
+["unify","يوحد"],
+["unprecedented","غير مسبوق"],
+["validity","صلاحية / صحة"],
+["variation","اختلاف / تنوع"],
+["versatile","متعدد الاستخدامات"],
+["virtually","تقريبًا"],
+["widespread","واسع الانتشار"],
+
+["academic","أكاديمي"],
+["accessibility","سهولة الوصول"],
+["accountability","مساءلة"],
+["accumulate","يتراكم"],
+["accuracy","دقة"],
+["adverse","ضار / سلبي"],
+["aggregate","إجمالي"],
+["allegedly","يزعم"],
+["ambition","طموح"],
+["amendment","تعديل"],
+["analytical","تحليلي"],
+["analyze","يحلل"],
+["annual","سنوي"],
+["applicable","قابل للتطبيق"],
+["arise","ينشأ"],
+["artificially","بشكل اصطناعي"],
+["assumption","افتراض"],
+["attitude","موقف / اتجاه"],
+["authentic","أصيل"],
+["autonomy","استقلالية"],
+["beneficiary","مستفيد"],
+["capacity","سعة / قدرة"],
+["certainty","يقين"],
+["civilian","مدني"],
+["clarification","توضيح"],
+["coincidence","مصادفة"],
+["collective","جماعي"],
+["commodity","سلعة"],
+["comparative","مقارن"],
+["compensate","يعوض"],
+["competent","كفء"],
+["compile","يجمع / يؤلف"],
+["conceal","يخفي"],
+["concession","تنازل"],
+["conclusive","حاسم"],
+["conduct","يجري / سلوك"],
+["confine","يحصر"],
+["consensus","إجماع"],
+["constrain","يقيد"],
+["consultation","استشارة"],
+["consumption","استهلاك"],
+["contemporary","معاصر"],
+["controversial","مثير للجدل"],
+["conventional","تقليدي"],
+["convey","ينقل / يوصل"],
+["convincing","مقنع"],
+["cooperate","يتعاون"],
+["corporation","شركة"],
+["correspondence","مراسلات / تطابق"],
+["credible","موثوق"],
+["deduction","استنتاج"],
+["definite","محدد / مؤكد"],
+["demographic","سكاني"],
+["denote","يدل على"],
+["depletion","استنزاف"],
+["designate","يحدد"],
+["deterioration","تدهور"],
+["differentiation","تمييز"],
+["discretion","حرية التصرف"],
+["dismiss","يرفض / يصرف"],
+["distinction","تمييز / فرق"],
+["distort","يشوه"],
+["diverse","متنوع"],
+["dominance","هيمنة"],
+["dynamic","ديناميكي"],
+["empirical","تجريبي"],
+["enable","يمكن"],
+["encounter","يواجه"],
+["enhancement","تحسين"],
+["ensure","يضمن"],
+["entail","يستلزم"],
+["equilibrium","توازن"],
+["exploitation","استغلال"],
+["explicitly","بوضوح"],
+["facilitate","يسهل"],
+["feasibility","إمكانية التنفيذ"],
+["fluctuate","يتذبذب"],
+["formulation","صياغة"],
+["framework","إطار"],
+["fundamentally","بشكل أساسي"],
+["generate","يولد"],
+["hierarchical","هرمي"],
+["identification","تحديد / تعريف"],
+["ideology","أيديولوجيا"],
+["implementation","تنفيذ"],
+["implicit","ضمني"],
+["inadequate","غير كافٍ"],
+["incidence","حدوث / معدل"],
+["inclination","ميل"],
+["incorporate","يدمج"],
+["inequality","عدم مساواة"],
+["inhibit","يعيق"],
+["innovation","ابتكار"],
+["inspection","تفتيش"],
+["integrate","يدمج"],
+["intermediate","متوسط / وسيط"],
+["interpret","يفسر"],
+["intervention","تدخل"],
+["justify","يبرر"],
+["legitimate","مشروع"],
+["mechanism","آلية"],
+["methodology","منهجية"],
+["monitor","يراقب"],
+["negligible","ضئيل"],
+["objective","موضوعي / هدف"],
+["obligation","التزام"],
+["ongoing","مستمر"],
+["orientation","توجه"],
+["parameter","معيار / معامل"],
+["perceive","يدرك"],
+["persistent","مستمر"],
+["persuasive","مقنع"],
+["phenomenon","ظاهرة"],
+["priority","أولوية"],
+["proportionate","متناسب"],
+["prospective","مستقبلي / محتمل"],
+["qualify","يؤهل"],
+["rational","عقلاني"],
+["refine","يصقل / يحسن"],
+["regardless","بغض النظر"],
+["reinforce","يعزز"],
+["relevant","ذو صلة"],
+["reliable","موثوق"],
+["reside","يقيم"],
+["resolve","يحل"],
+["retain","يحتفظ"],
+["revenue","إيرادات"],
+["rigid","صارم"],
+["scenario","سيناريو"],
+["scrutinize","يدقق في"],
+["sequence","تسلسل"],
+["solely","فقط"],
+["stereotype","صورة نمطية"],
+["substantial","كبير"],
+["substitute","يستبدل"],
+["sufficiently","بشكل كافٍ"],
+["suppress","يقمع"],
+["surpass","يتفوق على"],
+["sustainable","مستدام"],
+["tendency","ميل / اتجاه"],
+["terminate","ينهي"],
+["transformation","تحول"],
+["transparency","شفافية"],
+["undergo","يخضع لـ"],
+["validate","يتحقق من"],
+["variable","متغير"],
+["viable","قابل للتطبيق"],
+["voluntary","طوعي"],
+["whereas","في حين أن"],
+["withdraw","ينسحب"],
+
+["accumulate","يجمع / يتراكم"],
+["adverse","معاكس / ضار"],
+["advocate","يدافع عن"],
+["ambiguous","غامض"],
+["analogy","قياس / تشبيه"],
+["anticipate","يتوقع"],
+["apprehensive","قلق / متخوف"],
+["arbitrary","اعتباطي"],
+["assertion","تأكيد / ادعاء"],
+["attain","يحقق"],
+["attribute","صفة / ينسب"],
+["authenticity","أصالة"],
+["autonomous","مستقل"],
+["biases","تحيزات"],
+["coherent","مترابط"],
+["compelling","قوي الإقناع"],
+["comprehensive","شامل"],
+["consecutive","متتالٍ"],
+["constrain","يقيد"],
+["contemplate","يتأمل"],
+["contradictory","متناقض"],
+["corresponding","المقابل / المطابق"],
+["cumulative","تراكمي"],
+["deprive","يحرم"],
+["desirable","مرغوب"],
+["deteriorate","يتدهور"],
+["diminish","يتضاءل"],
+["disrupt","يعطل"],
+["distinctive","مميز"],
+["diversify","ينوع"],
+["elaborate","يفصل"],
+["emerging","ناشئ"],
+["empowerment","تمكين"],
+["exceedingly","بشكل كبير جدًا"],
+["exclusively","حصريًا"],
+["forthcoming","قادم"],
+["fragile","هش"],
+["incompatible","غير متوافق"],
+["inefficient","غير كفء"],
+["infrastructure","بنية تحتية"],
+["innovation","ابتكار"],
+["intrinsic","جوهري"],
+["legislative","تشريعي"],
+["mandatory","إلزامي"],
+["manipulate","يتلاعب بـ"],
+["marginal","هامشي"],
+["moderately","باعتدال"],
+["mutually","بشكل متبادل"],
+["notion","فكرة / مفهوم"],
+["obscure","غامض / غير معروف"],
+["offset","يعوض"],
+["persistent","مثابر / مستمر"],
+["precedent","سابقة"],
+["predominant","سائد"],
+["profoundly","بعمق"],
+["prohibit","يحظر"],
+["prominence","بروز / أهمية"],
+["rationality","عقلانية"],
+["reassess","يعيد التقييم"],
+["refinement","تحسين / تنقيح"],
+["relevance","أهمية / صلة"],
+["residential","سكني"],
+["respective","المتعلق بكل"],
+["restoration","ترميم / استعادة"],
+["restrict","يقيد"],
+["rigorously","بصرامة"],
+["scarce","نادر"],
+["simultaneously","في الوقت نفسه"],
+["specialized","متخصص"],
+["subsequent","لاحق"],
+["substitute","بديل"],
+["sustainable","مستدام"],
+["thorough","شامل / دقيق"],
+["unify","يوحد"],
+["unpredictable","غير متوقع"],
+["versatility","تعدد الاستخدامات"],
+["vulnerable","معرض للخطر"],
+["widespread","واسع الانتشار"],
+["withdrawal","انسحاب"],
+["yield","ينتج / محصول"],
+
+["absurd","سخيف / غير منطقي"],
+["acute","حاد / شديد"],
+["allegation","ادعاء / اتهام"],
+["apparatus","جهاز / معدات"],
+["arbitrary","عشوائي"],
+["assert","يؤكد"],
+["bias","تحيز"],
+["cease","يتوقف"],
+["clarity","وضوح"],
+["coincide","يتزامن"],
+["compliance","امتثال"],
+["conceive","يتصور"],
+["concession","تنازل"],
+["constrain","يقيد"],
+["controversy","جدل"],
+["deficiency","نقص"],
+["depict","يصور"],
+["deviation","انحراف"],
+["discrete","منفصل"],
+["distinction","تمييز"],
+["elaborate","مفصل"],
+["empower","يمكن / يمكّن"],
+["endeavour","مسعى / يسعى"],
+["enhance","يعزز"],
+["enormous","هائل"],
+["equivalent","مكافئ"],
+["exceed","يتجاوز"],
+["exhibit","يعرض / يظهر"],
+["explicit","صريح"],
+["facilitate","يسهل"],
+["feasible","ممكن التنفيذ"],
+["fluctuation","تقلب"],
+["formulate","يصوغ"],
+["incentive","حافز"],
+["incorporate","يدمج"],
+["inevitable","حتمي"],
+["inherent","متأصل"],
+["inspect","يفتش"],
+["integrity","نزاهة"],
+["intervene","يتدخل"],
+["isolate","يعزل"],
+["justify","يبرر"],
+["magnitude","حجم"],
+["modify","يعدل"],
+["objective","موضوعي"],
+["obtain","يحصل على"],
+["overlap","يتداخل"],
+["parameter","معيار"],
+["persistent","مستمر"],
+["plausible","محتمل / معقول"],
+["precede","يسبق"],
+["preliminary","أولي"],
+["profound","عميق"],
+["proportion","نسبة"],
+["pursuit","سعي"],
+["radical","جذري"],
+["refute","يدحض"],
+["regulate","ينظم"],
+["reinforcement","تعزيز"],
+["resilience","مرونة"],
+["restraint","تقييد"],
+["scrutiny","تدقيق"],
+["simultaneous","متزامن"],
+["specify","يحدد"],
+["stability","استقرار"],
+["substantial","جوهري / كبير"],
+["suppress","يقمع"],
+["tangible","ملموس"],
+["underlying","أساسي / كامن"],
+["unprecedented","غير مسبوق"],
+["validity","صلاحية"],
+["versatile","متعدد الاستخدامات"],
+["virtually","تقريبًا"],
+["vulnerable","ضعيف / معرض للخطر"],
+["welfare","رفاهية"],
+["widespread","منتشر على نطاق واسع"]
+
+];
+
+
+/* =========================================================
+   CHECK
+   ========================================================= */
+
+console.log("B1 words:", B1.length);
+console.log("B2 words:", B2.length);
+console.log("Total:", B1.length + B2.length);
+
+
+/* =========================================================
+   APP STATE
+   ========================================================= */
+
+let currentLevel = "ALL";
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function allWords(){
+
+    return [
+        ...B1.map((item,index)=>({
+            word:item[0],
+            arabic:item[1],
+            level:"B1",
+            originalIndex:index + 1
+        })),
+
+        ...B2.map((item,index)=>({
+            word:item[0],
+            arabic:item[1],
+            level:"B2",
+            originalIndex:index + 1
+        }))
+    ];
+
+}
+
+
+function getFilteredWords(){
+
+    const query =
+        document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+    return allWords().filter(item=>{
+
+        const levelMatch =
+            currentLevel === "ALL" ||
+            item.level === currentLevel;
+
+        const searchMatch =
+            !query ||
+            item.word.toLowerCase().includes(query) ||
+            item.arabic.toLowerCase().includes(query);
+
+        return levelMatch && searchMatch;
+
+    });
+
+}
+
+
+/* =========================================================
+   COVER
+   ========================================================= */
+
+function createCover(level,title,subtitle,count){
+
+    const cover = document.createElement("section");
+
+    cover.className = "cover";
+
+    cover.innerHTML = `
+
+        <div class="cover-content">
+
+            <span class="badge">
+                English Vocabulary
+            </span>
+
+            <div class="level-big">
+                ${level}
+            </div>
+
+            <h2>
+                ${title}
+            </h2>
+
+            <h3>
+                ${subtitle}
+            </h3>
+
+            <p>
+                ${count} كلمة مع الترجمة العربية
+            </p>
+
+            <div style="
+                margin-top:35px;
+                font-family:Inter,Arial,sans-serif;
+                font-size:14px;
+                color:#687187;
+                direction:ltr;
+            ">
+                Learn • Review • Practice
+            </div>
+
+        </div>
+
+    `;
+
+    return cover;
+
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+function createPage(words,pageNumber,level){
+
+    const page = document.createElement("section");
+
+    page.className = "page";
+
+    const title =
+        level === "ALL"
+        ? "English Vocabulary"
+        : `${level} Vocabulary`;
+
+    page.innerHTML = `
+
+        <div class="page-header">
+
+            <div>
+
+                <h2>
+                    ${title}
+                </h2>
+
+                <small>
+                    English → Arabic
+                </small>
+
+            </div>
+
+            <div class="page-level">
+                ${level}
+            </div>
+
+        </div>
+
+        <div class="words"></div>
+
+        <div class="footer">
+
+            <span>
+                English Vocabulary B1 & B2
+            </span>
+
+            <span>
+                Page ${pageNumber}
+            </span>
+
+        </div>
+
+    `;
+
+    const container =
+        page.querySelector(".words");
+
+    words.forEach((item,index)=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className = "word";
+
+        card.innerHTML = `
+
+            <div class="number">
+                ${index + 1}
+            </div>
+
+            <div>
+
+                <div class="english">
+                    ${escapeHTML(item.word)}
+                </div>
+
+                <div class="arabic">
+                    ${escapeHTML(item.arabic)}
+                </div>
+
+            </div>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+    return page;
+
+}
+
+
+/* =========================================================
+   SAFE TEXT
+   ========================================================= */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function render(){
+
+    const viewer =
+        document.getElementById("viewer");
+
+    viewer.innerHTML = "";
+
+    let words =
+        getFilteredWords();
+
+    if(words.length === 0){
+
+        viewer.innerHTML = `
+
+            <div class="no-results">
+
+                <h2>
+                    لا توجد نتائج
+                </h2>
+
+                <p>
+                    جرّب كلمة بحث أخرى.
+                </p>
+
+            </div>
+
+        `;
+
+        updateStats([]);
+
+        return;
+
+    }
+
+
+    /*
+       عند اختيار ALL:
+       B1 له غلاف مستقل
+       ثم صفحات B1
+       ثم B2 له غلاف مستقل
+       ثم صفحات B2
+    */
+
+    if(currentLevel === "ALL"){
+
+        renderLevelSection(
+            viewer,
+            B1,
+            "B1",
+            "Intermediate Vocabulary",
+            "500 كلمة للمستوى المتوسط"
+        );
+
+        renderLevelSection(
+            viewer,
+            B2,
+            "B2",
+            "Upper-Intermediate Vocabulary",
+            "500 كلمة للمستوى فوق المتوسط"
+        );
+
+    }else{
+
+        const source =
+            currentLevel === "B1"
+            ? B1
+            : B2;
+
+        renderLevelSection(
+            viewer,
+            source,
+            currentLevel,
+            currentLevel === "B1"
+            ? "Intermediate Vocabulary"
+            : "Upper-Intermediate Vocabulary",
+            currentLevel === "B1"
+            ? "500 كلمة للمستوى المتوسط"
+            : "500 كلمة للمستوى فوق المتوسط"
+        );
+
+    }
+
+
+    updateStats(words);
+
+}
+
+
+/* =========================================================
+   RENDER LEVEL
+   ========================================================= */
+
+function renderLevelSection(
+    viewer,
+    source,
+    level,
+    title,
+    subtitle
+){
+
+    let words =
+        source.map((item,index)=>({
+
+            word:item[0],
+
+            arabic:item[1],
+
+            level:level,
+
+            originalIndex:index + 1
+
+        }));
+
+
+    const query =
+        document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if(query){
+
+        words =
+            words.filter(item=>
+
+                item.word
+                    .toLowerCase()
+                    .includes(query)
+
+                ||
+
+                item.arabic
+                    .toLowerCase()
+                    .includes(query)
+
+            );
+
+    }
+
+
+    if(words.length === 0){
+
+        return;
+
+    }
+
+
+    viewer.appendChild(
+
+        createCover(
+            level,
+            title,
+            subtitle,
+            source.length
+        )
+
+    );
+
+
+    const perPage = 40;
+
+    let pageNumber = 1;
+
+
+    for(
+        let i = 0;
+        i < words.length;
+        i += perPage
+    ){
+
+        const pageWords =
+            words.slice(i,i + perPage);
+
+
+        viewer.appendChild(
+
+            createPage(
+                pageWords,
+                pageNumber,
+                level
+            )
+
+        );
+
+
+        pageNumber++;
+
+    }
+
+}
+
+
+/* =========================================================
+   LEVEL FILTER
+   ========================================================= */
+
+function setLevel(level){
+
+    currentLevel = level;
+
+    document
+        .querySelectorAll(".controls .btn")
+        .forEach(button=>{
+
+            button.classList.remove("dark");
+
+        });
+
+
+    render();
+
+}
+
+
+/* =========================================================
+   CLEAR SEARCH
+   ========================================================= */
+
+function clearSearch(){
+
+    document
+        .getElementById("search")
+        .value = "";
+
+    render();
+
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+function updateStats(words){
+
+    const b1 =
+        words.filter(
+            item=>item.level === "B1"
+        ).length;
+
+    const b2 =
+        words.filter(
+            item=>item.level === "B2"
+        ).length;
+
+
+    document
+        .getElementById("totalWords")
+        .textContent = words.length;
+
+
+    document
+        .getElementById("b1Count")
+        .textContent = b1;
+
+
+    document
+        .getElementById("b2Count")
+        .textContent = b2;
+
+}
+
+
+/* =========================================================
+   PDF
+   ========================================================= */
+
+function downloadPDF(){
+
+    /*
+       أفضل طريقة للحفاظ على تصميم A4
+       هي استخدام محرك الطباعة الأصلي للمتصفح.
+    */
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   KEYBOARD SHORTCUT
+   ========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            (event.ctrlKey || event.metaKey) &&
+            event.key.toLowerCase() === "p"
+        ){
+
+            event.preventDefault();
+
+            window.print();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        render();
+
+    }
+);
+
+
+/*
+   في حالة وضع هذا الجزء أسفل الجزء الأول مباشرة،
+   يتم تشغيل render بعد تحميل الصفحة.
+*/
+
+if(
+    document.readyState === "loading"
+){
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        render
+    );
+
+}else{
+
+    render();
+
+}
+
+</script>
+
+</body>
+</html>

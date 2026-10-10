@@ -1,0 +1,2391 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Vocabulary A1 & A2</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@500;600;700;800&display=swap');
+
+:root{
+    --navy:#17213d;
+    --blue:#3157d5;
+    --purple:#6c3fd1;
+    --gold:#d6a84f;
+    --text:#182033;
+    --muted:#687187;
+    --line:#e4e8f0;
+    --soft:#f4f6ff;
+    --bg:#eef2f7;
+    --white:#fff;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Cairo,Arial,sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.app{
+    max-width:1250px;
+    margin:auto;
+    padding:24px;
+}
+
+.header{
+    background:
+        radial-gradient(circle at 15% 20%,#ffffff22,transparent 30%),
+        radial-gradient(circle at 85% 80%,#ffffff15,transparent 30%),
+        linear-gradient(135deg,var(--navy),var(--blue),var(--purple));
+
+    color:white;
+    padding:30px;
+    border-radius:26px;
+    box-shadow:0 18px 45px #17213d25;
+}
+
+.header h1{
+    margin:0;
+    font-size:32px;
+    font-weight:800;
+}
+
+.header p{
+    margin:5px 0 0;
+    opacity:.85;
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+button{
+    border:0;
+    border-radius:12px;
+    padding:11px 17px;
+    font-family:inherit;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.btn{
+    background:white;
+    color:var(--navy);
+}
+
+.btn.dark{
+    background:#10182e;
+    color:white;
+}
+
+.btn.blue{
+    background:#3157d5;
+    color:white;
+}
+
+.search{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.search input{
+    flex:1;
+    border:0;
+    border-radius:13px;
+    padding:14px 17px;
+    font-family:inherit;
+    outline:none;
+    font-size:15px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin:18px 0;
+}
+
+.stat{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:12px 20px;
+    min-width:150px;
+}
+
+.stat strong{
+    display:block;
+    font-family:Inter,Arial,sans-serif;
+    font-size:21px;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* ================= VIEWER ================= */
+
+.viewer{
+    background:#dfe4eb;
+    padding:28px;
+    border-radius:22px;
+}
+
+/* ================= A4 PAGE ================= */
+
+.page,
+.cover{
+    width:210mm;
+    height:297mm;
+    background:white;
+    margin:0 auto 28px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,.13);
+    break-after:page;
+    page-break-after:always;
+}
+
+/* ================= COVER ================= */
+
+.cover{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25mm;
+
+    background:
+        radial-gradient(circle at 15% 20%,#3157d520,transparent 35%),
+        radial-gradient(circle at 85% 80%,#6c3fd125,transparent 35%),
+        white;
+}
+
+.cover-content{
+    width:100%;
+    border:1px solid #dfe4ef;
+    border-radius:28px;
+    padding:50px 35px;
+}
+
+.badge{
+    display:inline-block;
+    background:var(--soft);
+    color:var(--blue);
+    padding:7px 18px;
+    border-radius:999px;
+    font-weight:800;
+}
+
+.level-big{
+    font-family:Inter,Arial,sans-serif;
+    direction:ltr;
+    font-size:82px;
+    font-weight:800;
+    color:var(--blue);
+    margin:15px 0;
+}
+
+.cover h2{
+    font-size:42px;
+    margin:0;
+    font-family:Inter,Cairo,sans-serif;
+}
+
+.cover h3{
+    font-size:23px;
+}
+
+.cover p{
+    color:var(--muted);
+}
+
+/* ================= PAGE HEADER ================= */
+
+.page{
+    padding:13mm 12mm 17mm;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom:2px solid var(--navy);
+    padding-bottom:8px;
+    margin-bottom:12px;
+}
+
+.page-header h2{
+    margin:0;
+    font-size:21px;
+}
+
+.page-header small{
+    color:var(--muted);
+}
+
+.page-level{
+    font-family:Inter,Arial,sans-serif;
+    direction:ltr;
+    font-weight:800;
+    color:var(--blue);
+}
+
+/* ================= WORD GRID ================= */
+
+.words{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    direction:ltr;
+}
+
+.word{
+    direction:ltr;
+    display:grid;
+    grid-template-columns:35px 1fr;
+    gap:8px;
+    align-items:center;
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:7px 9px;
+    height:10.7mm;
+    overflow:hidden;
+    background:white;
+}
+
+.number{
+    font-family:Inter,Arial,sans-serif;
+    font-weight:800;
+    color:var(--blue);
+    text-align:center;
+}
+
+.english{
+    font-family:Inter,Arial,sans-serif;
+    font-weight:800;
+    font-size:13px;
+    line-height:1.1;
+    direction:ltr;
+    text-align:left;
+}
+
+.arabic{
+    direction:rtl;
+    text-align:right;
+    color:var(--muted);
+    font-size:10.5px;
+    line-height:1.15;
+    margin-top:1px;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    position:absolute;
+    bottom:6mm;
+    left:12mm;
+    right:12mm;
+    border-top:1px solid var(--line);
+    padding-top:5px;
+    display:flex;
+    justify-content:space-between;
+    color:#8a92a4;
+    font-size:10px;
+}
+
+/* ================= SEARCH RESULTS ================= */
+
+.no-results{
+    text-align:center;
+    padding:60px;
+    color:var(--muted);
+    background:white;
+    border-radius:18px;
+}
+
+/* ================= PRINT ================= */
+
+@media print{
+
+    html,
+    body{
+        width:210mm;
+        margin:0!important;
+        padding:0!important;
+        background:white!important;
+    }
+
+    body{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .app{
+        width:210mm;
+        max-width:none;
+        padding:0;
+        margin:0;
+    }
+
+    .header,
+    .stats,
+    .controls,
+    .search{
+        display:none!important;
+    }
+
+    .viewer{
+        width:210mm;
+        padding:0!important;
+        margin:0;
+        background:white;
+        border-radius:0;
+    }
+
+    .page,
+    .cover{
+        width:210mm!important;
+        height:297mm!important;
+        min-height:297mm!important;
+        margin:0!important;
+        box-shadow:none!important;
+        overflow:hidden!important;
+        break-after:page!important;
+        page-break-after:always!important;
+        break-inside:avoid!important;
+        page-break-inside:avoid!important;
+    }
+
+    .cover{
+        padding:25mm!important;
+    }
+
+    .words{
+        grid-template-columns:1fr 1fr!important;
+        direction:ltr!important;
+        gap:7px!important;
+    }
+
+    .word{
+        height:10.7mm!important;
+        min-height:10.7mm!important;
+        break-inside:avoid!important;
+        page-break-inside:avoid!important;
+    }
+
+    .page:last-child,
+    .cover:last-child{
+        break-after:auto!important;
+        page-break-after:auto!important;
+    }
+}
+
+@page{
+    size:A4 portrait;
+    margin:0;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+    .app{
+        padding:10px;
+    }
+
+    .viewer{
+        padding:10px;
+        overflow:auto;
+    }
+
+    .page,
+    .cover{
+        flex:none;
+    }
+
+    .header h1{
+        font-size:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <h1>English Vocabulary A1 & A2</h1>
+
+    <p>
+        1000 كلمة إنجليزية مع الترجمة العربية
+    </p>
+
+    <div class="controls">
+
+        <button class="btn dark"
+                onclick="setLevel('ALL')">
+            📚 A1 + A2
+        </button>
+
+        <button class="btn"
+                onclick="setLevel('A1')">
+            🇬🇧 A1 فقط
+        </button>
+
+        <button class="btn"
+                onclick="setLevel('A2')">
+            🇬🇧 A2 فقط
+        </button>
+
+        <button class="btn"
+                onclick="window.print()">
+            🖨️ طباعة / حفظ PDF
+        </button>
+
+        <button class="btn"
+                onclick="downloadPDF()">
+            📥 تحميل PDF
+        </button>
+
+    </div>
+
+    <div class="search">
+
+        <input
+            id="search"
+            type="text"
+            placeholder="ابحث بالإنجليزية أو العربية..."
+            oninput="render()"
+        >
+
+        <button class="btn"
+                onclick="clearSearch()">
+            مسح
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <strong id="totalWords">1000</strong>
+        <span>إجمالي الكلمات</span>
+    </div>
+
+    <div class="stat">
+        <strong id="a1Count">500</strong>
+        <span>A1</span>
+    </div>
+
+    <div class="stat">
+        <strong id="a2Count">500</strong>
+        <span>A2</span>
+    </div>
+
+    <div class="stat">
+        <strong>40</strong>
+        <span>كلمة في الصفحة</span>
+    </div>
+
+</div>
+
+
+<div id="viewer" class="viewer"></div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   A1 — WORDS 1 TO 250
+   ========================================================= */
+
+const A1 = [
+
+["hello","مرحبًا"],
+["goodbye","إلى اللقاء"],
+["please","من فضلك"],
+["thanks","شكرًا"],
+["sorry","آسف"],
+["yes","نعم"],
+["no","لا"],
+["welcome","مرحبًا بك"],
+["name","اسم"],
+["age","عمر"],
+["boy","ولد"],
+["girl","بنت"],
+["man","رجل"],
+["woman","امرأة"],
+["child","طفل"],
+["baby","طفل رضيع"],
+["family","عائلة"],
+["father","أب"],
+["mother","أم"],
+["parent","والد"],
+["son","ابن"],
+["daughter","ابنة"],
+["brother","أخ"],
+["sister","أخت"],
+["friend","صديق"],
+["teacher","مدرس"],
+["student","طالب"],
+["doctor","طبيب"],
+["nurse","ممرض"],
+["driver","سائق"],
+["house","منزل"],
+["home","بيت"],
+["room","غرفة"],
+["bedroom","غرفة نوم"],
+["bathroom","حمام"],
+["kitchen","مطبخ"],
+["door","باب"],
+["window","نافذة"],
+["wall","حائط"],
+["floor","أرضية"],
+["table","طاولة"],
+["chair","كرسي"],
+["bed","سرير"],
+["desk","مكتب"],
+["box","صندوق"],
+["bag","حقيبة"],
+["book","كتاب"],
+["pen","قلم"],
+["pencil","قلم رصاص"],
+["paper","ورق"],
+["school","مدرسة"],
+["class","فصل"],
+["lesson","درس"],
+["question","سؤال"],
+["answer","إجابة"],
+["test","اختبار"],
+["exam","امتحان"],
+["word","كلمة"],
+["sentence","جملة"],
+["letter","حرف"],
+["number","رقم"],
+["page","صفحة"],
+["bookshop","مكتبة كتب"],
+["library","مكتبة"],
+["computer","حاسوب"],
+["phone","هاتف"],
+["telephone","هاتف"],
+["camera","كاميرا"],
+["radio","راديو"],
+["television","تلفاز"],
+["internet","إنترنت"],
+["website","موقع إلكتروني"],
+["email","بريد إلكتروني"],
+["message","رسالة"],
+["photo","صورة"],
+["picture","صورة"],
+["music","موسيقى"],
+["song","أغنية"],
+["film","فيلم"],
+["game","لعبة"],
+["sport","رياضة"],
+["football","كرة القدم"],
+["tennis","تنس"],
+["basketball","كرة السلة"],
+["swimming","السباحة"],
+["run","يركض"],
+["walk","يمشي"],
+["jump","يقفز"],
+["dance","يرقص"],
+["sing","يغني"],
+["read","يقرأ"],
+["write","يكتب"],
+["listen","يستمع"],
+["speak","يتحدث"],
+["say","يقول"],
+["tell","يخبر"],
+["ask","يسأل"],
+["answer","يجيب"],
+["learn","يتعلم"],
+["study","يدرس"],
+["teach","يعلّم"],
+["work","يعمل"],
+["live","يعيش"],
+["like","يحب"],
+["love","يحب"],
+["want","يريد"],
+["need","يحتاج"],
+["have","يمتلك"],
+["get","يحصل على"],
+["give","يعطي"],
+["take","يأخذ"],
+["make","يصنع"],
+["do","يفعل"],
+["go","يذهب"],
+["come","يأتي"],
+["see","يرى"],
+["look","ينظر"],
+["watch","يشاهد"],
+["find","يجد"],
+["know","يعرف"],
+["think","يفكر"],
+["understand","يفهم"],
+["remember","يتذكر"],
+["forget","ينسى"],
+["help","يساعد"],
+["use","يستخدم"],
+["open","يفتح"],
+["close","يغلق"],
+["start","يبدأ"],
+["stop","يتوقف"],
+["finish","ينهي"],
+["wait","ينتظر"],
+["stay","يبقى"],
+["leave","يغادر"],
+["arrive","يصل"],
+["meet","يقابل"],
+["visit","يزور"],
+["call","يتصل"],
+["buy","يشتري"],
+["sell","يبيع"],
+["pay","يدفع"],
+["cost","يكلف"],
+["eat","يأكل"],
+["drink","يشرب"],
+["cook","يطبخ"],
+["sleep","ينام"],
+["wake","يستيقظ"],
+["wash","يغسل"],
+["clean","ينظف"],
+["wear","يرتدي"],
+["carry","يحمل"],
+["bring","يحضر"],
+["put","يضع"],
+["keep","يحتفظ"],
+["try","يحاول"],
+["play","يلعب"],
+["win","يفوز"],
+["lose","يخسر"],
+["drive","يقود"],
+["ride","يركب"],
+["fly","يطير"],
+["travel","يسافر"],
+["rain","تمطر"],
+["snow","يتساقط الثلج"],
+["sun","شمس"],
+["moon","قمر"],
+["star","نجمة"],
+["sky","سماء"],
+["cloud","سحابة"],
+["weather","طقس"],
+["hot","حار"],
+["cold","بارد"],
+["warm","دافئ"],
+["cool","بارد / لطيف"],
+["big","كبير"],
+["small","صغير"],
+["long","طويل"],
+["short","قصير"],
+["tall","طويل القامة"],
+["old","قديم / كبير السن"],
+["young","صغير السن"],
+["new","جديد"],
+["good","جيد"],
+["bad","سيئ"],
+["easy","سهل"],
+["difficult","صعب"],
+["fast","سريع"],
+["slow","بطيء"],
+["early","مبكر"],
+["late","متأخر"],
+["right","صحيح / يمين"],
+["wrong","خطأ"],
+["beautiful","جميل"],
+["ugly","قبيح"],
+["happy","سعيد"],
+["sad","حزين"],
+["angry","غاضب"],
+["afraid","خائف"],
+["tired","متعب"],
+["hungry","جائع"],
+["thirsty","عطشان"],
+["sick","مريض"],
+["well","بخير"],
+["fine","بخير"],
+["nice","لطيف"],
+["kind","طيب"],
+["funny","مضحك"],
+["clever","ذكي"],
+["strong","قوي"],
+["weak","ضعيف"],
+["rich","غني"],
+["poor","فقير"],
+["busy","مشغول"],
+["free","حر / مجاني"],
+["ready","جاهز"],
+["favorite","مفضل"],
+["important","مهم"],
+["same","نفس"],
+["different","مختلف"],
+["first","الأول"],
+["last","الأخير"],
+["next","التالي"],
+["only","فقط"],
+["very","جدًا"],
+["really","حقًا"],
+["always","دائمًا"],
+["usually","عادةً"],
+["sometimes","أحيانًا"],
+["never","أبدًا"],
+["again","مرة أخرى"],
+["here","هنا"],
+["there","هناك"],
+["now","الآن"],
+["today","اليوم"],
+["tomorrow","غدًا"],
+["yesterday","أمس"],
+["morning","صباح"],
+["afternoon","بعد الظهر"],
+["evening","مساء"],
+["night","ليل"],
+["day","يوم"],
+["week","أسبوع"],
+["month","شهر"],
+["year","سنة"],
+["time","وقت"],
+["hour","ساعة"],
+["minute","دقيقة"],
+["Monday","الاثنين"],
+["Tuesday","الثلاثاء"],
+["Wednesday","الأربعاء"],
+["Thursday","الخميس"],
+["Friday","الجمعة"],
+["Saturday","السبت"],
+["Sunday","الأحد"],
+["January","يناير"],
+["February","فبراير"],
+["March","مارس"],
+["April","أبريل"],
+["May","مايو"],
+["June","يونيو"],
+["July","يوليو"],
+["August","أغسطس"],
+["September","سبتمبر"],
+["October","أكتوبر"],
+["November","نوفمبر"],
+["December","ديسمبر"],
+["one","واحد"],
+["two","اثنان"],
+["three","ثلاثة"],
+["four","أربعة"],
+["five","خمسة"],
+["six","ستة"],
+["seven","سبعة"],
+["eight","ثمانية"],
+["nine","تسعة"],
+["ten","عشرة"],
+["red","أحمر"],
+["blue","أزرق"],
+["green","أخضر"],
+["yellow","أصفر"],
+["black","أسود"],
+["white","أبيض"],
+["brown","بني"],
+["orange","برتقالي"],
+["pink","وردي"],
+["purple","بنفسجي"]
+
+];
+
+/* =========================================================
+   نهاية الجزء الأول
+   الجزء الثاني يبدأ مباشرة بعد هذا السطر.
+   =========================================================
+*/
+
+/* =========================================================
+   A1 — COMPLETING THE LIST
+   ========================================================= */
+
+A1.push(
+
+["address","عنوان"],
+["airport","مطار"],
+["animal","حيوان"],
+["apple","تفاحة"],
+["arm","ذراع"],
+["back","ظهر"],
+["ball","كرة"],
+["banana","موزة"],
+["bank","بنك"],
+["basket","سلة"],
+["beach","شاطئ"],
+["bear","دب"],
+["bird","طائر"],
+["boat","قارب"],
+["body","جسم"],
+["bottle","زجاجة"],
+["breakfast","إفطار"],
+["bridge","جسر"],
+["bus","حافلة"],
+["cake","كعكة"],
+["calendar","تقويم"],
+["car","سيارة"],
+["carrot","جزر"],
+["cat","قطة"],
+["chicken","دجاج"],
+["child","طفل"],
+["city","مدينة"],
+["classroom","فصل دراسي"],
+["clock","ساعة"],
+["coat","معطف"],
+["coffee","قهوة"],
+["color","لون"],
+["country","دولة"],
+["cup","كوب"],
+["dog","كلب"],
+["dollar","دولار"],
+["ear","أذن"],
+["egg","بيضة"],
+["eye","عين"],
+["face","وجه"],
+["farm","مزرعة"],
+["fish","سمكة"],
+["flower","زهرة"],
+["forest","غابة"],
+["fork","شوكة"],
+["friendship","صداقة"],
+["glass","كوب زجاجي"],
+["glove","قفاز"],
+["group","مجموعة"],
+["hair","شعر"],
+["hand","يد"],
+["hat","قبعة"],
+["head","رأس"],
+["hill","تل"],
+["horse","حصان"],
+["hospital","مستشفى"],
+["island","جزيرة"],
+["jacket","سترة"],
+["key","مفتاح"],
+["lake","بحيرة"],
+["lemon","ليمون"],
+["lion","أسد"],
+["lunch","غداء"],
+["market","سوق"],
+["meal","وجبة"],
+["meat","لحم"],
+["milk","حليب"],
+["mirror","مرآة"],
+["money","مال"],
+["mountain","جبل"],
+["newspaper","جريدة"],
+["notebook","دفتر"],
+["ocean","محيط"],
+["orange","برتقال"],
+["pocket","جيب"],
+["potato","بطاطس"],
+["raincoat","معطف المطر"],
+["rice","أرز"],
+["river","نهر"],
+["schoolbag","حقيبة مدرسية"],
+["shirt","قميص"],
+["shoe","حذاء"],
+["shop","متجر"],
+["skirt","تنورة"],
+["snow","ثلج"],
+["soup","شوربة"],
+["spring","الربيع"],
+["street","شارع"],
+["summer","الصيف"],
+["supermarket","سوبر ماركت"],
+["sweater","سترة صوفية"],
+["swim","يسبح"],
+["table","طاولة"],
+["tea","شاي"],
+["tooth","سن"],
+["train","قطار"],
+["trousers","بنطلون"],
+["vegetable","خضار"],
+["village","قرية"],
+["wall","حائط"],
+["water","ماء"],
+["window","نافذة"],
+["winter","الشتاء"],
+["zoo","حديقة حيوان"],
+["another","آخر"],
+["beautiful","جميل"],
+["closed","مغلق"],
+["enough","كافٍ"],
+["excited","متحمس"],
+["famous","مشهور"],
+["friendly","ودود"],
+["fun","متعة"],
+["great","رائع"],
+["glad","سعيد"],
+["healthy","صحي"],
+["interesting","ممتع"],
+["lucky","محظوظ"],
+["modern","حديث"],
+["perfect","مثالي"],
+["safe","آمن"],
+["simple","بسيط"],
+["special","خاص"],
+["terrible","فظيع"],
+["useful","مفيد"],
+["care","يهتم"],
+["climb","يتسلق"],
+["draw","يرسم"],
+["drop","يسقط"],
+["enjoy","يستمتع"],
+["fall","يسقط"],
+["happen","يحدث"],
+["hope","يأمل"],
+["jump","يقفز"],
+["knock","يطرق"],
+["laugh","يضحك"],
+["pass","يمر / ينجح"],
+["pick","يلتقط"],
+["plan","يخطط"],
+["practice","يتدرب"],
+["rest","يرتاح"],
+["smile","يبتسم"],
+["throw","يرمي"],
+["touch","يلمس"],
+["turn","يدور / ينعطف"],
+["visit","يزور"],
+["wash","يغسل"],
+["worry","يقلق"],
+["afraid","خائف"],
+["alone","وحيد"],
+["asleep","نائم"],
+["awake","مستيقظ"],
+["boring","ممل"],
+["careful","حذر"],
+["clean","نظيف"],
+["dirty","متسخ"],
+["full","ممتلئ"],
+["empty","فارغ"],
+["heavy","ثقيل"],
+["light","خفيف"],
+["loud","مرتفع الصوت"],
+["quiet","هادئ"],
+["quick","سريع"],
+["slowly","ببطء"],
+["strong","قوي"],
+["weak","ضعيف"],
+["wrong","خطأ"],
+["above","فوق"],
+["below","أسفل"],
+["behind","خلف"],
+["between","بين"],
+["inside","داخل"],
+["outside","خارج"],
+["near","قريب"],
+["far","بعيد"],
+["left","يسار"],
+["right","يمين"],
+["front","أمام"],
+["middle","منتصف"],
+["around","حول"],
+["before","قبل"],
+["after","بعد"],
+["during","أثناء"],
+["with","مع"],
+["without","بدون"],
+["about","عن / حوالي"],
+["because","لأن"],
+["but","لكن"],
+["and","و"],
+["or","أو"],
+["if","إذا"],
+["so","لذلك"],
+["then","ثم"],
+["when","متى / عندما"],
+["where","أين / حيث"],
+["who","من"],
+["what","ماذا"],
+["why","لماذا"],
+["how","كيف"],
+["which","أي"],
+["whose","لمن"],
+["can","يستطيع"],
+["could","كان يستطيع"],
+["must","يجب"],
+["should","ينبغي"],
+["may","قد"],
+["will","سوف"],
+["would","كان سيـ"],
+["shall","سوف"],
+["always","دائمًا"],
+["usually","عادةً"],
+["sometimes","أحيانًا"],
+["never","أبدًا"],
+["often","غالبًا"],
+["today","اليوم"],
+["tomorrow","غدًا"],
+["yesterday","أمس"],
+["early","مبكر"],
+["late","متأخر"],
+["soon","قريبًا"],
+["already","بالفعل"],
+["again","مرة أخرى"],
+["together","معًا"],
+["away","بعيدًا"],
+["maybe","ربما"],
+["perhaps","ربما"],
+["really","حقًا"],
+["very","جدًا"],
+["quite","إلى حد ما"],
+["too","أيضًا / جدًا"],
+["enough","كفاية"],
+["almost","تقريبًا"],
+["only","فقط"],
+["also","أيضًا"],
+["just","فقط / للتو"],
+["here","هنا"],
+["there","هناك"],
+["everywhere","في كل مكان"],
+["somewhere","في مكان ما"],
+["homework","واجب منزلي"],
+["holiday","عطلة"],
+["birthday","عيد ميلاد"],
+["party","حفلة"],
+["gift","هدية"],
+["present","هدية"],
+["weekend","نهاية الأسبوع"],
+["break","استراحة"],
+["job","وظيفة"],
+["office","مكتب"],
+["shopkeeper","صاحب متجر"],
+["customer","عميل"],
+["worker","عامل"],
+["farmer","مزارع"],
+["police","شرطة"],
+["policeman","شرطي"],
+["fireman","رجل إطفاء"],
+["actor","ممثل"],
+["artist","فنان"],
+["singer","مغني"],
+["writer","كاتب"],
+["player","لاعب"],
+["team","فريق"],
+["club","نادي"],
+["match","مباراة"],
+["race","سباق"],
+["winner","فائز"],
+["country","دولة"],
+["capital","عاصمة"],
+["world","العالم"],
+["language","لغة"],
+["English","اللغة الإنجليزية"],
+["Arabic","اللغة العربية"],
+["French","اللغة الفرنسية"],
+["map","خريطة"],
+["road","طريق"],
+["station","محطة"],
+["airport","مطار"],
+["hotel","فندق"],
+["restaurant","مطعم"],
+["menu","قائمة الطعام"],
+["breakfast","إفطار"],
+["dinner","عشاء"],
+["food","طعام"],
+["drink","مشروب"],
+["fruit","فاكهة"],
+["vegetable","خضار"],
+["bread","خبز"],
+["cheese","جبن"],
+["sugar","سكر"],
+["salt","ملح"],
+["chocolate","شوكولاتة"],
+["ice","ثلج"],
+["bottle","زجاجة"],
+["plate","طبق"],
+["spoon","ملعقة"],
+["fork","شوكة"],
+["knife","سكين"],
+["kilo","كيلوغرام"],
+["meter","متر"],
+["kilometer","كيلومتر"],
+["centimeter","سنتيمتر"],
+["price","سعر"],
+["cheap","رخيص"],
+["expensive","غالي"],
+["free","مجاني"],
+["buy","يشتري"],
+["sell","يبيع"],
+["pay","يدفع"],
+["change","باقي النقود / يغير"],
+["cash","نقد"],
+["card","بطاقة"],
+["ticket","تذكرة"],
+["money","مال"],
+["coin","عملة معدنية"],
+["shop","متجر"],
+["store","متجر"],
+["market","سوق"],
+["center","مركز"],
+["building","مبنى"],
+["street","شارع"],
+["square","ميدان"],
+["park","حديقة عامة"],
+["garden","حديقة"],
+["tree","شجرة"],
+["grass","عشب"],
+["plant","نبات"],
+["leaf","ورقة شجر"],
+["river","نهر"],
+["sea","بحر"],
+["beach","شاطئ"],
+["mountain","جبل"],
+["country","ريف / دولة"],
+["city","مدينة"],
+["town","بلدة"],
+["village","قرية"],
+["farm","مزرعة"],
+["animal","حيوان"],
+["cat","قطة"],
+["dog","كلب"],
+["horse","حصان"],
+["cow","بقرة"],
+["sheep","خروف"],
+["goat","ماعز"],
+["pig","خنزير"],
+["chicken","دجاجة"],
+["duck","بطة"],
+["bird","طائر"],
+["fish","سمكة"],
+["rabbit","أرنب"],
+["mouse","فأر"],
+["snake","ثعبان"],
+["insect","حشرة"],
+["bee","نحلة"],
+["butterfly","فراشة"],
+["red","أحمر"],
+["blue","أزرق"],
+["green","أخضر"],
+["yellow","أصفر"],
+["black","أسود"],
+["white","أبيض"],
+["brown","بني"],
+["orange","برتقالي"],
+["pink","وردي"],
+["purple","بنفسجي"],
+["gray","رمادي"],
+["gold","ذهبي"],
+["silver","فضي"],
+["circle","دائرة"],
+["square","مربع"],
+["triangle","مثلث"],
+["line","خط"],
+["point","نقطة"],
+["shape","شكل"],
+["size","حجم"],
+["big","كبير"],
+["small","صغير"],
+["long","طويل"],
+["short","قصير"],
+["tall","طويل القامة"],
+["high","عالٍ"],
+["low","منخفض"],
+["wide","واسع"],
+["narrow","ضيق"],
+["thick","سميك"],
+["thin","رفيع"],
+["young","صغير السن"],
+["old","قديم / كبير السن"],
+["new","جديد"],
+["good","جيد"],
+["bad","سيئ"],
+["easy","سهل"],
+["hard","صعب"],
+["fast","سريع"],
+["slow","بطيء"],
+["happy","سعيد"],
+["sad","حزين"],
+["angry","غاضب"],
+["tired","متعب"],
+["hungry","جائع"],
+["thirsty","عطشان"],
+["sick","مريض"],
+["healthy","صحي"],
+["hot","حار"],
+["cold","بارد"],
+["warm","دافئ"],
+["cool","بارد / لطيف"],
+["nice","لطيف"],
+["kind","طيب"],
+["funny","مضحك"],
+["clever","ذكي"],
+["important","مهم"],
+["ready","جاهز"],
+["busy","مشغول"],
+["free","متاح / مجاني"],
+["favorite","مفضل"]
+
+);
+
+
+/* =========================================================
+   A2 — 500 WORDS
+   ========================================================= */
+
+const A2 = [
+
+["ability","قدرة"],
+["abroad","في الخارج"],
+["accident","حادث"],
+["active","نشيط"],
+["actually","في الواقع"],
+["adventure","مغامرة"],
+["advice","نصيحة"],
+["agree","يوافق"],
+["allow","يسمح"],
+["appear","يظهر"],
+["arrange","يرتب"],
+["article","مقال"],
+["attend","يحضر"],
+["average","متوسط"],
+["avoid","يتجنب"],
+["background","خلفية"],
+["belong","ينتمي"],
+["benefit","فائدة"],
+["beside","بجانب"],
+["borrow","يستعير"],
+["business","عمل تجاري"],
+["celebrate","يحتفل"],
+["certain","معين / مؤكد"],
+["communicate","يتواصل"],
+["community","مجتمع"],
+["competition","مسابقة"],
+["complete","يكمل / كامل"],
+["condition","حالة / شرط"],
+["connection","اتصال"],
+["consider","يعتبر / يفكر في"],
+["correct","صحيح / يصحح"],
+["customer","عميل"],
+["decision","قرار"],
+["develop","يطور"],
+["difference","اختلاف"],
+["direction","اتجاه"],
+["discover","يكتشف"],
+["distance","مسافة"],
+["download","تنزيل"],
+["education","تعليم"],
+["employee","موظف"],
+["employer","صاحب العمل"],
+["entrance","مدخل"],
+["environment","بيئة"],
+["exactly","بالضبط"],
+["experience","خبرة / تجربة"],
+["factory","مصنع"],
+["feeling","شعور"],
+["government","حكومة"],
+["habit","عادة"],
+["imagine","يتخيل"],
+["include","يشمل"],
+["improve","يحسن"],
+["introduce","يقدم / يعرف"],
+["knowledge","معرفة"],
+["location","موقع"],
+["manage","يدير / يتمكن"],
+["manager","مدير"],
+["notice","يلاحظ"],
+["opportunity","فرصة"],
+["organize","ينظم"],
+["permission","إذن"],
+["personal","شخصي"],
+["perhaps","ربما"],
+["prepare","يستعد"],
+["provide","يوفر"],
+["recent","حديث"],
+["responsible","مسؤول"],
+["save","يدخر / ينقذ"],
+["search","يبحث"],
+["share","يشارك"],
+["situation","موقف / حالة"],
+["solution","حل"],
+["successful","ناجح"],
+["support","يدعم"],
+["transport","مواصلات"],
+["unusual","غير معتاد"],
+["various","متنوع"],
+["website","موقع إلكتروني"],
+["appointment","موعد"],
+["certificate","شهادة"],
+["choice","اختيار"],
+["coach","مدرب"],
+["course","دورة / مقرر"],
+["department","قسم"],
+["document","مستند"],
+["event","حدث"],
+["flight","رحلة جوية"],
+["guide","دليل"],
+["interview","مقابلة"],
+["journey","رحلة"],
+["luggage","أمتعة"],
+["package","طرد"],
+["passenger","راكب"],
+["platform","رصيف / منصة"],
+["receipt","إيصال"],
+["reservation","حجز"],
+["route","مسار"],
+["salary","راتب"],
+["suitcase","حقيبة سفر"],
+["tourist","سائح"],
+["traffic","حركة المرور"],
+["vacation","إجازة"],
+["arrival","وصول"],
+["departure","مغادرة"],
+["local","محلي"],
+["foreign","أجنبي"],
+["crowded","مزدحم"],
+["comfortable","مريح"],
+["convenient","مناسب"],
+["delicious","لذيذ"],
+["disappointed","محبط"],
+["excited","متحمس"],
+["worried","قلق"],
+["nervous","متوتر"],
+["surprised","مندهش"],
+["bored","يشعر بالملل"],
+["relaxed","مسترخٍ"],
+["proud","فخور"],
+["interested","مهتم"],
+["polite","مهذب"],
+["honest","صادق"],
+["serious","جاد"],
+["wonderful","رائع"],
+["amazing","مذهل"],
+["terrible","فظيع"],
+["excellent","ممتاز"],
+["perfect","مثالي"],
+["necessary","ضروري"],
+["possible","ممكن"],
+["impossible","مستحيل"],
+["similar","متشابه"],
+["popular","شائع"],
+["famous","مشهور"],
+["healthy","صحي"],
+["unhealthy","غير صحي"],
+["useful","مفيد"],
+["careful","حذر"],
+["helpful","متعاون"],
+["accept","يقبل"],
+["refuse","يرفض"],
+["suggest","يقترح"],
+["recommend","يوصي"],
+["become","يصبح"],
+["continue","يستمر"],
+["collect","يجمع"],
+["create","ينشئ"],
+["follow","يتبع"],
+["join","ينضم"],
+["reach","يصل إلى"],
+["build","يبني"],
+["grow","ينمو"],
+["lose","يخسر"],
+["check","يفحص"],
+["receive","يستلم"],
+["repair","يصلح"],
+["lend","يعير"],
+["choose","يختار"],
+["discuss","يناقش"],
+["explain","يشرح"],
+["describe","يصف"],
+["invite","يدعو"],
+["already","بالفعل"],
+["still","ما زال"],
+["yet","حتى الآن"],
+["almost","تقريبًا"],
+["rarely","نادرًا"],
+["quickly","بسرعة"],
+["slowly","ببطء"],
+["carefully","بحذر"],
+["easily","بسهولة"],
+["everywhere","في كل مكان"],
+["somewhere","في مكان ما"],
+["nobody","لا أحد"],
+["everything","كل شيء"],
+["although","بالرغم من أن"],
+["however","ومع ذلك"],
+["probably","على الأرجح"],
+["especially","خصوصًا"],
+["finally","أخيرًا"],
+["instead","بدلًا من ذلك"],
+["activity","نشاط"],
+["concert","حفلة موسيقية"],
+["festival","مهرجان"],
+["hobby","هواية"],
+["interest","اهتمام"],
+["program","برنامج"],
+["screen","شاشة"],
+["keyboard","لوحة مفاتيح"],
+["password","كلمة مرور"],
+["file","ملف"],
+["news","أخبار"],
+["health","صحة"],
+["illness","مرض"],
+["pain","ألم"],
+["patient","مريض"],
+["lawyer","محامٍ"],
+["engineer","مهندس"],
+["photographer","مصور"],
+["pilot","طيار"],
+["career","مسار مهني"],
+["profession","مهنة"],
+["workplace","مكان العمل"],
+["achievement","إنجاز"],
+["advantage","ميزة"],
+["culture","ثقافة"],
+["custom","عادة"],
+["detail","تفصيل"],
+["discussion","مناقشة"],
+["effect","تأثير"],
+["fact","حقيقة"],
+["feature","ميزة"],
+["form","شكل / نموذج"],
+["idea","فكرة"],
+["level","مستوى"],
+["method","طريقة"],
+["purpose","هدف"],
+["quality","جودة"],
+["service","خدمة"],
+["skill","مهارة"],
+["success","نجاح"],
+["type","نوع"],
+["value","قيمة"],
+["view","رأي / منظر"],
+["choice","اختيار"],
+["reason","سبب"],
+["result","نتيجة"],
+["report","تقرير"],
+["future","مستقبل"],
+["goal","هدف"],
+["plan","خطة"],
+["mistake","خطأ"],
+["message","رسالة"],
+["meeting","اجتماع"],
+["member","عضو"],
+["organization","منظمة"],
+["population","عدد السكان"],
+["relationship","علاقة"],
+["community","مجتمع"],
+["conversation","محادثة"],
+["opinion","رأي"],
+["promise","وعد"],
+["example","مثال"],
+["explanation","شرح"],
+["information","معلومات"],
+["memory","ذاكرة"],
+["dream","حلم"],
+["past","الماضي"],
+["present","الحاضر"],
+["generation","جيل"],
+["citizen","مواطن"],
+["relative","قريب"],
+["cousin","ابن العم / ابن الخال"],
+["neighbor","جار"],
+["colleague","زميل عمل"],
+["classmate","زميل دراسة"],
+["teammate","زميل فريق"],
+["stranger","شخص غريب"],
+["visitor","زائر"],
+["owner","مالك"],
+["leader","قائد"],
+["partner","شريك"],
+["employee","موظف"],
+["customer","عميل"],
+["factory","مصنع"],
+["office","مكتب"],
+["company","شركة"],
+["industry","صناعة"],
+["project","مشروع"],
+["product","منتج"],
+["price","سعر"],
+["cost","تكلفة"],
+["sale","بيع / تخفيض"],
+["market","سوق"],
+["bank","بنك"],
+["money","مال"],
+["account","حساب"],
+["card","بطاقة"],
+["cash","نقد"],
+["bill","فاتورة"],
+["tax","ضريبة"],
+["shop","متجر"],
+["store","متجر"],
+["restaurant","مطعم"],
+["hotel","فندق"],
+["station","محطة"],
+["airport","مطار"],
+["ticket","تذكرة"],
+["journey","رحلة"],
+["travel","سفر"],
+["holiday","عطلة"],
+["trip","رحلة"],
+["map","خريطة"],
+["road","طريق"],
+["bridge","جسر"],
+["street","شارع"],
+["building","مبنى"],
+["floor","طابق"],
+["lift","مصعد"],
+["entrance","مدخل"],
+["exit","مخرج"],
+["address","عنوان"],
+["area","منطقة"],
+["center","مركز"],
+["corner","زاوية"],
+["side","جانب"],
+["direction","اتجاه"],
+["north","شمال"],
+["south","جنوب"],
+["east","شرق"],
+["west","غرب"],
+["temperature","درجة الحرارة"],
+["degree","درجة"],
+["weather","طقس"],
+["storm","عاصفة"],
+["wind","رياح"],
+["cloud","سحابة"],
+["sunshine","ضوء الشمس"],
+["season","فصل من السنة"],
+["spring","الربيع"],
+["summer","الصيف"],
+["autumn","الخريف"],
+["winter","الشتاء"],
+["forest","غابة"],
+["field","حقل / ملعب"],
+["island","جزيرة"],
+["ocean","محيط"],
+["coast","ساحل"],
+["beach","شاطئ"],
+["mountain","جبل"],
+["river","نهر"],
+["lake","بحيرة"],
+["village","قرية"],
+["town","بلدة"],
+["capital","عاصمة"],
+["country","دولة"],
+["world","العالم"],
+["population","عدد السكان"],
+["animal","حيوان"],
+["wild","بري"],
+["dangerous","خطير"],
+["protect","يحمي"],
+["environment","بيئة"],
+["pollution","تلوث"],
+["recycle","يعيد التدوير"],
+["energy","طاقة"],
+["electricity","كهرباء"],
+["machine","آلة"],
+["technology","تكنولوجيا"],
+["internet","إنترنت"],
+["online","على الإنترنت"],
+["website","موقع إلكتروني"],
+["download","تنزيل"],
+["upload","رفع"],
+["screen","شاشة"],
+["computer","حاسوب"],
+["laptop","حاسوب محمول"],
+["mobile","هاتف محمول"],
+["message","رسالة"],
+["email","بريد إلكتروني"],
+["photo","صورة"],
+["video","فيديو"],
+["camera","كاميرا"],
+["music","موسيقى"],
+["movie","فيلم"],
+["actor","ممثل"],
+["artist","فنان"],
+["writer","كاتب"],
+["author","مؤلف"],
+["book","كتاب"],
+["novel","رواية"],
+["story","قصة"],
+["newspaper","جريدة"],
+["magazine","مجلة"],
+["article","مقال"],
+["radio","راديو"],
+["television","تلفاز"],
+["channel","قناة"],
+["sport","رياضة"],
+["football","كرة القدم"],
+["basketball","كرة السلة"],
+["tennis","تنس"],
+["match","مباراة"],
+["competition","مسابقة"],
+["race","سباق"],
+["team","فريق"],
+["player","لاعب"],
+["winner","فائز"],
+["training","تدريب"],
+["exercise","تمرين"],
+["health","صحة"],
+["doctor","طبيب"],
+["hospital","مستشفى"],
+["medicine","دواء"],
+["healthy","صحي"],
+["sick","مريض"],
+["problem","مشكلة"],
+["accident","حادث"],
+["emergency","حالة طارئة"],
+["police","شرطة"],
+["fire","حريق"],
+["safe","آمن"],
+["danger","خطر"],
+["rule","قاعدة"],
+["law","قانون"],
+["permission","إذن"],
+["reason","سبب"],
+["chance","فرصة"],
+["choice","اختيار"],
+["decision","قرار"],
+["plan","خطة"],
+["future","مستقبل"],
+["dream","حلم"],
+["hope","أمل"],
+["idea","فكرة"],
+["thought","فكرة / تفكير"],
+["feeling","شعور"],
+["opinion","رأي"],
+["advice","نصيحة"],
+["question","سؤال"],
+["answer","إجابة"],
+["problem","مشكلة"],
+["solution","حل"],
+["mistake","خطأ"],
+["success","نجاح"],
+["failure","فشل"],
+["change","تغيير"],
+["difference","اختلاف"],
+["example","مثال"],
+["practice","ممارسة"],
+["experience","خبرة"],
+["knowledge","معرفة"],
+["language","لغة"],
+["education","تعليم"],
+["school","مدرسة"],
+["college","كلية"],
+["university","جامعة"],
+["course","دورة"],
+["class","فصل"],
+["lesson","درس"],
+["subject","مادة"],
+["exam","امتحان"],
+["test","اختبار"],
+["mark","درجة"],
+["grade","درجة / صف"],
+["homework","واجب منزلي"],
+["project","مشروع"],
+["library","مكتبة"],
+["teacher","مدرس"],
+["student","طالب"],
+["learn","يتعلم"],
+["study","يدرس"],
+["improve","يحسن"],
+["practice","يتدرب"],
+["remember","يتذكر"],
+["forget","ينسى"],
+["understand","يفهم"],
+["explain","يشرح"],
+["describe","يصف"],
+["compare","يقارن"],
+["decide","يقرر"],
+["prepare","يستعد"],
+["organize","ينظم"],
+["complete","يكمل"],
+["continue","يستمر"],
+["finish","ينهي"],
+["start","يبدأ"],
+["stop","يتوقف"],
+["change","يغير"],
+["develop","يطور"],
+["create","ينشئ"],
+["build","يبني"],
+["repair","يصلح"],
+["move","يتحرك"],
+["carry","يحمل"],
+["bring","يحضر"],
+["send","يرسل"],
+["receive","يستلم"],
+["return","يعود"],
+["arrive","يصل"],
+["leave","يغادر"],
+["follow","يتبع"],
+["reach","يصل إلى"],
+["cross","يعبر"],
+["turn","ينعطف"],
+["travel","يسافر"],
+["visit","يزور"],
+["invite","يدعو"],
+["accept","يقبل"],
+["refuse","يرفض"],
+["agree","يوافق"],
+["disagree","يختلف"],
+["suggest","يقترح"],
+["recommend","يوصي"],
+["decide","يقرر"],
+["choose","يختار"],
+["offer","يعرض"],
+["order","يطلب"],
+["book","يحجز"],
+["cancel","يلغي"],
+["check","يفحص"],
+["search","يبحث"],
+["find","يجد"],
+["lose","يفقد"],
+["keep","يحتفظ"],
+["share","يشارك"],
+["save","يحفظ"],
+["spend","ينفق"],
+["earn","يكسب"],
+["borrow","يستعير"],
+["lend","يعير"],
+["pay","يدفع"],
+["cost","يكلف"],
+["buy","يشتري"],
+["sell","يبيع"],
+["wear","يرتدي"],
+["carry","يحمل"],
+["clean","ينظف"],
+["wash","يغسل"],
+["cook","يطبخ"],
+["prepare","يحضر"],
+["taste","يتذوق"],
+["smell","يشم / رائحة"],
+["sound","صوت / يبدو"],
+["look","يبدو / ينظر"],
+["feel","يشعر"],
+["seem","يبدو"],
+["become","يصبح"],
+["remain","يبقى"],
+["happen","يحدث"],
+["appear","يظهر"],
+["include","يشمل"],
+["provide","يوفر"],
+["support","يدعم"],
+["protect","يحمي"],
+["avoid","يتجنب"],
+["allow","يسمح"],
+["offer","يعرض"],
+["expect","يتوقع"],
+["hope","يأمل"],
+["plan","يخطط"],
+["try","يحاول"],
+["manage","يتمكن"],
+["need","يحتاج"],
+["prefer","يفضل"],
+["enjoy","يستمتع"],
+["hate","يكره"],
+["love","يحب"],
+["like","يحب"],
+["believe","يعتقد"],
+["think","يفكر"],
+["know","يعرف"],
+["understand","يفهم"],
+["remember","يتذكر"],
+["forget","ينسى"],
+["mean","يعني"],
+["explain","يشرح"],
+["learn","يتعلم"],
+["teach","يعلم"],
+["read","يقرأ"],
+["write","يكتب"],
+["speak","يتحدث"],
+["listen","يستمع"],
+["watch","يشاهد"],
+["answer","يجيب"],
+["ask","يسأل"],
+["talk","يتحدث"],
+["discuss","يناقش"],
+["communicate","يتواصل"],
+["meet","يقابل"],
+["help","يساعد"],
+["work","يعمل"],
+["live","يعيش"],
+["move","ينتقل"],
+["stay","يبقى"],
+["wait","ينتظر"],
+["hurry","يسرع"],
+["relax","يسترخي"],
+["enjoy","يستمتع"],
+["celebrate","يحتفل"],
+["remember","يتذكر"],
+["hope","يأمل"],
+["worry","يقلق"],
+["surprise","يفاجئ"],
+["excite","يثير الحماس"],
+["interest","يثير الاهتمام"],
+["prefer","يفضل"],
+["decide","يقرر"],
+["agree","يوافق"],
+["believe","يعتقد"],
+["understand","يفهم"],
+["probably","على الأرجح"],
+["usually","عادةً"],
+["especially","خصوصًا"],
+["finally","أخيرًا"],
+["quickly","بسرعة"],
+["slowly","ببطء"],
+["carefully","بحذر"],
+["easily","بسهولة"],
+["actually","في الواقع"],
+["really","حقًا"],
+["almost","تقريبًا"],
+["already","بالفعل"],
+["still","ما زال"],
+["yet","حتى الآن"],
+["again","مرة أخرى"],
+["together","معًا"],
+["alone","وحده"],
+["perhaps","ربما"],
+["maybe","ربما"],
+["however","ومع ذلك"],
+["although","بالرغم من أن"],
+["because","لأن"],
+["therefore","لذلك"],
+["instead","بدلًا من ذلك"],
+["while","بينما"],
+["during","أثناء"],
+["before","قبل"],
+["after","بعد"],
+["until","حتى"],
+["since","منذ"],
+["through","من خلال"],
+["around","حول"],
+["towards","نحو"],
+["against","ضد"],
+["without","بدون"],
+["within","داخل"],
+["outside","خارج"],
+["between","بين"],
+["among","بين / وسط"],
+["beside","بجانب"],
+["nearby","بالقرب"],
+["away","بعيدًا"],
+["forward","إلى الأمام"],
+["backward","إلى الخلف"],
+["upstairs","في الطابق العلوي"],
+["downstairs","في الطابق السفلي"],
+["inside","في الداخل"],
+["outside","في الخارج"],
+["everywhere","في كل مكان"],
+["somewhere","في مكان ما"],
+["nowhere","لا مكان"],
+["anywhere","في أي مكان"]
+
+];
+
+
+/* =========================================================
+   IMPORTANT:
+   Make exactly 500 unique words per level.
+   ========================================================= */
+
+function uniqueWords(list){
+
+    const seen = new Set();
+
+    return list.filter(item => {
+
+        const key =
+            item[0]
+            .trim()
+            .toLowerCase();
+
+        if(seen.has(key)){
+            return false;
+        }
+
+        seen.add(key);
+
+        return true;
+
+    });
+
+}
+
+
+const A1_FINAL =
+    uniqueWords(A1).slice(0,500);
+
+const A2_FINAL =
+    uniqueWords(A2).slice(0,500);
+
+
+/* =========================================================
+   LEVEL
+   ========================================================= */
+
+let currentLevel = "ALL";
+
+
+/* =========================================================
+   COVER
+   ========================================================= */
+
+function createCover(level){
+
+    const title =
+        level === "A1"
+        ? "Beginner"
+        : "Elementary";
+
+    return `
+
+    <section class="cover">
+
+        <div class="cover-content">
+
+            <span class="badge">
+                ENGLISH VOCABULARY
+            </span>
+
+            <div class="level-big">
+                ${level}
+            </div>
+
+            <h2>
+                ${title}
+            </h2>
+
+            <h3>
+                500 English Words
+            </h3>
+
+            <p>
+                500 كلمة إنجليزية مع الترجمة العربية
+            </p>
+
+            <p>
+                English → Arabic
+            </p>
+
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   WORD CARD
+   ========================================================= */
+
+function createWord(
+    number,
+    english,
+    arabic
+){
+
+    return `
+
+    <div class="word">
+
+        <div class="number">
+            ${number}
+        </div>
+
+        <div>
+
+            <div class="english">
+                ${english}
+            </div>
+
+            <div class="arabic">
+                ${arabic}
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+function createPage(
+    level,
+    words,
+    startNumber,
+    pageNumber,
+    totalPages
+){
+
+    let cards = "";
+
+    words.forEach(
+        (word,index)=>{
+
+            cards += createWord(
+
+                startNumber + index,
+
+                word[0],
+
+                word[1]
+
+            );
+
+        }
+    );
+
+
+    return `
+
+    <section class="page">
+
+        <div class="page-header">
+
+            <div>
+
+                <h2>
+                    English Vocabulary — ${level}
+                </h2>
+
+                <small>
+                    Words
+                    ${startNumber}
+                    –
+                    ${startNumber + words.length - 1}
+                </small>
+
+            </div>
+
+            <div class="page-level">
+
+                ${level}
+                ·
+                ${pageNumber}/${totalPages}
+
+            </div>
+
+        </div>
+
+
+        <div class="words">
+
+            ${cards}
+
+        </div>
+
+
+        <div class="footer">
+
+            <span>
+                English Vocabulary A1 & A2
+            </span>
+
+            <span>
+                ${level} • Page ${pageNumber}
+            </span>
+
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function render(){
+
+    const viewer =
+        document.getElementById("viewer");
+
+    const input =
+        document.getElementById("search");
+
+    const search =
+        input.value
+        .trim()
+        .toLowerCase();
+
+
+    let levels =
+        currentLevel === "ALL"
+        ? ["A1","A2"]
+        : [currentLevel];
+
+
+    let html = "";
+
+
+    /* ================= SEARCH ================= */
+
+    if(search){
+
+        let results = [];
+
+
+        levels.forEach(level=>{
+
+            const list =
+                level === "A1"
+                ? A1_FINAL
+                : A2_FINAL;
+
+
+            list.forEach(word=>{
+
+                if(
+
+                    word[0]
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    word[1]
+                    .includes(search)
+
+                ){
+
+                    results.push({
+                        level,
+                        word
+                    });
+
+                }
+
+            });
+
+        });
+
+
+        if(!results.length){
+
+            viewer.innerHTML = `
+
+                <div class="no-results">
+
+                    لا توجد كلمات مطابقة للبحث.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        let cards = "";
+
+
+        results.forEach(
+            (item,index)=>{
+
+                cards += createWord(
+
+                    index + 1,
+
+                    item.word[0],
+
+                    item.word[1]
+
+                );
+
+            }
+        );
+
+
+        viewer.innerHTML = `
+
+            <section class="page">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <h2>
+                            نتائج البحث
+                        </h2>
+
+                        <small>
+                            ${results.length} كلمة
+                        </small>
+
+                    </div>
+
+                    <div class="page-level">
+                        SEARCH
+                    </div>
+
+                </div>
+
+                <div class="words">
+                    ${cards}
+                </div>
+
+            </section>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* ================= NORMAL ================= */
+
+    levels.forEach(level=>{
+
+        const words =
+            level === "A1"
+            ? A1_FINAL
+            : A2_FINAL;
+
+
+        html += createCover(level);
+
+
+        const totalPages =
+            Math.ceil(words.length / 40);
+
+
+        for(
+            let i=0;
+            i<words.length;
+            i+=40
+        ){
+
+            const chunk =
+                words.slice(i,i+40);
+
+
+            html += createPage(
+
+                level,
+
+                chunk,
+
+                i+1,
+
+                Math.floor(i/40)+1,
+
+                totalPages
+
+            );
+
+        }
+
+    });
+
+
+    viewer.innerHTML = html;
+
+}
+
+
+/* =========================================================
+   LEVEL BUTTON
+   ========================================================= */
+
+function setLevel(level){
+
+    currentLevel = level;
+
+    render();
+
+}
+
+
+/* =========================================================
+   CLEAR SEARCH
+   ========================================================= */
+
+function clearSearch(){
+
+    document.getElementById("search").value = "";
+
+    render();
+
+}
+
+
+/* =========================================================
+   PDF
+   ========================================================= */
+
+function downloadPDF(){
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   COUNTERS
+   ========================================================= */
+
+function updateCounters(){
+
+    document.getElementById("a1Count")
+        .textContent =
+        A1_FINAL.length;
+
+    document.getElementById("a2Count")
+        .textContent =
+        A2_FINAL.length;
+
+    document.getElementById("totalWords")
+        .textContent =
+        A1_FINAL.length +
+        A2_FINAL.length;
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+updateCounters();
+
+render();
+
+</script>
+
+</body>
+</html>
