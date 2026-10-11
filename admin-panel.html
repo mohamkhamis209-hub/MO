@@ -1473,6 +1473,16 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                   <p style="color:#667;line-height:1.8">الملفات المدمجة لا تظهر للطلاب تلقائيًا؛ فعّل فقط مجموعات التسميع التي تريد إسنادها. الطلاب يرون المجموعات المفعّلة المناسبة لصفهم فقط. أسماء الملفات الحالية تظهر في القائمة بالأسفل. لإضافة ملف جديد الصق رابط ملف JSON مباشرًا (GitHub Raw أو أي رابط مباشر يسمح بالقراءة من الموقع). إذا كان الرابط من موقع آخر فيجب أن يسمح بخاصية CORS. يدعم الملف مصفوفة كلمات مثل: <code>[{"en":"apple","ar":"تفاحة"}]</code> أو كائنًا يحتوي على <code>words</code>. يجب أن تكون كل كلمة لها en و ar أو english و arabic.</p>
                   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
                     <label>اسم مجموعة الكلمات<input id="vocabTitle" class="form-control" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px" placeholder="مثال: كلمات Unit 1"></label>
+                    <div style="grid-column:1/-1;border:1px solid #cbd5e1;border-radius:12px;padding:12px;background:#f8fafc">
+                      <button type="button" class="btn-sm btn-secondary" onclick="window.toggleVocabularyFilePicker()">📂 عرض ملفات الكلمات الموجودة واختيار ملف</button>
+                      <div id="vocabFilePickerWrap" style="display:none;margin-top:10px">
+                        <label style="display:block;font-weight:800;margin-bottom:6px">ملفات الكلمات الجاهزة في المشروع</label>
+                        <select id="vocabBundledFileSelect" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px" onchange="window.chooseBundledVocabularyFile(this.value)">
+                          <option value="">اضغط لعرض الملفات الموجودة...</option>
+                        </select>
+                        <small style="display:block;color:#64748b;margin-top:5px">اختيار ملف يملأ الرابط واسم المجموعة تلقائيًا. الملفات المعروضة هنا هي ملفات JSON المناسبة للتسميع.</small>
+                      </div>
+                    </div>
                     <label>رابط ملف JSON مباشر<input id="vocabUrl" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px" placeholder="https://raw.githubusercontent.com/.../words.json أو ./vocabulary/words.json" oninput="const n=document.getElementById('vocabFileNamePreview');if(n)n.textContent=this.value.trim()?'اسم الملف: '+(this.value.split('?')[0].split('#')[0].split('/').pop()||this.value):'اسم الملف سيظهر هنا'"> <small id="vocabFileNamePreview" style="display:block;color:#64748b;margin-top:5px">اسم الملف سيظهر هنا</small></label>
                     <label>الصف الدراسي<select id="vocabGrade" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px">${getGradeOptions('all')}</select></label>
                     <label>الكورس<select id="vocabCourse" style="width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px"><option value="">كل كورسات الصف</option>${courses.map(c=>`<option value="${vocabEsc(c.id)}">${vocabEsc(c.name||c.title||'كورس')} — ${vocabEsc(c.grade||'')}</option>`).join('')}</select></label>
@@ -1489,6 +1499,37 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 assignSnap.forEach(d=>{const x=d.data();html+=`<div class="admin-section-card" style="margin:10px 0"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><h3 style="margin:0 0 8px">${vocabEsc(x.title||'مجموعة كلمات')}</h3><div>الصف: <b>${vocabEsc(x.grade||'—')}</b> · الكورس: <b>${vocabEsc(x.courseName||'كل كورسات الصف')}</b></div><div>النطاق: ${x.from||1}–${x.to||'؟'} · يوميًا: ${x.dailyCount||20} كلمة · <span style="color:${x.active?'#059669':'#dc2626'}">${x.active?'مفعّل':'متوقف'}</span></div><div style="margin:6px 0 3px;padding:7px 10px;background:#eef6ff;border-radius:8px;color:#174a7e;font-weight:800">📄 اسم الملف: ${vocabEsc(vocabFileName(x.githubUrl||''))}</div><small style="word-break:break-all;color:#64748b">🔗 الرابط: ${vocabEsc(x.githubUrl||'')}</small></div><div style="display:flex;gap:8px;align-items:start;flex-wrap:wrap"><button class="btn-sm btn-secondary" onclick="window.editVocabularyAssignment('${d.id}')">✏️ تعديل</button><button class="btn-sm btn-danger" onclick="window.deleteVocabularyAssignment('${d.id}')">🗑️ حذف</button></div></div></div>`;});
                 html+=`<h3 style="margin-top:24px">📈 أحدث نتائج الطلاب</h3>`; if(!vocabAttempts.length) html+=`<div class="admin-section-card">لا توجد محاولات تسميع حتى الآن.</div>`; vocabAttempts.slice(0,100).forEach(a=>{html+=`<div class="admin-section-card" style="margin:9px 0"><b>${vocabEsc(a.studentName||a.studentCode||'طالب')}</b> — ${vocabEsc(a.assignmentTitle||'تسميع الكلمات')}<div>الصف: ${vocabEsc(a.grade||'—')} · التاريخ: ${vocabEsc(a.dateKey||'—')} · الحالة: ${a.status==='submitted'?'تم التسليم':'بدأ ولم يسلّم'}</div>${a.status==='submitted'?`<div style="font-weight:900;color:#059669">النتيجة: ${Number(a.score)||0} / ${Number(a.total)||0}</div>`:''}</div>`;}); area.innerHTML=html;
             } catch(e) { console.error(e); area.innerHTML='<div class="admin-section-card"><h2>تعذر تحميل قسم تسميع الكلمات</h2><p>تأكد من اتصال Firebase وصلاحيات Firestore.</p></div>'; }
+        };
+        // قائمة ملفات الكلمات المتاحة داخل المشروع، قابلة للتوسعة عبر vocabulary/files.json.
+        let bundledVocabularyFileList = null;
+        window.toggleVocabularyFilePicker = async function(){
+            const wrap=document.getElementById('vocabFilePickerWrap');
+            if(!wrap)return;
+            const opening=wrap.style.display==='none'; wrap.style.display=opening?'block':'none';
+            if(!opening)return;
+            const select=document.getElementById('vocabBundledFileSelect');
+            if(select.options.length>1)return;
+            select.innerHTML='<option value="">جارٍ تحميل أسماء الملفات...</option>';
+            try{
+                if(!bundledVocabularyFileList){
+                    const response=await fetch('./vocabulary/files.json',{cache:'no-store'});
+                    if(!response.ok)throw new Error('تعذر قراءة قائمة الملفات. تأكد من رفع مجلد vocabulary كاملًا إلى GitHub.');
+                    const data=await response.json();
+                    bundledVocabularyFileList=Array.isArray(data.files)?data.files:[];
+                }
+                select.innerHTML='<option value="">اختر ملف الكلمات...</option>'+bundledVocabularyFileList.map(f=>`<option value="${vocabEsc(f.path)}" data-title="${vocabEsc(f.title||f.name)}">${vocabEsc(f.name)}${Number.isFinite(Number(f.wordCount))?' — '+Number(f.wordCount)+' كلمة':''}</option>`).join('');
+                if(!bundledVocabularyFileList.length)select.innerHTML='<option value="">لا توجد ملفات في القائمة</option>';
+            }catch(e){select.innerHTML='<option value="">تعذر تحميل قائمة الملفات</option>';const msg=document.getElementById('vocabAdminMessage');if(msg)msg.innerHTML=`<div style="color:#dc2626">❌ ${vocabEsc(e.message)}</div>`;}
+        };
+        window.chooseBundledVocabularyFile = function(path){
+            if(!path)return;
+            const select=document.getElementById('vocabBundledFileSelect');
+            const option=select?.selectedOptions?.[0];
+            const url=document.getElementById('vocabUrl'); if(url)url.value=path;
+            const title=document.getElementById('vocabTitle');
+            if(title && !title.value.trim()) title.value=option?.dataset?.title||option?.textContent?.split(' — ')[0]||'';
+            const preview=document.getElementById('vocabFileNamePreview');if(preview)preview.textContent='اسم الملف: '+path.split('/').pop();
+            const msg=document.getElementById('vocabAdminMessage');if(msg)msg.innerHTML='<div style="color:#0f766e;font-weight:700">تم اختيار الملف. أكمل إعدادات التسميع ثم احفظ، أو اختبر الرابط أولًا.</div>';
         };
         window.testVocabularyUrl=async function(){const box=document.getElementById('vocabAdminMessage');try{const url=document.getElementById('vocabUrl').value.trim();if(!url)throw Error('اكتب رابط GitHub Raw أولًا');const words=await fetchVocabularyJson(url);box.innerHTML=`<div style="color:#059669;font-weight:800">✅ الرابط يعمل، وتم العثور على ${words.length} كلمة.</div>`;}catch(e){box.innerHTML=`<div style="color:#dc2626">❌ ${vocabEsc(e.message||'فشل قراءة الملف')}</div>`;}};
         async function fetchVocabularyJson(url){const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw Error('تعذر فتح الملف ('+res.status+'). تأكد أن الرابط Raw والمستودع عام.');const data=await res.json();let arr=Array.isArray(data)?data:(data.words||data.vocabulary||data.items);if(!Array.isArray(arr))throw Error('تنسيق JSON غير صحيح: يجب أن يكون مصفوفة كلمات أو يحتوي على words.');const words=arr.map((w,i)=>({en:String(w.en??w.english??w.word??w.term??'').trim(),ar:String(w.ar??w.arabic??w.meaning??w.translation??'').trim(),index:i+1})).filter(w=>w.en&&w.ar);if(!words.length)throw Error('لم يتم العثور على كلمات لها معنى عربي وإنجليزي.');return words;}
