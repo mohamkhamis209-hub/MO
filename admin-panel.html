@@ -1497,9 +1497,50 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 </div><h3>📚 مجموعات التسميع الحالية</h3>`;
                 if(assignSnap.empty) html+=`<div class="admin-section-card">لم تتم إضافة مجموعات بعد.</div>`;
                 assignSnap.forEach(d=>{const x=d.data();html+=`<div class="admin-section-card" style="margin:10px 0"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><h3 style="margin:0 0 8px">${vocabEsc(x.title||'مجموعة كلمات')}</h3><div>الصف: <b>${vocabEsc(x.grade||'—')}</b> · الكورس: <b>${vocabEsc(x.courseName||'كل كورسات الصف')}</b></div><div>النطاق: ${x.from||1}–${x.to||'؟'} · يوميًا: ${x.dailyCount||20} كلمة · <span style="color:${x.active?'#059669':'#dc2626'}">${x.active?'مفعّل':'متوقف'}</span></div><div style="margin:6px 0 3px;padding:7px 10px;background:#eef6ff;border-radius:8px;color:#174a7e;font-weight:800">📄 اسم الملف: ${vocabEsc(vocabFileName(x.githubUrl||''))}</div><small style="word-break:break-all;color:#64748b">🔗 الرابط: ${vocabEsc(x.githubUrl||'')}</small></div><div style="display:flex;gap:8px;align-items:start;flex-wrap:wrap"><button class="btn-sm btn-secondary" onclick="window.editVocabularyAssignment('${d.id}')">✏️ تعديل</button><button class="btn-sm btn-danger" onclick="window.deleteVocabularyAssignment('${d.id}')">🗑️ حذف</button></div></div></div>`;});
-                html+=`<h3 style="margin-top:24px">📈 أحدث نتائج الطلاب — تقدر تعدّل تصحيح كل كلمة</h3>`; if(!vocabAttempts.length) html+=`<div class="admin-section-card">لا توجد محاولات تسميع حتى الآن.</div>`; vocabAttempts.slice(0,100).forEach(a=>{html+=`<div class="admin-section-card" style="margin:9px 0"><b>${vocabEsc(a.studentName||a.studentCode||'طالب')}</b> — ${vocabEsc(a.assignmentTitle||'تسميع الكلمات')}<div>الصف: ${vocabEsc(a.grade||'—')} · التاريخ: ${vocabEsc(a.dateKey||'—')} · الحالة: ${a.status==='submitted'?'تم التسليم':'بدأ ولم يسلّم'}</div>${a.status==='submitted'?`<div style="font-weight:900;color:#059669;margin:7px 0">النتيجة: <span id="vocab-score-${a.id}">${Number(a.score)||0}</span> / ${Number(a.total)||0}</div>${Array.isArray(a.results)?a.results.map((r,i)=>`<div style="padding:10px;margin:8px 0;border:1px solid #dbe3eb;border-radius:10px;background:${r.correct?'#f0fdf4':'#fff7f7'}"><b>السؤال ${i+1}: ${vocabEsc(r.prompt||'')}</b><div>إجابة الطالب: ${vocabEsc(r.answer||'—')}</div><div>الإجابة المعتمدة: ${vocabEsc(r.correctAnswer||'—')}</div><div style="font-weight:800;margin:5px 0;color:${r.correct?'#15803d':'#b91c1c'}">${r.correct?'✅ محسوبة صحيحة':'❌ محسوبة خطأ'}</div><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn-sm btn-success" onclick="window.setVocabularyResultCorrect('${a.id}',${i},true)" ${r.correct?'disabled':''}>✔ اعتبرها صح</button><button class="btn-sm btn-danger" onclick="window.setVocabularyResultCorrect('${a.id}',${i},false)" ${!r.correct?'disabled':''}>✖ اعتبرها غلط</button></div></div>`).join(''):'<div>تفاصيل الإجابات غير متاحة لهذه المحاولة القديمة.</div>'}`:''}</div>`;}); area.innerHTML=html;
+                html+=`<h3 style="margin-top:24px">📈 نتائج الطلاب — اضغط على تفاصيل الطالب لعرض إجاباته وتعديل الدرجة</h3>`;
+                if(!vocabAttempts.length) html+=`<div class="admin-section-card">لا توجد محاولات تسميع حتى الآن.</div>`;
+                vocabAttempts.slice(0,100).forEach(a=>{
+                    const submitted=a.status==='submitted', score=Number(a.score)||0, total=Number(a.total)||0;
+                    const detailsId='vocab-attempt-details-'+a.id;
+                    html+=`<div class="admin-section-card" style="margin:10px 0;padding:14px;border:1px solid #dbe3eb;border-radius:14px">
+                      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;align-items:center">
+                        <div><small style="color:#64748b">اسم الطالب</small><div style="font-weight:900">${vocabEsc(a.studentName||a.studentCode||'طالب')}</div></div>
+                        <div><small style="color:#64748b">اسم التسميع</small><div style="font-weight:800">${vocabEsc(a.assignmentTitle||'تسميع الكلمات')}</div></div>
+                        <div><small style="color:#64748b">الدرجة</small><div style="font-weight:900;color:${submitted?'#059669':'#b45309'}">${submitted?`${score} / ${total}`:'لم يتم التسليم'}</div></div>
+                        <div><small style="color:#64748b">التاريخ</small><div>${vocabEsc(a.dateKey||'—')}</div></div>
+                        <div><small style="color:#64748b">الصف</small><div>${vocabEsc(a.grade||'—')}</div></div>
+                        <div><small style="color:#64748b">الحالة</small><div style="font-weight:800;color:${submitted?'#059669':'#b45309'}">${submitted?'✅ تم التسليم':'⏳ بدأ ولم يسلّم'}</div></div>
+                      </div>
+                      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+                        <button type="button" class="btn-sm btn-search" onclick="window.toggleVocabularyAttemptDetails('${detailsId}',this)">👁️ عرض درجات وإجابات الطالب</button>
+                        <button type="button" class="btn-sm btn-danger" onclick="window.deleteVocabularyAttemptAndAllowRetry('${a.id}')">🗑️ حذف النتيجة والسماح بالإعادة</button>
+                      </div>
+                      <div id="${detailsId}" style="display:none;margin-top:12px;border-top:1px solid #e2e8f0;padding-top:12px">
+                        ${submitted?`<div style="font-weight:900;margin:7px 0">النتيجة: <span id="vocab-score-${a.id}">${score}</span> / ${total}</div>${Array.isArray(a.results)?a.results.map((r,i)=>`<div style="padding:10px;margin:8px 0;border:1px solid #dbe3eb;border-radius:10px;background:${r.correct?'#f0fdf4':'#fff7f7'}"><b>السؤال ${i+1}: ${vocabEsc(r.prompt||'')}</b><div>إجابة الطالب: ${vocabEsc(r.answer||'—')}</div><div>الإجابة المعتمدة: ${vocabEsc(r.correctAnswer||'—')}</div><div style="font-weight:800;margin:5px 0;color:${r.correct?'#15803d':'#b91c1c'}">${r.correct?'✅ محسوبة صحيحة':'❌ محسوبة خطأ'}</div><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn-sm btn-success" onclick="window.setVocabularyResultCorrect('${a.id}',${i},true)" ${r.correct?'disabled':''}>✔ اعتبرها صح</button><button class="btn-sm btn-danger" onclick="window.setVocabularyResultCorrect('${a.id}',${i},false)" ${!r.correct?'disabled':''}>✖ اعتبرها غلط</button></div></div>`).join(''):'<div>تفاصيل الإجابات غير متاحة لهذه المحاولة القديمة.</div>'}`:`<p>الطالب بدأ التسميع ولم يسلّمه بعد. يمكنك حذف المحاولة للسماح له بالبدء من جديد.</p>`}
+                      </div>
+                    </div>`;
+                });; area.innerHTML=html;
             } catch(e) { console.error(e); area.innerHTML='<div class="admin-section-card"><h2>تعذر تحميل قسم تسميع الكلمات</h2><p>تأكد من اتصال Firebase وصلاحيات Firestore.</p></div>'; }
         };
+        window.toggleVocabularyAttemptDetails = function(id, button){
+            const el=document.getElementById(id); if(!el)return;
+            const opening=el.style.display==='none'; el.style.display=opening?'block':'none';
+            if(button) button.textContent=opening?'🙈 إخفاء درجات وإجابات الطالب':'👁️ عرض درجات وإجابات الطالب';
+        };
+        // حذف محاولة الطالب من سجلات التسميع يسمح له بإعادة التسميع في نفس اليوم.
+        window.deleteVocabularyAttemptAndAllowRetry = async function(attemptId){
+            if(!confirm('هل تريد حذف نتيجة/محاولة هذا الطالب؟ سيتمكن الطالب من إعادة التسميع مرة أخرى.'))return;
+            try{
+                const ref=doc(db,'vocabularyAttempts',attemptId), snap=await getDoc(ref);
+                if(!snap.exists())throw new Error('المحاولة غير موجودة بالفعل.');
+                const a=snap.data();
+                // حذف سجل المحاولة يجعل الطالب قادرًا على إنشاء محاولة جديدة بنفس معرّف اليوم.
+                await deleteDoc(ref);
+                await window.showVocabularyAdmin();
+                alert('تم حذف المحاولة. يمكن للطالب الآن إعادة التسميع.');
+            }catch(e){console.error(e);alert('تعذر حذف النتيجة: '+(e.message||e));}
+        };
+
         // تصحيح يدوي لنتيجة تسميع: يسمح للمشرف بتغيير أي إجابة من صح إلى غلط أو العكس.
         window.setVocabularyResultCorrect = async function(attemptId, resultIndex, isCorrect){
             try{
