@@ -2737,12 +2737,18 @@ const bundledVocabularyDefaults = [
 async function ensureBundledVocabularyDefaults(){
  await ensureAnonymousAuth();
  const marker=doc(db,'platformSettings','vocabularyDefaultsV1');
- if((await getDoc(marker)).exists()) return;
- for(const x of bundledVocabularyDefaults){
-  const ref=doc(db,'vocabularyAssignments',x.id);
-  if(!(await getDoc(ref)).exists()) await setDoc(ref,{title:x.title,githubUrl:x.githubUrl,grade:'all',courseId:'',courseName:'كل الصفوف',from:1,to:x.wordCount,dailyCount:20,active:true,wordCount:x.wordCount,direction:'random',avoidRepeats:true,bundled:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+ if(!(await getDoc(marker)).exists()){
+  for(const x of bundledVocabularyDefaults){
+   const ref=doc(db,'vocabularyAssignments',x.id);
+   if(!(await getDoc(ref)).exists()) await setDoc(ref,{title:x.title,githubUrl:x.githubUrl,grade:'all',courseId:'',courseName:'كل الصفوف',from:1,to:x.wordCount,dailyCount:20,active:false,wordCount:x.wordCount,direction:'random',avoidRepeats:true,bundled:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+  }
+  await setDoc(marker,{installed:true,version:1,updatedAt:serverTimestamp()});
  }
- await setDoc(marker,{installed:true,version:1,updatedAt:serverTimestamp()});
+ const visibilityMarker=doc(db,'platformSettings','vocabularyVisibilityV2');
+ if(!(await getDoc(visibilityMarker)).exists()){
+  for(const x of bundledVocabularyDefaults){const ref=doc(db,'vocabularyAssignments',x.id),snap=await getDoc(ref);if(snap.exists())await updateDoc(ref,{active:false,updatedAt:serverTimestamp()});}
+  await setDoc(visibilityMarker,{installed:true,version:2,updatedAt:serverTimestamp()});
+ }
 }
 async function loadVocabJson(url){const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw Error('تعذر تحميل ملف الكلمات من مجلد vocabulary داخل المشروع. تأكد من رفع الملفات الأربعة مع المشروع.');const data=await r.json();const a=Array.isArray(data)?data:(data.words||data.vocabulary||data.items);if(!Array.isArray(a))throw Error('تنسيق JSON غير صحيح.');return a.map((w,i)=>({en:String(w.en??w.english??w.word??w.term??'').trim(),ar:String(w.ar??w.arabic??w.meaning??w.translation??'').trim(),index:i+1})).filter(w=>w.en&&w.ar);}
 async function showVocab(){const c=document.getElementById('student-content');if(!c)return;c.innerHTML='<h2>⏳ جاري تحميل تسميع الكلمات...</h2>';try{const code=localStorage.getItem('studentCode')||'',grade=localStorage.getItem('studentGrade')||'all';if(!code)throw Error('سجّل الدخول أولًا.');await ensureBundledVocabularyDefaults();const snap=await getDocs(collection(db,'vocabularyAssignments'));const arr=[];snap.forEach(d=>{const a=d.data();if(a.active&&(String(a.grade||'').trim()===String(grade).trim()||String(a.grade||'').toLowerCase()==='all'))arr.push({id:d.id,...a});});if(!arr.length){c.innerHTML='<div class="admin-section-card"><h2>🔤 تسميع الكلمات</h2><p>لا توجد مجموعات مفعّلة لصفك حاليًا. راجع المشرف.</p></div>';return;}let h='<div class="courses-shell"><div class="courses-hero"><h2>🔤 تسميع الكلمات</h2><p>تسميع يومي عشوائي، مع تجنب تكرار الكلمات حتى استكمال النطاق.</p></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:16px">';for(const a of arr)h+=`<div class="admin-section-card"><h3>${escV(a.title||'تسميع الكلمات')}</h3><p>📘 ${escV(a.courseName||'كورس الصف')}</p><p>📍 الكلمات ${a.from||1}–${a.to||a.wordCount||'—'}</p><p>🎯 ${a.dailyCount||20} كلمة يوميًا</p><button class="btn-green" style="width:100%;padding:12px;border:0;border-radius:10px;font-weight:900" onclick="window.beginVocabulary('${a.id}')">ابدأ تسميع اليوم 🚀</button></div>`;h+='</div><div id="vocabStudentSession" style="margin-top:18px"></div></div>';c.innerHTML=h;}catch(e){c.innerHTML=`<div class="admin-section-card"><h2>تعذر تحميل التسميع</h2><p>${escV(e.message)}</p></div>`;}}
