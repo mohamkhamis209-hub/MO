@@ -1120,10 +1120,10 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
     <!-- ============================================ -->
     <script type="module">
         // تحميل Firebase بطريقة آمنة حتى لا تتوقف لوحة الطالب إذا تأخر الملف أو حدث خطأ فيه.
-        let db, collection, getDocs, query, where, doc, getDoc, addDoc, updateDoc, serverTimestamp, setDoc, authReady, ensureAnonymousAuth;
+        let db, collection, getDocs, query, where, doc, getDoc, addDoc, updateDoc, deleteDoc, serverTimestamp, setDoc, authReady, ensureAnonymousAuth;
         try {
             const fb = await import('./js/firebase-config.js');
-            ({ db, collection, getDocs, query, where, doc, getDoc, addDoc, updateDoc, serverTimestamp, setDoc, authReady, ensureAnonymousAuth } = fb);
+            ({ db, collection, getDocs, query, where, doc, getDoc, addDoc, updateDoc, deleteDoc, serverTimestamp, setDoc, authReady, ensureAnonymousAuth } = fb);
             if (authReady) await authReady;
         } catch (bootError) {
             console.error('❌ تعذر تشغيل Firebase في لوحة الطالب:', bootError);
@@ -1950,6 +1950,7 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         // دوال سؤال الطالب عبر واتساب
         // ============================================
         let currentLessonQuestionVideoId='';
+        let editingLessonQuestionId='';
         async function showLessonQuestionsUnderPlayer(videoId){
             const box=document.getElementById('lesson-questions-'+videoId);
             if(!box) return;
@@ -1966,7 +1967,8 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                         const replies=await getDocs(query(collection(db,'lessonQuestionReplies'),where('questionId','==',x.id)));
                         replies.forEach(d=>rs.push({id:d.id,...d.data()}));
                     } catch(replyError) { console.warn('تعذر تحميل ردود سؤال الدرس:',replyError); }
-                    rendered.push(`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>👤 ${escCourse(x.studentName||'طالب')}</b><p style="margin:6px 0;white-space:pre-wrap">${escCourse(x.question||'')}</p>${x.answer?`<div style="background:#effaf5;border-right:4px solid #12a56b;padding:9px;border-radius:10px"><b>${x.answerPinned?'📌 إجابة المشرف المثبتة':'👨‍🏫 المشرف'}</b><div style="white-space:pre-wrap">${escCourse(x.answer)}</div></div>`:''}${rs.map(r=>`<div style="margin:7px 0;padding:8px 12px;background:#f6f8fb;border-radius:10px"><b>💬 ${escCourse(r.studentName||'طالب')}</b><div style="white-space:pre-wrap">${escCourse(r.reply||'')}</div></div>`).join('')}<button class="btn-sm btn-secondary" style="margin-top:8px" onclick="window.replyLessonQuestion('${escCourse(x.id)}','${escCourse(videoId)}')">💬 رد</button></div>`);
+                    const ownQuestion=String(x.studentCode||'')===String(localStorage.getItem('studentCode')||'');
+                    rendered.push(`<div style="padding:12px 0;border-bottom:1px solid #eee"><b>👤 ${escCourse(x.studentName||'طالب')}</b><p style="margin:6px 0;white-space:pre-wrap">${escCourse(x.question||'')}</p>${x.answer?`<div style="background:#effaf5;border-right:4px solid #12a56b;padding:9px;border-radius:10px"><b>${x.answerPinned?'📌 إجابة المشرف المثبتة':'👨‍🏫 المشرف'}</b><div style="white-space:pre-wrap">${escCourse(x.answer)}</div></div>`:''}${rs.map(r=>`<div style="margin:7px 0;padding:8px 12px;background:#f6f8fb;border-radius:10px"><b>💬 ${escCourse(r.studentName||'طالب')}</b><div style="white-space:pre-wrap">${escCourse(r.reply||'')}</div></div>`).join('')}<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn-sm btn-secondary" onclick="window.replyLessonQuestion('${escCourse(x.id)}','${escCourse(videoId)}')">💬 رد</button>${ownQuestion?`<button class="btn-sm btn-secondary" onclick="window.editLessonQuestion('${escCourse(x.id)}','${escCourse(videoId)}')">✏️ تعديل سؤالي</button><button class="btn-sm" style="background:#fee2e2;color:#991b1b" onclick="window.deleteMyLessonQuestion('${escCourse(x.id)}','${escCourse(videoId)}')">🗑️ حذف سؤالي</button>`:''}</div></div>`);
                 }
                 box.innerHTML=rendered.length?rendered.join(''):'<div style="color:#888">لا توجد أسئلة بعد. كن أول من يسأل.</div>';
             } catch(error) {
@@ -1991,16 +1993,42 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
         window.openLessonQuestionModal=function(videoId,title){
             if(!videoId){alert('تعذر تحديد الدرس. أغلق الدرس وافتحه مرة أخرى.');return;}
             currentLessonQuestionVideoId=String(videoId);
+            editingLessonQuestionId='';
             const titleEl=document.getElementById('lessonQuestionTitle');
             const textEl=document.getElementById('lessonQuestionText');
             const modal=document.getElementById('lessonQuestionModal');
             if(!titleEl||!textEl||!modal){alert('نافذة سؤال تحت الدرس غير موجودة في الصفحة. حدّث الصفحة وحاول مرة أخرى.');return;}
             titleEl.textContent='الدرس: '+(title||'الدرس');
             textEl.value='';
+            const sendBtn=modal.querySelector('button[onclick="window.sendLessonQuestion()"]');if(sendBtn)sendBtn.textContent='إرسال';
             modal.style.display='flex';
             setTimeout(()=>textEl.focus(),50);
         };
         window.closeLessonQuestionModal=function(){const modal=document.getElementById('lessonQuestionModal');if(modal)modal.style.display='none';};
+        window.editLessonQuestion=async function(questionId,videoId){
+            try{
+                const snap=await getDoc(doc(db,'lessonQuestions',questionId));
+                if(!snap.exists())return alert('السؤال لم يعد موجودًا.');
+                const data=snap.data(),code=localStorage.getItem('studentCode')||'';
+                if(String(data.studentCode||'')!==String(code))return alert('يمكنك تعديل أسئلتك أنت فقط.');
+                editingLessonQuestionId=questionId;currentLessonQuestionVideoId=String(videoId);
+                document.getElementById('lessonQuestionTitle').textContent='تعديل سؤالك: '+(data.lessonTitle||'الدرس');
+                document.getElementById('lessonQuestionText').value=data.question||'';
+                const btn=document.querySelector('#lessonQuestionModal button[onclick="window.sendLessonQuestion()"]');if(btn)btn.textContent='حفظ التعديل';
+                document.getElementById('lessonQuestionModal').style.display='flex';
+            }catch(e){console.error(e);alert('تعذر فتح السؤال للتعديل: '+(e.code||e.message||''));}
+        };
+        window.deleteMyLessonQuestion=async function(questionId,videoId){
+            if(!confirm('هل تريد حذف سؤالك نهائيًا؟'))return;
+            try{
+                const ref=doc(db,'lessonQuestions',questionId),snap=await getDoc(ref);
+                if(!snap.exists())return alert('السؤال غير موجود.');
+                if(String(snap.data().studentCode||'')!==String(localStorage.getItem('studentCode')||''))return alert('يمكنك حذف أسئلتك أنت فقط.');
+                const replies=await getDocs(query(collection(db,'lessonQuestionReplies'),where('questionId','==',questionId)));
+                for(const r of replies.docs)await deleteDoc(r.ref);
+                await deleteDoc(ref);await showLessonQuestionsUnderPlayer(videoId);alert('✅ تم حذف سؤالك.');
+            }catch(e){console.error(e);alert('تعذر حذف السؤال. '+(e.code||e.message||''));}
+        };
         window.sendLessonQuestion=async function(){
             const textEl=document.getElementById('lessonQuestionText');
             const q=(textEl?.value||'').trim();
@@ -2013,16 +2041,22 @@ body.dark-mode{background:#0b1220!important;color:#edf5fb!important}body.dark-mo
                 if(ensureAnonymousAuth) await ensureAnonymousAuth();
                 const code=localStorage.getItem('studentCode')||'';
                 const name=localStorage.getItem('studentName')||'طالب';
-                // Query by videoId only to avoid requiring a composite Firestore index.
-                const existing=await getDocs(query(collection(db,'lessonQuestions'),where('videoId','==',videoId)));
-                let duplicate=false;
-                existing.forEach(d=>{const x=d.data();if(String(x.studentCode||'')===String(code)&&String(x.question||'').trim()===q)duplicate=true;});
-                if(duplicate){alert('⚠️ أرسلت نفس السؤال لهذا الدرس من قبل. يمكنك كتابة سؤال مختلف.');return;}
-                const title=(document.getElementById('lessonQuestionTitle')?.textContent||'الدرس').replace(/^الدرس:\s*/,'');
-                await addDoc(collection(db,'lessonQuestions'),{studentCode:code,studentName:name,videoId:String(videoId),lessonTitle:title,question:q,answer:'',answerPinned:false,createdAt:serverTimestamp()});
-                window.closeLessonQuestionModal();
-                await showLessonQuestionsUnderPlayer(videoId);
-                alert('✅ تم نشر سؤالك تحت الدرس');
+                const title=(document.getElementById('lessonQuestionTitle')?.textContent||'الدرس').replace(/^(الدرس|تعديل سؤالك):\s*/,'');
+                if(editingLessonQuestionId){
+                    const ref=doc(db,'lessonQuestions',editingLessonQuestionId),snap=await getDoc(ref);
+                    if(!snap.exists())throw new Error('السؤال غير موجود.');
+                    if(String(snap.data().studentCode||'')!==String(code))throw new Error('يمكنك تعديل أسئلتك أنت فقط.');
+                    await updateDoc(ref,{question:q,updatedAt:serverTimestamp()});
+                    editingLessonQuestionId='';window.closeLessonQuestionModal();await showLessonQuestionsUnderPlayer(videoId);alert('✅ تم تعديل سؤالك بنجاح');
+                }else{
+                    // Query by videoId only to avoid requiring a composite Firestore index.
+                    const existing=await getDocs(query(collection(db,'lessonQuestions'),where('videoId','==',videoId)));
+                    let duplicate=false;
+                    existing.forEach(d=>{const x=d.data();if(String(x.studentCode||'')===String(code)&&String(x.question||'').trim()===q)duplicate=true;});
+                    if(duplicate){alert('⚠️ أرسلت نفس السؤال لهذا الدرس من قبل. يمكنك كتابة سؤال مختلف.');return;}
+                    await addDoc(collection(db,'lessonQuestions'),{studentCode:code,studentName:name,videoId:String(videoId),lessonTitle:title,question:q,answer:'',answerPinned:false,createdAt:serverTimestamp()});
+                    window.closeLessonQuestionModal();await showLessonQuestionsUnderPlayer(videoId);alert('✅ تم نشر سؤالك تحت الدرس');
+                }
             } catch(error) {
                 console.error('تعذر إرسال سؤال تحت الدرس:',error);
                 const detail=error?.code==='permission-denied'?'صلاحيات Firebase لا تسمح بإرسال السؤال.':(error?.code==='unavailable'?'الاتصال بقاعدة البيانات غير متاح حاليًا.':'');
