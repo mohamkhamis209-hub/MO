@@ -670,3 +670,69 @@ button,input,select,textarea{max-width:100%}
 @media (min-width:769px){
   .mobile-menu-toggle,.mobile-sidebar-overlay{display:none!important}
 }
+
+/* ===== إصلاح وضوح النصوص في الوضع الفاتح ===== */
+body:not(.dark-mode) {
+  color: #1f2937;
+}
+body:not(.dark-mode) .content,
+body:not(.dark-mode) .content p,
+body:not(.dark-mode) .content label,
+body:not(.dark-mode) .content small,
+body:not(.dark-mode) .content li,
+body:not(.dark-mode) .content .form-group,
+body:not(.dark-mode) .content .form-label {
+  color: #1f2937;
+}
+body:not(.dark-mode) input,
+body:not(.dark-mode) select,
+body:not(.dark-mode) textarea {
+  color: #1f2937 !important;
+  background-color: #fff !important;
+  border-color: #cbd5e1 !important;
+  caret-color: #1d4ed8;
+}
+body:not(.dark-mode) input::placeholder,
+body:not(.dark-mode) textarea::placeholder {
+  color: #64748b !important;
+  opacity: 1;
+}
+body:not(.dark-mode) .admin-section-card,
+body:not(.dark-mode) .admin-section-card p,
+body:not(.dark-mode) .admin-section-card h1,
+body:not(.dark-mode) .admin-section-card h2,
+body:not(.dark-mode) .admin-section-card h3,
+body:not(.dark-mode) .admin-section-card h4,
+body:not(.dark-mode) .admin-section-card label,
+body:not(.dark-mode) .admin-section-card small,
+body:not(.dark-mode) .admin-section-card td,
+body:not(.dark-mode) .admin-section-card th {
+  color: #1f2937;
+}
+body:not(.dark-mode) .admin-section-card input,
+body:not(.dark-mode) .admin-section-card select,
+body:not(.dark-mode) .admin-section-card textarea {
+  color: #1f2937 !important;
+  background: #fff !important;
+}
+body:not(.dark-mode) .content table th {
+  color: #fff;
+}
+body:not(.dark-mode) .content table td {
+  color: #1f2937;
+}
+body:not(.dark-mode) .modal,
+body:not(.dark-mode) .modal-content,
+body:not(.dark-mode) .popup,
+body:not(.dark-mode) .dialog {
+  color: #1f2937;
+}
+body:not(.dark-mode) .modal input,
+body:not(.dark-mode) .modal select,
+body:not(.dark-mode) .modal textarea,
+body:not(.dark-mode) .modal-content input,
+body:not(.dark-mode) .modal-content select,
+body:not(.dark-mode) .modal-content textarea {
+  color: #1f2937 !important;
+  background: #fff !important;
+}
