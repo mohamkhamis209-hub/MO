@@ -1567,7 +1567,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 for(const st of students){const g=String(st.grade||'غير محدد');if(!grades.has(g))grades.set(g,{students:[],attempts:[]});grades.get(g).students.push(st);}
                 for(const a of attempts){const g=String(a.grade||students.find(s=>String(s.code||'')===String(a.studentCode||''))?.grade||'غير محدد');if(!grades.has(g))grades.set(g,{students:[],attempts:[]});grades.get(g).attempts.push(a);}
                 let html='<h2>📊 النتائج</h2><div class="admin-section-card"><h3>نتائج التسميع</h3><p>اختر الصف لعرض الطلاب الذين سمّعوا والطلاب الذين لم يسجّلوا تسميعًا. الأعداد محسوبة من سجلات الطلاب والمحاولات الفعلية.</p></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px">';
-                for(const [g,data] of [...grades.entries()].sort((a,b)=>a[0].localeCompare(b[0],'ar'))){const submittedCodes=new Set(data.attempts.filter(a=>a.status==='submitted').map(a=>String(a.studentCode||'')));const attemptedCodes=new Set(data.attempts.map(a=>String(a.studentCode||'')));html+=`<button type="button" class="admin-section-card" style="text-align:right;cursor:pointer;border:1px solid #dbe5ef" onclick="window.openVocabularyGradeResults(decodeURIComponent('${encodeURIComponent(g)}'))"><h3>🎓 ${vocabEsc(g)}</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><span>👥 الطلاب: ${data.students.length}</span><span style="color:#059669">✅ سمّعوا: ${data.students.filter(s=>submittedCodes.has(String(s.code||''))).length}</span><span style="color:#b45309">⏳ لم يسمّعوا: ${data.students.filter(s=>!submittedCodes.has(String(s.code||''))).length}</span></div><small>اضغط لعرض التفاصيل ←</small></button>`;}
+                for(const [g,data] of [...grades.entries()].sort((a,b)=>a[0].localeCompare(b[0],'ar'))){const gradeLabel=(cachedGrades.find(x=>String(x.code)===String(g))?.name)||({'1':'أولى ثانوي','2':'ثانية ثانوي','3':'ثالثة ثانوي'}[String(g)])||g;const submittedCodes=new Set(data.attempts.filter(a=>a.status==='submitted').map(a=>String(a.studentCode||'')));const attemptedCodes=new Set(data.attempts.map(a=>String(a.studentCode||'')));html+=`<button type="button" class="admin-section-card" style="text-align:right;cursor:pointer;border:1px solid #dbe5ef;border-radius:18px;padding:20px;background:linear-gradient(145deg,#ffffff,#f4f8ff);box-shadow:0 8px 24px rgba(15,23,42,.07);transition:transform .18s,box-shadow .18s" onclick="window.openVocabularyGradeResults(decodeURIComponent('${encodeURIComponent(g)}'))"><h3>🎓 ${vocabEsc(gradeLabel)}</h3><div style="font-size:12px;color:#64748b;margin:-3px 0 10px">كود الصف: ${vocabEsc(g)}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><span>👥 الطلاب: ${data.students.length}</span><span style="color:#059669">✅ سمّعوا: ${data.students.filter(s=>submittedCodes.has(String(s.code||''))).length}</span><span style="color:#b45309">⏳ لم يسمّعوا: ${data.students.filter(s=>!submittedCodes.has(String(s.code||''))).length}</span></div><small>اضغط لعرض التفاصيل ←</small></button>`;}
                 html+='</div><div id="vocabGradeResultsDetails" style="margin-top:18px"></div>';area.innerHTML=html;
                 window.__vocabGradeResultData={students,attempts};
             }catch(e){console.error(e);area.innerHTML=`<div class="admin-section-card"><h2>تعذر تحميل النتائج</h2><p>${vocabEsc(e.message)}</p></div>`;}
@@ -1575,12 +1575,13 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
         window.openVocabularyGradeResults = function(grade){
             if(!hasPermission('results'))return alert('ليس لديك صلاحية لعرض النتائج.');
             const root=document.getElementById('vocabGradeResultsDetails'),data=window.__vocabGradeResultData;if(!root||!data)return;
+            const gradeLabel=(cachedGrades.find(x=>String(x.code)===String(grade))?.name)||({'1':'أولى ثانوي','2':'ثانية ثانوي','3':'ثالثة ثانوي'}[String(grade)])||grade;
             const students=data.students.filter(s=>String(s.grade||'غير محدد')===String(grade));
             const attempts=data.attempts.filter(a=>String(a.grade||data.students.find(s=>String(s.code||'')===String(a.studentCode||''))?.grade||'غير محدد')===String(grade));
             const submittedCodes=new Set(attempts.filter(a=>a.status==='submitted').map(a=>String(a.studentCode||'')));
             const attemptedCodes=new Set(attempts.map(a=>String(a.studentCode||'')));
-            const renderStudent=(s,done)=>{const latest=attempts.filter(a=>String(a.studentCode||'')===String(s.code||'')).sort((a,b)=>String(b.dateKey||'').localeCompare(String(a.dateKey||'')))[0];const detailId='vocabResultDetail_'+String(s.id).replace(/[^a-zA-Z0-9_-]/g,'_');const answerHtml=latest&&Array.isArray(latest.results)?latest.results.map((r,i)=>`<div style="padding:9px;margin:7px 0;border:1px solid #dbe3eb;border-radius:9px;background:${r.correct?'#f0fdf4':'#fff7f7'}"><b>السؤال ${i+1}: ${vocabEsc(r.prompt||'—')}</b><div>إجابة الطالب: ${vocabEsc(r.answer||'—')}</div><div>الإجابة الصحيحة: ${vocabEsc(r.correctAnswer||'—')}</div><div>${r.correct?'✅ صحيحة':'❌ غير صحيحة'}</div></div>`).join(''):'<p>لا توجد تفاصيل إجابات محفوظة لهذه المحاولة.</p>';return `<div class="admin-section-card" style="margin:8px 0"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><b>${vocabEsc(s.name||'طالب')}</b><div>الكود: ${vocabEsc(s.code||'—')} · الصف: ${vocabEsc(grade)}</div>${latest?`<div>التسميع: ${vocabEsc(latest.assignmentTitle||'تسميع الكلمات')} · التاريخ: ${vocabEsc(latest.dateKey||'—')}</div><div style="font-weight:900;color:${latest.status==='submitted'?'#059669':'#b45309'}">${latest.status==='submitted'?`الدرجة: ${Number(latest.score)||0} / ${Number(latest.total)||0}`:'بدأ ولم يسلّم بعد'}</div>`:'<div>لا توجد محاولة مسجلة.</div>'}</div>${latest?`<button class="btn-sm btn-secondary" onclick="window.toggleVocabularyAttemptDetails('${detailId}',this)">عرض الدرجة والإجابات</button>`:''}</div>${latest?`<div id="${detailId}" style="display:none;margin-top:12px"><h4>تفاصيل التسميع</h4>${answerHtml}</div>`:''}</div>`;};
-            root.innerHTML=`<div class="admin-section-card"><h2>🎓 ${vocabEsc(grade)}</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"><div><h3>✅ سمّعوا (${students.filter(s=>submittedCodes.has(String(s.code||''))).length})</h3>${students.filter(s=>submittedCodes.has(String(s.code||''))).map(s=>renderStudent(s,true)).join('')||'<p>لا يوجد طلاب سلّموا تسميعًا.</p>'}</div><div><h3>⏳ لم يسمّعوا (${students.filter(s=>!submittedCodes.has(String(s.code||''))).length})</h3>${students.filter(s=>!submittedCodes.has(String(s.code||''))).map(s=>renderStudent(s,false)).join('')||'<p>كل الطلاب لديهم محاولة مسجلة.</p>'}</div></div></div>`;
+            const renderStudent=(s,done)=>{const latest=attempts.filter(a=>String(a.studentCode||'')===String(s.code||'')).sort((a,b)=>String(b.dateKey||'').localeCompare(String(a.dateKey||'')))[0];const detailId='vocabResultDetail_'+String(s.id).replace(/[^a-zA-Z0-9_-]/g,'_');const answerHtml=latest&&Array.isArray(latest.results)?latest.results.map((r,i)=>`<div style="padding:9px;margin:7px 0;border:1px solid #dbe3eb;border-radius:9px;background:${r.correct?'#f0fdf4':'#fff7f7'}"><b>السؤال ${i+1}: ${vocabEsc(r.prompt||'—')}</b><div>إجابة الطالب: ${vocabEsc(r.answer||'—')}</div><div>الإجابة الصحيحة: ${vocabEsc(r.correctAnswer||'—')}</div><div>${r.correct?'✅ صحيحة':'❌ غير صحيحة'}</div></div>`).join(''):'<p>لا توجد تفاصيل إجابات محفوظة لهذه المحاولة.</p>';return `<div class="admin-section-card" style="margin:8px 0"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><b>${vocabEsc(s.name||'طالب')}</b><div>الكود: ${vocabEsc(s.code||'—')} · الصف: ${vocabEsc(gradeLabel)}</div>${latest?`<div>التسميع: ${vocabEsc(latest.assignmentTitle||'تسميع الكلمات')} · التاريخ: ${vocabEsc(latest.dateKey||'—')}</div><div style="font-weight:900;color:${latest.status==='submitted'?'#059669':'#b45309'}">${latest.status==='submitted'?`الدرجة: ${Number(latest.score)||0} / ${Number(latest.total)||0}`:'بدأ ولم يسلّم بعد'}</div>`:'<div>لا توجد محاولة مسجلة.</div>'}</div>${latest?`<button class="btn-sm btn-secondary" onclick="window.toggleVocabularyAttemptDetails('${detailId}',this)">عرض الدرجة والإجابات</button>`:''}</div>${latest?`<div id="${detailId}" style="display:none;margin-top:12px"><h4>تفاصيل التسميع</h4>${answerHtml}</div>`:''}</div>`;};
+            root.innerHTML=`<div class="admin-section-card"><h2>🎓 نتائج صف ${vocabEsc(gradeLabel)}</h2><p style="color:#64748b;margin-top:-6px">كود الصف: ${vocabEsc(grade)}</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"><div><h3>✅ سمّعوا (${students.filter(s=>submittedCodes.has(String(s.code||''))).length})</h3>${students.filter(s=>submittedCodes.has(String(s.code||''))).map(s=>renderStudent(s,true)).join('')||'<p>لا يوجد طلاب سلّموا تسميعًا.</p>'}</div><div><h3>⏳ لم يسمّعوا (${students.filter(s=>!submittedCodes.has(String(s.code||''))).length})</h3>${students.filter(s=>!submittedCodes.has(String(s.code||''))).map(s=>renderStudent(s,false)).join('')||'<p>كل الطلاب لديهم محاولة مسجلة.</p>'}</div></div></div>`;
         };
 
         window.toggleVocabularyAttemptDetails = function(id, button){
@@ -2482,6 +2483,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                     <td>${lastLogin}</td>
                     <td>${deviceCount}</td>
                     <td>
+                        <button onclick="window.editStudentById('${s.id}')" class="btn-sm" style="background:#0f766e;color:white" title="تعديل بيانات الطالب">✏️ تعديل</button>
                         <button onclick="showStudentProgress('${s.code}')" class="btn-sm" style="background:#3498db; color:white;">📊</button>
                         <button onclick="showStudentContent('${s.code}')" class="btn-sm" style="background:#16a085; color:white;" title="إدارة محتوى هذا الطالب">🎯</button>
                         <button onclick="showStudentDevices('${s.code}')" class="btn-sm" style="background:#9b59b6; color:white;">📱</button>
@@ -2493,6 +2495,53 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             });
             html += `</table></div>`;
             document.getElementById('content-area').innerHTML = html;
+        };
+
+        window.editStudentById = async function(studentId) {
+            try {
+                await getGrades();
+                const snap = await getDoc(doc(db, 'students', studentId));
+                if (!snap.exists()) return alert('الطالب غير موجود.');
+                const st = snap.data();
+                document.getElementById('studentEditOverlay')?.remove();
+                const gradeOptions = cachedGrades.map(g => `<option value="${esc(String(g.code))}" ${String(st.grade||'')===String(g.code)?'selected':''}>${esc(g.name)} (${esc(g.code)})</option>`).join('');
+                const overlay = document.createElement('div');
+                overlay.id = 'studentEditOverlay';
+                overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.65);display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(5px)';
+                overlay.innerHTML = `<form id="studentEditForm" style="width:min(620px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;box-shadow:0 25px 80px #0004;color:#172033">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px"><div><h2 style="margin:0 0 5px">✏️ تعديل بيانات الطالب</h2><p style="margin:0;color:#64748b;font-size:13px">تقدر تعدّل بيانات الطالب وتنقله لصف آخر.</p></div><button type="button" id="closeStudentEdit" style="border:0;background:#f1f5f9;border-radius:12px;padding:9px 13px;cursor:pointer;font-size:18px">×</button></div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px">
+                    <label style="display:grid;gap:6px;font-weight:700">اسم الطالب<input id="editStudentName" required maxlength="120" value="${esc(st.name||'')}" style="padding:12px;border:1px solid #cbd5e1;border-radius:11px;width:100%;box-sizing:border-box"></label>
+                    <label style="display:grid;gap:6px;font-weight:700">رقم الهاتف<input id="editStudentPhone" required maxlength="30" value="${esc(st.phone||'')}" style="padding:12px;border:1px solid #cbd5e1;border-radius:11px;width:100%;box-sizing:border-box"></label>
+                    <label style="display:grid;gap:6px;font-weight:700">الصف الدراسي<select id="editStudentGrade" required style="padding:12px;border:1px solid #cbd5e1;border-radius:11px;width:100%;box-sizing:border-box">${gradeOptions}<option value="1" ${String(st.grade)==='1'?'selected':''}>أولى ثانوي</option><option value="2" ${String(st.grade)==='2'?'selected':''}>ثانية ثانوي</option><option value="3" ${String(st.grade)==='3'?'selected':''}>ثالثة ثانوي</option></select></label>
+                    <label style="display:grid;gap:6px;font-weight:700">حالة الحساب<select id="editStudentStatus" style="padding:12px;border:1px solid #cbd5e1;border-radius:11px;width:100%;box-sizing:border-box"><option value="active" ${st.status==='active'?'selected':''}>نشط</option><option value="inactive" ${(!st.status||st.status==='inactive')?'selected':''}>غير نشط</option><option value="suspended" ${st.status==='suspended'?'selected':''}>موقوف</option></select></label>
+                    <label style="display:grid;gap:6px;font-weight:700;grid-column:1/-1">رسالة الإيقاف (اختياري)<textarea id="editStudentSuspendMessage" rows="2" style="padding:12px;border:1px solid #cbd5e1;border-radius:11px;width:100%;box-sizing:border-box">${esc(st.suspendMessage||'')}</textarea></label>
+                  </div>
+                  <div style="margin:12px 0;padding:11px 13px;background:#f8fafc;border-radius:11px;color:#64748b;font-size:12px">كود الطالب: <b style="color:#0f172a">${esc(st.code||'—')}</b> — لم يتم تغييره حتى لا تنقطع ارتباطات سجلاته ونتائجه السابقة.</div>
+                  <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px"><button type="button" id="cancelStudentEdit" style="border:0;border-radius:11px;padding:11px 18px;background:#e2e8f0;cursor:pointer">إلغاء</button><button type="submit" id="saveStudentEdit" style="border:0;border-radius:11px;padding:11px 20px;background:linear-gradient(135deg,#0f766e,#0d9488);color:white;font-weight:800;cursor:pointer">💾 حفظ التعديلات</button></div>
+                </form>`;
+                document.body.appendChild(overlay);
+                const close = () => overlay.remove();
+                overlay.querySelector('#closeStudentEdit').onclick = close;
+                overlay.querySelector('#cancelStudentEdit').onclick = close;
+                overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+                overlay.querySelector('#studentEditForm').onsubmit = async e => {
+                    e.preventDefault();
+                    const name = overlay.querySelector('#editStudentName').value.trim();
+                    const phone = overlay.querySelector('#editStudentPhone').value.trim();
+                    const grade = overlay.querySelector('#editStudentGrade').value;
+                    const status = overlay.querySelector('#editStudentStatus').value;
+                    const suspendMessage = overlay.querySelector('#editStudentSuspendMessage').value.trim();
+                    if (!name || !phone || !grade) return alert('من فضلك أكمل الاسم والهاتف والصف.');
+                    const saveBtn = overlay.querySelector('#saveStudentEdit'); saveBtn.disabled = true; saveBtn.textContent = 'جارٍ الحفظ...';
+                    try {
+                        const phoneSnap = await getDocs(query(collection(db,'students'), where('phone','==',phone)));
+                        if (phoneSnap.docs.some(d => d.id !== studentId)) { saveBtn.disabled=false; saveBtn.textContent='💾 حفظ التعديلات'; return alert('رقم الهاتف مستخدم لطالب آخر.'); }
+                        await updateDoc(doc(db,'students',studentId), { name, phone, grade, status, suspendMessage, updatedAt: serverTimestamp(), updatedBy: adminName || 'admin' });
+                        close(); alert('✅ تم حفظ بيانات الطالب بنجاح.'); await window.showStudents();
+                    } catch (err) { console.error(err); alert('تعذر حفظ التعديلات: ' + (err.message || err)); saveBtn.disabled=false; saveBtn.textContent='💾 حفظ التعديلات'; }
+                };
+            } catch (err) { console.error(err); alert('تعذر فتح بيانات الطالب: ' + (err.message || err)); }
         };
 
         window.searchStudents = function() { window.showStudents(); };
