@@ -527,6 +527,7 @@ body{margin:0;background:#f5f8fb!important}
             <li onclick="window.showSection('books')" data-permission="books">📚 الكتب</li>
             <li onclick="window.showSection('exams')" data-permission="exams">📝 الاختبارات</li>
             <li onclick="window.showSection('results')" data-permission="results">📊 النتائج</li>
+            <li onclick="window.showSection('vocabularyResults')" data-permission="results">🗣️ نتائج التسميع</li>
             <li onclick="window.showSection('vocabulary')" data-permission="vocabulary">🔤 تسميع الكلمات</li>
             <li onclick="window.open('question-importer.html','_blank')">📷 إضافة أسئلة من صورة</li>
             <li onclick="window.showSection('notifications')" data-permission="notifications">🔔 الإشعارات</li>
@@ -697,7 +698,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
         }
 
         const ASSISTANT_PERMISSIONS = [
-            ['dashboard','الرئيسية'],['students','الطلاب'],['pendingRequests','الطلبات المعلقة'],['lessonQuestions','أسئلة الدروس العامة'],['privateQuestions','الأسئلة الخاصة'],['courses','الكورسات'],['videos','الفيديوهات'],['books','الكتب'],['exams','الاختبارات'],['results','النتائج ونتائج التسميع'],['vocabulary','تسميع الكلمات'],['notifications','الإشعارات'],['dangerZone','منطقة الخطر'],['registrationRequests','طلبات التسجيل (قديم)'],['courseRequests','طلبات دخول الكورسات (قديم)'],['progress','تقدم الطلاب'],['devices','الأجهزة المعلقة'],['allDevices','كل الأجهزة'],['liveSettings','إعدادات البث'],['reports','التقارير'],['attendance','الحضور'],['parentReports','تقارير أولياء الأمور'],['examGrades','درجات الاختبارات'],['groups','المجموعات'],['advancedStats','الإحصائيات المتقدمة'],['sessions','الجلسات'],['fees','المصروفات']
+            ['dashboard','الرئيسية'],['students','الطلاب'],['pendingRequests','الطلبات المعلقة'],['lessonQuestions','أسئلة الدروس العامة'],['privateQuestions','الأسئلة الخاصة'],['courses','الكورسات'],['videos','الفيديوهات'],['books','الكتب'],['exams','الاختبارات'],['results','النتائج العامة'],['vocabularyResults','نتائج التسميع'],['vocabulary','تسميع الكلمات'],['notifications','الإشعارات'],['dangerZone','منطقة الخطر'],['registrationRequests','طلبات التسجيل (قديم)'],['courseRequests','طلبات دخول الكورسات (قديم)'],['progress','تقدم الطلاب'],['devices','الأجهزة المعلقة'],['allDevices','كل الأجهزة'],['liveSettings','إعدادات البث'],['reports','التقارير'],['attendance','الحضور'],['parentReports','تقارير أولياء الأمور'],['examGrades','درجات الاختبارات'],['groups','المجموعات'],['advancedStats','الإحصائيات المتقدمة'],['sessions','الجلسات'],['fees','المصروفات']
         ];
 
         window.showAssistantManagement = async function() {
@@ -1407,7 +1408,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
 
         window.showSection = function(section) {
             const permissionMap = {
-                dashboard:'dashboard', students:'students', pendingRequests:'pendingRequests', privateQuestions:'privateQuestions', registrationRequests:'registrationRequests', courseRequests:'courseRequests', lessonQuestions:'lessonQuestions', courses:'courses', videos:'videos', books:'books', exams:'exams', results:'results', vocabulary:'vocabulary', notifications:'notifications', dangerZone:'dangerZone'
+                dashboard:'dashboard', students:'students', pendingRequests:'pendingRequests', privateQuestions:'privateQuestions', registrationRequests:'registrationRequests', courseRequests:'courseRequests', lessonQuestions:'lessonQuestions', courses:'courses', videos:'videos', books:'books', exams:'exams', results:'results', vocabularyResults:'results', vocabulary:'vocabulary', notifications:'notifications', dangerZone:'dangerZone'
             };
             if (section !== 'assistants' && !requirePermission(permissionMap[section] || section)) return;
             if (section === 'assistants' && !isPrimaryAdmin()) return alert('⛔ هذا القسم للمشرف الأساسي فقط');
@@ -1425,7 +1426,8 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
                 case 'videos': window.showVideos(); break;
                 case 'books': window.showBooks(); break;
                 case 'exams': window.showExams(); break;
-                case 'results': window.showVocabularyResultsByGrade(); break;
+                case 'results': window.showGeneralResultsHome(); break;
+                case 'vocabularyResults': window.showVocabularyResultsByGrade(); break;
                 case 'vocabulary': window.showVocabularyAdmin(); break;
                 case 'notifications': window.showNotifications(); break;
                 case 'devices': window.showPendingDevices(); break;
@@ -1547,6 +1549,12 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             await window.showVocabularyAdmin();
         };
 
+        window.showGeneralResultsHome = function(){
+            if(!requirePermission('results')) return;
+            const area=document.getElementById('content-area');
+            area.innerHTML=`<h2>📊 النتائج</h2><div class="admin-section-card"><h3>درجات الاختبارات</h3><p>إدارة ومراجعة درجات الاختبارات المسجلة للطلاب.</p><button class="btn-sm btn-add" onclick="window.showSection('examGrades')">📝 فتح درجات امتحانات الطلاب</button></div><div class="admin-section-card" style="margin-top:14px"><h3>🗣️ نتائج التسميع</h3><p>قسم مستقل لعرض الصفوف والطلاب الذين سمّعوا والذين لم يسمّعوا وتفاصيل الدرجات والإجابات.</p><button class="btn-sm btn-add" onclick="window.showSection('vocabularyResults')">فتح نتائج التسميع ←</button></div>`;
+        };
+
         // نتائج التسميع: الصفوف مبنية على سجل الطلاب الفعلي ومحاولات التسميع الموجودة.
         window.showVocabularyResultsByGrade = async function(){
             if(!requirePermission('results'))return;
@@ -1571,7 +1579,7 @@ window.addEventListener('resize',function(){if(window.innerWidth>768) window.clo
             const attempts=data.attempts.filter(a=>String(a.grade||data.students.find(s=>String(s.code||'')===String(a.studentCode||''))?.grade||'غير محدد')===String(grade));
             const submittedCodes=new Set(attempts.filter(a=>a.status==='submitted').map(a=>String(a.studentCode||'')));
             const attemptedCodes=new Set(attempts.map(a=>String(a.studentCode||'')));
-            const renderStudent=(s,done)=>{const latest=attempts.filter(a=>String(a.studentCode||'')===String(s.code||'')).sort((a,b)=>String(b.dateKey||'').localeCompare(String(a.dateKey||'')))[0];return `<div class="admin-section-card" style="margin:8px 0"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><b>${vocabEsc(s.name||'طالب')}</b><div>الكود: ${vocabEsc(s.code||'—')} · الصف: ${vocabEsc(grade)}</div>${latest?`<div>التسميع: ${vocabEsc(latest.assignmentTitle||'تسميع الكلمات')} · التاريخ: ${vocabEsc(latest.dateKey||'—')}</div><div style="font-weight:900;color:${latest.status==='submitted'?'#059669':'#b45309'}">${latest.status==='submitted'?`الدرجة: ${Number(latest.score)||0} / ${Number(latest.total)||0}`:'بدأ ولم يسلّم بعد'}</div>`:'<div>لا توجد محاولة مسجلة.</div>'}</div>${latest?`<button class="btn-sm btn-secondary" onclick="window.showSection('vocabulary')">عرض الإجابات</button>`:''}</div></div>`;};
+            const renderStudent=(s,done)=>{const latest=attempts.filter(a=>String(a.studentCode||'')===String(s.code||'')).sort((a,b)=>String(b.dateKey||'').localeCompare(String(a.dateKey||'')))[0];const detailId='vocabResultDetail_'+String(s.id).replace(/[^a-zA-Z0-9_-]/g,'_');const answerHtml=latest&&Array.isArray(latest.results)?latest.results.map((r,i)=>`<div style="padding:9px;margin:7px 0;border:1px solid #dbe3eb;border-radius:9px;background:${r.correct?'#f0fdf4':'#fff7f7'}"><b>السؤال ${i+1}: ${vocabEsc(r.prompt||'—')}</b><div>إجابة الطالب: ${vocabEsc(r.answer||'—')}</div><div>الإجابة الصحيحة: ${vocabEsc(r.correctAnswer||'—')}</div><div>${r.correct?'✅ صحيحة':'❌ غير صحيحة'}</div></div>`).join(''):'<p>لا توجد تفاصيل إجابات محفوظة لهذه المحاولة.</p>';return `<div class="admin-section-card" style="margin:8px 0"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><b>${vocabEsc(s.name||'طالب')}</b><div>الكود: ${vocabEsc(s.code||'—')} · الصف: ${vocabEsc(grade)}</div>${latest?`<div>التسميع: ${vocabEsc(latest.assignmentTitle||'تسميع الكلمات')} · التاريخ: ${vocabEsc(latest.dateKey||'—')}</div><div style="font-weight:900;color:${latest.status==='submitted'?'#059669':'#b45309'}">${latest.status==='submitted'?`الدرجة: ${Number(latest.score)||0} / ${Number(latest.total)||0}`:'بدأ ولم يسلّم بعد'}</div>`:'<div>لا توجد محاولة مسجلة.</div>'}</div>${latest?`<button class="btn-sm btn-secondary" onclick="window.toggleVocabularyAttemptDetails('${detailId}',this)">عرض الدرجة والإجابات</button>`:''}</div>${latest?`<div id="${detailId}" style="display:none;margin-top:12px"><h4>تفاصيل التسميع</h4>${answerHtml}</div>`:''}</div>`;};
             root.innerHTML=`<div class="admin-section-card"><h2>🎓 ${vocabEsc(grade)}</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"><div><h3>✅ سمّعوا (${students.filter(s=>submittedCodes.has(String(s.code||''))).length})</h3>${students.filter(s=>submittedCodes.has(String(s.code||''))).map(s=>renderStudent(s,true)).join('')||'<p>لا يوجد طلاب سلّموا تسميعًا.</p>'}</div><div><h3>⏳ لم يسمّعوا (${students.filter(s=>!submittedCodes.has(String(s.code||''))).length})</h3>${students.filter(s=>!submittedCodes.has(String(s.code||''))).map(s=>renderStudent(s,false)).join('')||'<p>كل الطلاب لديهم محاولة مسجلة.</p>'}</div></div></div>`;
         };
 
